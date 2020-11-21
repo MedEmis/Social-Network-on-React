@@ -54,7 +54,6 @@ export const MiniMenu = () => {
 						</div>
 					</div>
 				</div>
-				<div className="overlay" ></div>
 			</div>
 		</div>
 	)
