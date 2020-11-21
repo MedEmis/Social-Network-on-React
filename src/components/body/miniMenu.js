@@ -1,19 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react';
 import './mini-menu.scss'
-let className = require('classnames');
+let classNames = require('classnames');
 export const MiniMenu = () => {
-	let isActive = false
-	let mobileCanvas = "mobile-canvas"
-	let buttonContainer = "button-container"
+	let [isActive, setActive] = useState(false);
+	//let mobileCanvas = "mobile-canvas open"
+	//let buttonContainer = "button-container open"
 	function toggleOpen() {
-		isActive = !isActive
-		mobileCanvas = className("mobile-canvas", { " open": isActive });
-		buttonContainer = className("button-container", { " open": isActive });
+		setActive(!isActive)
 	}
 
 	return (
-		<div className={mobileCanvas}>
-			<div className={buttonContainer}>
+		<div className={classNames("mobile-canvas", { " open": isActive })}>
+			<div className={classNames("button-container", { " open": isActive })}>
 				<div className="button-wrapper">
 					<div className="button" onClick={toggleOpen}>
 						<span></span>
