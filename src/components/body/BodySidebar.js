@@ -1,5 +1,6 @@
 import React from 'react'
 import './body.css';
+import { MiniMenu } from './miniMenu';
 
 
 class BodySidebar extends React.Component {
@@ -17,7 +18,8 @@ class BodySidebar extends React.Component {
 					<li className="body-sidebar__list-item">Menu</li>
 					<li className="body-sidebar__list-item">Menu</li>
 				</ul>
-				<div className="body-sidebar__app-settings"><img src="https://img.icons8.com/nolan/64/gear.png"/></div>
+				<div className="body-sidebar__app-settings"><img src="https://img.icons8.com/nolan/64/gear.png" /></div>
+				<MiniMenu />
 			</div>
 		);
 	}

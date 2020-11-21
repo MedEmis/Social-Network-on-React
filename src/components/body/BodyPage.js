@@ -48,7 +48,7 @@ class BodyPage extends React.Component {
 						<textarea type="text" placeholder="some news?.." />
 					</div>
 					<div className="body-page__hero-posts-submit">
-						<button type="submit" class="blue-btn" id="neon-text">Send</button>
+						<button type="submit" className="blue-btn" id="neon-text">Send</button>
 
 					</div>
 				</div>

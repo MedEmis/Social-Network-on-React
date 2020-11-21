@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100");
+
+// Variables
+$button-size: 65px;
+$button-radius: 150px;
+$button-transform-origin: $button-radius + ($button-size/2);
+
+// Colors
+$dark-purple: #131222;
+$purple: #411a58;
+$pink: #fc3e9f;
+$green: #2dfbb2;
+
+// Positioning / z-index
+$z-1: 10;
+$z-2: 20;
+$z-3: 30;
+$z-4: 40;
+
+// Easings
+$bounce: cubic-bezier(0.5, -0.5, 0.5, 1.5);
+$bezier: cubic-bezier(0.64, 0.04, 0.35, 1);
+
+// Timings
+$delay: 500ms;
+$time: 300ms;
+$longer-time: ($time * 2); // all about naming, right?
+
+// Mixins
+@mixin neon-fx($color) {
+	box-shadow: 0 0 9px 2px $color, 0 0 9px 2px $color inset;
+}
+
+// Keyframes
+@keyframes flicker {
+	0%,
+	19%,
+	21%,
+	23%,
+	25%,
+	54%,
+	56%,
+	100% {
+		@include neon-fx($pink);
+	}
+
+	20%,
+	24%,
+	55% {
+		box-shadow: none;
+		opacity: 0.8;
+	}
+}
+
+@keyframes flicker-icon {
+	0%,
+	19%,
+	21%,
+	23%,
+	25%,
+	54%,
+	56%,
+	100% {
+		fill: $pink;
+	}
+	20%,
+	24%,
+	55% {
+		fill: $purple;
+		opacity: 0.8;
+	}
+}
+
+.mobile-canvas {
+	position: relative;
+	z-index: $z-1;
+	width: 300px;
+	height: 300px;
+	overflow: hidden;
+	background-color: $purple;
+	padding: 2em;
+
+	&.open {
+		.overlay {
+			opacity: 0.6;
+		}
+	}
+}
+
+.overlay {
+	position: absolute;
+	z-index: $z-2;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	top: 0;
+	left: 0;
+	transition: all $time ease-in-out;
+	background: darken($purple, 10);
+}
+
+.button-container {
+	position: absolute;
+	bottom: 40px;
+	right: 40px;
+	width: $button-size;
+	height: $button-size;
+
+	.button-wrapper {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+
+	&.open {
+		.button {
+			border-color: $green;
+			@include neon-fx($green);
+
+			span {
+				width: 3px;
+				background-color: $green;
+				@include neon-fx($green);
+				transition: margin $time, transform $time, border-radius $time $longer-time, height $time $longer-time;
+
+				&:first-child,
+				&:last-child {
+					margin: 0;
+					height: 30px;
+					border-radius: 5px;
+				}
+
+				&:first-child {
+					transform: translate(-50%, -50%) rotate(45deg);
+				}
+
+				&:nth-of-type(2) {
+					opacity: 0;
+				}
+
+				&:last-child {
+					transform: translate(-50%, -50%) rotate(-45deg);
+				}
+			}
+		}
+
+		.button-child-wrapper {
+			transform: translateX((-$button-radius));
+			transition-delay: 0s;
+		}
+
+		.button-child {
+			@include neon-fx($pink);
+			transition-delay: $delay;
+			//animation: flicker 1.5s infinite alternate;
+
+			svg {
+				opacity: 1;
+				visibility: visible;
+				transition-delay: $delay;
+
+				g {
+					animation: flicker-icon 1.5s infinite alternate;
+				}
+			}
+
+			&:nth-child(2) {
+				transform: rotate(45deg);
+			}
+
+			&:nth-child(3) {
+				transform: rotate(90deg);
+			}
+		}
+	}
+}
+
+.button,
+.button-child-wrapper {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.button {
+	border-radius: 50%;
+	border: 3px solid $pink;
+	z-index: $z-4;
+	@include neon-fx($pink);
+	transition: all $time ease-in-out $delay;
+
+	span {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 5px;
+		height: 5px;
+		background-color: $pink;
+		border-radius: 50%;
+		@include neon-fx($pink);
+		transition: height $time, transform $longer-time, margin $time $longer-time, background-color $longer-time,
+			border-radius $longer-time;
+
+		&:first-child,
+		&:last-child {
+		}
+
+		&:first-child {
+			margin-top: -10px;
+		}
+
+		&:last-child {
+			margin-top: 10px;
+		}
+	}
+}
+
+.button-child-wrapper {
+	transition: transform 0.3s $bounce $delay;
+	z-index: $z-3;
+}
+
+.button-child {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	border-radius: 50%;
+	border: 3px solid $pink;
+	transform-origin: $button-transform-origin;
+	transition: all $time $bezier;
+
+	&:nth-child(2) {
+		svg {
+			transform: rotate(-45deg);
+		}
+	}
+
+	&:nth-child(3) {
+		svg {
+			transform: rotate(-90deg);
+		}
+	}
+
+	svg {
+		opacity: 0;
+		visibility: hidden;
+		transition: all $longer-time $bezier calc((-$delay) / 2);
+	}
+}

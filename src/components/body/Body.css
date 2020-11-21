@@ -15,6 +15,7 @@
 	background: rgb(42, 53, 61);
 	padding: 20px;
 	font-size: 34px;
+	overflow: hidden;
 }
 .body-sidebar__list-item {
 	margin-bottom: 5%;
