@@ -1,4 +1,5 @@
 import React from 'react'
+import './Body.css';
 
 
 class Body extends React.Component {
@@ -8,7 +9,10 @@ class Body extends React.Component {
 	}
 	render() {
 		return (
-			<div>Body</div>
+			<div className="body-main">
+				<div className="body-main__sidebar"></div>
+				<div className="body-main__body-page"></div>
+			</div>
 		);
 	}
 }
