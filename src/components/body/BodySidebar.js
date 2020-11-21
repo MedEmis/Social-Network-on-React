@@ -20,6 +20,7 @@ class BodySidebar extends React.Component {
 				</ul>
 				{/* <div className="body-sidebar__app-settings"><img src="https://img.icons8.com/nolan/64/gear.png" /></div> */}
 				<MiniMenu />
+				<div className="body-sidebar__news-box"></div>
 			</div>
 		);
 	}

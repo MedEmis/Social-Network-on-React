@@ -42,10 +42,10 @@
 	filter: grayscale(100%);
 	transition-property: all;
 	transition-duration: 1000ms;
-	transform: rotateY(180deg);
+	transform: rotate(0deg);
 }
 .header__hero-avatar:hover {
-	transform: rotateY(0deg);
+	transform: rotate(360deg);
 	filter: grayscale(0%);
 }
 
