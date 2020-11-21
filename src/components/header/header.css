@@ -19,7 +19,15 @@
 .header-nav_item:hover {
 	background: rgb(33, 28, 49);
 }
-
+.header__hero-avatar {
+	min-height: 50px;
+	min-width: 50px;
+	position: relative;
+}
+.header__hero-avatar,
+img {
+	height: 70px;
+}
 .App-logo {
 	height: 15vmin;
 	pointer-events: none;
