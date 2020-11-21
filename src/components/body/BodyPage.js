@@ -53,7 +53,9 @@ class BodyPage extends React.Component {
 					</div>
 				</div>
 				<div className="body-page__hero-posts-log">
-					<div className="body-page__hero-posts-log-item"></div>
+					<div className="body-page__hero-posts-log-item">loredkfgjbdksfgbsdk;lfgjbe;rgbd;sgkberg</div>
+					<div className="body-page__hero-posts-log-item">engejkg;bndkcvhjbashdejrygtlafsdghfbasdjhfdvasjdhfvj</div>
+					<div className="body-page__hero-posts-log-item">kfjgbaklfdhjbdsfgbeirfgbi</div>
 				</div>
 			</div>
 		);
