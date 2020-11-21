@@ -1,0 +1,39 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px 30px 5px 20px;
+	background: rgb(97, 79, 163);
+}
+.header__header-nav {
+	display: flex;
+}
+.header-nav_item {
+	list-style: none;
+	margin-left: 50px;
+	padding: 10px 20px;
+	border-radius: 10px;
+	background: rgb(56, 49, 85);
+}
+
+.header-nav_item:hover {
+	background: rgb(33, 28, 49);
+}
+
+.App-logo {
+	height: 15vmin;
+	pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+	.App-logo {
+		animation: App-logo-spin infinite 60s linear;
+	}
+}
+@keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
