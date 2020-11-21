@@ -3,31 +3,52 @@
 	justify-content: space-between;
 	align-items: center;
 	padding: 5px 30px 5px 20px;
+	/* padding: 5% 2%; */
 	background: rgb(97, 79, 163);
+	position: relative;
+	height: 100px;
+	z-index: 1;
 }
-.header__header-nav {
+.header__pictures {
+	flex: 0 1 20%;
 	display: flex;
+	justify-content: space-between;
 }
-.header-nav_item {
+.header-nav-item {
+	flex: 0 1 10%;
 	list-style: none;
-	margin-left: 50px;
-	padding: 10px 20px;
+	text-align: center;
+	display: flex;
+  justify-content: center;
+  flex-direction: column;
+	min-width: 50px;
+	height: 50%;
 	border-radius: 10px;
 	background: rgb(56, 49, 85);
+	justify-self: flex-start;
 }
 
-.header-nav_item:hover {
+.header-nav-item:hover {
 	background: rgb(33, 28, 49);
 }
 .header__hero-avatar {
-	min-height: 50px;
-	min-width: 50px;
-	position: relative;
+	position: absolute;
+	z-index: 3;
+	top: 5%;
+	height: 90%;
+	border-radius: 50%;
+	border-color: #363635;
+	border-width: 3px;
+	border-style: solid;
+	filter: grayscale(100%);
+	transition-property: all;
+	transition-duration: 800ms;
 }
-.header__hero-avatar,
-img {
-	height: 70px;
+.header__hero-avatar:hover {
+	transform: rotate(360deg);
+	filter: grayscale(0%);
 }
+
 .App-logo {
 	height: 15vmin;
 	pointer-events: none;

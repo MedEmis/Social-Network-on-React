@@ -12,14 +12,14 @@ class Header extends React.Component {
 	render() {
 		return (
 			<div className="header">
-				<ul className="header__header-nav">
-					<li className="header-nav_item">Home</li>
-					<li className="header-nav_item">Tab 1</li>
-					<li className="header-nav_item">Tab 2</li>
-					<li className="header-nav_item">Tab 3</li>
-				</ul>
-				<div className="header__hero-avatar"><img src={hero} alt="hero"></img></div>
-				<div className="header__logo"><img className="App-logo" src={logo} alt="logo"></img></div>
+				<div className="header-nav-item">Home</div>
+				<div className="header-nav-item">Tab 1</div>
+				<div className="header-nav-item">Tab 2</div>
+				<div className="header-nav-item">Tab 3</div>
+				<div className="header__pictures">
+					<div ><img className="header__hero-avatar" src={hero} alt="hero" /></div>
+					<div className="header__logo"><img className="App-logo" src={logo} alt="logo" /></div>
+				</div>
 			</div>
 		);
 	}
