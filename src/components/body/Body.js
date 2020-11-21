@@ -1,5 +1,8 @@
 import React from 'react'
-import './Body.css';
+import './body.css';
+import BodyPage from './BodyPage';
+import BodySidebar from './BodySidebar';
+
 
 
 class Body extends React.Component {
@@ -10,8 +13,8 @@ class Body extends React.Component {
 	render() {
 		return (
 			<div className="body-main">
-				<div className="body-main__sidebar"></div>
-				<div className="body-main__body-page"></div>
+				<BodySidebar />
+				<BodyPage/>
 			</div>
 		);
 	}
