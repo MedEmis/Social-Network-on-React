@@ -1,7 +1,7 @@
 import React from 'react'
 import './body.css';
-import BodyPage from './BodyPage';
-import BodySidebar from './BodySidebar';
+import BodySidebar from './sidebar/BodySidebar';
+import BodyPage from './page/BodyPage';
 
 
 
@@ -13,7 +13,7 @@ class Body extends React.Component {
 	render() {
 		return (
 			<div className="body-main">
-				<BodySidebar />
+				<BodySidebar/>
 				<BodyPage/>
 			</div>
 		);

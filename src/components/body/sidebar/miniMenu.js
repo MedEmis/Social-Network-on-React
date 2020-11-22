@@ -3,12 +3,9 @@ import './mini-menu.scss'
 let classNames = require('classnames');
 export const MiniMenu = () => {
 	let [isActive, setActive] = useState(false);
-	//let mobileCanvas = "mobile-canvas open"
-	//let buttonContainer = "button-container open"
 	function toggleOpen() {
 		setActive(!isActive)
 	}
-
 	return (
 		<div className={classNames("mobile-canvas", { " open": isActive })}>
 			<div className={classNames("button-container", { " open": isActive })}>

@@ -1,0 +1,90 @@
+.body-page__hero-posts-reply-log-item {
+	width: 80%;
+	min-height: 50px;
+	height: auto;
+	padding: 35px 10px 35px 10px;
+	background: rgb(104, 101, 88);
+	border-right: 10px solid rgb(150, 73, 1);
+	margin: 15px 15px 15px 0;
+	float: right;
+	border-radius: 5px 0 0 30px;
+	word-wrap: break-word;
+	line-height: 25px;
+	letter-spacing: normal;
+	text-align: right;
+	position: relative;
+}
+.body-page__hero-posts-reply-log-item:before {
+	content: "";
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	left: -100px;
+	top: 10px;
+	border-radius: 20%;
+	background: rgb(209, 190, 18);
+	background: center / contain no-repeat url(../../../images/avatar.jpeg);
+	border: 3px solid rgb(90, 90, 90);
+}
+.body-page__hero-posts-reply-log-item:after {
+	content: "";
+	position: absolute;
+	width: 30%;
+	height: 30px;
+	right: 0px;
+	bottom: 0px;
+	border-radius: 40px 0 0 0;
+	background: rgb(88, 85, 51);
+	border: 2px solid rgb(90, 90, 90);
+}
+.body-page__hero-posts-reply-log-item__title {
+	position: absolute;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px 5px 5px 5px;
+	top: 0;
+	left: 0;
+	width: 70%;
+	height: 35px;
+	background: rgb(82, 82, 82);
+	border-radius: 5px 3px 70px 0;
+	font-size: 18px;
+}
+.body-page__hero-posts-reply-log-item__title-from {
+	background-color: rgb(53, 52, 52);
+	padding: 2px 7px 2px 7px;
+	border-radius: 50px;
+	width: auto;
+	cursor: pointer;
+}
+.body-page__hero-posts-reply-log-item__title-date {
+	background-color: rgb(53, 52, 52);
+	padding: 2px 15px 2px 5px;
+	border-radius: 0 0 60px 0;
+	width: 230px;
+}
+
+.body-page__hero-posts-reply-log-item__body-text {
+	text-align: left;
+	font-size: 16px;
+	line-height: 25px;
+	letter-spacing: normal;
+	word-wrap: break-word;
+}
+.body-page__hero-posts-reply-log-item__body-special {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 7px 10px;
+	z-index: 5;
+}
+.body-page__hero-posts-reply-log-item__body-special-list {
+	display: flex;
+}
+.body-page__hero-posts-reply-log-item__body-special-item {
+	margin: 0 10px;
+	cursor: pointer;
+}
+.body-page__hero-posts-log-nested-reply-wrapper {
+}

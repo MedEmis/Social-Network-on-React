@@ -1,0 +1,10 @@
+.body-page__hero-posts-log {
+	background: rgb(66, 66, 66);
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+	flex-direction: column;
+	padding: 10px;
+}

@@ -12,15 +12,8 @@ ReactDOM.render(
 );
 
 
-//for mini-menu start
-// var buttonContainer = document.querySelector('.button-container');
-// var overlay = document.querySelector('.overlay');
-// var mobileCanvas = document.querySelector('.mobile-canvas')
-
-// buttonContainer.addEventListener('click', function () {
-// 	buttonContainer.classList.toggle('open');
-// 	mobileCanvas.classList.toggle('open');
-// }, false);
+//for textarea autosize
+ 
 //for mini-menu end
 
 
