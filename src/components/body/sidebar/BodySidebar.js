@@ -1,5 +1,5 @@
 import React from 'react'
-import './bodySidebar.css'
+import './bodySidebar.scss'
 import { MiniMenu } from './miniMenu';
 import SidebarNav from './SidebarNav';
 import SidebarNews from './SidebarNews';

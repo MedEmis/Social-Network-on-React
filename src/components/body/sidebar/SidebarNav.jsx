@@ -8,12 +8,12 @@ class SidebarNav extends React.Component {
 	}
 	render() {
 		return (
-			<ul className="body-sidebar__list">
-				<li className="body-sidebar__list-item">PROFILE</li>
-				<li className="body-sidebar__list-item">MESSAGES</li>
-				<li className="body-sidebar__list-item">NEWS</li>
-				<li className="body-sidebar__list-item">MUSIC</li>
-			</ul>
+			<div className="body-sidebar__list">
+				<button className="body-sidebar__list-item">PROFILE</button>
+				<button className="body-sidebar__list-item">MESSAGES</button>
+				<button className="body-sidebar__list-item">NEWS</button>
+				<button className="body-sidebar__list-item">MUSIC</button>
+			</div>
 		);
 	}
 }

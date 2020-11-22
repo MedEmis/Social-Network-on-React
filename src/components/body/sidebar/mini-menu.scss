@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:100");
 
+.mini-menu-box{
+	position: absolute;
+	right: 20px;
+	z-index: 20;
+}
+
 // Variables
 $button-size: 65px;
 $button-radius: 150px;
