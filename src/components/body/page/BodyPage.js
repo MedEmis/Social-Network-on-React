@@ -21,7 +21,7 @@ class BodyPage extends React.Component {
 				<HeroInfo />
 				<MakePost />
 				<PostLog />
-				<div className="body-page__end">no more messages</div>
+				<div className="body-page__end">no more messages here</div>
 			</div>
 		);
 	}
