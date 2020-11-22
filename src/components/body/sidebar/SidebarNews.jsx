@@ -9,7 +9,8 @@ class SidebarNews extends React.Component {
 	render() {
 		return (
 			<div className="body-sidebar__news-box">
-				NEWS
+				<div className="body-sidebar__news-box_title">NEWS</div>
+				<div className="body-sidebar__news-box_body">No news yet</div>
 			</div>
 		);
 	}
