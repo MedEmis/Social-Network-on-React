@@ -13,7 +13,7 @@ class NestedReplyPostItem extends React.Component {
 		return (
 			<div className="body-page__hero-posts-nested-reply-log-item">
 				<div className="body-page__hero-posts-nested-reply-log-item__title">
-					<div className="body-page__hero-posts-nested-reply-log-item__title-from">{!this.props.nikName ? " Anonymous" : this.props.nikName}</div>
+					<div className="body-page__hero-posts-nested-reply-log-item__title-from">From: {!this.props.nikName ? " Anonymous" : this.props.nikName}</div>
 					<div className="body-page__hero-posts-nested-reply-log-item__title-date">{!this.props.dataDate ? "--.--.--" : this.props.dataDate}  /   At: {!this.props.dataTime ? "--:--" : this.props.dataTime}</div>
 				</div>
 				<div className="body-page__hero-posts-nested-reply-log-item__body">

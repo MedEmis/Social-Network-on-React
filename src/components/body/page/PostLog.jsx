@@ -19,8 +19,8 @@ class PostLog extends React.Component {
 	render() {
 		return (
 			<div className="body-page__hero-posts-log">
-				<PostItem nikName={this.state.nikName} dataDate={this.state.dataDate} dataTime={this.state.dataTime} textBody={this.state.textBody}/>
-				<PostItem />
+				{/* <PostItem nikName={this.state.nikName} dataDate={this.state.dataDate} dataTime={this.state.dataTime} textBody={this.state.textBody}/>
+				<PostItem /> */}
 				{/* <PostItem />
 				<PostItem />
 				<PostItem />

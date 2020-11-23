@@ -20,7 +20,7 @@ class BodyPage extends React.Component {
 				<div className="body-page__background"><img src={topImage} alt="topImage"></img></div>
 				<HeroInfo />
 				<MakePost />
-				<PostLog />
+				<PostLog id='PostLog' />
 				<div className="body-page__end">no more messages here</div>
 			</div>
 		);

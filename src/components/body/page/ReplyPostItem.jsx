@@ -13,7 +13,6 @@ class ReplyPostItem extends React.Component {
 			dataDate: '23.11.2020',
 			dataTime: '15:55',
 			textBody: "Loreme esentium dolorum mollitia iste? Molestias consectetur voluptate vitae perferendis nemo dignissimos aperiam suscipit",
-
 		};
 	}
 	render() {
