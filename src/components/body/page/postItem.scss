@@ -55,7 +55,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 5px 5px 5px 5px;
+	padding: 5px 10px 5px 5px;
 	top: 0;
 	left: 0;
 	width: 70%;
@@ -73,9 +73,9 @@
 }
 .body-page__hero-posts-log-item__title-date {
 	background-color: rgb(53, 52, 52);
-	padding: 2px 5px 2px 5px;
-	border-radius: 0 0 60px 0;
-	width: 230px;
+	padding: 2px 15px 2px 15px;
+	border-radius: 50px;
+	width: auto;
 }
 
 .body-page__hero-posts-log-item__body {

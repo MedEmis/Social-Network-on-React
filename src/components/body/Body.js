@@ -14,7 +14,7 @@ class Body extends React.Component {
 		return (
 			<div className="body-main">
 				<BodySidebar/>
-				<BodyPage/>
+				<BodyPage />
 			</div>
 		);
 	}

@@ -18,7 +18,8 @@
 
 .body-page__hero-posts-textarea-input {
 	overflow: hidden;
-	min-width: 100%;
+	width: 100%;
+	max-width: 100%;
 	min-height: 50px;
 	height: auto;
 	font-size: 16px;

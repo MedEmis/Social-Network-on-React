@@ -13,11 +13,11 @@ class NestedReplyPostItem extends React.Component {
 		return (
 			<div className="body-page__hero-posts-nested-reply-log-item">
 				<div className="body-page__hero-posts-nested-reply-log-item__title">
-					<div className="body-page__hero-posts-nested-reply-log-item__title-from">From: Naadsasdasdasme</div>
-					<div className="body-page__hero-posts-nested-reply-log-item__title-date">Date: 00.00.00  /   At: 00.00</div>
+					<div className="body-page__hero-posts-nested-reply-log-item__title-from">{!this.props.nikName ? " Anonymous" : this.props.nikName}</div>
+					<div className="body-page__hero-posts-nested-reply-log-item__title-date">{!this.props.dataDate ? "--.--.--" : this.props.dataDate}  /   At: {!this.props.dataTime ? "--:--" : this.props.dataTime}</div>
 				</div>
 				<div className="body-page__hero-posts-nested-reply-log-item__body">
-					<div className="body-page__hero-posts-nested-reply-log-item__body-text">word sdggf word sdgord sdggf word sdggf woggf word sdggf sdgord sdggf word sdggf woggf word sdggf word sdggf word sdggf word sdggf word sdggf </div>
+					<div className="body-page__hero-posts-nested-reply-log-item__body-text">{!this.props.textBody?"...no text":this.props.textBody}</div>
 					<div className="body-page__hero-posts-nested-reply-log-item__body-special">
 						<ul className="body-page__hero-posts-nested-reply-log-item__body-special-list">
 							<li className="body-page__hero-posts-nested-reply-log-item__body-special-item">OO</li>
