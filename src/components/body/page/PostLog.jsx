@@ -12,7 +12,7 @@ class PostLog extends React.Component {
 		this.state = {
 			posts: []
 		};
-		console.log(this.state.posts)
+		//console.log(this.state.posts)
 	}
 	auto_grow = (event) => {
 		event.target.style.height = "5px";
@@ -20,24 +20,20 @@ class PostLog extends React.Component {
 	}
 	addNewPost = () => {
 		let textArea = document.querySelector(".body-page__hero-posts-textarea-input")
-		let today = new Date()
-		let hours = today.getHours()
-		let minutes = today.getMinutes()
-		let day = today.getDate()
-		let month = today.getMonth() + 1
-		let year = today.getUTCFullYear()
-		let userNik = 'User  000'
+		let time = new Date().toLocaleTimeString().slice(0, -3)
+		let date = new Date().toLocaleDateString()
+		let userNik = this.props.name
 		this.setState(function () {
 			return this.state.posts.push(
 				{
 					nikName: userNik,
-					dataDate: `${day}.${month}.${year}`,
-					dataTime: `${hours}:${minutes}`,
+					dataDate: `${date}`,
+					dataTime: `${time}`,
 					textBody: textArea.value
 				}
 			)
 		});
-		console.log(this.state.posts)
+		//console.log(this.state.posts)
 	}
 	render() {
 		return (
