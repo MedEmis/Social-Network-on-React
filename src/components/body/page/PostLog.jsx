@@ -23,15 +23,13 @@ class PostLog extends React.Component {
 		let time = new Date().toLocaleTimeString().slice(0, -3)
 		let date = new Date().toLocaleDateString()
 		let userNik = this.props.name
-		this.setState(function () {
-			return this.state.posts.push(
-				{
-					nikName: userNik,
-					dataDate: `${date}`,
-					dataTime: `${time}`,
-					textBody: textArea.value
-				}
-			)
+		this.setState({
+			posts: [...this.state.posts, {
+				nikName: userNik,
+				dataDate: `${date}`,
+				dataTime: `${time}`,
+				textBody: textArea.value
+			}]
 		});
 		//console.log(this.state.posts)
 	}
