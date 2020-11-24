@@ -1,6 +1,6 @@
 import React from 'react'
 import './body.css';
-import Dialogs from './../components/body/page/Dialogs';
+import Dialogs from './../components/body/page/dialogs/Dialogs';
 
 
 

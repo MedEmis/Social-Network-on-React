@@ -1,6 +1,6 @@
 import React from 'react'
 import './dialogs.scss';
-import heroPicture from './../../../images/avatar.jpeg'
+import heroPicture from './../../../../images/avatar.jpeg'
 
 
 
@@ -16,12 +16,10 @@ class DialogsItem extends React.Component {
 					<div className="dialogs-item__avatar">
 						<img className="dialog-avatar" src={heroPicture} alt="heroPicture" />
 					</div>
-					<div className="dialogs-item__info">Name Name</div>
-
-
-
-
-
+					<div className="dialogs-item__info">
+						<div className="dialogs-item__info">Name Name</div>
+						<div className="dialogs-item__info">Last time was here: 00.00.00</div>
+					</div>
 					<div className="dialogs-item__contact_status">Online</div>
 					<div className="dialogs-item__contact_status-color"></div>
 				</div>
@@ -32,6 +30,10 @@ class DialogsItem extends React.Component {
 					<div className="dialogs-item__avatar">
 						<img className="dialog-avatar" src={heroPicture} alt="heroPicture" />
 					</div>
+					<div className="dialogs-item__num-of-messages">
+						Messages: 45
+					</div>
+
 
 				</div>
 			</div>

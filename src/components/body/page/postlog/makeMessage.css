@@ -29,10 +29,11 @@
 	transition: all 0.2s linear ;
 }
 .body-page__hero-posts-submit,
-.blue-btn {
+.blue-btn,
+.red-btn {
 	align-self: flex-end;
 	width: 100px;
-	height: 40px;
+	height: 30px;
 	font-size: 18px;
 	font-weight: 900;
 }
@@ -43,13 +44,29 @@
 	border: 1.5px solid #03e9f4;
 	border-radius: 7px;
 }
+.red-btn {
+	color: #941505;
+	background: rgb(196, 195, 195);
+	border: 1.5px solid #03e9f4;
+	border-radius: 7px;
+}
 .blue-btn:hover {
 	background-color: #03e9f4;
 	color: #00a5ad;
 	-webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
 	transition: 0.2s;
 }
+.red-btn:hover {
+	background-color: #b10909;
+	color: #00a5ad;
+	-webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+	transition: 0.2s;
+}
 .blue-btn:active {
 	box-shadow: 0px 0px 10px #03e9f4, 0px 0px 20px #03e9f4, 0px 0px 25px #03e9f4, 0px 0px 30px #03e9f4;
+	-webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
+.red-btn:active {
+	box-shadow: 0px 0px 10px  #f43303, 0px 0px 20px #f43303, 0px 0px 25px  #f43303, 0px 0px 30px #f43303;
 	-webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
 }

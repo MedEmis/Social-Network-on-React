@@ -1,7 +1,8 @@
 import React from 'react'
-import './postLog.css';
+import './postLog.scss';
 import './makeMessage.css';
 import PostItem from './PostItem';
+let classNames = require('classnames');
 
 
 
@@ -10,9 +11,10 @@ class PostLog extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			posts: []
+			posts: [],
+			IsTextOpen: false
 		};
-		//console.log(this.state.posts)
+		console.table(this.state.posts)
 	}
 	auto_grow = (event) => {
 		event.target.style.height = "5px";
@@ -29,9 +31,20 @@ class PostLog extends React.Component {
 				dataDate: `${date}`,
 				dataTime: `${time}`,
 				textBody: textArea.value
-			}]
+			}],
 		});
-		//console.log(this.state.posts)
+		
+	}
+	showTextarea = () => {
+		this.setState({
+			IsTextOpen: true
+		})
+		
+	}
+	hideTextarea = () => {
+		this.setState({
+			IsTextOpen: false
+		})
 	}
 	render() {
 		return (
@@ -46,8 +59,17 @@ class PostLog extends React.Component {
 					</div>
 				</div>
 				<div className="body-page__hero-posts-logs-wrapper">
+					<div className={classNames(" body-page__reply-textarea", { " visible": this.state.IsTextOpen })}>
+						<textarea onInput={this.auto_grow} className="body-page__reply-textarea-input" type="text" defaultValue={`Answer to ${this.state.posts.userNik}:`} />
+						<div className="body-page__reply-textarea-buttons">
+							<button onClick={this.hideTextarea} type="submit" className="red-btn" id="neon-text">Close</button>
+							<button onClick={() => this.refs.child.toReply()} type="submit" className="blue-btn" id="neon-text">Publish</button>
+						</div>
+					</div>
 					{
-						this.state.posts.map((item) => (item ? <PostItem key={Math.floor(Math.random() * 10000)} nikName={item.nikName} dataDate={item.dataDate} dataTime={item.dataTime} textBody={item.textBody} /> : null))
+						this.state.posts.map((item) => (item ? <PostItem ref="child" key={Math.floor(Math.random() * 10000)}
+							replyFunc={() => this.showTextarea()} closeFunc={() => this.hideTextarea()}
+							nikName={item.nikName} dataDate={item.dataDate} dataTime={item.dataTime} textBody={item.textBody} /> : null))
 					}
 				</div>
 			</div>
@@ -55,3 +77,5 @@ class PostLog extends React.Component {
 	}
 }
 export default PostLog;
+
+// className={classNames(" body-page__reply-textarea", { " visible": this.state.IsTextOpen })}

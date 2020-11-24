@@ -1,8 +1,8 @@
 import React from 'react'
-import './posts.css';
-import topImage from "./../../../images/page-top.jpg"
+import './/profile.scss';
+import topImage from "./../../../../images/page-top.jpg"
 import HeroInfo from './HeroInfo';
-import heroPicture from './../../../images/avatar.jpeg'
+import heroPicture from './../../../../images/avatar.jpeg'
 
 
 

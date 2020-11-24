@@ -1,0 +1,47 @@
+.body-page {
+	&__hero-posts-log {
+		background: rgb(66, 66, 66);
+		width: 100%;
+		height: auto;
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-end;
+		flex-direction: column;
+		padding: 10px;
+		position: relative;
+	}
+	&__hero-posts-logs-wrapper {
+		display: flex;
+		justify-content: flex-start;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		transition: 0.3s;
+	}
+	&__reply-textarea {
+		position: absolute;
+		width: 500px;
+		min-height: 100px;
+		background: rgb(9, 85, 121);
+		padding: 10px;
+		border-radius: 10px;
+		bottom: -0px;
+		right: -100%;
+		z-index: 20;
+		transition: 0.5s linear;
+		&.visible {
+			right: 0;
+		}
+	}
+	&__reply-textarea-input {
+		width: 100%;
+		height: auto;
+		transition: 0.3s linear;
+	}
+	&__reply-textarea-buttons {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		padding: 3px;
+	}
+}
