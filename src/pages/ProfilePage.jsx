@@ -1,9 +1,8 @@
 import React from 'react'
 import './body.css';
 import BodySidebar from './sidebar/BodySidebar';
-import Posts from './page/Posts';
+import Posts from './page/BodyPage';
 import Profile from './page/Profile';
-import Dialogs from './page/Dialogs';
 
 
 
@@ -16,8 +15,7 @@ class Body extends React.Component {
 		return (
 			<div className="body-main">
 				<BodySidebar/>
-				<Dialogs/>
-				
+				<Profile/>
 			</div>
 		);
 	}

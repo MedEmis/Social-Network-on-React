@@ -1,0 +1,81 @@
+.dialogs {
+	&__wrapper {
+		flex: 1 1 auto;
+		height: 100%;
+		overflow: scroll;
+		background: rgb(63, 60, 60);
+		padding: 0 10px 130px 10px;
+		position: relative;
+	}
+	&__title {
+		width: 100%;
+		height: 50px;
+		background: #000;
+		margin-bottom: 10px;
+		border-radius: 10px;
+	}
+}
+.dialogs-item {
+	height: 100px;
+	width: 100%;
+	background: #000;
+	margin-bottom: 15px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	position: relative;
+	border-radius: 10px;
+	&__contact {
+		flex: 0 0 49%;
+		height: 90%;
+		background: rgb(49, 49, 49);
+		border-radius: 10px;
+		border-radius: 10px;
+		display: flex;
+		position: relative;
+		&_status {
+			position: absolute;
+			width: 20%;
+			height: 36%;
+			background: rgb(78, 75, 75);
+			right: 0%;
+			text-align: right;
+			padding: 2px;
+			border-radius: 20px 0 0 20px;
+		}
+		&_status-color {
+			position: absolute;
+			width: 24px;
+			height: 24px;
+			right: 15%;
+			top: 4%;
+			border-radius: 50%;
+			background: rgb(177, 12, 12);
+		}
+	}
+	&__info{
+		margin: 10px 0 0 20px
+	}
+	&__conversations {
+		flex: 0 0 49%;
+		height: 90%;
+		background: rgb(66, 66, 66);
+		border-radius: 10px;
+		display: flex;
+	}
+	&__avatar {
+		height: 100%;
+		width: 17%;
+		background: rgb(129, 129, 129);
+		border-radius: 15px;
+		border: 4px solid #555;
+		position: relative;
+		overflow: hidden;
+	}
+}
+.dialog-avatar {
+	position: absolute;
+	width: 100%;
+	height: auto;
+	left: 0;
+}

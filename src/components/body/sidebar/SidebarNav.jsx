@@ -10,7 +10,8 @@ class SidebarNav extends React.Component {
 		return (
 			<div className="body-sidebar__list">
 				<button className="body-sidebar__list-item">PROFILE</button>
-				<button className="body-sidebar__list-item">MESSAGES</button>
+				<button className="body-sidebar__list-item">POSTS</button>
+				<button className="body-sidebar__list-item">DIALOGS</button>
 				<button className="body-sidebar__list-item">NEWS</button>
 				<button className="body-sidebar__list-item">MUSIC</button>
 			</div>
