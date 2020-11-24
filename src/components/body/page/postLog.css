@@ -7,4 +7,13 @@
 	align-items: flex-end;
 	flex-direction: column;
 	padding: 10px;
+	position: relative;
+}
+.body-page__hero-posts-logs-wrapper {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	transition: 0.3s;
 }

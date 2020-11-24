@@ -9,10 +9,7 @@ class PostItem extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			nikName: 'MyReplyName',
-			dataDate: '1.12.2020',
-			dataTime: '9:55',
-			textBody: "Lorem ita. Aucessitatibus iste doloribus, nam harum alias? Omnis quas dolore rem quia cupiditate laborum at odit, maiores molestias? Vero praesentium dolorum mollitia iste? Molestias consectetur voluptate vitae perferendis nemo dignissimos aperiam suscipit"
+			
 		};
 		//console.log(!this.props ? this.props.nikName : "Anonymous")
 	}
@@ -39,8 +36,8 @@ class PostItem extends React.Component {
 					<button type="submit" className="body-page__hero-posts-log-item__button-reply">Reply</button>
 				</div>
 				<div className="body-page__hero-posts-log-reply-wrapper">
-					<ReplyPostItem nikName={this.state.nikName} dataDate={this.state.dataDate} dataTime={this.state.dataTime} textBody={this.state.textBody} />
-					<ReplyPostItem />
+					{/* <ReplyPostItem nikName={this.state.nikName} dataDate={this.state.dataDate} dataTime={this.state.dataTime} textBody={this.state.textBody} /> */}
+					{/* <ReplyPostItem /> */}
 				</div>
 			</div>
 		);

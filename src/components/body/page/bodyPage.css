@@ -5,6 +5,7 @@
 	overflow: scroll;
 	background: rgb(75, 71, 71);
 	padding: 0 0 130px 0;
+	position: relative;
 }
 .body-page__background {
 	width: 100%;
