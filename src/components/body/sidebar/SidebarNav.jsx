@@ -21,11 +21,11 @@ class SidebarNav extends React.Component {
 	render() {
 		return (
 			<div className="body-sidebar__list">
-				<NavLink onClick={this.pageMove} className="body-sidebar__list-item" to="/src/components/body/page/profile/Profile.jsx" >PROFILE</NavLink>
-				<NavLink onClick={this.pageMove} className="body-sidebar__list-item" to="/src/components/body/page/postlog/Posts.js" >POSTS</NavLink>
-				<NavLink onClick={this.pageMove} className="body-sidebar__list-item" to="/src/components/body/page/dialogs/Dialogs.jsx" >DIALOGS</NavLink>
-				<NavLink onClick={this.pageMove} className="body-sidebar__list-item" to="/src/components/body/page/" >NEWS</NavLink>
-				<NavLink onClick={this.pageMove} className="body-sidebar__list-item" to="/src/components/body/page/" >MUSIC</NavLink>
+				<NavLink onClick={this.pageMove} className="body-sidebar__list-item" to="/src/components/body/page/profile/Profile.jsx" ><span className="body-sidebar__arrov-hint"/>PROFILE</NavLink>
+				<NavLink onClick={this.pageMove} className="body-sidebar__list-item" to="/src/components/body/page/postlog/Posts.js" ><span className="body-sidebar__arrov-hint"/>POSTS</NavLink>
+				<NavLink onClick={this.pageMove} className="body-sidebar__list-item" to="/src/components/body/page/dialogs/Dialogs.jsx" ><span className="body-sidebar__arrov-hint"/>DIALOGS</NavLink>
+				<NavLink onClick={this.pageMove} className="body-sidebar__list-item" to="/src/components/body/page/news/News.jsx" ><span className="body-sidebar__arrov-hint"/>NEWS</NavLink>
+				<NavLink onClick={this.pageMove} className="body-sidebar__list-item" to="/src/components/body/page/music/Music.jsx" ><span className="body-sidebar__arrov-hint"/>MUSIC</NavLink>
 			</div>
 		);
 	}

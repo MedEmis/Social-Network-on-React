@@ -1,0 +1,19 @@
+.news {
+	&__wrapper {
+		flex: 1 1 auto;
+		height: 100%;
+		overflow: scroll;
+		background: rgb(63, 60, 60);
+		padding: 0 10px 130px 10px;
+		position: relative;
+	}
+	&__title {
+		width: 100%;
+		height: 50px;
+		background: rgb(51, 49, 88);
+		margin-bottom: 10px;
+		border-radius: 0 0 10px 10px;
+		padding: 5px;
+		font-weight: 700;
+	}
+}

@@ -32,31 +32,6 @@ class Dialogs extends React.Component {
 						totalMessages={this.state.totalMessages} lastMessage={this.state.lastMessage} opponentPic={this.state.opponentPic} dialogItemId={this.state.dialogItemId} />
 					<DialogsItem nikName={this.state.nikName} lastDate={this.state.lastDate} statusText={this.state.isOnline ? "Online" : "Offline"} status={this.state.isOnline ? "green" : "red"}
 						totalMessages={this.state.totalMessages} lastMessage={this.state.lastMessage} opponentPic={this.state.opponentPic} dialogItemId={this.state.dialogItemId} />
-					<DialogsItem nikName={this.state.nikName} lastDate={this.state.lastDate} statusText={this.state.isOnline ? "Online" : "Offline"} status={this.state.isOnline ? "green" : "red"}
-						totalMessages={this.state.totalMessages} lastMessage={this.state.lastMessage} opponentPic={this.state.opponentPic} dialogItemId={this.state.dialogItemId} />
-					<DialogsItem nikName={this.state.nikName} lastDate={this.state.lastDate} statusText={this.state.isOnline ? "Online" : "Offline"} status={this.state.isOnline ? "green" : "red"}
-						totalMessages={this.state.totalMessages} lastMessage={this.state.lastMessage} opponentPic={this.state.opponentPic} dialogItemId={this.state.dialogItemId} />
-					<DialogsItem nikName={this.state.nikName} lastDate={this.state.lastDate} statusText={this.state.isOnline ? "Online" : "Offline"} status={this.state.isOnline ? "green" : "red"}
-						totalMessages={this.state.totalMessages} lastMessage={this.state.lastMessage} opponentPic={this.state.opponentPic} dialogItemId={this.state.dialogItemId} />
-					<DialogsItem nikName={this.state.nikName} lastDate={this.state.lastDate} statusText={this.state.isOnline ? "Online" : "Offline"} status={this.state.isOnline ? "green" : "red"}
-						totalMessages={this.state.totalMessages} lastMessage={this.state.lastMessage} opponentPic={this.state.opponentPic} dialogItemId={this.state.dialogItemId} />
-					<DialogsItem nikName={this.state.nikName} lastDate={this.state.lastDate} statusText={this.state.isOnline ? "Online" : "Offline"} status={this.state.isOnline ? "green" : "red"}
-						totalMessages={this.state.totalMessages} lastMessage={this.state.lastMessage} opponentPic={this.state.opponentPic} dialogItemId={this.state.dialogItemId} />
-					<DialogsItem nikName={this.state.nikName} lastDate={this.state.lastDate} statusText={this.state.isOnline ? "Online" : "Offline"} status={this.state.isOnline ? "green" : "red"}
-						totalMessages={this.state.totalMessages} lastMessage={this.state.lastMessage} opponentPic={this.state.opponentPic} dialogItemId={this.state.dialogItemId} />
-					<DialogsItem nikName={this.state.nikName} lastDate={this.state.lastDate} statusText={this.state.isOnline ? "Online" : "Offline"} status={this.state.isOnline ? "green" : "red"}
-						totalMessages={this.state.totalMessages} lastMessage={this.state.lastMessage} opponentPic={this.state.opponentPic} dialogItemId={this.state.dialogItemId} />
-					<DialogsItem nikName={this.state.nikName} lastDate={this.state.lastDate} statusText={this.state.isOnline ? "Online" : "Offline"} status={this.state.isOnline ? "green" : "red"}
-						totalMessages={this.state.totalMessages} lastMessage={this.state.lastMessage} opponentPic={this.state.opponentPic} dialogItemId={this.state.dialogItemId} />
-					<DialogsItem nikName={this.state.nikName} lastDate={this.state.lastDate} statusText={this.state.isOnline ? "Online" : "Offline"} status={this.state.isOnline ? "green" : "red"}
-						totalMessages={this.state.totalMessages} lastMessage={this.state.lastMessage} opponentPic={this.state.opponentPic} dialogItemId={this.state.dialogItemId} />
-					<DialogsItem nikName={this.state.nikName} lastDate={this.state.lastDate} statusText={this.state.isOnline ? "Online" : "Offline"} status={this.state.isOnline ? "green" : "red"}
-						totalMessages={this.state.totalMessages} lastMessage={this.state.lastMessage} opponentPic={this.state.opponentPic} dialogItemId={this.state.dialogItemId} />
-					<DialogsItem nikName={this.state.nikName} lastDate={this.state.lastDate} statusText={this.state.isOnline ? "Online" : "Offline"} status={this.state.isOnline ? "green" : "red"}
-						totalMessages={this.state.totalMessages} lastMessage={this.state.lastMessage} opponentPic={this.state.opponentPic} dialogItemId={this.state.dialogItemId} />
-					<DialogsItem nikName={this.state.nikName} lastDate={this.state.lastDate} statusText={this.state.isOnline ? "Online" : "Offline"} status={this.state.isOnline ? "green" : "red"}
-						totalMessages={this.state.totalMessages} lastMessage={this.state.lastMessage} opponentPic={this.state.opponentPic} dialogItemId={this.state.dialogItemId} />
-
 				</div>
 			</>
 		);
