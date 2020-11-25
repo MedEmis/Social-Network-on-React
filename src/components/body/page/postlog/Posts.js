@@ -22,10 +22,10 @@ class Posts extends React.Component {
 	}
 	render() {
 		return (
-			<div className="body-page">
+			<>
 				<PostLog id='PostLog' name={this.state.userData.name}/>
 				<div className="body-page__end">no more messages here</div>
-			</div>
+			</>
 		);
 	}
 }

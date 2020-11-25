@@ -14,7 +14,8 @@ class PostLog extends React.Component {
 			posts: [],
 			IsTextOpen: false
 		};
-		console.table(this.state.posts)
+		this.child = React.createRef();
+		//console.table(this.state.posts)
 	}
 	auto_grow = (event) => {
 		event.target.style.height = "5px";
@@ -33,13 +34,13 @@ class PostLog extends React.Component {
 				textBody: textArea.value
 			}],
 		});
-		
+
 	}
 	showTextarea = () => {
 		this.setState({
 			IsTextOpen: true
 		})
-		
+
 	}
 	hideTextarea = () => {
 		this.setState({
@@ -63,11 +64,11 @@ class PostLog extends React.Component {
 						<textarea onInput={this.auto_grow} className="body-page__reply-textarea-input" type="text" defaultValue={`Answer to ${this.state.posts.userNik}:`} />
 						<div className="body-page__reply-textarea-buttons">
 							<button onClick={this.hideTextarea} type="submit" className="red-btn" id="neon-text">Close</button>
-							<button onClick={() => this.refs.child.toReply()} type="submit" className="blue-btn" id="neon-text">Publish</button>
+							<button onClick={() => this.child.current.toReply()} type="submit" className="blue-btn" id="neon-text">Publish</button>
 						</div>
 					</div>
 					{
-						this.state.posts.map((item) => (item ? <PostItem ref="child" key={Math.floor(Math.random() * 10000)}
+						this.state.posts.map((item) => (item ? <PostItem ref={this.child} key={Math.floor(Math.random() * 10000)}
 							replyFunc={() => this.showTextarea()} closeFunc={() => this.hideTextarea()}
 							nikName={item.nikName} dataDate={item.dataDate} dataTime={item.dataTime} textBody={item.textBody} /> : null))
 					}

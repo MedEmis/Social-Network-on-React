@@ -1,5 +1,5 @@
 .body-main {
-	background-image: url("/src/images/chiptextures.jpg");
+	background-image: url("../../images/chiptextures.jpg");
 	width: 100vw;
 	height: 100%;
 	display: flex;
@@ -7,6 +7,28 @@
 	align-items: center;
 	overflow: auto;
 	position: relative;
+}
+.body-page {
+	margin: 0;
+	padding: 0;
+	overflow: auto;
+	flex: 1 1 auto;
+	right: 0px;
+	position: relative;
+	transition: 0.3s linear;
+	position: relative;
+	&_cover {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgb(43, 43, 43);
+		opacity: 80%;
+		display: none;
+		z-index: 15;
+	}
 }
 
 .tooltip {
@@ -24,8 +46,6 @@
 	text-align: center;
 	border-radius: 6px;
 	padding: 5px;
-
-	/* Position the tooltip */
 	position: absolute;
 	bottom: -30px;
 	right: -40px;
@@ -34,4 +54,15 @@
 
 .tooltip:hover .tooltiptext {
 	visibility: visible;
+}
+@keyframes move {
+	0% {
+		right: 0%;
+	}
+	50% {
+		right: 100%;
+	}
+	100% {
+		right: 0%;
+	}
 }

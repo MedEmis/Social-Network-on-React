@@ -49,9 +49,9 @@ class PostItem extends React.Component {
 				textBody: textArea.value
 			}],
 		});
-		console.table(this.state)
+		//console.table(this.state)
 		setTimeout(() => {
-			//this.props.closeFunc()
+			this.props.closeFunc()
 			textArea.value = ''
 		}, 1500);
 	}

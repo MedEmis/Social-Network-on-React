@@ -23,12 +23,12 @@ class Profile extends React.Component {
 	}
 	render() {
 		return (
-			<div className="body-page">
+			<>
 				<div className="body-page__background"><img src={topImage} alt="topImage"></img></div>
 				<HeroInfo heroPicture={heroPicture} name={this.state.userData.name} dObirth={this.state.userData.dObirth}
 					city={this.state.userData.city} education={this.state.userData.education} webSite={this.state.userData.webSite} />
 
-			</div>
+			</>
 		);
 	}
 }
