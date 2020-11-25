@@ -19,9 +19,9 @@ class Body extends React.Component {
 				<div className="body-main">
 					<BodySidebar />
 					<>
-						<Route path='/src/components/body/page/profile/Profile.jsx' component={Profile} />
-						<Route path='/src/components/body/page/postlog/Posts.js' component={Posts} />
-						<Route path='/src/components/body/page/dialogs/Dialogs.jsx' component={Dialogs} />
+						<Route exact path='/src/components/body/page/profile/Profile.jsx' component={Profile} />
+						<Route exact path='/src/components/body/page/postlog/Posts.js' component={Posts} />
+						<Route exact path='/src/components/body/page/dialogs/Dialogs.jsx' component={Dialogs} />
 					</>
 				</div>
 			</BrowserRouter>

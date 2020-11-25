@@ -12,7 +12,7 @@ class Dialogs extends React.Component {
 	render() {
 		return (
 			<div className="dialogs__wrapper">
-				<div className="dialogs__title"></div>
+				<div className="dialogs__title">Your contacts and recent conversations</div>
 				<DialogsItem/>
 				<DialogsItem/>
 				<DialogsItem/>

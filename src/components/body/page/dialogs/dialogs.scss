@@ -10,9 +10,11 @@
 	&__title {
 		width: 100%;
 		height: 50px;
-		background: #000;
+		background: rgb(51, 49, 88);
 		margin-bottom: 10px;
-		border-radius: 10px;
+		border-radius: 0 0 10px 10px;
+		padding: 5px;
+		font-weight: 700;
 	}
 }
 .dialogs-item {
@@ -28,7 +30,7 @@
 	&__contact {
 		flex: 0 0 49%;
 		height: 90%;
-		background: rgb(49, 49, 49);
+		background: rgb(69, 69, 104);
 		border-radius: 10px;
 		border-radius: 10px;
 		display: flex;
@@ -37,8 +39,9 @@
 			position: absolute;
 			width: 20%;
 			height: 36%;
-			background: rgb(78, 75, 75);
+			background: rgb(59, 58, 58);
 			right: 0%;
+			top: 0;
 			text-align: right;
 			padding: 2px;
 			border-radius: 20px 0 0 20px;
@@ -52,6 +55,33 @@
 			border-radius: 50%;
 			background: rgb(177, 12, 12);
 		}
+		&_delete-tab {
+			position: absolute;
+			width: 15%;
+			height: 33%;
+			background: rgb(100, 61, 61);
+			right: 0%;
+			top: 35%;
+			text-align: right;
+			padding: 2px;
+			cursor: pointer;
+			background: center / contain no-repeat url(../../../../images/delete.png);
+			background-color: rgb(109, 52, 52);
+			border-radius: 20px 0 0 20px;
+		}
+		&_watch-info {
+			position: absolute;
+			width: 10%;
+			height: 33%;
+			background: rgb(61, 107, 67);
+			right: 0;
+			cursor: pointer;
+			top: 67%;
+			text-align: center;
+			border-radius: 20px 0 0 20px;
+			background: center / contain no-repeat url(../../../../images/watch.png);
+			background-color: rgb(62, 104, 66);
+		}
 	}
 	&__info {
 		margin: 10px 0 0 20px;
@@ -59,24 +89,49 @@
 	&__conversations {
 		flex: 0 0 49%;
 		height: 90%;
-		background: rgb(66, 66, 66);
+		background: rgb(69, 28, 80);
 		border-radius: 10px;
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
+		position: relative;
 	}
 	&__avatar {
 		height: 100%;
 		width: 17%;
+		flex: 0 0 15%;
 		background: rgb(129, 129, 129);
 		border-radius: 15px;
 		border: 4px solid #555;
 		position: relative;
 		overflow: hidden;
 	}
-	&__num-of-messages{
-		margin-left: 50px;
-
+	&__recent-messages {
+		flex: 0 0 70%;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		height: 90%;
+		word-wrap: break-word;
+		letter-spacing: normal;
+		text-align: left;
+		font-size: 16px;
+		padding: 15px 5px 5px 5px;
+		&_title {
+			position: absolute;
+			width: 70%;
+			height: 15px;
+			background: rgb(14, 15, 105);
+			top: 0;
+			right: 0;
+			color: rgb(255, 255, 255);
+			border-radius: 0 0 20px 20px;
+			line-height: 20px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-decoration: none;
+		}
+		
 	}
 }
 .dialog-avatar {

@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 
 
 class SidebarNav extends React.Component {
@@ -9,11 +10,11 @@ class SidebarNav extends React.Component {
 	render() {
 		return (
 			<div className="body-sidebar__list">
-				<a href="/src/components/body/page/profile/Profile.jsx" className="body-sidebar__list-item">PROFILE</a>
-				<a href="/src/components/body/page/postlog/Posts.js" className="body-sidebar__list-item">POSTS</a>
-				<a href="/src/components/body/page/dialogs/Dialogs.jsx" className="body-sidebar__list-item">DIALOGS</a>
-				<a href="/src/components/body/page/" className="body-sidebar__list-item">NEWS</a>
-				<a href="/src/components/body/page/" className="body-sidebar__list-item">MUSIC</a>
+				<NavLink className="body-sidebar__list-item" to="/src/components/body/page/profile/Profile.jsx" >PROFILE</NavLink>
+				<NavLink className="body-sidebar__list-item" to="/src/components/body/page/postlog/Posts.js" >POSTS</NavLink>
+				<NavLink className="body-sidebar__list-item" to="/src/components/body/page/dialogs/Dialogs.jsx" >DIALOGS</NavLink>
+				<NavLink className="body-sidebar__list-item" to="/src/components/body/page/" >NEWS</NavLink>
+				<NavLink className="body-sidebar__list-item" to="/src/components/body/page/" >MUSIC</NavLink>
 			</div>
 		);
 	}
