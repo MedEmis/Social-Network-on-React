@@ -1,7 +1,7 @@
 import React from 'react'
 import './dialogs.scss';
 import heroPicture from './../../../../images/avatar.jpeg'
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { pageMove } from "./../../../../App.js"
 
 
@@ -10,6 +10,8 @@ class DialogsItem extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
+		this.userProfile = "/src/components/body/page/profile/Profile"
+		this.userPosts = "/src/components/body/page/postlog/Posts"
 	}
 	deleteItem = (event) => {
 		let dialogItem = event.target.parentNode.parentNode
@@ -32,8 +34,10 @@ class DialogsItem extends React.Component {
 					<div className="dialogs-item__contact_status">{this.props.statusText}</div>
 					<div className="dialogs-item__contact_status-color" style={{ background: this.props.status }}></div>
 					<div onClick={this.deleteItem} className="dialogs-item__contact_delete-tab"></div>
-					<NavLink onClick={pageMove} to={"/src/components/body/page/profile/Profile"} className="dialogs-item__contact_watch-info "></NavLink>
-
+					<Link onClick={pageMove}
+						to={{ pathname: this.userProfile, currentUserId: this.props.userId }}
+						className="dialogs-item__contact_watch-info "
+					></Link>
 				</div>
 				<div className="dialogs-item__conversations">
 					<div className="dialogs-item__avatar">
@@ -43,11 +47,14 @@ class DialogsItem extends React.Component {
 						<img className="dialog-avatar" src={this.props.opponentPic} alt="heroPicture" />
 					</div>
 					<div className="dialogs-item__recent-messages">
-						<NavLink onClick={pageMove} to="/src/components/body/page/postlog/Posts" className="dialogs-item__recent-messages_title">Total messages: &nbsp; <b>{this.props.totalMessages}</b> <span>Open log</span> </NavLink>
+						<Link onClick={pageMove}
+							to={{ pathname: this.userPosts, currentUserId: this.props.userId }}
+							className="dialogs-item__recent-messages_title"
+						>Total messages: &nbsp; <b>{this.props.totalMessages}</b> <span>Open log</span> </Link>
 						{this.props.lastMessage}
 					</div>
 				</div>
-			</div>
+			</div >
 		);
 	}
 }

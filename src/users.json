@@ -1,49 +1,56 @@
 {
-  "users": [
-    {
-      "userId": "0001",
-      "name": "Name One",
-      "birthDate": "00.11.22",
-      "city": "some town",
-      "education": "some education",
-      "webSite": "some webSite",
-      "registerDate": "33.33.33"
-    },
-    {
-      "userId": "0002",
-      "name": "Name Two",
-      "birthDate": "11.22.33",
-      "city": "some town",
-      "education": "some education",
-      "webSite": "some webSite",
-      "registerDate": "44.44.44"
-    },
-    {
-      "userId": "0003",
-      "name": "Name Three",
-      "birthDate": "00.11.33",
-      "city": "some town",
-      "education": "some education",
-      "webSite": "some webSite",
-      "registerDate": "44.44.44"
-    },
-    {
-      "userId": "0004",
-      "name": "Name Four",
-      "birthDate": "00.11.44",
-      "city": "some town",
-      "education": "some education",
-      "webSite": "some webSite",
-      "registerDate": "55.55.55"
-    },
-    {
-      "userId": "0005",
-      "name": "Name Five",
-      "birthDate": "00.11.55",
-      "city": "some town",
-      "education": "some education",
-      "webSite": "some webSite",
-      "registerDate": "55.55.55"
-    }
-  ]
+  "id0001": {
+    "userId": "id0001",
+    "name": "Name MAIN FIRST",
+    "birthDate": "00.11.22",
+    "city": "some town",
+    "education": "some education",
+    "webSite": "some webSite",
+    "registerDate": "33.33.33"
+  },
+  "id0002": {
+    "userId": "id0002",
+    "name": "Name Two",
+    "birthDate": "11.22.33",
+    "city": "some town",
+    "education": "some education",
+    "webSite": "some webSite",
+    "registerDate": "44.44.44"
+  },
+  "id0003": {
+    "userId": "id0003",
+    "name": "Name Three",
+    "birthDate": "00.11.33",
+    "city": "some town",
+    "education": "some education",
+    "webSite": "some webSite",
+    "registerDate": "44.44.44"
+  },
+  "id0004": {
+    "userId": "id0004",
+    "name": "Name Four",
+    "birthDate": "00.11.44",
+    "city": "some town",
+    "education": "some education",
+    "webSite": "some webSite",
+    "registerDate": "55.55.55"
+  },
+  "id0005": {
+    "userId": "id0005",
+    "name": "Name Five",
+    "birthDate": "00.11.55",
+    "city": "some town",
+    "education": "some education",
+    "webSite": "some webSite",
+    "registerDate": "55.55.55"
+  },
+  "id0006": {
+    "userId": "id0006",
+    "name": "Name Six",
+    "birthDate": "00.11.66",
+    "city": "some town",
+    "education": "some education",
+    "webSite": "some webSite",
+    "registerDate": "66.66.66"
+  }
 }

@@ -74,10 +74,10 @@ class ReplyPostItem extends React.Component {
 						this.reply.map((item, index) => (item ? <NestedReplyPostItem
 							key={Math.floor(Math.random() * 10000)}
 							id={this.reply[index].id}
-							nikName={this.reply[index].props.nikName}
-							dataDate={this.reply[index].props.dataDate}
-							dataTime={this.reply[index].props.dataTime}
-							textBody={this.reply[index].props.textBody}
+							nikName={this.reply[index].nikName}
+							dataDate={this.reply[index].dataDate}
+							dataTime={this.reply[index].dataTime}
+							textBody={this.reply[index].textBody}
 						/> : null))
 					}
 				</div>

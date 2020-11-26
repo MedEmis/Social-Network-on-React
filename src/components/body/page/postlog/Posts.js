@@ -1,6 +1,7 @@
 import React from 'react'
-import './posts.css';
+import './postLog.scss';
 import PostLog from './PostLog';
+import { currentUserId } from './../../../body/Body.js'
 
 
 
@@ -10,17 +11,20 @@ class Posts extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			userData: {
-				name: "Name Name",
-			}
+
 		};
+		if (this.props.location.currentUserId) {
+			this.userId = this.props.location.currentUserId || this.props.location.UserId
+		} else {
+			this.userId = currentUserId
+		}
+		//console.log(this.props.location)
 
 	}
 	render() {
 		return (
 			<>
-				<PostLog id='PostLog' name={this.state.userData.name} />
-				<div className="body-page__end">no more messages here</div>
+				<PostLog id='PostLog' userId={this.userId} />
 			</>
 		);
 	}

@@ -81,11 +81,11 @@ class PostItem extends React.Component {
 						this.reply.map((item, index) => (item ? <ReplyPostItem
 							key={Math.floor(Math.random() * 10000)}
 							id={this.reply[index].id}
-							nikName={this.reply[index].props.nikName}
-							dataDate={this.reply[index].props.dataDate}
-							dataTime={this.reply[index].props.dataTime}
-							textBody={this.reply[index].props.textBody}
-							childReply={this.reply[index].props.nestedReply}
+							nikName={this.reply[index].nikName}
+							dataDate={this.reply[index].dataDate}
+							dataTime={this.reply[index].dataTime}
+							textBody={this.reply[index].textBody}
+							childReply={this.reply[index].nestedReply}
 						/> : null))
 					}
 				</div>

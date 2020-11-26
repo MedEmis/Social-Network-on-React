@@ -1,9 +1,8 @@
 import React from 'react'
-import './postLog.scss';
 import './makeMessage.css';
 import PostItem from './PostItem';
 import postsBase from './../../../../posts.json'
-
+import { currentUserId } from './../../../body/Body.js'
 let classNames = require('classnames');
 
 
@@ -12,12 +11,16 @@ let classNames = require('classnames');
 class PostLog extends React.Component {
 	constructor(props) {
 		super(props);
+		this.child = React.createRef();
 		this.state = {
 			IsTextOpen: false
 		};
-		this.postsBase = postsBase.posts
-		this.child = React.createRef();
-		console.log('postLog ', postsBase)
+		this.posts = postsBase.posts
+		this.UserId = this.props.userId
+		this.accordinglyToId = this.posts.filter(item => item[this.UserId])//searching current user posts...
+		this.postsBlock = this.accordinglyToId[0][this.UserId]//getting block of  Posts
+		this.postReplays = this.postsBlock[0].reply//getting post replays
+		//console.log("postReplays", this.postReplays)
 
 	}
 	auto_grow = (event) => {
@@ -37,7 +40,6 @@ class PostLog extends React.Component {
 				textBody: textArea.value
 			}],
 		});
-
 	}
 	showTextarea = (event) => {
 		this.setState({
@@ -72,19 +74,20 @@ class PostLog extends React.Component {
 						</div>
 					</div>
 					{
-						this.postsBase.map((item, index) => (item ? <PostItem
+						this.postsBlock.map((item, index) => (item ? <PostItem
 							replyFunc={() => this.showTextarea()}
 							closeFunc={() => this.hideTextarea()}
 							ref={this.child}
 							key={Math.floor(Math.random() * 10000)}
-							id={this.postsBase[index].id}
-							nikName={this.postsBase[index].props.nikName}
-							dataDate={this.postsBase[index].props.dataDate}
-							dataTime={this.postsBase[index].props.dataTime}
-							textBody={this.postsBase[index].props.textBody}
-							childReply = {this.postsBase[index].props.reply}
+							id={this.postsBlock[index].id}
+							nikName={this.postsBlock[index].nikName}
+							dataDate={this.postsBlock[index].dataDate}
+							dataTime={this.postsBlock[index].dataTime}
+							textBody={this.postsBlock[index].textBody}
+							childReply={this.postsBlock[index].reply}
 						/> : null))
 					}
+					<div className="body-page__end">no more messages here</div>
 				</div>
 			</div>
 		);

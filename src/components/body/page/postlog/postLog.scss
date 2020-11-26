@@ -1,13 +1,20 @@
 .body-page {
+	flex: 1 1 auto;
+	width: 200px;
+	height: 100%;
+	overflow: scroll;
+	background: rgb(75, 71, 71);
+	position: relative;
 	&__hero-posts-log {
-		background: rgb(66, 66, 66);
+		background: rgb(116, 112, 112);
 		width: 100%;
 		height: auto;
 		display: flex;
 		justify-content: flex-start;
 		align-items: flex-end;
 		flex-direction: column;
-		padding: 10px;
+		padding: 5px 5px 30px 5px;
+
 		position: relative;
 	}
 	&__hero-posts-logs-wrapper {
@@ -17,6 +24,7 @@
 		align-items: center;
 		width: 100%;
 		transition: 0.3s;
+		padding: 0 0 100px 0;
 	}
 	&__reply-textarea {
 		position: absolute;

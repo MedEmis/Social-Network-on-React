@@ -7,6 +7,7 @@ import Dialogs from './page/dialogs/Dialogs';
 import News from './page/news/News';
 import Music from './page/music/Music';
 import './body.scss';
+export const currentUserId = "id0001"//<<<==  USER
 
 //СТРАНИЦА, ГДЕ НУЖНО ДЕЛАТЬ РОУТИНГ ДЛЯ ПЕРЕКЛЮЧЕНИЯ МЕЖДУ СТРАНИЦАМИ С ПОМОЩЬЮ NAV
 
@@ -25,7 +26,7 @@ class Body extends React.Component {
 		return (
 			<BrowserRouter >
 				<div className="body-main">
-					<BodySidebar />
+					<BodySidebar currentUserId={currentUserId} />
 					<div className="body-page">
 						<span className="body-page_cover"></span>
 						<Route exact path='/src/components/body/page/profile/Profile' component={Profile} />

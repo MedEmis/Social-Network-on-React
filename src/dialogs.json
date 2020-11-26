@@ -1,8 +1,8 @@
 {
   "dialogs": [
     {
-      "userId": "0001",
       "id": "111",
+      "userId": "id0001",
       "name": "Name One",
       "lastVisit": "11.11.12",
       "messages": [
@@ -15,7 +15,7 @@
     },
     {
       "id": "222",
-      "userId": "0002",
+      "userId": "id0002",
       "name": "Name two",
       "lastVisit": "11.11.12",
       "messages": [
@@ -29,7 +29,7 @@
     },
     {
       "id": "333",
-      "userId": "0003",
+      "userId": "id0003",
       "name": "Name three",
       "lastVisit": "11.11.12",
       "messages": [
@@ -42,7 +42,7 @@
     },
     {
       "id": "444",
-      "userId": "0004",
+      "userId": "id0004",
       "name": "Name four",
       "lastVisit": "11.11.12",
       "messages": [
@@ -55,7 +55,7 @@
     },
     {
       "id": "555",
-      "userId": "0005",
+      "userId": "id0005",
       "name": "Name five",
       "lastVisit": "11.11.12",
       "messages": [
