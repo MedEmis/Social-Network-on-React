@@ -1,0 +1,70 @@
+{
+  "dialogs": [
+    {
+      "userId": "0001",
+      "id": "111",
+      "name": "Name One",
+      "lastVisit": "11.11.12",
+      "messages": [
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "Lorem, irit? Quos?",
+        "Lorem, ipsum dolorolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "sadfasdfsdfsadfasdfasd"
+      ]
+    },
+    {
+      "id": "222",
+      "userId": "0002",
+      "name": "Name two",
+      "lastVisit": "11.11.12",
+      "messages": [
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "Lorem, irit? Quos?",
+        "Lorem, ipsum dolorolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "sadfasdfsdfsadfasdfasd",
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?"
+      ]
+    },
+    {
+      "id": "333",
+      "userId": "0003",
+      "name": "Name three",
+      "lastVisit": "11.11.12",
+      "messages": [
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "Lorem, irit? Quos?",
+        "Lorem, ipsum dolorolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "sadfasdfsdfsadfasdfasd"
+      ]
+    },
+    {
+      "id": "444",
+      "userId": "0004",
+      "name": "Name four",
+      "lastVisit": "11.11.12",
+      "messages": [
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "Lorem, irit? Quos?",
+        "Lorem, ipsum dolorolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "sadfasdfsdfsadfasdfasd"
+      ]
+    },
+    {
+      "id": "555",
+      "userId": "0005",
+      "name": "Name five",
+      "lastVisit": "11.11.12",
+      "messages": [
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "Lorem, irit? Quos?",
+        "Lorem, ipsum dolorolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+        "sadfasdfsdfsadfasdfasd"
+      ]
+    }
+  ]
+}

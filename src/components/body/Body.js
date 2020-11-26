@@ -10,6 +10,11 @@ import './body.scss';
 
 //СТРАНИЦА, ГДЕ НУЖНО ДЕЛАТЬ РОУТИНГ ДЛЯ ПЕРЕКЛЮЧЕНИЯ МЕЖДУ СТРАНИЦАМИ С ПОМОЩЬЮ NAV
 
+
+
+
+
+
 class Body extends React.Component {
 	constructor(props) {
 		super(props);
@@ -23,11 +28,11 @@ class Body extends React.Component {
 					<BodySidebar />
 					<div className="body-page">
 						<span className="body-page_cover"></span>
-						<Route exact path='/src/components/body/page/profile/Profile.jsx' component={Profile} />
-						<Route exact path='/src/components/body/page/postlog/Posts.js' component={Posts} />
-						<Route exact path='/src/components/body/page/dialogs/Dialogs.jsx' component={Dialogs} />
-						<Route exact path='/src/components/body/page/news/News.jsx' component={News} />
-						<Route exact path='/src/components/body/page/music/Music.jsx' component={Music} />
+						<Route exact path='/src/components/body/page/profile/Profile' component={Profile} />
+						<Route exact path='/src/components/body/page/postlog/Posts' component={Posts} />
+						<Route exact path='/src/components/body/page/dialogs/Dialogs' component={Dialogs} />
+						<Route exact path='/src/components/body/page/news/News' component={News} />
+						<Route exact path='/src/components/body/page/music/Music' component={Music} />
 					</div>
 				</div>
 			</BrowserRouter>

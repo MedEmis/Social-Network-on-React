@@ -12,8 +12,10 @@ class ReplyPostItem extends React.Component {
 			isVouted: false,
 			like: 0,
 			dislike: 0,
-			nestedReplyLog: []
 		};
+		this.reply = this.props.childReply
+		//console.log('postItemReply ',this.props.id)
+
 	}
 	likeIncrement = (event) => {
 		let elemPanel = event.target.parentNode
@@ -51,7 +53,7 @@ class ReplyPostItem extends React.Component {
 				<div className="hero-posts-log-item reply">
 					<div className="hero-posts-log-item__title">
 						<div className="hero-posts-log-item__title-from">From: {!this.props.nikName ? " Anonymous" : this.props.nikName}</div>
-						<div className="hero-posts-log-item__title-date">Date: {!this.props.dataDate ? "--.--.--" : this.props.dataDate}  /   At: {!this.props.dataTime ? "--:--" : this.props.dataTime}</div>
+						<div className="hero-posts-log-item__title-date">Id: {this.props.id}&nbsp;&nbsp;&nbsp;Date: {!this.props.dataDate ? "--.--.--" : this.props.dataDate}  /   At: {!this.props.dataTime ? "--:--" : this.props.dataTime}</div>
 					</div>
 					<div className="hero-posts-log-item__body">
 						<div className="hero-posts-log-item__body-text">{!this.props.textBody ? "...no text" : this.props.textBody}</div>
@@ -69,7 +71,14 @@ class ReplyPostItem extends React.Component {
 				</div>
 				<div className="body-page__hero-posts-log-nested-reply-wrapper">
 					{
-						this.state.nestedReplyLog.map((item) => (item ? <NestedReplyPostItem key={Math.floor(Math.random() * 10000)} nikName={item.nikName} dataDate={item.dataDate} dataTime={item.dataTime} textBody={item.textBody} /> : null))
+						this.reply.map((item, index) => (item ? <NestedReplyPostItem
+							key={Math.floor(Math.random() * 10000)}
+							id={this.reply[index].id}
+							nikName={this.reply[index].props.nikName}
+							dataDate={this.reply[index].props.dataDate}
+							dataTime={this.reply[index].props.dataTime}
+							textBody={this.reply[index].props.textBody}
+						/> : null))
 					}
 				</div>
 			</>

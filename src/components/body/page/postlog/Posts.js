@@ -12,10 +12,6 @@ class Posts extends React.Component {
 		this.state = {
 			userData: {
 				name: "Name Name",
-				dObirth: "20.04.1991",
-				city: "Pervomaisk",
-				education: "Bachelor",
-				webSite: ""
 			}
 		};
 
@@ -23,7 +19,7 @@ class Posts extends React.Component {
 	render() {
 		return (
 			<>
-				<PostLog id='PostLog' name={this.state.userData.name}/>
+				<PostLog id='PostLog' name={this.state.userData.name} />
 				<div className="body-page__end">no more messages here</div>
 			</>
 		);

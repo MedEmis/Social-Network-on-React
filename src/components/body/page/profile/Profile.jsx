@@ -1,5 +1,5 @@
 import React from 'react'
-import './/profile.scss';
+import './profile.scss';
 import topImage from "./../../../../images/page-top.jpg"
 import HeroInfo from './HeroInfo';
 import heroPicture from './../../../../images/avatar.jpeg'

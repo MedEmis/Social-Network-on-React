@@ -1,0 +1,49 @@
+{
+  "users": [
+    {
+      "userId": "0001",
+      "name": "Name One",
+      "birthDate": "00.11.22",
+      "city": "some town",
+      "education": "some education",
+      "webSite": "some webSite",
+      "registerDate": "33.33.33"
+    },
+    {
+      "userId": "0002",
+      "name": "Name Two",
+      "birthDate": "11.22.33",
+      "city": "some town",
+      "education": "some education",
+      "webSite": "some webSite",
+      "registerDate": "44.44.44"
+    },
+    {
+      "userId": "0003",
+      "name": "Name Three",
+      "birthDate": "00.11.33",
+      "city": "some town",
+      "education": "some education",
+      "webSite": "some webSite",
+      "registerDate": "44.44.44"
+    },
+    {
+      "userId": "0004",
+      "name": "Name Four",
+      "birthDate": "00.11.44",
+      "city": "some town",
+      "education": "some education",
+      "webSite": "some webSite",
+      "registerDate": "55.55.55"
+    },
+    {
+      "userId": "0005",
+      "name": "Name Five",
+      "birthDate": "00.11.55",
+      "city": "some town",
+      "education": "some education",
+      "webSite": "some webSite",
+      "registerDate": "55.55.55"
+    }
+  ]
+}

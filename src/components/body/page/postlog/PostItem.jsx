@@ -10,21 +10,19 @@ class PostItem extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isVouted: false,
+			isVoted: false,
 			like: 0,
-			dislike: 0,
-			replyLog: [],
-			// replyLogStorage: []
+			dislike: 0
 		};
-
+		this.reply = this.props.childReply
+		//console.log('postItem ', this.reply)
 
 	}
-	//replyLogStorage = []
 	likeIncrement = (event) => {
 		let elemPanel = event.target.parentNode
 		this.setState({
 			like: this.state.like + 1,
-			isVouted: true
+			isVoted: true
 		})
 		this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
 	}
@@ -32,7 +30,7 @@ class PostItem extends React.Component {
 		let elemPanel = event.target.parentNode
 		this.setState({
 			dislike: this.state.dislike + 1,
-			isVouted: true
+			isVoted: true
 		})
 		this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
 	}
@@ -62,7 +60,7 @@ class PostItem extends React.Component {
 				<div className="hero-posts-log-item">
 					<div className="hero-posts-log-item__title">
 						<div className="hero-posts-log-item__title-from">From: {!this.props.nikName ? " Anonymous" : this.props.nikName}</div>
-						<div className="hero-posts-log-item__title-date">Date: {!this.props.dataDate ? "--.--.--" : this.props.dataDate}  /   At: {!this.props.dataTime ? "--:--" : this.props.dataTime}</div>
+						<div className="hero-posts-log-item__title-date">Id: {this.props.id}&nbsp;&nbsp;&nbsp;Date: {!this.props.dataDate ? "--.--.--" : this.props.dataDate}  /   At: {!this.props.dataTime ? "--:--" : this.props.dataTime}</div>
 					</div>
 					<div className="hero-posts-log-item__body">
 						<div className="hero-posts-log-item__body-text">{!this.props.textBody ? "...no text" : this.props.textBody}</div>
@@ -80,9 +78,16 @@ class PostItem extends React.Component {
 				</div>
 				<div className="hero-posts-log-reply-wrapper">
 					{
-						this.state.replyLog.map((item) => (item ? <ReplyPostItem key={Math.floor(Math.random() * 10000)} nikName={item.nikName} dataDate={item.dataDate} dataTime={item.dataTime} textBody={item.textBody} /> : null))
+						this.reply.map((item, index) => (item ? <ReplyPostItem
+							key={Math.floor(Math.random() * 10000)}
+							id={this.reply[index].id}
+							nikName={this.reply[index].props.nikName}
+							dataDate={this.reply[index].props.dataDate}
+							dataTime={this.reply[index].props.dataTime}
+							textBody={this.reply[index].props.textBody}
+							childReply={this.reply[index].props.nestedReply}
+						/> : null))
 					}
-					{/* Makes eny item of storage to component with props */}
 				</div>
 			</div>
 		);
