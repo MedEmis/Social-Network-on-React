@@ -11,6 +11,8 @@ class Music extends React.Component {
 		this.state = {
 			
 		};
+		console.log("Music props", this.props)
+
 	}
 	render() {
 		return (

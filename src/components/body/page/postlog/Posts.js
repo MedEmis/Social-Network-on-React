@@ -13,18 +13,26 @@ class Posts extends React.Component {
 		this.state = {
 
 		};
-		if (this.props.location.currentUserId) {
-			this.userId = this.props.location.currentUserId || this.props.location.UserId
-		} else {
-			this.userId = currentUserId
-		}
-		//console.log(this.props.location)
+		this.userBase = this.props.userBase
+		this.userId = this.props.currentUserId
+		this.postsBase = this.props.postsBase
+		// if (this.props.location.currentUserId) {
+		// 	this.userId = this.props.location.currentUserId || this.props.location.UserId
+		// } else {
+		// 	this.userId = currentUserId
+		// }
+		//console.log("Posts props", this.props)
+
 
 	}
 	render() {
 		return (
 			<>
-				<PostLog id='PostLog' userId={this.userId} />
+				<PostLog
+					userId={this.userId}
+					userBase={this.props.userBase}
+					postsBase={this.props.postsBase}
+				/>
 			</>
 		);
 	}

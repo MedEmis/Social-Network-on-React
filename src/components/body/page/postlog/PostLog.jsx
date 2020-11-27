@@ -1,8 +1,6 @@
 import React from 'react'
 import './makeMessage.css';
 import PostItem from './PostItem';
-import postsBase from './../../../../posts.json'
-import { currentUserId } from './../../../body/Body.js'
 let classNames = require('classnames');
 
 
@@ -15,12 +13,13 @@ class PostLog extends React.Component {
 		this.state = {
 			IsTextOpen: false
 		};
-		this.posts = postsBase.posts
-		this.UserId = this.props.userId
-		this.accordinglyToId = this.posts.filter(item => item[this.UserId])//searching current user posts...
-		this.postsBlock = this.accordinglyToId[0][this.UserId]//getting block of  Posts
+		this.userBase = this.props.userBase
+		this.userId = this.props.userId
+		this.postsBase = this.props.postsBase.posts
+		this.accordinglyToId = this.postsBase.filter(item => item[this.userId])//searching current user posts...
+		this.postsBlock = this.accordinglyToId[0][this.userId]//getting block of  Posts
 		this.postReplays = this.postsBlock[0].reply//getting post replays
-		//console.log("postReplays", this.postReplays)
+		//console.log("PostLog props", this.accordinglyToId)
 
 	}
 	auto_grow = (event) => {

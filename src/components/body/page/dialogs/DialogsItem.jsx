@@ -1,8 +1,8 @@
 import React from 'react'
-import './dialogs.scss';
-import heroPicture from './../../../../images/avatar.jpeg'
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { pageMove } from "./../../../../App.js"
+import heroPicture from './../../../../images/avatar.jpeg'
+import './dialogs.scss';
 
 
 
@@ -10,8 +10,22 @@ class DialogsItem extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
-		this.userProfile = "/src/components/body/page/profile/Profile"
-		this.userPosts = "/src/components/body/page/postlog/Posts"
+		this.userProfilePath = {
+			pathname: "/src/components/body/page/profile/Profile",
+			currentUserId: this.props.currentUserId,
+			userBase: this.props.userBase,
+			postsBase: this.props.postsBase,
+			dialogBase: this.props.dialogBase
+		}
+		this.userPostsPath = {
+			pathname: "/src/components/body/page/postlog/Posts",
+			currentUserId: this.props.currentUserId,
+			userBase: this.props.userBase,
+			postsBase: this.props.postsBase,
+			dialogBase: this.props.dialogBase
+		}
+
+		//console.log("DialogItem props", this.props)
 	}
 	deleteItem = (event) => {
 		let dialogItem = event.target.parentNode.parentNode
@@ -34,8 +48,9 @@ class DialogsItem extends React.Component {
 					<div className="dialogs-item__contact_status">{this.props.statusText}</div>
 					<div className="dialogs-item__contact_status-color" style={{ background: this.props.status }}></div>
 					<div onClick={this.deleteItem} className="dialogs-item__contact_delete-tab"></div>
-					<Link onClick={pageMove}
-						to={{ pathname: this.userProfile, currentUserId: this.props.userId }}
+					<Link
+						to={this.userProfilePath}
+						onClick={pageMove}
 						className="dialogs-item__contact_watch-info "
 					></Link>
 				</div>
@@ -47,8 +62,9 @@ class DialogsItem extends React.Component {
 						<img className="dialog-avatar" src={this.props.opponentPic} alt="heroPicture" />
 					</div>
 					<div className="dialogs-item__recent-messages">
-						<Link onClick={pageMove}
-							to={{ pathname: this.userPosts, currentUserId: this.props.userId }}
+						<Link
+							onClick={pageMove}
+							to={this.userPostsPath}
 							className="dialogs-item__recent-messages_title"
 						>Total messages: &nbsp; <b>{this.props.totalMessages}</b> <span>Open log</span> </Link>
 						{this.props.lastMessage}

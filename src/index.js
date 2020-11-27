@@ -3,19 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import userBase from './users.json'
+import postsBase from './posts.json'
+import dialogBase from './dialogs.json'
+
+const currentUserId = "id0001"//<<<==  USER
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<App
+			currentUserId={currentUserId}
+			userBase={userBase}
+			postsBase={postsBase}
+			dialogBase={dialogBase}
+		/>
 	</React.StrictMode>,
 	document.getElementById('root')
 );
-
-
-//for textarea autosize
- 
-//for mini-menu end
-
 
 
 

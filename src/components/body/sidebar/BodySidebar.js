@@ -9,12 +9,17 @@ class BodySidebar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
-		//console.log(this.props.currentUserId)
+		this.currentUserId = this.props.currentUserId
 	}
 	render() {
 		return (
 			<div className="body-sidebar">
-				<SidebarNav currentUserId={this.props.currentUserId} />
+				<SidebarNav
+					currentUserId={this.props.currentUserId}
+					userBase={this.props.userBase}
+					postsBase={this.props.postsBase}
+					dialogBase={this.props.dialogBase}
+				/>
 				<MiniMenu />
 				<SidebarNews />
 			</div>

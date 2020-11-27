@@ -2,8 +2,6 @@ import React from 'react'
 import './dialogs.scss';
 import DialogsItem from './DialogsItem';
 import opponentPicture from './../../../../images/opponent.jpeg'
-import userBase from './../../../../users.json'
-import dialogBase from './../../../../dialogs.json'
 
 
 
@@ -15,8 +13,10 @@ class Dialogs extends React.Component {
 			isOnline: false,
 			opponentPic: opponentPicture
 		};
-		this.userBase = userBase
-		this.dialogBase = dialogBase
+		this.userBase = this.props.userBase
+		this.dialogBase = this.props.dialogBase
+		//console.log("Dialogs props", this.props)
+
 
 	}
 	render() {

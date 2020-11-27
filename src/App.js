@@ -16,14 +16,45 @@ export const pageMove = (event) => {//global function for page animation
 	}, 300);
 }
 
-function App() {
-	return (
-		<div className="App">
-			<Header />
-			<Body />
-			<Footer />
-		</div>
-	);
-}
 
+class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {};
+		//console.log("App props", this.props)
+	}
+
+	render() {
+		return (
+			<div className="App">
+				<Header />
+				<Body
+					currentUserId={this.props.currentUserId}
+					userBase={this.props.userBase}
+					postsBase={this.props.postsBase}
+					dialogBase={this.props.dialogBase}
+				/>
+				<Footer />
+			</div>
+		);
+	}
+}
 export default App;
+
+
+
+
+
+
+
+// function App() {
+// 	return (
+// 		<div className="App">
+// 			<Header />
+// 			<Body />
+// 			<Footer />
+// 		</div>
+// 	);
+// }
+
+//export default App;

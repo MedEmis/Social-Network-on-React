@@ -16,7 +16,6 @@ class PostItem extends React.Component {
 		};
 		this.reply = this.props.childReply
 		//console.log('postItem ', this.reply)
-
 	}
 	likeIncrement = (event) => {
 		let elemPanel = event.target.parentNode

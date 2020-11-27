@@ -11,6 +11,8 @@ class News extends React.Component {
 		this.state = {
 			
 		};
+		console.log("News props", this.props)
+
 	}
 	render() {
 		return (

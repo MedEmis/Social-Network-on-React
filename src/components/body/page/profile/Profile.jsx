@@ -3,8 +3,6 @@ import './profile.scss';
 import HeroInfo from './HeroInfo';
 import User404 from './User404';
 import heroPicture from './../../../../images/avatar.jpeg'
-import userBase from './../../../../users.json'
-import { currentUserId } from './../../../body/Body.js'
 
 
 
@@ -14,31 +12,34 @@ class Profile extends React.Component {
 		super(props);
 		this.state = {
 		};
-		this.users = userBase
-		if (this.props.location.currentUserId) {
-			this.userId = this.props.location.currentUserId || this.props.location.UserId
-		} else {
-			this.userId = currentUserId
-		}
-		console.log(this.props.location.currentUserId)
+		this.userBase = this.props.userBase
+		this.userId = this.props.currentUserId
+
+		// if (this.props.location.currentUserId) {
+		// 	this.userId = this.props.location.currentUserId
+		// } else {
+		// 	this.userId = this.props.currentuserid
+		// }
+
 	}
 
 	render() {
 		// if (!props.location.propsSearch) return <Redirect to="/src/components/body/page/profile/Profile" />;
+		console.log("Profile props", this.props.location)
 
 
 
 		return (
 			<>
 				{
-					this.users.hasOwnProperty(this.userId)
+					this.userBase.hasOwnProperty(this.userId)
 						? <HeroInfo
 							heroPicture={heroPicture}
-							name={this.users[this.userId].name}
-							birthDate={this.users[this.userId].birthDate}
-							city={this.users[this.userId].city}
-							education={this.users[this.userId].education}
-							webSite={this.users[this.userId].webSite}
+							name={this.userBase[this.userId].name}
+							birthDate={this.userBase[this.userId].birthDate}
+							city={this.userBase[this.userId].city}
+							education={this.userBase[this.userId].education}
+							webSite={this.userBase[this.userId].webSite}
 						/>
 						: <User404 />
 				}
