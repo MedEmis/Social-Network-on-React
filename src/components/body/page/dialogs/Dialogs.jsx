@@ -1,7 +1,7 @@
 import React from 'react'
 import './dialogs.scss';
 import DialogsItem from './DialogsItem';
-import opponentPicture from './../../../../images/opponent.jpeg'
+import opponentPicture from './../../../../images/avatars/id0002.jpeg'
 
 
 
@@ -10,11 +10,12 @@ class Dialogs extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isOnline: false,
+			//isOnline: false,
 			opponentPic: opponentPicture
 		};
 		this.userBase = this.props.userBase
 		this.dialogBase = this.props.dialogBase
+		this.currentUserId = this.props.currentUserId
 		//console.log("Dialogs props", this.props)
 
 
@@ -25,20 +26,22 @@ class Dialogs extends React.Component {
 				<div className="dialogs__wrapper">
 					<div className="dialogs__title">Your contacts and recent conversations</div>
 					{
-						this.dialogBase.dialogs.map((item, index) => (item ? <DialogsItem
+						this.dialogBase[this.currentUserId].map((item, index) => (item ? <DialogsItem
+							opponentName={this.dialogBase[this.currentUserId][index].name}
+							lastDate={this.dialogBase[this.currentUserId][index].lastVisit}
+							opponentId={this.dialogBase[this.currentUserId][index].opponentId}
+							statusText={this.userBase[this.dialogBase[this.currentUserId][index].opponentId].isOnline ? "Online" : "Offline"}
+							statusColor={this.userBase[this.dialogBase[this.currentUserId][index].opponentId].isOnline ? "green" : "red"}
+							totalMessages={this.dialogBase[this.currentUserId][index].messages.length}
+							lastMessage={this.dialogBase[this.currentUserId][index].messages[this.dialogBase[this.currentUserId][index].messages.length - 1]}
+							opponentPic={this.userBase[this.dialogBase[this.currentUserId][index].opponentId].avatarUrl}
+							dialogItemId={this.dialogBase[this.currentUserId][index].id}
+							currentUserId={this.currentUserId}
+							currentPic={this.userBase[this.currentUserId].avatarUrl}
 							key={Math.floor(Math.random() * 10000)}
-							nikName={this.dialogBase.dialogs[index].name}
-							lastDate={this.dialogBase.dialogs[index].lastVisit}
-							statusText={this.state.isOnline ? "Online" : "Offline"}
-							status={this.state.isOnline ? "green" : "red"}
-							totalMessages={this.dialogBase.dialogs[index].messages.length}
-							lastMessage={this.dialogBase.dialogs[index].messages[this.dialogBase.dialogs[index].messages.length - 1]}
-							opponentPic={this.state.opponentPic}
-							dialogItemId={this.dialogBase.dialogs[index].id}
-							userId={this.dialogBase.dialogs[index].userId}
 						/> : null))
 					}
-					{/* {console.log(this.dialogBase.dialogs.filter(item => item.userId === "0004"))} */}
+					{/* {console.log(Math.floor(Math.random() * 10000))} */}
 				</div>
 			</>
 		);

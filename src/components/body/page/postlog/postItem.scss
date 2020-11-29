@@ -28,6 +28,18 @@
 	text-align: right;
 	float: right;
 	position: relative;
+	&_avatar {
+		content: "";
+		position: absolute;
+		width: 80px;
+		height: 80px;
+		left: -100px;
+		top: 10px;
+		border-radius: 20%;
+		background: rgb(209, 190, 18);
+		border: 3px solid rgb(90, 90, 90);
+		z-index: 5;
+	}
 	&.reply {
 		width: 80%;
 		min-height: 50px;
@@ -75,19 +87,7 @@
 			}
 		}
 	}
-	&::before {
-		content: "";
-		position: absolute;
-		width: 80px;
-		height: 80px;
-		left: -100px;
-		top: 10px;
-		border-radius: 20%;
-		background: rgb(209, 190, 18);
-		background: center / contain no-repeat url(../../../../images/avatar.jpeg);
-		border: 3px solid rgb(90, 90, 90);
-		z-index: 5;
-	}
+
 	&__title {
 		position: absolute;
 		display: flex;

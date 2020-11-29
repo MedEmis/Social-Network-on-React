@@ -1,6 +1,7 @@
 import React from 'react'
 import './postItem.scss';
 import ReplyPostItem from './ReplyPostItem';
+import heroPicture from './../../../../images/avatars/id0001.jpeg'
 
 
 
@@ -57,6 +58,9 @@ class PostItem extends React.Component {
 		return (
 			<div className="posts-log-item-wrapper">
 				<div className="hero-posts-log-item">
+					<div className="hero-posts-log-item_avatar"
+						style={{ background: `center / contain no-repeat url(${heroPicture})` }}
+					/>
 					<div className="hero-posts-log-item__title">
 						<div className="hero-posts-log-item__title-from">From: {!this.props.nikName ? " Anonymous" : this.props.nikName}</div>
 						<div className="hero-posts-log-item__title-date">Id: {this.props.id}&nbsp;&nbsp;&nbsp;Date: {!this.props.dataDate ? "--.--.--" : this.props.dataDate}  /   At: {!this.props.dataTime ? "--:--" : this.props.dataTime}</div>

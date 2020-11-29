@@ -15,10 +15,10 @@ class BodySidebar extends React.Component {
 		return (
 			<div className="body-sidebar">
 				<SidebarNav
-					currentUserId={this.props.currentUserId}
-					userBase={this.props.userBase}
-					postsBase={this.props.postsBase}
-					dialogBase={this.props.dialogBase}
+					currentUserId={this.props.sidebarState.currentUserId}
+					userBase={this.props.sidebarState.userBase}
+					postsBase={this.props.sidebarState.postsBase}
+					dialogBase={this.props.sidebarState.dialogBase}
 				/>
 				<MiniMenu />
 				<SidebarNews />

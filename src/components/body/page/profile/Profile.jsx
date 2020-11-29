@@ -1,8 +1,11 @@
 import React from 'react'
-import './profile.scss';
 import HeroInfo from './HeroInfo';
+import HeroContacts from './HeroContacts';
 import User404 from './User404';
-import heroPicture from './../../../../images/avatar.jpeg'
+import topImage from "./../../../../images/page-top.jpg"
+import heroPicture from './../../../../images/avatars/id0001.jpeg'
+import './profile.scss';
+
 
 
 
@@ -15,6 +18,7 @@ class Profile extends React.Component {
 		this.userBase = this.props.userBase
 		this.userId = this.props.currentUserId
 
+
 		// if (this.props.location.currentUserId) {
 		// 	this.userId = this.props.location.currentUserId
 		// } else {
@@ -25,7 +29,7 @@ class Profile extends React.Component {
 
 	render() {
 		// if (!props.location.propsSearch) return <Redirect to="/src/components/body/page/profile/Profile" />;
-		console.log("Profile props", this.props.location)
+		//console.log("Profile props", this.props.location)
 
 
 
@@ -33,14 +37,24 @@ class Profile extends React.Component {
 			<>
 				{
 					this.userBase.hasOwnProperty(this.userId)
-						? <HeroInfo
-							heroPicture={heroPicture}
-							name={this.userBase[this.userId].name}
-							birthDate={this.userBase[this.userId].birthDate}
-							city={this.userBase[this.userId].city}
-							education={this.userBase[this.userId].education}
-							webSite={this.userBase[this.userId].webSite}
-						/>
+						? <div className="body-page__hero-page">
+							<div className="body-page__background"><img src={topImage} alt="topImage"></img></div>
+							<HeroInfo
+								userBase={this.userBase}
+								userId={this.userId}
+								name={this.userBase[this.userId].name}
+								heroPicture = {this.userBase[this.userId].avatarUrl}
+								birthDate={this.userBase[this.userId].birthDate}
+								city={this.userBase[this.userId].city}
+								education={this.userBase[this.userId].education}
+								webSite={this.userBase[this.userId].webSite}
+							/>
+							<HeroContacts
+								contactName="contactName"
+								userBase={this.userBase}
+								userId={this.userId}
+							/>
+						</div>
 						: <User404 />
 				}
 			</>

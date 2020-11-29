@@ -20,8 +20,8 @@ class Body extends React.Component {
 		super(props);
 		this.state = {};
 		this.currentUserId = this.props.currentUserId
+		this.state = this.props.state
 		//console.log("Body props", this.props)
-
 	}
 
 	render() {
@@ -29,54 +29,42 @@ class Body extends React.Component {
 			<BrowserRouter >
 				<div className="body-main">
 					<BodySidebar
-						currentUserId={this.props.currentUserId}
-						userBase={this.props.userBase}
-						postsBase={this.props.postsBase}
-						dialogBase={this.props.dialogBase}
+						sidebarState={this.props.bodyState}
 					/>
 					<div className="body-page">
 						<span className="body-page_cover"></span>
 						<Route exact path='/src/components/body/page/profile/Profile' render={() =>
 							<Profile
-								currentUserId={this.props.currentUserId}
-								userBase={this.props.userBase}
-								postsBase={this.props.postsBase}
-								dialogBase={this.props.dialogBase}
+								currentUserId={this.props.bodyState.currentUserId}
+								userBase={this.props.bodyState.userBase}
+								postsBase={this.props.bodyState.postsBase}
 							/>
 						} />
 						{/* <Route exact path='/src/components/body/page/profile/Profile' component={Profile} /> */}
 						<Route exact path='/src/components/body/page/postlog/Posts' render={() =>
 							<Posts
-								currentUserId={this.props.currentUserId}
-								userBase={this.props.userBase}
-								postsBase={this.props.postsBase}
-								dialogBase={this.props.dialogBase}
+								currentUserId={this.props.bodyState.currentUserId}
+								userBase={this.props.bodyState.userBase}
+								postsBase={this.props.bodyState.postsBase}
 							/>
 						} />
 						{/* <Route exact path='/src/components/body/page/profile/Posts' component={Posts} /> */}
 						<Route exact path='/src/components/body/page/dialogs/Dialogs' render={() =>
 							<Dialogs
-								currentUserId={this.props.currentUserId}
-								userBase={this.props.userBase}
-								postsBase={this.props.postsBase}
-								dialogBase={this.props.dialogBase}
+								currentUserId={this.props.bodyState.currentUserId}
+								userBase={this.props.bodyState.userBase}
+								dialogBase={this.props.bodyState.dialogBase}
 							/>
 						} />
 						{/* <Route exact path='/src/components/body/page/profile/Dialogs' component={Dialogs} /> */}
 						<Route exact path='/src/components/body/page/news/News' render={() =>
 							<News
-								currentUserId={this.props.currentUserId}
-								userBase={this.props.userBase}
-								postsBase={this.props.postsBase}
-								dialogBase={this.props.dialogBase}
+								currentUserId={this.props.bodyState.currentUserId}
 							/>
 						} />
 						<Route exact path='/src/components/body/page/music/Music' render={() =>
 							<Music
-								currentUserId={this.props.currentUserId}
-								userBase={this.props.userBase}
-								postsBase={this.props.postsBase}
-								dialogBase={this.props.dialogBase}
+								currentUserId={this.props.bodyState.currentUserId}
 							/>
 						} />
 

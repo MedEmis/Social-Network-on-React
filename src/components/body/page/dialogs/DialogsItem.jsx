@@ -1,7 +1,6 @@
 import React from 'react'
-import { Link, Route } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { pageMove } from "./../../../../App.js"
-import heroPicture from './../../../../images/avatar.jpeg'
 import './dialogs.scss';
 
 
@@ -12,20 +11,20 @@ class DialogsItem extends React.Component {
 		this.state = {};
 		this.userProfilePath = {
 			pathname: "/src/components/body/page/profile/Profile",
-			currentUserId: this.props.currentUserId,
+			currentUserId: this.props.opponentId,
 			userBase: this.props.userBase,
 			postsBase: this.props.postsBase,
 			dialogBase: this.props.dialogBase
 		}
 		this.userPostsPath = {
 			pathname: "/src/components/body/page/postlog/Posts",
-			currentUserId: this.props.currentUserId,
+			currentUserId: this.props.opponentId,
 			userBase: this.props.userBase,
 			postsBase: this.props.postsBase,
 			dialogBase: this.props.dialogBase
 		}
 
-		//console.log("DialogItem props", this.props)
+		console.log("DialogItem props", this.props)
 	}
 	deleteItem = (event) => {
 		let dialogItem = event.target.parentNode.parentNode
@@ -41,12 +40,12 @@ class DialogsItem extends React.Component {
 						<img className="dialog-avatar" src={this.props.opponentPic} alt="heroPicture" />
 					</div>
 					<div className="dialogs-item__info">
-						<div className="dialogs-item__info_name">{this.props.nikName}</div>
+						<div className="dialogs-item__info_name">{this.props.opponentName}</div>
 						<div className="dialogs-item__info_date">Last time was here: {this.props.lastDate}</div>
-						<div className="dialogs-item__info_id"> user id: {this.props.userId}&nbsp;&nbsp;&nbsp;log id: {this.props.dialogItemId}</div>
+						<div className="dialogs-item__info_id"> user id: {this.props.opponentId}&nbsp;&nbsp;&nbsp;log id: {this.props.dialogItemId}</div>
 					</div>
 					<div className="dialogs-item__contact_status">{this.props.statusText}</div>
-					<div className="dialogs-item__contact_status-color" style={{ background: this.props.status }}></div>
+					<div className="dialogs-item__contact_status-color" style={{ background: this.props.statusColor }}></div>
 					<div onClick={this.deleteItem} className="dialogs-item__contact_delete-tab"></div>
 					<Link
 						to={this.userProfilePath}
@@ -56,10 +55,10 @@ class DialogsItem extends React.Component {
 				</div>
 				<div className="dialogs-item__conversations">
 					<div className="dialogs-item__avatar">
-						<img className="dialog-avatar" src={heroPicture} alt="heroPicture" />
+						<img className="dialog-avatar" src={this.props.currentPic} alt="heroPicture" />
 					</div>
 					<div className="dialogs-item__avatar">
-						<img className="dialog-avatar" src={this.props.opponentPic} alt="heroPicture" />
+						<img className="dialog-avatar" src={this.props.opponentPic} alt="opponentPicture" />
 					</div>
 					<div className="dialogs-item__recent-messages">
 						<Link
@@ -70,8 +69,8 @@ class DialogsItem extends React.Component {
 						{this.props.lastMessage}
 					</div>
 				</div>
-			</div >
-		);
+			</div>
+		)
 	}
 }
 export default DialogsItem;

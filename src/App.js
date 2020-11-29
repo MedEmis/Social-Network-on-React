@@ -29,10 +29,7 @@ class App extends React.Component {
 			<div className="App">
 				<Header />
 				<Body
-					currentUserId={this.props.currentUserId}
-					userBase={this.props.userBase}
-					postsBase={this.props.postsBase}
-					dialogBase={this.props.dialogBase}
+					bodyState={this.props.appState}
 				/>
 				<Footer />
 			</div>

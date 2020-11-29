@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from './../../../src/images/logo192.png';
-import hero from './../../../src/images/avatar.jpeg';
+import hero from './../../../src/images/avatars/id0001.jpeg';
 import './header.css';
 
 

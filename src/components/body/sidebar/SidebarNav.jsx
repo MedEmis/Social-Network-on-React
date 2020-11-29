@@ -15,7 +15,7 @@ class SidebarNav extends React.Component {
 			dialogBase: this.props.dialogBase
 		}
 
-		console.log("sideBarNav ", this.props)
+		//console.log("sideBarNav ", this.props)
 	}
 	render() {
 		return (

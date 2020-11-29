@@ -3,19 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import userBase from './users.json'
-import postsBase from './posts.json'
-import dialogBase from './dialogs.json'
 
-const currentUserId = "id0001"//<<<==  USER
+import state from "./redux/state"
+
 
 ReactDOM.render(
 	<React.StrictMode>
 		<App
-			currentUserId={currentUserId}
-			userBase={userBase}
-			postsBase={postsBase}
-			dialogBase={dialogBase}
+			appState={state}
 		/>
 	</React.StrictMode>,
 	document.getElementById('root')
