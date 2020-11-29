@@ -1,7 +1,6 @@
 import React from 'react'
 import NestedReplyPostItem from './NestedReplyPostItem';
 import './postItem.scss';
-import heroPicture from './../../../../images/avatars/id0001.jpeg'
 
 
 
@@ -15,6 +14,8 @@ class ReplyPostItem extends React.Component {
 			dislike: 0,
 		};
 		this.reply = this.props.childReply
+		this.userId = this.props.userId
+		this.userBase = this.props.userBase
 		//console.log('postItemReply ',this.props.id)
 
 	}
@@ -52,12 +53,10 @@ class ReplyPostItem extends React.Component {
 		return (
 			<>
 				<div className="hero-posts-log-item reply">
-					<div className="hero-posts-log-item_avatar"
-						style={{ background: `center / contain no-repeat url(${heroPicture})` }}
-					/>
+					<img className="hero-posts-log-item_avatar" src={this.userBase[this.userId].avatarUrl} />
 					<div className="hero-posts-log-item__title">
 						<div className="hero-posts-log-item__title-from">From: {!this.props.nikName ? " Anonymous" : this.props.nikName}</div>
-						<div className="hero-posts-log-item__title-date">Id: {this.props.id}&nbsp;&nbsp;&nbsp;Date: {!this.props.dataDate ? "--.--.--" : this.props.dataDate}  /   At: {!this.props.dataTime ? "--:--" : this.props.dataTime}</div>
+						<div className="hero-posts-log-item__title-date">{this.userId}&nbsp;&nbsp;&nbsp;Date: {!this.props.dataDate ? "--.--.--" : this.props.dataDate}  /   At: {!this.props.dataTime ? "--:--" : this.props.dataTime}</div>
 					</div>
 					<div className="hero-posts-log-item__body">
 						<div className="hero-posts-log-item__body-text">{!this.props.textBody ? "...no text" : this.props.textBody}</div>
@@ -78,6 +77,8 @@ class ReplyPostItem extends React.Component {
 						this.reply.map((item, index) => (item ? <NestedReplyPostItem
 							key={Math.floor(Math.random() * 10000)}
 							id={this.reply[index].id}
+							userId={this.reply[index].userId}
+							userBase={this.userBase}
 							nikName={this.reply[index].nikName}
 							dataDate={this.reply[index].dataDate}
 							dataTime={this.reply[index].dataTime}

@@ -2,7 +2,7 @@ import React from 'react'
 import './makeMessage.css';
 import PostItem from './PostItem';
 let classNames = require('classnames');
-
+//import testBase from "./../../../../testsss.json"
 
 
 
@@ -15,11 +15,11 @@ class PostLog extends React.Component {
 		};
 		this.userBase = this.props.userBase
 		this.userId = this.props.userId
-		this.postsBase = this.props.postsBase.posts
-		this.accordinglyToId = this.postsBase.filter(item => item[this.userId])//searching current user posts...
-		this.postsBlock = this.accordinglyToId[0][this.userId]//getting block of  Posts
+		this.postsBase = this.props.postsBase
+		this.postsBlock = this.postsBase[this.userId]//getting block of  Posts
 		this.postReplays = this.postsBlock[0].reply//getting post replays
-		//console.log("PostLog props", this.accordinglyToId)
+		console.log("PostLog props", this.postReplays)
+
 
 	}
 	auto_grow = (event) => {
@@ -30,15 +30,21 @@ class PostLog extends React.Component {
 		let textArea = document.querySelector(".body-page__hero-posts-textarea-input")
 		let time = new Date().toLocaleTimeString().slice(0, -3)
 		let date = new Date().toLocaleDateString()
-		let userNik = this.props.name
-		this.setState({
-			posts: [...this.state.posts, {
-				nikName: userNik,
-				dataDate: `${date}`,
-				dataTime: `${time}`,
-				textBody: textArea.value
-			}],
-		});
+		let userNik = this.userBase[this.userId].name
+		 //let dataBase = JSON.parse(this.postsBase)
+		// let post = {
+		// 	"id": "00001",
+		// 	"userId": `${this.userId}`,
+		// 	"nikName": userNik,
+		// 	"dataDate": `${date}`,
+		// 	"dataTime": `${time}`,
+		// 	"textBody": textArea.value,
+		// 	"reply": []
+		// }
+		// dataBase[this.userId].push(post)
+		// let newPost = JSON.stringify(dataBase)
+		// // console.log(dataBase[this.userId])
+
 	}
 	showTextarea = (event) => {
 		this.setState({
@@ -79,6 +85,8 @@ class PostLog extends React.Component {
 							ref={this.child}
 							key={Math.floor(Math.random() * 10000)}
 							id={this.postsBlock[index].id}
+							userId={this.postsBlock[index].userId}
+							userBase={this.userBase}
 							nikName={this.postsBlock[index].nikName}
 							dataDate={this.postsBlock[index].dataDate}
 							dataTime={this.postsBlock[index].dataTime}

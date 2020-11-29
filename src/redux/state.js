@@ -5,7 +5,7 @@ import DialogBase from '../dialogs.json'
 
 
 let state = {
-	currentUserId: "id0001",//<<<==  USER
+	currentUserId: "id0006",//<<<==  USER
 	userBase: UserBase,
 	postsBase: PostsBase,
 	dialogBase: DialogBase
