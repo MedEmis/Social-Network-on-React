@@ -34,13 +34,14 @@
 		background: rgb(52, 63, 68);
 		padding: 10px;
 		border-radius: 10px;
-		transition: 0.5s linear;
+		transition: 0.3s linear;
 		opacity: 0;
 		z-index: 20;
 		overflow: hidden;
 		&.visible {
 			opacity: 1;
-			height: 100px;
+			min-height: 100px;
+			height: auto;
 		}
 	}
 	&__reply-textarea-input {

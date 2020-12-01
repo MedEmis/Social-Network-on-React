@@ -10,16 +10,14 @@ class ReplyPostItem extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isVouted: false,
+			isVoted: false,
 			like: 0,
 			dislike: 0,
-			IsTextOpen: false
+			IsTextOpen: false,
+			postsBlock: props.childReply
+
 		};
-		this.child = React.createRef();
-		this.reply = this.props.childReply
-		this.userId = this.props.userId
-		this.userBase = this.props.userBase
-		//console.log('postItemReply ',this.props)
+		console.log('ReplypostItem ', this.state.postsBlock)
 
 	}
 	likeIncrement = (event) => {
@@ -38,48 +36,15 @@ class ReplyPostItem extends React.Component {
 		})
 		this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
 	}
-	toReply = (event) => {
-		let textArea = document.querySelector(".body-page__reply-textarea-input")
-		// let time = new Date().toLocaleTimeString().slice(0, -3)
-		// let date = new Date().toLocaleDateString()
-		// let userNik = this.props.name
-		// this.setState({
-		// 	replyLog: [...this.state.replyLog, {
-		// 		nikName: userNik,
-		// 		dataDate: `${date}`,
-		// 		dataTime: `${time}`,
-		// 		textBody: textArea.value
-		// 	}],
-		// });
-		//console.table(this.event)
-		setTimeout(() => {
-			this.hideTextarea()
-			textArea.value = ''
-		}, 500);
-	}
-	showTextarea = (event) => {
-		this.setState({
-			IsTextOpen: true
-		})
-		let textArea = document.querySelector(".body-page__reply-textarea-input")
-	}
-	hideTextarea = () => {
-		this.setState({
-			IsTextOpen: false
-		})
-	}
-	auto_grow = (event) => {
-		event.target.style.height = "5px";
-		event.target.style.height = (event.target.scrollHeight) + "px";
-	}
 	render() {
 		return (
 			<>
 				<div className="hero-posts-log-item reply">
-					<img className="hero-posts-log-item_avatar" src={this.userBase[this.userId].avatarUrl} />
+					<img className="hero-posts-log-item_avatar" src={this.props.userBase[this.props.userId].avatarUrl} />
 					<div className="hero-posts-log-item__title">
 						<div className="hero-posts-log-item__title-from">From: {!this.props.nikName ? " Anonymous" : this.props.nikName}</div>
-						<div className="hero-posts-log-item__title-date">{this.userId}&nbsp;&nbsp;&nbsp;Date: {!this.props.dataDate ? "--.--.--" : this.props.dataDate}  /   At: {!this.props.dataTime ? "--:--" : this.props.dataTime}</div>
+						<div className="hero-posts-log-item__title-date">{this.props.userId}&nbsp;&nbsp;&nbsp;Date: {!this.props.dataDate ? "--.--.--" : this.props.dataDate}  /   At: {!this.props.dataTime ? "--:--" : this.props.dataTime}</div>
+						<div className="hero-posts-log-item__title-log-id">log id: {this.props.id}</div>
 					</div>
 					<div className="hero-posts-log-item__body">
 						<div className="hero-posts-log-item__body-text">{!this.props.textBody ? "...no text" : this.props.textBody}</div>
@@ -95,26 +60,45 @@ class ReplyPostItem extends React.Component {
 					</div>
 					<button onClick={() => this.setState({ IsTextOpen: true })} type="submit" className="hero-posts-log-item__button-reply">Reply</button>
 					<div className={classNames(" body-page__reply-textarea", { " visible": this.state.IsTextOpen })}>
-						<textarea onInput={this.auto_grow} className="body-page__reply-textarea-input" type="text" defaultValue={`Answer to ${this.props.nikName}:`} />
+						<textarea onInput={this.props.auto_growFunc} className="body-page__reply-textarea-input" type="text" defaultValue={`Answer to ${this.props.nikName} :---`} />
 						<div className="body-page__reply-textarea-buttons">
 							<button onClick={() => this.setState({ IsTextOpen: false })} type="submit" className="red-btn" id="neon-text">Close</button>
-							<button onClick={this.toReply} type="submit" className="blue-btn" id="neon-text">Publish</button>
+							<button onClick={(event) => {
+								this.props.nestReplyFunc(
+									this.props.userId,
+									this.props.initialUser,
+									this.props.initialPost,
+									this.props.id,
+									this.props.userBase[this.props.userId].name,
+									event
+								)
+								this.setState({ IsTextOpen: false })
+								this.setState({ refresh: true })
+
+							}
+							} type="submit" className="blue-btn" id="neon-text">Publish</button>
 						</div>
 					</div>
 				</div>
 				<div className="body-page__hero-posts-log-nested-reply-wrapper">
 					{
-						this.reply.map((item, index) => (item ? <NestedReplyPostItem
-							ref={this.child}
-							key={Math.floor(Math.random() * 10000)}
-							id={this.reply[index].id}
-							userId={this.reply[index].userId}
-							userBase={this.userBase}
-							nikName={this.reply[index].nikName}
-							dataDate={this.reply[index].dataDate}
-							dataTime={this.reply[index].dataTime}
-							textBody={this.reply[index].textBody}
-						/> : null))
+						(this.state.postsBlock !== undefined && this.state.postsBlock !== null)
+							? this.state.postsBlock.map((item, index) => (item ? <NestedReplyPostItem
+								ref={this.child}
+								key={Math.floor(Math.random() * 10000)}
+								id={this.state.postsBlock[index].id}
+								userId={this.state.postsBlock[index].userId}
+								userBase={this.props.userBase}
+								nikName={this.state.postsBlock[index].nikName}
+								dataDate={this.state.postsBlock[index].dataDate}
+								dataTime={this.state.postsBlock[index].dataTime}
+								textBody={this.state.postsBlock[index].textBody}
+								childReply={this.state.postsBlock[index].nestedReply}
+								nestReplyFunc={this.props.nestReplyFunc}
+								auto_growFunc={this.props.auto_growFunc}
+								props={this.props}
+							/> : null))
+							: null
 					}
 				</div>
 			</>

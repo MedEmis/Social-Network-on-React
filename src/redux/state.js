@@ -491,6 +491,24 @@ let state = {
 			}
 		],
 		"id0006": [
+			// {
+			// 	"id": 1,
+			// 	"userId": "id0006",
+			// 	"nikName": "First Name",
+			// 	"dataDate": "11.11.11",
+			// 	"dataTime": "12:11",
+			// 	"textBody": "АДИН",
+			// 	"reply": []
+			// },
+			// {
+			// 	"id": 2,
+			// 	"userId": "id0006",
+			// 	"nikName": "First Name",
+			// 	"dataDate": "11.11.11",
+			// 	"dataTime": "12:11",
+			// 	"textBody": "ДВА",
+			// 	"reply": []
+			// }
 		]
 	}
 	,
@@ -629,9 +647,76 @@ let state = {
 		],
 		"id0004": [],
 		"id0005": [],
-		"id0006": []
-	}
+		"id0006": [
+			{}
+		]
+	},
+	postsCount: 0,
+	dialogsCount: 0
 
 }
+export let auto_grow = (event) => {
+	event.target.style.height = "5px";
+	event.target.style.height = (event.target.scrollHeight) + "px";
+}
+
+
+
+
+export let addNewPost = (userId, nikName) => {
+	let textArea = document.querySelector(".body-page__hero-posts-textarea-input")
+	let time = new Date().toLocaleTimeString().slice(0, -3)
+	let date = new Date().toLocaleDateString()
+	let post = {
+		"id": ++state.postsCount,
+		"userId": userId,
+		"nikName": nikName,
+		"dataDate": `${date}`,
+		"dataTime": `${time}`,
+		"textBody": textArea.value,
+		"reply": []
+	}
+	textArea.value = `some news?...`
+	state.postsBase[userId].push(post)
+}
+export let addNewReply = (userId, id, nikName,event) => {
+	let textArea = event.target.offsetParent.lastElementChild.childNodes[0]
+	let time = new Date().toLocaleTimeString().slice(0, -3)
+	let date = new Date().toLocaleDateString()
+	let post = {
+		"id": ++state.postsCount,
+		"userId": userId,
+		"nikName": nikName,
+		"dataDate": `${date}`,
+		"dataTime": `${time}`,
+		"textBody": textArea.value,
+		"nestedReply": []
+	}
+	textArea.value = `Answer to ${nikName}:--- `
+	let target = state.postsBase[userId].filter(item => item.id === id)
+	target[0].reply.push(post)
+}
+export let addNewNestedReply = (userId, initialUser, initialPost, id, nikName, event) => {
+	let textArea = event.target.offsetParent.lastElementChild.childNodes[0]
+	let time = new Date().toLocaleTimeString().slice(0, -3)
+	let date = new Date().toLocaleDateString()
+	let post = {
+		"id": ++state.postsCount,
+		"userId": userId,
+		"nikName": nikName,
+		"dataDate": `${date}`,
+		"dataTime": `${time}`,
+		"textBody": textArea.value
+	}
+	textArea.value = `Answer to ${nikName}:--- `
+	let target = state.postsBase[initialUser].filter(item => item.id === initialPost)
+	let nestedTarget = target[0].reply.filter(item => item.id === id)
+	nestedTarget[0].nestedReply.push(post)
+	console.log("FUNC", state)
+}
+
+
 
 export default state
+
+
