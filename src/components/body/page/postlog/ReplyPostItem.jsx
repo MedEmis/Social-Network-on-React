@@ -17,7 +17,7 @@ class ReplyPostItem extends React.Component {
 			postsBlock: props.childReply
 
 		};
-		console.log('ReplypostItem ', this.state.postsBlock)
+		//console.log('ReplypostItem ', this.state.postsBlock)
 
 	}
 	likeIncrement = (event) => {
@@ -40,7 +40,7 @@ class ReplyPostItem extends React.Component {
 		return (
 			<>
 				<div className="hero-posts-log-item reply">
-					<img className="hero-posts-log-item_avatar" src={this.props.userBase[this.props.userId].avatarUrl} />
+					<img className="hero-posts-log-item_avatar" src={this.props.userBase[this.props.userId].avatarUrl} alt="avatar" />
 					<div className="hero-posts-log-item__title">
 						<div className="hero-posts-log-item__title-from">From: {!this.props.nikName ? " Anonymous" : this.props.nikName}</div>
 						<div className="hero-posts-log-item__title-date">{this.props.userId}&nbsp;&nbsp;&nbsp;Date: {!this.props.dataDate ? "--.--.--" : this.props.dataDate}  /   At: {!this.props.dataTime ? "--:--" : this.props.dataTime}</div>
@@ -52,7 +52,9 @@ class ReplyPostItem extends React.Component {
 							<ul className="hero-posts-log-item__body-special-list" >
 								<li className="hero-posts-log-item__body-special-item tooltip">{this.state.like}<span className="tooltiptext">Likes</span></li>
 								<li className="hero-posts-log-item__body-special-item tooltip">{this.state.dislike}<span className="tooltiptext">Dislikes</span></li>
-								<li onClick={this.likeIncrement} className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Up</span></li>
+								<li onClick={(event) => {
+									this.props.likeIncrementState(event)
+								}} className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Up</span></li>
 								<li onClick={this.likeDecrement} className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Down</span></li>
 								<li className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Feature 4</span></li>
 							</ul>
@@ -97,6 +99,7 @@ class ReplyPostItem extends React.Component {
 								nestReplyFunc={this.props.nestReplyFunc}
 								auto_growFunc={this.props.auto_growFunc}
 								props={this.props}
+								likeIncrementState = {this.props.likeIncrementState}
 							/> : null))
 							: null
 					}

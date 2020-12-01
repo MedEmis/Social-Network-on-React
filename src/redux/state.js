@@ -679,7 +679,7 @@ export let addNewPost = (userId, nikName) => {
 	textArea.value = `some news?...`
 	state.postsBase[userId].push(post)
 }
-export let addNewReply = (userId, id, nikName,event) => {
+export let addNewReply = (userId, id, nikName, event) => {
 	let textArea = event.target.offsetParent.lastElementChild.childNodes[0]
 	let time = new Date().toLocaleTimeString().slice(0, -3)
 	let date = new Date().toLocaleDateString()
@@ -712,10 +712,100 @@ export let addNewNestedReply = (userId, initialUser, initialPost, id, nikName, e
 	let target = state.postsBase[initialUser].filter(item => item.id === initialPost)
 	let nestedTarget = target[0].reply.filter(item => item.id === id)
 	nestedTarget[0].nestedReply.push(post)
-	console.log("FUNC", state)
+	//console.log("FUNC", state)
 }
 
+export let likeIncrementState = (event) => {
+	let userId = event.target.parentElement.parentElement.parentElement.previousSibling.childNodes[1].innerText.slice(0, 6)
+	let logId = +event.target.parentElement.parentElement.parentElement.previousSibling.childNodes[2].innerText.slice(-2)
+	let target
+	// for (let key in state.postsBase) {
+	// 	let tempTarget = state.postsBase[key]
+	// 	let num = 0
+	// 	//searchin in posts
+	// 	for (let i = 0; i < tempTarget.length; i++) {
+	// 		if (tempTarget[i].id !== logId) {
+	// 			//searchin in reply
+	// 			let newtempTarget = tempTarget[i].reply
+	// 			if (newtempTarget[i] === undefined) {
+	// 				continue
+	// 			}
+	// 			if (newtempTarget[i].id !== logId) {
+	// 				for (let i = 0; i < newtempTarget.length; i++) {
+	// 					//searchin in nested reply
+	// 					let newNestedTarget = newtempTarget[i].nestedReply
+	// 					if (newNestedTarget[i] === undefined) {
+	// 						continue
+	// 					}
+	// 					if (newNestedTarget[i].id !== logId) {
+	// 						continue
+	// 					} else {
+	// 						target = newNestedTarget[i]
+	// 					}
+	// 				}
+	// 			} else {
+	// 				target = newtempTarget[i]
+	// 			}
+	// 		} else {
+	// 			target = tempTarget[i]
+	// 		}
+	// 	}
+	// }
+	for (let key in state.postsBase) {
+		let tempTarget = state.postsBase[key]
+		let num = 0
+		//searchin in posts
+		for (let i = 0; i < tempTarget.length; i++) {
+			if (tempTarget[i] === undefined) {
+				continue
+			}
+			if (tempTarget[i].id !== logId) {
+				//searchin in reply
+				let newtempTarget = tempTarget[i].reply
+				if (newtempTarget[i] === undefined) {
+					continue
+				}
+				if (newtempTarget[i].id !== logId) {
+					for (let i = 0; i < newtempTarget.length; i++) {
+						//searchin in nested reply
+						let newNestedTarget = newtempTarget[i].nestedReply
+						if (newNestedTarget[i] === undefined) {
+							continue
+						}
+						if (newNestedTarget[i].id !== logId) {
+							continue
+						} else {
+							target = newNestedTarget[i]
+						}
+					}
+				} else {
+					target = newtempTarget[i]
+				}
+			} else {
+				target = tempTarget[i]
+			}
+		}
+	}
+	//  INITIAL 1 есть    REPLY 2 есть   NESTED 3 есть   NESTED 4 нет            !!!!
+	console.log(target)
 
+
+	// let elemPanel = event.target.parentNode
+	// this.setState({
+	// 	like: this.state.like + 1,
+	// 	isVoted: true
+	// })
+	// this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
+	//console.log(state.postsBase)
+}
+export let likeDecrement = (event) => {
+	let elemPanel = event.target.parentNode
+	this.setState({
+		dislike: this.state.dislike + 1,
+		isVoted: true
+	})
+	this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
+}
 
 export default state
 

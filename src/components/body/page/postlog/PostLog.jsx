@@ -1,7 +1,7 @@
 import React from 'react'
 import './makeMessage.css';
 import PostItem from './PostItem';
-import { addNewPost, addNewReply, addNewNestedReply, auto_grow } from "./../../../../redux/state"
+import { addNewPost, addNewReply, addNewNestedReply, auto_grow, likeIncrementState } from "./../../../../redux/state"
 
 
 
@@ -53,6 +53,7 @@ class PostLog extends React.Component {
 							replyFunc={addNewReply}
 							nestReplyFunc={addNewNestedReply}
 							auto_growFunc={auto_grow}
+							likeIncrementState = {likeIncrementState}
 						/> : null))
 					}
 					<div className="body-page__end">no more messages here</div>

@@ -5,7 +5,6 @@ let classNames = require('classnames');
 
 
 
-
 class PostItem extends React.Component {
 	constructor(props) {
 		super(props);
@@ -20,22 +19,22 @@ class PostItem extends React.Component {
 		//console.log('postItem ', this.props)
 
 	}
-	likeIncrement = (event) => {
-		let elemPanel = event.target.parentNode
-		this.setState({
-			like: this.state.like + 1,
-			isVoted: true
-		})
-		this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
-	}
-	likeDecrement = (event) => {
-		let elemPanel = event.target.parentNode
-		this.setState({
-			dislike: this.state.dislike + 1,
-			isVoted: true
-		})
-		this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
-	}
+	// likeIncrement = (event) => {
+	// 	let elemPanel = event.target.parentNode
+	// 	this.setState({
+	// 		like: this.state.like + 1,
+	// 		isVoted: true
+	// 	})
+	// 	this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
+	// }
+	// likeDecrement = (event) => {
+	// 	let elemPanel = event.target.parentNode
+	// 	this.setState({
+	// 		dislike: this.state.dislike + 1,
+	// 		isVoted: true
+	// 	})
+	// 	this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
+	// }
 
 	render() {
 		return (
@@ -56,7 +55,9 @@ class PostItem extends React.Component {
 							<ul className="hero-posts-log-item__body-special-list" >
 								<li className="hero-posts-log-item__body-special-item tooltip">{this.state.like}<span className="tooltiptext">Likes</span></li>
 								<li className="hero-posts-log-item__body-special-item tooltip">{this.state.dislike}<span className="tooltiptext">Dislikes</span></li>
-								<li onClick={this.likeIncrement} className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Up</span></li>
+								<li onClick={(event) => {
+									this.props.likeIncrementState(event)
+								}} className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Up</span></li>
 								<li onClick={this.likeDecrement} className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Down</span></li>
 								<li className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Feature 4</span></li>
 							</ul>
@@ -98,6 +99,7 @@ class PostItem extends React.Component {
 							childReply={this.state.postsBlock[index].nestedReply}
 							nestReplyFunc={this.props.nestReplyFunc}
 							auto_growFunc={this.props.auto_growFunc}
+							likeIncrementState={this.props.likeIncrementState}
 						/> : null))
 					}
 				</div>
