@@ -60,8 +60,8 @@ class PostItem extends React.Component {
 								name="like" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Up</span></li>
 							<li onClick={(event) => { this.isVoutedCheck(event) }}
 								name="dislike" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Down</span></li>
-							<li className="hero-posts-log-item__body-special-item tooltip">{this.props.likes}<span className="tooltiptext">Likes</span></li>
-							<li className="hero-posts-log-item__body-special-item tooltip">{this.props.dislikes}<span className="tooltiptext">Dislikes</span></li>
+							<li className="hero-posts-log-item__body-special-item tooltip">{this.props.likes ? this.props.likes : 0}<span className="tooltiptext">Likes</span></li>
+							<li className="hero-posts-log-item__body-special-item tooltip">{this.props.dislikes ? this.props.dislikes : 0}<span className="tooltiptext">Dislikes</span></li>
 						</ul>
 					</div>
 					<button onClick={() => this.setState({ IsTextOpen: true })} type="submit" className="hero-posts-log-item__button-reply">Reply</button>

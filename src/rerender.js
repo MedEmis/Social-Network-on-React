@@ -1,14 +1,21 @@
-//import React from 'react';
-//import ReactDOM from 'react-dom';
-//import App from './App';
-import state from "./redux/state"
+import React from 'react';
+import ReactDOM from 'react-dom';
 import './index.css';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { reRenderApp } from "./rerender"
+//import state from "./redux/state"
 
+export let reRenderApp = (state) => {
+	ReactDOM.render(
+		<React.StrictMode>
+			<App
+				appState={state}
+			/>
+		</React.StrictMode>,
+		document.getElementById('root')
+	);
+}
 
-
-reRenderApp(state)
 
 
 

@@ -27,10 +27,8 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="App">
-				<Header />
-				<Body
-					bodyState={this.props.appState}
-				/>
+				<Header headerState={this.props.appState} />
+				<Body bodyState={this.props.appState} />
 				<Footer />
 			</div>
 		);

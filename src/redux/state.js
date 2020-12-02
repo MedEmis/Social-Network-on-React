@@ -1,6 +1,7 @@
 // import UserBase from '../users.json'
 // import PostsBase from '../posts.json'
 // import DialogBase from '../dialogs.json'
+import { reRenderApp } from "./../rerender"
 
 
 
@@ -660,7 +661,34 @@ let state = {
 		"id0004": [],
 		"id0005": [],
 		"id0006": [
-			{}
+			{
+				"id": "111",
+				"userId": "id0003",
+				"opponentId": "id0002",
+				"name": "Name Two",
+				"lastVisit": "11.11.12",
+				"messages": [
+					"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+					"Lorem, irit? Quos?",
+					"Lorem, ipsum dolorolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+					"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+					"sadfasdfsdfsadfasdfasd"
+				]
+			},
+			{
+				"id": "112",
+				"userId": "id0003",
+				"opponentId": "id0004",
+				"name": "Name Four",
+				"lastVisit": "11.11.12",
+				"messages": [
+					"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+					"Lorem, irit? Quos?",
+					"Lorem, ipsum dolorolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+					"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+					"sadfasdfsdfsadfasdfasd"
+				]
+			}
 		]
 	},
 	postsCount: 0,
@@ -671,9 +699,6 @@ export let auto_grow = (event) => {
 	event.target.style.height = "5px";
 	event.target.style.height = (event.target.scrollHeight) + "px";
 }
-
-
-
 
 export let addNewPost = (userId, nikName) => {
 	let textArea = document.querySelector(".body-page__hero-posts-textarea-input")
@@ -692,6 +717,7 @@ export let addNewPost = (userId, nikName) => {
 	}
 	textArea.value = `some news?...`
 	state.postsBase[userId].push(post)
+	reRenderApp(state)
 }
 export let addNewReply = (userId, id, nikName, event) => {
 	let textArea = event.target.offsetParent.lastElementChild.childNodes[0]
@@ -711,6 +737,7 @@ export let addNewReply = (userId, id, nikName, event) => {
 	textArea.value = `Answer to ${nikName}:--- `
 	let target = state.postsBase[userId].filter(item => item.id === id)
 	target[0].reply.push(post)
+	reRenderApp(state)
 }
 export let addNewNestedReply = (userId, initialUser, initialPost, id, nikName, event) => {
 	let textArea = event.target.offsetParent.lastElementChild.childNodes[0]
@@ -731,57 +758,62 @@ export let addNewNestedReply = (userId, initialUser, initialPost, id, nikName, e
 	let target = state.postsBase[initialUser].filter(item => item.id === initialPost)
 	let nestedTarget = target[0].reply.filter(item => item.id === id)
 	nestedTarget[0].nestedReply.push(post)
-	//console.log("FUNC", state)
+	reRenderApp(state)
 }
 
 export let likeIncrementState = (event) => {
 	let userId = event.target.parentElement.parentElement.previousSibling.childNodes[1].innerText.slice(0, 6)
 	let logId = +event.target.parentElement.parentElement.previousSibling.childNodes[2].innerText.slice(-2)
 	let action = event.target.attributes.name.value
-	//CYCLE FOR SEARCHING ANY OBJECT IN NESTED BASE BY ANY ATTRIBUTE======START
-	for (let key in state.postsBase) {
-		let tempTarget = state.postsBase[key]
-		//searchin in posts
-		for (let i = 0; i < tempTarget.length; i++) {
-			if (tempTarget[i] !== undefined) {
-				if (tempTarget[i].id === logId) {
-					if (action === "like") {
-						state.postsBase[key][i].like++
-						state.userBase[userId].voutedLike.push(logId)
-						break
-					} else if (action === "dislike") {
-						state.postsBase[key][i].dislike++
-						state.userBase[userId].voutedDislike.push(logId)
-						break
-					}
-				} else {
-					//searchin in reply
-					let newtempTarget = tempTarget[i].reply
-					for (let j = 0; j < newtempTarget.length; j++) {
-						if (newtempTarget[j] !== undefined) {
-							if (newtempTarget[j].id === logId) {
-								if (action === "like") {
-									state.postsBase[key][i].reply[j].like++
-									state.userBase[userId].voutedLike.push(logId)
-									break
-								} else if (action === "dislike") {
-									state.postsBase[key][i].reply[j].dislike++
-									state.userBase[userId].voutedDislike.push(logId)
-									break
-								}
-							} else {
-								//searchin in nested reply
-								let newNestedTarget = newtempTarget[j].nestedReply
-								for (let k = 0; k < newNestedTarget.length; k++) {
-									if (newNestedTarget[k].id === logId) {
-										if (action === "like") {
-											state.postsBase[key][i].reply[j].nestedReply[k].like++
-											state.userBase[userId].voutedLike.push(logId)
-											break
-										} else if (action === "dislike") {
-											state.postsBase[key][i].reply[j].nestedReply[k].dislike++
-											state.userBase[userId].voutedDislike.push(logId)
-											break
+
+	if (state.userBase[userId].voutedLike.includes(logId) || state.userBase[userId].voutedDislike.includes(logId)) {
+		return
+	} else {
+		//CYCLE FOR SEARCHING ANY OBJECT IN NESTED BASE BY ANY ATTRIBUTE======START
+		for (let key in state.postsBase) {
+			let tempTarget = state.postsBase[key]
+			//searching in posts
+			for (let i = 0; i < tempTarget.length; i++) {
+				if (tempTarget[i] !== undefined) {
+					if (tempTarget[i].id === logId) {
+						if (action === "like") {
+							state.postsBase[key][i].like++
+							state.userBase[userId].voutedLike.push(logId)
+							break
+						} else if (action === "dislike") {
+							state.postsBase[key][i].dislike++
+							state.userBase[userId].voutedDislike.push(logId)
+							break
+						}
+					} else {
+						//searching in reply
+						let newtempTarget = tempTarget[i].reply
+						for (let j = 0; j < newtempTarget.length; j++) {
+							if (newtempTarget[j] !== undefined) {
+								if (newtempTarget[j].id === logId) {
+									if (action === "like") {
+										state.postsBase[key][i].reply[j].like++
+										state.userBase[userId].voutedLike.push(logId)
+										break
+									} else if (action === "dislike") {
+										state.postsBase[key][i].reply[j].dislike++
+										state.userBase[userId].voutedDislike.push(logId)
+										break
+									}
+								} else {
+									//searching in nested reply
+									let newNestedTarget = newtempTarget[j].nestedReply
+									for (let k = 0; k < newNestedTarget.length; k++) {
+										if (newNestedTarget[k].id === logId) {
+											if (action === "like") {
+												state.postsBase[key][i].reply[j].nestedReply[k].like++
+												state.userBase[userId].voutedLike.push(logId)
+												break
+											} else if (action === "dislike") {
+												state.postsBase[key][i].reply[j].nestedReply[k].dislike++
+												state.userBase[userId].voutedDislike.push(logId)
+												break
+											}
 										}
 									}
 								}
@@ -792,22 +824,7 @@ export let likeIncrementState = (event) => {
 			}
 		}
 	}
-
-	//CYCLE FOR SEARCHING ANY OBJECT IN NESTED BASE BY ANY ATTRIBUTE=======END
-	// console.log("voutedLike", state.userBase[userId].voutedLike)
-	// console.log("voutedDislike", state.userBase[userId].voutedDislike)
-
-
-}
-
-
-export let likeDecrement = (event) => {
-	let elemPanel = event.target.parentNode
-	this.setState({
-		dislike: this.state.dislike + 1,
-		isVoted: true
-	})
-	this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
+	reRenderApp(state)
 }
 
 export default state

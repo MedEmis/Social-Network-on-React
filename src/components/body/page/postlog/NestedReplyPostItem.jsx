@@ -32,10 +32,10 @@ class NestedReplyPostItem extends React.Component {
 		}
 	}
 	isVoutedCheck = (event) => {
-		console.log("isVouted before", this.state.isVoted)
 		if (this.state.isVoted === false) {
 			this.props.likeIncrementState(event)
 			this.setState({ isVoted: true })
+			event.target.className += " " + "visited"
 		} else if (this.state.isVoted === true) {
 			return
 		}
@@ -55,8 +55,8 @@ class NestedReplyPostItem extends React.Component {
 						<ul onLoad={this.panelColor()} style={this.panColor} className="hero-posts-log-item__body-special-list" id="nestedReply">
 							<li onClick={(event) => { this.isVoutedCheck(event) }} name="like" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Up</span></li>
 							<li onClick={(event) => { this.isVoutedCheck(event) }} name="dislike" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Down</span></li>
-							<li className="hero-posts-log-item__body-special-item tooltip">{this.props.likes}<span className="tooltiptext">Likes</span></li>
-							<li className="hero-posts-log-item__body-special-item tooltip">{this.props.dislikes}<span className="tooltiptext">Dislikes</span></li>
+							<li className="hero-posts-log-item__body-special-item tooltip">{this.props.likes ? this.props.likes : 0}<span className="tooltiptext">Likes</span></li>
+							<li className="hero-posts-log-item__body-special-item tooltip">{this.props.dislikes ? this.props.dislikes : 0}<span className="tooltiptext">Dislikes</span></li>
 						</ul>
 					</div>
 					{/* <button onClick={() => this.setState({ IsTextOpen: true })} type="submit" className="hero-posts-log-item__button-reply">Reply</button>
