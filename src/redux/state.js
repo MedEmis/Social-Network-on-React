@@ -15,6 +15,8 @@ let state = {
 			"education": "some education",
 			"webSite": "some webSite",
 			"registerDate": "33.33.33",
+			"voutedLike": [],
+			"voutedDislike": [],
 			"isOnline": false,
 			"avatarUrl": "https://i.pinimg.com/originals/15/b2/1a/15b21a20631cede3f16bb02759215b09.jpg",
 			"contacts": ["id0003", "id0002", "id0006", "id0005"]
@@ -26,6 +28,8 @@ let state = {
 			"city": "some town",
 			"education": "some education",
 			"webSite": "some webSite",
+			"voutedLike": [],
+			"voutedDislike": [],
 			"registerDate": "44.44.44",
 			"isOnline": true,
 			"avatarUrl": "https://scontent.fiev13-1.fna.fbcdn.net/v/t1.0-9/944993_737146193094013_5672080899067667646_n.jpg?_nc_cat=107&cb=846ca55b-ee17756f&ccb=2&_nc_sid=09cbfe&_nc_ohc=SyPoRklCbqAAX9Iyd7J&_nc_ht=scontent.fiev13-1.fna&oh=c7b2cd2853d192f8a2d0de8baefb17e7&oe=5FEA9D29",
@@ -38,6 +42,8 @@ let state = {
 			"city": "some town",
 			"education": "some education",
 			"webSite": "some webSite",
+			"voutedLike": [],
+			"voutedDislike": [],
 			"registerDate": "44.44.44",
 			"isOnline": false,
 			"avatarUrl": "https://i.pinimg.com/236x/df/02/f2/df02f287609f6f06224622be9e3a588c--second-life-life-photography.jpg",
@@ -50,6 +56,8 @@ let state = {
 			"city": "some town",
 			"education": "some education",
 			"webSite": "some webSite",
+			"voutedLike": [],
+			"voutedDislike": [],
 			"registerDate": "55.55.55",
 			"isOnline": true,
 			"avatarUrl": "https://i.pinimg.com/originals/41/83/04/418304673aa2ab05fd39640c99e71828.jpg",
@@ -62,6 +70,8 @@ let state = {
 			"city": "some town",
 			"education": "some education",
 			"webSite": "some webSite",
+			"voutedLike": [],
+			"voutedDislike": [],
 			"registerDate": "55.55.55",
 			"isOnline": false,
 			"avatarUrl": "https://avatarfiles.alphacoders.com/257/thumb-257122.jpg",
@@ -72,6 +82,8 @@ let state = {
 			"name": "Name Six",
 			"birthDate": "00.11.66",
 			"city": "some town",
+			"voutedLike": [],
+			"voutedDislike": [],
 			"education": "some education",
 			"webSite": "some webSite",
 			"registerDate": "66.66.66",
@@ -674,6 +686,8 @@ export let addNewPost = (userId, nikName) => {
 		"dataDate": `${date}`,
 		"dataTime": `${time}`,
 		"textBody": textArea.value,
+		"like": 0,
+		"dislike": 0,
 		"reply": []
 	}
 	textArea.value = `some news?...`
@@ -690,6 +704,8 @@ export let addNewReply = (userId, id, nikName, event) => {
 		"dataDate": `${date}`,
 		"dataTime": `${time}`,
 		"textBody": textArea.value,
+		"like": 0,
+		"dislike": 0,
 		"nestedReply": []
 	}
 	textArea.value = `Answer to ${nikName}:--- `
@@ -706,7 +722,10 @@ export let addNewNestedReply = (userId, initialUser, initialPost, id, nikName, e
 		"nikName": nikName,
 		"dataDate": `${date}`,
 		"dataTime": `${time}`,
-		"textBody": textArea.value
+		"textBody": textArea.value,
+		"like": 0,
+		"dislike": 0,
+
 	}
 	textArea.value = `Answer to ${nikName}:--- `
 	let target = state.postsBase[initialUser].filter(item => item.id === initialPost)
@@ -716,88 +735,72 @@ export let addNewNestedReply = (userId, initialUser, initialPost, id, nikName, e
 }
 
 export let likeIncrementState = (event) => {
-	let userId = event.target.parentElement.parentElement.parentElement.previousSibling.childNodes[1].innerText.slice(0, 6)
-	let logId = +event.target.parentElement.parentElement.parentElement.previousSibling.childNodes[2].innerText.slice(-2)
-	let target
-	// for (let key in state.postsBase) {
-	// 	let tempTarget = state.postsBase[key]
-	// 	let num = 0
-	// 	//searchin in posts
-	// 	for (let i = 0; i < tempTarget.length; i++) {
-	// 		if (tempTarget[i].id !== logId) {
-	// 			//searchin in reply
-	// 			let newtempTarget = tempTarget[i].reply
-	// 			if (newtempTarget[i] === undefined) {
-	// 				continue
-	// 			}
-	// 			if (newtempTarget[i].id !== logId) {
-	// 				for (let i = 0; i < newtempTarget.length; i++) {
-	// 					//searchin in nested reply
-	// 					let newNestedTarget = newtempTarget[i].nestedReply
-	// 					if (newNestedTarget[i] === undefined) {
-	// 						continue
-	// 					}
-	// 					if (newNestedTarget[i].id !== logId) {
-	// 						continue
-	// 					} else {
-	// 						target = newNestedTarget[i]
-	// 					}
-	// 				}
-	// 			} else {
-	// 				target = newtempTarget[i]
-	// 			}
-	// 		} else {
-	// 			target = tempTarget[i]
-	// 		}
-	// 	}
-	// }
+	let userId = event.target.parentElement.parentElement.previousSibling.childNodes[1].innerText.slice(0, 6)
+	let logId = +event.target.parentElement.parentElement.previousSibling.childNodes[2].innerText.slice(-2)
+	let action = event.target.attributes.name.value
+	//CYCLE FOR SEARCHING ANY OBJECT IN NESTED BASE BY ANY ATTRIBUTE======START
 	for (let key in state.postsBase) {
 		let tempTarget = state.postsBase[key]
-		let num = 0
 		//searchin in posts
 		for (let i = 0; i < tempTarget.length; i++) {
-			if (tempTarget[i] === undefined) {
-				continue
-			}
-			if (tempTarget[i].id !== logId) {
-				//searchin in reply
-				let newtempTarget = tempTarget[i].reply
-				if (newtempTarget[i] === undefined) {
-					continue
-				}
-				if (newtempTarget[i].id !== logId) {
-					for (let i = 0; i < newtempTarget.length; i++) {
-						//searchin in nested reply
-						let newNestedTarget = newtempTarget[i].nestedReply
-						if (newNestedTarget[i] === undefined) {
-							continue
-						}
-						if (newNestedTarget[i].id !== logId) {
-							continue
-						} else {
-							target = newNestedTarget[i]
-						}
+			if (tempTarget[i] !== undefined) {
+				if (tempTarget[i].id === logId) {
+					if (action === "like") {
+						state.postsBase[key][i].like++
+						state.userBase[userId].voutedLike.push(logId)
+						break
+					} else if (action === "dislike") {
+						state.postsBase[key][i].dislike++
+						state.userBase[userId].voutedDislike.push(logId)
+						break
 					}
 				} else {
-					target = newtempTarget[i]
+					//searchin in reply
+					let newtempTarget = tempTarget[i].reply
+					for (let j = 0; j < newtempTarget.length; j++) {
+						if (newtempTarget[j] !== undefined) {
+							if (newtempTarget[j].id === logId) {
+								if (action === "like") {
+									state.postsBase[key][i].reply[j].like++
+									state.userBase[userId].voutedLike.push(logId)
+									break
+								} else if (action === "dislike") {
+									state.postsBase[key][i].reply[j].dislike++
+									state.userBase[userId].voutedDislike.push(logId)
+									break
+								}
+							} else {
+								//searchin in nested reply
+								let newNestedTarget = newtempTarget[j].nestedReply
+								for (let k = 0; k < newNestedTarget.length; k++) {
+									if (newNestedTarget[k].id === logId) {
+										if (action === "like") {
+											state.postsBase[key][i].reply[j].nestedReply[k].like++
+											state.userBase[userId].voutedLike.push(logId)
+											break
+										} else if (action === "dislike") {
+											state.postsBase[key][i].reply[j].nestedReply[k].dislike++
+											state.userBase[userId].voutedDislike.push(logId)
+											break
+										}
+									}
+								}
+							}
+						}
+					}
 				}
-			} else {
-				target = tempTarget[i]
 			}
 		}
 	}
-	//  INITIAL 1 есть    REPLY 2 есть   NESTED 3 есть   NESTED 4 нет            !!!!
-	console.log(target)
+
+	//CYCLE FOR SEARCHING ANY OBJECT IN NESTED BASE BY ANY ATTRIBUTE=======END
+	// console.log("voutedLike", state.userBase[userId].voutedLike)
+	// console.log("voutedDislike", state.userBase[userId].voutedDislike)
 
 
-	// let elemPanel = event.target.parentNode
-	// this.setState({
-	// 	like: this.state.like + 1,
-	// 	isVoted: true
-	// })
-	// this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
-	//console.log(state.postsBase)
 }
+
+
 export let likeDecrement = (event) => {
 	let elemPanel = event.target.parentNode
 	this.setState({

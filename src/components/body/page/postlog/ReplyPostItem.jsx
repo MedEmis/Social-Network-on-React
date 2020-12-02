@@ -11,8 +11,6 @@ class ReplyPostItem extends React.Component {
 		super(props);
 		this.state = {
 			isVoted: false,
-			like: 0,
-			dislike: 0,
 			IsTextOpen: false,
 			postsBlock: props.childReply
 
@@ -20,21 +18,29 @@ class ReplyPostItem extends React.Component {
 		//console.log('ReplypostItem ', this.state.postsBlock)
 
 	}
-	likeIncrement = (event) => {
-		let elemPanel = event.target.parentNode
-		this.setState({
-			like: this.state.like + 1,
-			isVouted: true
-		})
-		this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
+	panelColor = () => {
+		if (this.props.likes > this.props.dislikes) {
+			this.panColor = {
+				background: 'rgb(20, 77, 2)'
+			};
+		} else if (this.props.likes < this.props.dislikes) {
+			this.panColor = {
+				background: 'rgb(107, 11, 11)'
+			};
+		} else {
+			this.panColor = {
+				background: 'rgb(105, 85, 17)'
+			};
+		}
 	}
-	likeDecrement = (event) => {
-		let elemPanel = event.target.parentNode
-		this.setState({
-			dislike: this.state.dislike + 1,
-			isVouted: true
-		})
-		this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
+	isVoutedCheck = (event) => {
+		console.log("isVouted before", this.state.isVoted)
+		if (this.state.isVoted === false) {
+			this.props.likeIncrementState(event)
+			this.setState({ isVoted: true })
+		} else if (this.state.isVoted === true) {
+			return
+		}
 	}
 	render() {
 		return (
@@ -48,17 +54,14 @@ class ReplyPostItem extends React.Component {
 					</div>
 					<div className="hero-posts-log-item__body">
 						<div className="hero-posts-log-item__body-text">{!this.props.textBody ? "...no text" : this.props.textBody}</div>
-						<div className="hero-posts-log-item__body-special">
-							<ul className="hero-posts-log-item__body-special-list" >
-								<li className="hero-posts-log-item__body-special-item tooltip">{this.state.like}<span className="tooltiptext">Likes</span></li>
-								<li className="hero-posts-log-item__body-special-item tooltip">{this.state.dislike}<span className="tooltiptext">Dislikes</span></li>
-								<li onClick={(event) => {
-									this.props.likeIncrementState(event)
-								}} className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Up</span></li>
-								<li onClick={this.likeDecrement} className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Down</span></li>
-								<li className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Feature 4</span></li>
-							</ul>
-						</div>
+						<ul onLoad={this.panelColor()} style={this.panColor} className="hero-posts-log-item__body-special-list" >
+							<li onClick={(event) => { this.isVoutedCheck(event) }}
+								name="like" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Up</span></li>
+							<li onClick={(event) => { this.isVoutedCheck(event) }}
+								name="dislike" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Down</span></li>
+							<li className="hero-posts-log-item__body-special-item tooltip">{this.props.likes}<span className="tooltiptext">Likes</span></li>
+							<li className="hero-posts-log-item__body-special-item tooltip">{this.props.dislikes}<span className="tooltiptext">Dislikes</span></li>
+						</ul>
 					</div>
 					<button onClick={() => this.setState({ IsTextOpen: true })} type="submit" className="hero-posts-log-item__button-reply">Reply</button>
 					<div className={classNames(" body-page__reply-textarea", { " visible": this.state.IsTextOpen })}>
@@ -95,11 +98,13 @@ class ReplyPostItem extends React.Component {
 								dataDate={this.state.postsBlock[index].dataDate}
 								dataTime={this.state.postsBlock[index].dataTime}
 								textBody={this.state.postsBlock[index].textBody}
+								likes={this.state.postsBlock[index].like}
+								dislikes={this.state.postsBlock[index].dislike}
 								childReply={this.state.postsBlock[index].nestedReply}
 								nestReplyFunc={this.props.nestReplyFunc}
 								auto_growFunc={this.props.auto_growFunc}
 								props={this.props}
-								likeIncrementState = {this.props.likeIncrementState}
+								likeIncrementState={this.props.likeIncrementState}
 							/> : null))
 							: null
 					}

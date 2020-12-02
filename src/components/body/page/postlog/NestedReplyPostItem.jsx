@@ -10,33 +10,35 @@ class NestedReplyPostItem extends React.Component {
 		super(props);
 		this.state = {
 			isVoted: false,
-			like: 0,
-			dislike: 0,
 			IsTextOpen: false,
 			postsBlock: props.childReply
 		};
 
 		//console.log('postItemNestedReply ', typeof (this.props.childReply))
 	}
-	likeIncrement = (event) => {
-		let elemPanel = event.target.parentNode
-		this.setState({
-			like: this.state.like + 1,
-			isVouted: true
-		})
-		this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
+	panelColor = () => {
+		if (this.props.likes > this.props.dislikes) {
+			this.panColor = {
+				background: 'rgb(20, 77, 2)'
+			};
+		} else if (this.props.likes < this.props.dislikes) {
+			this.panColor = {
+				background: 'rgb(107, 11, 11)'
+			};
+		} else {
+			this.panColor = {
+				background: 'rgb(105, 85, 17)'
+			};
+		}
 	}
-	likeDecrement = (event) => {
-		let elemPanel = event.target.parentNode
-		this.setState({
-			dislike: this.state.dislike + 1,
-			isVouted: true
-		})
-		this.state.dislike > this.state.like ? elemPanel.style.background = 'rgb(163, 4, 4)' : elemPanel.style.background = 'rgb(47, 110, 10)'
-	}
-	auto_grow = (event) => {
-		event.target.style.height = "5px";
-		event.target.style.height = (event.target.scrollHeight) + "px";
+	isVoutedCheck = (event) => {
+		console.log("isVouted before", this.state.isVoted)
+		if (this.state.isVoted === false) {
+			this.props.likeIncrementState(event)
+			this.setState({ isVoted: true })
+		} else if (this.state.isVoted === true) {
+			return
+		}
 	}
 	render() {
 		return (
@@ -50,21 +52,16 @@ class NestedReplyPostItem extends React.Component {
 					</div>
 					<div className="hero-posts-log-item__body">
 						<div className="hero-posts-log-item__body-text">{!this.props.textBody ? "...no text" : this.props.textBody}</div>
-						<div className="hero-posts-log-item__body-special">
-							<ul className="hero-posts-log-item__body-special-list" id="nestedReply">
-								<li className="hero-posts-log-item__body-special-item tooltip">{this.state.like}<span className="tooltiptext">Likes</span></li>
-								<li className="hero-posts-log-item__body-special-item tooltip">{this.state.dislike}<span className="tooltiptext">Dislikes</span></li>
-								<li onClick={(event) => {
-									this.props.likeIncrementState(event)
-								}} className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Up</span></li>
-								<li onClick={this.likeDecrement} className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Down</span></li>
-								<li className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Feature 4</span></li>
-							</ul>
-						</div>
+						<ul onLoad={this.panelColor()} style={this.panColor} className="hero-posts-log-item__body-special-list" id="nestedReply">
+							<li onClick={(event) => { this.isVoutedCheck(event) }} name="like" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Up</span></li>
+							<li onClick={(event) => { this.isVoutedCheck(event) }} name="dislike" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Down</span></li>
+							<li className="hero-posts-log-item__body-special-item tooltip">{this.props.likes}<span className="tooltiptext">Likes</span></li>
+							<li className="hero-posts-log-item__body-special-item tooltip">{this.props.dislikes}<span className="tooltiptext">Dislikes</span></li>
+						</ul>
 					</div>
-					{/* <button onClick={() => this.setState({ IsTextOpen: true })} type="submit" className="hero-posts-log-item__button-reply">Reply</button> */}
+					{/* <button onClick={() => this.setState({ IsTextOpen: true })} type="submit" className="hero-posts-log-item__button-reply">Reply</button>
 					<div className={classNames(" body-page__reply-textarea", { " visible": this.state.IsTextOpen })}>
-						{/* <textarea onInput={this.auto_grow} className="body-page__reply-textarea-input" type="text" defaultValue={`Answer to ${this.props.nikName}:`} />
+						<textarea onInput={this.auto_grow} className="body-page__reply-textarea-input" type="text" defaultValue={`Answer to ${this.props.nikName}:`} />
 						<div className="body-page__reply-textarea-buttons">
 							<button onClick={() => this.setState({ IsTextOpen: false })} type="submit" className="red-btn" id="neon-text">Close</button>
 							<button onClick={(event) => {
@@ -80,8 +77,8 @@ class NestedReplyPostItem extends React.Component {
 								this.setState({ refresh: true })
 							}
 							} type="submit" className="blue-btn" id="neon-text">Publish</button>
-						</div> */}
-					</div>
+						</div>
+					</div> */}
 				</div>
 				{/* <div className="body-page__hero-posts-log-nested-reply-wrapper">
 					{

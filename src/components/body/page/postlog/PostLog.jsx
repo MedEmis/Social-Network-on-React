@@ -49,6 +49,8 @@ class PostLog extends React.Component {
 							dataDate={this.state.postsBlock[index].dataDate}
 							dataTime={this.state.postsBlock[index].dataTime}
 							textBody={this.state.postsBlock[index].textBody}
+							likes={this.state.postsBlock[index].like}
+							dislikes={this.state.postsBlock[index].dislike}
 							childReply={this.state.postsBlock[index].reply}
 							replyFunc={addNewReply}
 							nestReplyFunc={addNewNestedReply}
