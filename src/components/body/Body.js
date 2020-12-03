@@ -19,8 +19,8 @@ class Body extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
-		this.currentUserId = this.props.currentUserId
-		this.state = this.props.state
+		// this.currentUserId = this.props.bodyState.currentUserId
+		// this.state = this.props.bodyState
 		//console.log("Body props", this.props)
 	}
 
@@ -46,6 +46,13 @@ class Body extends React.Component {
 								currentUserId={this.props.bodyState.currentUserId}
 								userBase={this.props.bodyState.userBase}
 								postsBase={this.props.bodyState.postsBase}
+								currentPostText={this.props.bodyState.currentPostText}
+								updatePostText={this.props.updatePostText}
+								addNewPost={this.props.addNewPost}
+								addNewReply={this.props.addNewReply}
+								addNewNestedReply={this.props.addNewNestedReply}
+								likeIncrementState={this.props.likeIncrementState}
+								auto_grow={this.props.auto_grow}
 							/>
 						} />
 						{/* <Route exact path='/src/components/body/page/profile/Posts' component={Posts} /> */}

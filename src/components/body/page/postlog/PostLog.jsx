@@ -1,7 +1,7 @@
 import React from 'react'
 import './makeMessage.css';
 import PostItem from './PostItem';
-import { addNewPost, addNewReply, addNewNestedReply, auto_grow, likeIncrementState } from "./../../../../redux/state"
+//import { addNewPost, addNewReply, addNewNestedReply, auto_grow, likeIncrementState, updatePostText } from "./../../../../redux/state"
 
 
 
@@ -14,22 +14,25 @@ class PostLog extends React.Component {
 			postReplays: props.postsBase[props.userId].length !== 0 ? props.postsBase[props.userId].reply : null
 		};
 		this.child = React.createRef();
-		//console.log("PostLog props", this.state.postsBlock)
+		this.postInput = React.createRef();
+		//console.log("PostLog props", this)
 	}
-
+	onPostInput = () => {
+		console.log(this.postInput.current.value)
+	}
 	render() {
 		return (
 			<div className="body-page__hero-posts-log">
 				<div className="body-page__hero-posts">
 					<div className="body-page__hero-posts-title">Add message</div>
 					<div className="body-page__hero-posts-textarea">
-						<textarea onInput={(event) => auto_grow(event)} className="body-page__hero-posts-textarea-input"
-							type="text" placeholder="some news?..."
-						/>
+						<textarea onInput={(event) => this.props.auto_grow(event)} ref={this.postInput}
+							value={this.props.currentPostText} onChange={(event) => this.props.updatePostText(event.target.value)}
+							className="body-page__hero-posts-textarea-input" placeholder="some news?..." />
 					</div>
 					<div className="body-page__hero-posts-submit">
 						<button onClick={(e) => {
-							addNewPost(
+							this.props.addNewPost(
 								this.props.userId,
 								this.props.userBase[this.props.userId].name
 							)
@@ -52,10 +55,10 @@ class PostLog extends React.Component {
 							likes={this.state.postsBlock[index].like}
 							dislikes={this.state.postsBlock[index].dislike}
 							childReply={this.state.postsBlock[index].reply}
-							replyFunc={addNewReply}
-							nestReplyFunc={addNewNestedReply}
-							auto_growFunc={auto_grow}
-							likeIncrementState = {likeIncrementState}
+							replyFunc={this.props.addNewReply}
+							nestReplyFunc={this.props.addNewNestedReply}
+							auto_growFunc={this.props.auto_grow}
+							likeIncrementState={this.props.likeIncrementState}
 						/> : null))
 					}
 					<div className="body-page__end">no more messages here</div>

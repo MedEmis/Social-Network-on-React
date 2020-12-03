@@ -1,8 +1,6 @@
 // import UserBase from '../users.json'
 // import PostsBase from '../posts.json'
 // import DialogBase from '../dialogs.json'
-import { reRenderApp } from "./../rerender"
-
 
 
 let state = {
@@ -692,16 +690,27 @@ let state = {
 		]
 	},
 	postsCount: 0,
-	dialogsCount: 0
-
+	dialogsCount: 0,
+	currentPostText: ""
 }
-export let auto_grow = (event) => {
+
+let reRenderApp = () => { }
+
+export const subscribe = (observer) => {
+	reRenderApp = observer
+}
+
+export const updatePostText = (inputValue) => {
+	state.currentPostText = inputValue
+	reRenderApp()
+}
+
+export const auto_grow = (event) => {
 	event.target.style.height = "5px";
 	event.target.style.height = (event.target.scrollHeight) + "px";
 }
 
-export let addNewPost = (userId, nikName) => {
-	let textArea = document.querySelector(".body-page__hero-posts-textarea-input")
+export const addNewPost = (userId, nikName) => {
 	let time = new Date().toLocaleTimeString().slice(0, -3)
 	let date = new Date().toLocaleDateString()
 	let post = {
@@ -710,16 +719,16 @@ export let addNewPost = (userId, nikName) => {
 		"nikName": nikName,
 		"dataDate": `${date}`,
 		"dataTime": `${time}`,
-		"textBody": textArea.value,
+		"textBody": state.currentPostText,
 		"like": 0,
 		"dislike": 0,
 		"reply": []
 	}
-	textArea.value = `some news?...`
 	state.postsBase[userId].push(post)
-	reRenderApp(state)
+	state.currentPostText = "some news?..."
+	reRenderApp()
 }
-export let addNewReply = (userId, id, nikName, event) => {
+export const addNewReply = (userId, id, nikName, event) => {
 	let textArea = event.target.offsetParent.lastElementChild.childNodes[0]
 	let time = new Date().toLocaleTimeString().slice(0, -3)
 	let date = new Date().toLocaleDateString()
@@ -737,9 +746,10 @@ export let addNewReply = (userId, id, nikName, event) => {
 	textArea.value = `Answer to ${nikName}:--- `
 	let target = state.postsBase[userId].filter(item => item.id === id)
 	target[0].reply.push(post)
-	reRenderApp(state)
+	textArea.value = ""
+	reRenderApp()
 }
-export let addNewNestedReply = (userId, initialUser, initialPost, id, nikName, event) => {
+export const addNewNestedReply = (userId, initialUser, initialPost, id, nikName, event) => {
 	let textArea = event.target.offsetParent.lastElementChild.childNodes[0]
 	let time = new Date().toLocaleTimeString().slice(0, -3)
 	let date = new Date().toLocaleDateString()
@@ -758,10 +768,11 @@ export let addNewNestedReply = (userId, initialUser, initialPost, id, nikName, e
 	let target = state.postsBase[initialUser].filter(item => item.id === initialPost)
 	let nestedTarget = target[0].reply.filter(item => item.id === id)
 	nestedTarget[0].nestedReply.push(post)
-	reRenderApp(state)
+	textArea.value = ""
+	reRenderApp()
 }
 
-export let likeIncrementState = (event) => {
+export const likeIncrementState = (event) => {
 	let userId = event.target.parentElement.parentElement.previousSibling.childNodes[1].innerText.slice(0, 6)
 	let logId = +event.target.parentElement.parentElement.previousSibling.childNodes[2].innerText.slice(-2)
 	let action = event.target.attributes.name.value
@@ -824,9 +835,7 @@ export let likeIncrementState = (event) => {
 			}
 		}
 	}
-	reRenderApp(state)
+	reRenderApp()
 }
 
 export default state
-
-

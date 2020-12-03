@@ -16,7 +16,7 @@ class Dialogs extends React.Component {
 		this.userBase = this.props.userBase
 		this.dialogBase = this.props.dialogBase
 		this.currentUserId = this.props.currentUserId
-		console.log("Dialogs props", this.currentUserId)
+		//console.log("Dialogs props", this.currentUserId)
 
 
 	}

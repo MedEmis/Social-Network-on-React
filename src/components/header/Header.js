@@ -10,6 +10,7 @@ class Header extends React.Component {
 		this.user = this.props.headerState.currentUserId
 		this.userBase = this.props.headerState.userBase
 		this.userAvatar = this.props.headerState.userBase[this.user].avatarUrl
+		//console.log("header props", this.props)
 	}
 	render() {
 		return (

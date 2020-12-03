@@ -21,14 +21,22 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
-		//console.log("App props", this.props)
 	}
 
 	render() {
+		//console.log("App props", this.props.appStore)
 		return (
 			<div className="App">
-				<Header headerState={this.props.appState} />
-				<Body bodyState={this.props.appState} />
+				<Header headerState={this.props.appStore.getState()} />
+				<Body
+					bodyState={this.props.appStore.getState()}
+					updatePostText={this.props.appStore.updatePostText.bind(this.props.appStore)}//
+					addNewPost={this.props.appStore.addNewPost.bind(this.props.appStore)}//
+					addNewReply={this.props.appStore.addNewReply.bind(this.props.appStore)}//
+					addNewNestedReply={this.props.appStore.addNewNestedReply.bind(this.props.appStore)}//
+					likeIncrementState={this.props.appStore.likeIncrementState.bind(this.props.appStore)}//
+					auto_grow={this.props.appStore.auto_grow.bind(this.props.appStore)}//
+				/>
 				<Footer />
 			</div>
 		);

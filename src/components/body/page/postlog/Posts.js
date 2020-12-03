@@ -1,7 +1,6 @@
 import React from 'react'
 import './postLog.scss';
 import PostLog from './PostLog';
-import { currentUserId } from './../../../body/Body.js'
 
 
 
@@ -13,9 +12,6 @@ class Posts extends React.Component {
 		this.state = {
 
 		};
-		this.userBase = this.props.userBase
-		this.userId = this.props.currentUserId
-		this.postsBase = this.props.postsBase
 		// if (this.props.location.currentUserId) {
 		// 	this.userId = this.props.location.currentUserId || this.props.location.UserId
 		// } else {
@@ -29,9 +25,16 @@ class Posts extends React.Component {
 		return (
 			<>
 				<PostLog
-					userId={this.userId}
+					userId={this.props.currentUserId}
 					userBase={this.props.userBase}
 					postsBase={this.props.postsBase}
+					currentPostText={this.props.currentPostText}
+					updatePostText={this.props.updatePostText}
+					addNewPost={this.props.addNewPost}
+					addNewReply={this.props.addNewReply}
+					addNewNestedReply={this.props.addNewNestedReply}
+					likeIncrementState={this.props.likeIncrementState}
+					auto_grow={this.props.auto_grow}
 				/>
 			</>
 		);

@@ -24,7 +24,7 @@ class DialogsItem extends React.Component {
 			dialogBase: this.props.dialogBase
 		}
 
-		console.log("DialogItem props", this.props)
+		//console.log("DialogItem props", this.props)
 	}
 	deleteItem = (event) => {
 		let dialogItem = event.target.parentNode.parentNode
