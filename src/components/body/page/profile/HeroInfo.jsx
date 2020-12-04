@@ -17,7 +17,11 @@ class HeroInfo extends React.Component {
 		return (
 			<div className="body-page__info">
 				<div className="body-page__hero-bigavatar">
-					<img className="hero-avatar" src={this.props.heroPicture} alt="hero" />
+					{
+						this.props.heroPicture
+							? <img className="hero-avatar" src={this.props.heroPicture} alt="hero" />
+							: 'no image'
+					}
 				</div>
 				<div className="body-page__hero-data">
 					<div className="body-page__hero-data-item">
@@ -33,8 +37,8 @@ class HeroInfo extends React.Component {
 						<span>{!this.props.city ? "-None-" : this.props.city}</span>
 					</div>
 					<div className="body-page__hero-data-item">
-						<span>Education:</span>
-						<span>{!this.props.education ? "-None-" : this.props.education}</span>
+						<span>E-mail:</span>
+						<span>{!this.props.email ? "-None-" : this.props.email}</span>
 					</div>
 					<div className="body-page__hero-data-item">
 						<span>Web Site</span>

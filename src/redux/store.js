@@ -1,8 +1,10 @@
 
 
 let store = {
+	//===========state=============================================//
 	_state: {
-		currentUserId: "id0006",//<<<==  USER
+		currentUserId: null,//<<<==  USER
+		// currentUserId: "id0006",//<<<==  USER
 		userBase: {
 			"id0001": {
 				"userId": "id0001",
@@ -689,6 +691,8 @@ let store = {
 		dialogsCount: 0,
 		currentPostText: ""
 	},
+	//===========state end=========================================//
+	//===========rerender subscriber===============================//
 	getState() {
 		return this._state
 	},
@@ -696,6 +700,9 @@ let store = {
 	toSubscribe(observer) {
 		this._subscriber = observer
 	},
+	//=================rerender subscriber end=====================//
+	//-------------------------------------------------------------
+	//===========dispatcher =======================================//
 	dispatch(action) {
 		if (action.type === "AUTO_GROW") {
 			// let action = {
@@ -877,11 +884,9 @@ let store = {
 		}
 	}
 }
-
-
-
-
-
+//===========dispatcher end====================================//
+//-------------------------------------------------------------
+//===========dispatcher actions models=========================//
 export const AUTO_GROWactionCreator = (event) => {
 	return {
 		type: "AUTO_GROW",
@@ -921,5 +926,5 @@ export const ADD_NEW_NESTED_REPLYactionCreator = (userId, initialUser, initialPo
 		event: event,
 	}
 }
-
+//===========dispatcher actions models end=====================//
 export default store

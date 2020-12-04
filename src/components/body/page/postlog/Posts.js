@@ -24,19 +24,23 @@ class Posts extends React.Component {
 	render() {
 		return (
 			<>
-				<PostLog
-					userId={this.props.currentUserId}
-					userBase={this.props.userBase}
-					postsBase={this.props.postsBase}
-					currentPostText={this.props.currentPostText}
-					dispatch={this.props.dispatch}
-				// updatePostText={this.props.updatePostText}
-				// addNewPost={this.props.addNewPost}
-				// addNewReply={this.props.addNewReply}
-				// addNewNestedReply={this.props.addNewNestedReply}
-				// likeIncrementState={this.props.likeIncrementState}
-				// auto_grow={this.props.auto_grow}
-				/>
+				{
+					this.props.currentUserId
+						? <PostLog
+							userId={this.props.currentUserId}
+							userBase={this.props.userBase}
+							postsBase={this.props.postsBase}
+							currentPostText={this.props.currentPostText}
+							dispatch={this.props.dispatch}
+						// updatePostText={this.props.updatePostText}
+						// addNewPost={this.props.addNewPost}
+						// addNewReply={this.props.addNewReply}
+						// addNewNestedReply={this.props.addNewNestedReply}
+						// likeIncrementState={this.props.likeIncrementState}
+						// auto_grow={this.props.auto_grow}
+						/>
+						: <h1><b>You don't have any posts yet</b></h1>
+				}
 			</>
 		);
 	}
