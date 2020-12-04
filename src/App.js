@@ -27,15 +27,12 @@ class App extends React.Component {
 		//console.log("App props", this.props.appStore)
 		return (
 			<div className="App">
-				<Header headerState={this.props.appStore.getState()} />
+				<Header
+					headerState={this.props.appState}
+				/>
 				<Body
-					bodyState={this.props.appStore.getState()}
-					updatePostText={this.props.appStore.updatePostText.bind(this.props.appStore)}//
-					addNewPost={this.props.appStore.addNewPost.bind(this.props.appStore)}//
-					addNewReply={this.props.appStore.addNewReply.bind(this.props.appStore)}//
-					addNewNestedReply={this.props.appStore.addNewNestedReply.bind(this.props.appStore)}//
-					likeIncrementState={this.props.appStore.likeIncrementState.bind(this.props.appStore)}//
-					auto_grow={this.props.appStore.auto_grow.bind(this.props.appStore)}//
+					bodyState={this.props.appState}
+					dispatch={this.props.dispatch}
 				/>
 				<Footer />
 			</div>

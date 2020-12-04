@@ -1,10 +1,6 @@
 import React from 'react'
 import './profile.scss';
 
-import heroPicture from './../../../../images/avatars/id0001.jpeg'
-import heroPictures from './../../../../images/avatars/id0001.jpeg'
-
-
 class HeroContacts extends React.Component {
 	constructor(props) {
 		super(props);

@@ -1,8 +1,7 @@
 import React from 'react'
 import './makeMessage.css';
 import PostItem from './PostItem';
-//import { addNewPost, addNewReply, addNewNestedReply, auto_grow, likeIncrementState, updatePostText } from "./../../../../redux/state"
-
+import { AUTO_GROWactionCreator, UPDATE_POST_TEXTactionCreator, ADD_NEW_POSTactionCreator } from "../../../../redux/store"
 
 
 class PostLog extends React.Component {
@@ -17,26 +16,26 @@ class PostLog extends React.Component {
 		this.postInput = React.createRef();
 		//console.log("PostLog props", this)
 	}
-	onPostInput = () => {
-		console.log(this.postInput.current.value)
-	}
 	render() {
 		return (
 			<div className="body-page__hero-posts-log">
 				<div className="body-page__hero-posts">
 					<div className="body-page__hero-posts-title">Add message</div>
 					<div className="body-page__hero-posts-textarea">
-						<textarea onInput={(event) => this.props.auto_grow(event)} ref={this.postInput}
-							value={this.props.currentPostText} onChange={(event) => this.props.updatePostText(event.target.value)}
-							className="body-page__hero-posts-textarea-input" placeholder="some news?..." />
+						<textarea
+							onInput={(event) => this.props.dispatch(AUTO_GROWactionCreator(event))}
+							ref={this.postInput}
+							value={this.props.currentPostText}
+							onChange={(event) => this.props.dispatch(UPDATE_POST_TEXTactionCreator(event))}
+							className="body-page__hero-posts-textarea-input"
+							placeholder="some news?..."
+						/>
 					</div>
 					<div className="body-page__hero-posts-submit">
-						<button onClick={(e) => {
-							this.props.addNewPost(
-								this.props.userId,
-								this.props.userBase[this.props.userId].name
-							)
-							this.setState({ refresh: true })
+						<button onClick={() => {
+							this.props.dispatch(ADD_NEW_POSTactionCreator(
+								this.props.userId, this.props.userBase[this.props.userId].name
+							))
 						}} type="submit" className="blue-btn" id="neon-text">Publish</button>
 					</div>
 				</div>
@@ -45,20 +44,17 @@ class PostLog extends React.Component {
 						this.state.postsBlock.map((item, index) => (item ? <PostItem
 							ref={this.child}
 							key={Math.floor(Math.random() * 10000)}
-							id={this.state.postsBlock[index].id}
-							userId={this.state.postsBlock[index].userId}
 							userBase={this.props.userBase}
+							id={this.state.postsBlock[index].id}
+							likes={this.state.postsBlock[index].like}
+							userId={this.state.postsBlock[index].userId}
 							nikName={this.state.postsBlock[index].nikName}
 							dataDate={this.state.postsBlock[index].dataDate}
 							dataTime={this.state.postsBlock[index].dataTime}
 							textBody={this.state.postsBlock[index].textBody}
-							likes={this.state.postsBlock[index].like}
 							dislikes={this.state.postsBlock[index].dislike}
 							childReply={this.state.postsBlock[index].reply}
-							replyFunc={this.props.addNewReply}
-							nestReplyFunc={this.props.addNewNestedReply}
-							auto_growFunc={this.props.auto_grow}
-							likeIncrementState={this.props.likeIncrementState}
+							dispatch={this.props.dispatch}//all functions
 						/> : null))
 					}
 					<div className="body-page__end">no more messages here</div>

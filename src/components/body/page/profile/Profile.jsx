@@ -3,7 +3,6 @@ import HeroInfo from './HeroInfo';
 import HeroContacts from './HeroContacts';
 import User404 from './User404';
 import topImage from "./../../../../images/page-top.jpg"
-import heroPicture from './../../../../images/avatars/id0001.jpeg'
 import './profile.scss';
 
 

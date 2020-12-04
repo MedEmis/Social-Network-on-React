@@ -1,6 +1,6 @@
 import React from 'react'
 import './postItem.scss';
-let classNames = require('classnames');
+//let classNames = require('classnames');
 
 
 
@@ -33,7 +33,10 @@ class NestedReplyPostItem extends React.Component {
 	}
 	isVoutedCheck = (event) => {
 		if (this.state.isVoted === false) {
-			this.props.likeIncrementState(event)
+			this.props.dispatch({
+				type: "LIKE_INCREMENT",
+				event: event,
+			})
 			this.setState({ isVoted: true })
 			event.target.className += " " + "visited"
 		} else if (this.state.isVoted === true) {

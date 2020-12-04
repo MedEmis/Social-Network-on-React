@@ -1,6 +1,7 @@
 import React from 'react'
-import './postItem.scss';
 import ReplyPostItem from './ReplyPostItem';
+import { AUTO_GROWactionCreator, ADD_NEW_REPLYactionCreator } from "../../../../redux/store"
+import './postItem.scss';
 let classNames = require('classnames');
 
 
@@ -13,7 +14,6 @@ class PostItem extends React.Component {
 			IsTextOpen: false,
 			postsBlock: props.childReply,
 		};
-
 	}
 	panelColor = () => {
 		if (this.props.likes > this.props.dislikes) {
@@ -32,14 +32,16 @@ class PostItem extends React.Component {
 	}
 	isVoutedCheck = (event) => {
 		if (this.state.isVoted === false) {
-			this.props.likeIncrementState(event)
+			this.props.dispatch({
+				type: "LIKE_INCREMENT",
+				event: event,
+			})
 			this.setState({ isVoted: true })
 			event.target.className += " " + "visited"
 		} else if (this.state.isVoted === true) {
 			return
 		}
 	}
-
 	render() {
 		return (
 			<div className="posts-log-item-wrapper">
@@ -66,17 +68,16 @@ class PostItem extends React.Component {
 					</div>
 					<button onClick={() => this.setState({ IsTextOpen: true })} type="submit" className="hero-posts-log-item__button-reply">Reply</button>
 					<div className={classNames(" body-page__reply-textarea", { " visible": this.state.IsTextOpen })}>
-						<textarea onInput={this.props.auto_growFunc} className="body-page__reply-textarea-input" type="text" defaultValue={`Answer to ${this.props.nikName}:---`} />
+						<textarea onInput={(event) => this.props.dispatch(AUTO_GROWactionCreator(event))} className="body-page__reply-textarea-input" type="text" defaultValue={`Answer to ${this.props.nikName}:---`} />
 						<div className="body-page__reply-textarea-buttons">
 							<button onClick={() => this.setState({ IsTextOpen: false })} type="submit" className="red-btn" id="neon-text">Close</button>
 							<button onClick={
 								(event) => {
-									this.props.replyFunc(
+									this.props.dispatch(ADD_NEW_REPLYactionCreator(
 										this.props.userId,
 										this.props.id,
 										this.props.userBase[this.props.userId].name,
-										event
-									)
+										event))
 									this.setState({ IsTextOpen: false })
 								}
 							} type="submit" className="blue-btn" id="neon-text">Publish</button>
@@ -100,13 +101,11 @@ class PostItem extends React.Component {
 							likes={this.state.postsBlock[index].like}
 							dislikes={this.state.postsBlock[index].dislike}
 							childReply={this.state.postsBlock[index].nestedReply}
-							nestReplyFunc={this.props.nestReplyFunc}
-							auto_growFunc={this.props.auto_growFunc}
-							likeIncrementState={this.props.likeIncrementState}
+							dispatch={this.props.dispatch}//all functions
 						/> : null))
 					}
 				</div>
-			</div >
+			</div>
 		);
 	}
 }

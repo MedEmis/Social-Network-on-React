@@ -29,12 +29,13 @@ class Posts extends React.Component {
 					userBase={this.props.userBase}
 					postsBase={this.props.postsBase}
 					currentPostText={this.props.currentPostText}
-					updatePostText={this.props.updatePostText}
-					addNewPost={this.props.addNewPost}
-					addNewReply={this.props.addNewReply}
-					addNewNestedReply={this.props.addNewNestedReply}
-					likeIncrementState={this.props.likeIncrementState}
-					auto_grow={this.props.auto_grow}
+					dispatch={this.props.dispatch}
+				// updatePostText={this.props.updatePostText}
+				// addNewPost={this.props.addNewPost}
+				// addNewReply={this.props.addNewReply}
+				// addNewNestedReply={this.props.addNewNestedReply}
+				// likeIncrementState={this.props.likeIncrementState}
+				// auto_grow={this.props.auto_grow}
 				/>
 			</>
 		);
