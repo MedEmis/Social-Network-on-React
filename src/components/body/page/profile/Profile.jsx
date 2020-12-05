@@ -3,7 +3,6 @@ import HeroInfo from './HeroInfo';
 import HeroContacts from './HeroContacts';
 import User404 from './User404';
 import topImage from "./../../../../images/page-top.jpg"
-import Authorization from './Autorization';
 import './profile.scss';
 import Registration from './Registration';
 
@@ -30,34 +29,32 @@ class Profile extends React.Component {
 
 	render() {
 		// if (!props.location.propsSearch) return <Redirect to="/src/components/body/page/profile/Profile" />;
-		//console.log("Profile props", this.props.location)
+		console.log("Profile props", this.props)
 
 
 
 		return (
 			<>
-				{this.props.currentUserId
-					? this.userBase.hasOwnProperty(this.userId)
-						? <div className="body-page__hero-page">
-							<div className="body-page__background"><img src={topImage} alt="topImage"></img></div>
-							<HeroInfo
-								userBase={this.userBase}
-								userId={this.userId}
-								name={this.userBase[this.userId].name}
-								heroPicture={this.userBase[this.userId].avatarUrl}
-								birthDate={this.userBase[this.userId].birthDate}
-								city={this.userBase[this.userId].city}
-								education={this.userBase[this.userId].education}
-								webSite={this.userBase[this.userId].webSite}
-							/>
-							<HeroContacts
-								contactName="contactName"
-								userBase={this.userBase}
-								userId={this.userId}
-							/>
-						</div>
-						: <User404 />
-					: <Registration/>
+				{ this.userBase.hasOwnProperty(this.userId)
+					? <div className="body-page__hero-page">
+						<div className="body-page__background"><img src={topImage} alt="topImage"></img></div>
+						<HeroInfo
+							userBase={this.userBase}
+							userId={this.userId}
+							name={this.userBase[this.userId].name}
+							heroPicture={this.userBase[this.userId].avatarUrl}
+							birthDate={this.userBase[this.userId].birthDate}
+							city={this.userBase[this.userId].city}
+							education={this.userBase[this.userId].education}
+							webSite={this.userBase[this.userId].webSite}
+						/>
+						<HeroContacts
+							contactName="contactName"
+							userBase={this.userBase}
+							userId={this.userId}
+						/>
+					</div>
+					: <User404 />
 				}
 			</>
 		);

@@ -31,6 +31,8 @@ class Posts extends React.Component {
 							userBase={this.props.userBase}
 							postsBase={this.props.postsBase}
 							currentPostText={this.props.currentPostText}
+							currentPostReply={this.props.currentPostReply}
+							currentPostNestreply={this.props.currentPostNestreply}
 							dispatch={this.props.dispatch}
 						// updatePostText={this.props.updatePostText}
 						// addNewPost={this.props.addNewPost}

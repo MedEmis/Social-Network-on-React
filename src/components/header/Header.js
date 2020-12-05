@@ -10,11 +10,11 @@ class Header extends React.Component {
 		this.user = this.props.headerState.currentUserId
 		this.userBase = this.props.headerState.userBase
 		this.userAvatar = this.props.headerState.userBase[this.user] ? this.props.headerState.userBase[this.user].avatarUrl : ""
-		//console.log("header props", this.props)
+		console.log("header props", this.props.headerState)
 	}
 	render() {
 		return (
-			<div className="header">
+			<div className="header" >
 				<div className="header-nav-item">Home</div>
 				<div className="header__pictures">
 					<div >

@@ -4,7 +4,7 @@ let store = {
 	//===========state=============================================//
 	_state: {
 		currentUserId: null,//<<<==  USER
-		// currentUserId: "id0006",//<<<==  USER
+		//currentUserId: "id0006",//<<<==  USER
 		userBase: {
 			"id0001": {
 				"userId": "id0001",
@@ -772,7 +772,7 @@ let store = {
 					"dislike": 0,
 					"nestedReply": []
 				}
-				textArea.value = `Answer to ${nikName}:--- `
+				// textArea.value = `Answer to ${nikName === null || nikName === undefined ? "anonymous" : nikName}:--- `
 				let target = this._state.postsBase[userId].filter(item => item.id === id)
 				target[0].reply.push(post)
 				textArea.value = ""
@@ -803,7 +803,6 @@ let store = {
 					"like": 0,
 					"dislike": 0,
 				}
-				textArea.value = `Answer to ${nikName}:--- `
 				let target = this._state.postsBase[initialUser].filter(item => item.id === initialPost)
 				let nestedTarget = target[0].reply.filter(item => item.id === id)
 				nestedTarget[0].nestedReply.push(post)
@@ -818,8 +817,9 @@ let store = {
 			// }
 			let likeIncrementState = (event) => {
 				let userId = event.target.parentElement.parentElement.previousSibling.childNodes[1].innerText.slice(0, 6)
-				let logId = +event.target.parentElement.parentElement.previousSibling.childNodes[2].innerText.slice(-2)
+				let logId = +event.target.parentElement.parentElement.previousSibling.childNodes[3].innerText.slice(-2)
 				let action = event.target.attributes.name.value
+				//checking if this los was already vouted
 				if (this._state.userBase[userId].voutedLike.includes(logId) || this._state.userBase[userId].voutedDislike.includes(logId)) {
 					return
 				} else {
@@ -881,6 +881,33 @@ let store = {
 				this._subscriber(store)
 			}
 			likeIncrementState(action.event)
+		} else if (action.type === "CREATE_NEW_USER") {
+			let creatNewUser = (userData) => {
+				let date = new Date().toLocaleDateString()
+				let newUserId = "id0" + ++Object.keys(this._state.userBase).length
+				let newUserinfo = {
+					"userId": newUserId,
+					"name": userData.name,
+					"birthDate": userData.dateOfbirth,
+					"city": userData.city,
+					"email": userData.email,
+					"webSite": userData.website,
+					"registerDate": `${date}`,
+					"voutedLike": [],
+					"voutedDislike": [],
+					"isOnline": false,
+					"avatarUrl": userData.avatar,
+					"contacts": []
+				}
+				this._state.userBase[newUserId] = newUserinfo
+				this._state.postsBase[newUserId] = []
+				this._state.dialogBase[newUserId] = []
+				this._state.currentUserId = newUserId
+
+				this._subscriber(store)
+			}
+			creatNewUser(action.userData)
+
 		}
 	}
 }
@@ -926,5 +953,13 @@ export const ADD_NEW_NESTED_REPLYactionCreator = (userId, initialUser, initialPo
 		event: event,
 	}
 }
+export const CREATE_NEW_USERactionCreator = (userData) => {
+	return {
+		type: "CREATE_NEW_USER",
+		userData: userData
+	}
+}
 //===========dispatcher actions models end=====================//
+// console.log("user base", store._state.userBase)
+// console.log("cur user", store._state.currentUserId)
 export default store

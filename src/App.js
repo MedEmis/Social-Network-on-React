@@ -2,6 +2,8 @@ import React from 'react'
 import Header from './components/header/Header';
 import Body from './components/body/Body';
 import Footer from './components/footer/Footer';
+import { Switch, Route, BrowserRouter } from 'react-router-dom'
+
 import './App.css';
 
 export const pageMove = (event) => {//global function for page animation
@@ -24,11 +26,12 @@ class App extends React.Component {
 	}
 
 	render() {
-		//console.log("App props", this.props.appStore)
+		//console.log("App props", this.props.appState)
 		return (
 			<div className="App">
 				<Header
 					headerState={this.props.appState}
+					dispatch={this.props.dispatch}
 				/>
 				<Body
 					bodyState={this.props.appState}

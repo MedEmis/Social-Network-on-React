@@ -1,7 +1,9 @@
 import React from 'react'
 import 'materialize-css';
 import HeroInfo from './HeroInfo';
-
+import { pageMove } from "./../../../../App.js"
+import { Link } from 'react-router-dom';
+import { CREATE_NEW_USERactionCreator } from "../../../../redux/store"
 
 
 
@@ -9,14 +11,14 @@ class Registration extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			// name: '',
-			// dateOfbirth: '',
-			// city: '',
-			// email: '',
-			// website: '',
-			// avatar: ''
+			name: null,
+			dateOfbirth: null,
+			city: null,
+			email: null,
+			website: null,
+			avatar: null
 		};
-
+		this.userPath = "/src/components/body/page/postlog/Profile"
 
 	}
 
@@ -96,10 +98,16 @@ class Registration extends React.Component {
 								id="avatar" type="url" name="avatar" className="reginput validate" />
 							<label htmlFor="avatar">Here you can add link to your avatar</label>
 						</div>
-						<button type="button" className="body-page__authorization_button">DONE!</button>
+						<Link to={this.state.name ? this.userPath : ""}
+							onClick={(event) => {
+								pageMove(event)
+								this.props.dispatch(CREATE_NEW_USERactionCreator(this.state))
+							}
+							} type="button" className="body-page__authorization_button"
+						>DONE!</Link>
 					</div>
 				</div>
-			</div >
+			</div>
 		);
 	}
 }
