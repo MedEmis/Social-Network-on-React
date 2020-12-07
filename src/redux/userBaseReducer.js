@@ -29,4 +29,5 @@ const userBaseReduser = (state, action) => {
 
 	return state
 }
+export default userBaseReduser
 //reducer getting state from store and action from UI. Don't need subscriber. It will return renewed state.
