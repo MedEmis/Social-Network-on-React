@@ -11,7 +11,7 @@ class HeroInfo extends React.Component {
 		this.state = {
 
 		};
-		//console.log(this.props.birthDate)
+		//console.log(this.props)
 	}
 	render() {
 		return (

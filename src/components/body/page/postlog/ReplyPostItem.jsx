@@ -74,7 +74,8 @@ class ReplyPostItem extends React.Component {
 					</div>
 					<div onClick={() => this.setState({ IsTextOpen: true })} type="submit" className="hero-posts-log-item__button-reply">Reply</div>
 					<div className={classNames(" body-page__reply-textarea", { " visible": this.state.IsTextOpen })}>
-						<textarea onInput={(event) => this.props.dispatch(AUTO_GROWactionCreator(event))}
+						<textarea
+							// onInput={(event) => this.props.dispatch(AUTO_GROWactionCreator(event))}
 							className="body-page__reply-textarea-input" type="text"
 							defaultValue={`Answer to ${this.props.nikName === null || this.props.nikName === undefined ? "anonymous" : this.props.nikName}:---`} />
 						<div className="body-page__reply-textarea-buttons">

@@ -3,6 +3,8 @@ import Header from './components/header/Header';
 import Body from './components/body/Body';
 import Footer from './components/footer/Footer';
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
+import Registration from './components/body/page/profile/Registration';
+import Authorization from './components/body/page/profile/Autorization';
 
 import './App.css';
 
@@ -26,20 +28,58 @@ class App extends React.Component {
 	}
 
 	render() {
+
 		//console.log("App props", this.props.appState)
-		return (
-			<div className="App">
-				<Header
-					headerState={this.props.appState}
-					dispatch={this.props.dispatch}
-				/>
-				<Body
-					bodyState={this.props.appState}
-					dispatch={this.props.dispatch}
-				/>
-				<Footer />
-			</div>
-		);
+
+		if (this.props.appState.currentUserId) {
+			return (//autorized user
+				<div className="App">
+					<BrowserRouter>
+						<Switch>
+							<>
+								<Header
+									headerState={this.props.appState}
+									dispatch={this.props.dispatch}
+								/>
+								<Body
+									bodyState={this.props.appState}
+									dispatch={this.props.dispatch}
+								/>
+							</>
+							<div className="body-main">
+								<div className="body-page">
+									<span className="body-page_cover"></span>
+									<Route exact path='/'>
+										<Authorization dispatch={this.props.dispatch} />
+									</Route>
+								</div>
+							</div>
+						</Switch>
+					</BrowserRouter>
+					<Footer />
+				</div>
+			);
+		} else {
+			return (//not autorized user
+				<div className="App">
+					<BrowserRouter>
+						<div className="body-main">
+							<div className="body-page">
+								<span className="body-page_cover"></span>
+								<Route exact path='/'>
+									<Authorization dispatch={this.props.dispatch} />
+								</Route>
+								<Route exact path='/registration' render={() =>
+									<Registration isUserExist={this.props.appState.isUserExist} dispatch={this.props.dispatch} />
+								} />
+							</div>
+						</div>
+					</BrowserRouter>
+					<Footer />
+				</div>
+			);
+		}
+
 	}
 }
 export default App;

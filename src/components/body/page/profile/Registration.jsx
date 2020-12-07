@@ -7,6 +7,8 @@ import { CREATE_NEW_USERactionCreator } from "../../../../redux/store"
 
 
 
+
+
 class Registration extends React.Component {
 	constructor(props) {
 		super(props);
@@ -16,9 +18,10 @@ class Registration extends React.Component {
 			city: null,
 			email: null,
 			website: null,
-			avatar: null
+			avatar: null,
+			password: null
 		};
-		this.userPath = "/src/components/body/page/postlog/Profile"
+		this.userPath = ''
 
 	}
 
@@ -37,6 +40,9 @@ class Registration extends React.Component {
 			case "email":
 				this.setState({ email: event.target.value })
 				break;
+			case "password":
+				this.setState({ password: event.target.value })
+				break;
 			case "site":
 				this.setState({ website: event.target.value })
 				break;
@@ -48,6 +54,12 @@ class Registration extends React.Component {
 		}
 	}
 	render() {
+		if (!this.props.isUserExist) {
+			this.userPath = "/registration"
+		} else {
+			this.userPath = "/src/components/body/page/profile/Profile"
+		}
+		console.log("isUser exist", this.props.isUserExist)
 		return (
 			<div className="body-page__registration">
 				<HeroInfo
@@ -72,6 +84,11 @@ class Registration extends React.Component {
 						</div>
 						<div className="input-field col s12">
 							<input onInput={(event) => this.infoPreviev(event)}
+								id="avatar" type="url" name="avatar" className="reginput validate" />
+							<label htmlFor="avatar">Here you can add link to your avatar</label>
+						</div>
+						<div className="input-field col s12">
+							<input onInput={(event) => this.infoPreviev(event)}
 								id="date" type="text" name="birthdate" className="reginput validate"
 								onFocus={(event) => event.target.type = "date"}
 								onBlur={(event) => event.target.type = "text"}
@@ -85,29 +102,32 @@ class Registration extends React.Component {
 						</div>
 						<div className="input-field col s12">
 							<input onInput={(event) => this.infoPreviev(event)}
-								id="email" type="email" name="email" className="reginput validate" />
-							<label htmlFor="email">Your e-mail</label>
-						</div>
-						<div className="input-field col s12">
-							<input onInput={(event) => this.infoPreviev(event)}
 								id="site" type="text" name="site" className="reginput validate" />
 							<label htmlFor="site">Your Web site, if some</label>
 						</div>
 						<div className="input-field col s12">
 							<input onInput={(event) => this.infoPreviev(event)}
-								id="avatar" type="url" name="avatar" className="reginput validate" />
-							<label htmlFor="avatar">Here you can add link to your avatar</label>
+								id="email" type="email" name="email" className="reginput validate" />
+							<label htmlFor="email">Your e-mail, it will be your login</label>
 						</div>
-						<Link to={this.state.name ? this.userPath : ""}
+						<div className="input-field col s12">
+							<input onInput={(event) => this.infoPreviev(event)}
+								id="password" type="text" name="password" className="reginput validate" />
+							<label htmlFor="password">Your password</label>
+						</div>
+						<Link
 							onClick={(event) => {
-								pageMove(event)
 								this.props.dispatch(CREATE_NEW_USERactionCreator(this.state))
+								pageMove(event)
 							}
-							} type="button" className="body-page__authorization_button"
+							}
+							to={this.userPath}//if such login already exist, we will stay on registration page
+							// to={isUserExist ? this.userPath : this.registration}//if such login already exist, we will stay on registration page
+							type="button" className="body-page__authorization_button"
 						>DONE!</Link>
 					</div>
 				</div>
-			</div>
+			</div >
 		);
 	}
 }

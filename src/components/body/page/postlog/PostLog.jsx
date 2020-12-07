@@ -28,7 +28,6 @@ class PostLog extends React.Component {
 							value={this.props.currentPostText}
 							onChange={(event) => this.props.dispatch(UPDATE_POST_TEXTactionCreator(event))}
 							className="body-page__hero-posts-textarea-input"
-							placeholder="some news?..."
 						/>
 					</div>
 					<div className="body-page__hero-posts-submit">

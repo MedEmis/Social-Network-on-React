@@ -1,6 +1,7 @@
 
 import userBaseReduser from './userBaseReducer';
 import postBaseReduser from './postBaseReducer';
+import dialogBaseReducer from './dialogBaseReducer';
 
 
 
@@ -8,10 +9,12 @@ import postBaseReduser from './postBaseReducer';
 let store = {
 	//===========state=============================================//
 	_state: {
-		//currentUserId: null,//<<<==  USER
-		currentUserId: "id0006",//<<<==  USER
+		currentUserId: localStorage.getItem("currentUserId"),//<<<==  USER
+		//currentUserId: "id0006",//<<<==  USER
 		userBase: {
 			"id0001": {
+				"login": "AAA@111.cc",
+				"password": "aaa111aaa",
 				"userId": "id0001",
 				"name": "Name MAIN FIRST",
 				"birthDate": "00.11.22",
@@ -26,6 +29,8 @@ let store = {
 				"contacts": ["id0003", "id0002", "id0006", "id0005"]
 			},
 			"id0002": {
+				"login": "BB@B111",
+				"password": "bbb111bbb",
 				"userId": "id0002",
 				"name": "Name Two",
 				"birthDate": "11.22.33",
@@ -40,6 +45,8 @@ let store = {
 				"contacts": ["id0001", "id0003"]
 			},
 			"id0003": {
+				"login": "CCC@111",
+				"password": "ccc111ccc",
 				"userId": "id0003",
 				"name": "Name Three",
 				"birthDate": "00.11.33",
@@ -54,6 +61,8 @@ let store = {
 				"contacts": ["id0002", "id0006"]
 			},
 			"id0004": {
+				"login": "DDD@111",
+				"password": "ddd111ddd",
 				"userId": "id0004",
 				"name": "Name Four",
 				"birthDate": "00.11.44",
@@ -68,6 +77,8 @@ let store = {
 				"contacts": ["id0003"]
 			},
 			"id0005": {
+				"login": "EEE@111",
+				"password": "eee111eee",
 				"userId": "id0005",
 				"name": "Name Five",
 				"birthDate": "00.11.55",
@@ -82,6 +93,8 @@ let store = {
 				"contacts": ["id0003", "id0001"]
 			},
 			"id0006": {
+				"login": "FFF@111",
+				"password": "fff111fff",
 				"userId": "id0006",
 				"name": "Name Six",
 				"birthDate": "00.11.66",
@@ -694,7 +707,8 @@ let store = {
 		},
 		postsCount: 0,
 		dialogsCount: 0,
-		currentPostText: ""
+		currentPostText: "",
+		isUserExist: false
 	},
 	//===========state end=========================================//
 	//===========rerender subscriber===============================//
@@ -709,7 +723,7 @@ let store = {
 	dispatch(action) {
 		this._state = userBaseReduser(this._state, action)
 		this._state = postBaseReduser(this._state, action)
-		this._state = userBaseReduser(this._state, action)
+		this._state = dialogBaseReducer(this._state, action)
 
 		this._subscriber(store)
 	}
@@ -760,6 +774,18 @@ export const CREATE_NEW_USERactionCreator = (userData) => {
 	return {
 		type: "CREATE_NEW_USER",
 		userData: userData
+	}
+}
+export const USER_LOG_INactionCreator = (event) => {
+	return {
+		type: "USER_LOG_IN",
+		inputLogin: event.target[0].value,
+		inputPassword: event.target[1].value,
+	}
+}
+export const USER_LOG_OUTactionCreator = () => {
+	return {
+		type: "USER_LOG_OUT",
 	}
 }
 //===========dispatcher actions models end=====================//

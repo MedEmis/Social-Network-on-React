@@ -2,6 +2,7 @@ import React from 'react'
 import 'materialize-css';
 import { Link } from 'react-router-dom';
 import { pageMove } from "./../../../../App.js"
+import { USER_LOG_INactionCreator } from './../../../../redux/store';
 
 
 
@@ -13,18 +14,24 @@ class Authorization extends React.Component {
 		this.state = {};
 
 	}
-	getFormData = (event) => {
-		event.preventDefault()
-		console.log(event.target[0].value)
-		console.log(event.target[1].value)
+	// getFormData = (event) => {
+	// 	event.preventDefault()
+	// 	console.log(event.target[0].value)
+	// 	console.log(event.target[1].value)
 
-	}
+	// }
+
 	render() {
 		return (
 			<div className="body-page__authorization">
 				<div className="body-page__authorization_box">
-					<form onSubmit={(event) => this.getFormData(event)}
-						action="#" className="body-page__authorization_form">
+					<form onSubmit={(event) => {
+						this.props.dispatch(USER_LOG_INactionCreator(event))
+						event.preventDefault()
+						pageMove(event)
+					}
+					}
+						action="" className="body-page__authorization_form">
 						<h1 type="text" className="body-page__authorization_title"><b>WELCOME</b></h1>
 						<h1 type="text" className="body-page__authorization_title">Here you can log in to your account or create a new one!</h1>
 						<div className="input-field col s12">

@@ -25,6 +25,7 @@
 	border-radius: 10px;
 	background: rgb(56, 49, 85);
 	justify-self: flex-start;
+	cursor: pointer;
 }
 
 .header-nav-item:hover {

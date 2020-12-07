@@ -29,7 +29,7 @@ class HeroContacts extends React.Component {
 							<div className="body-page__hero-contacts_name">{this.userBase[item].name}</div>
 							{/* {console.log(`./images/avatars/${this.userBase[item].avatarUrl}`)} */}
 							{/* <img src={require('/images/image-name.png')}/> */}
-						</div> : null))
+						</div> : "You dont have any frend yet"))
 				}</div>
 
 			</div>

@@ -4,7 +4,6 @@ import HeroContacts from './HeroContacts';
 import User404 from './User404';
 import topImage from "./../../../../images/page-top.jpg"
 import './profile.scss';
-import Registration from './Registration';
 
 
 
@@ -45,7 +44,7 @@ class Profile extends React.Component {
 							heroPicture={this.userBase[this.userId].avatarUrl}
 							birthDate={this.userBase[this.userId].birthDate}
 							city={this.userBase[this.userId].city}
-							education={this.userBase[this.userId].education}
+							email={this.userBase[this.userId].login}
 							webSite={this.userBase[this.userId].webSite}
 						/>
 						<HeroContacts

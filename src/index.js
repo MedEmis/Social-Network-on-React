@@ -23,6 +23,10 @@ let reRenderApp = (store) => {
 reRenderApp(store)
 store.toSubscribe(reRenderApp)
 
-
+// if (store._state.currentUserId !== null) {
+// 	store.toSubscribe(reRenderApp)
+// } else {
+// 	reRenderApp(store)
+// }
 reportWebVitals();
 
