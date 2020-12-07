@@ -2,7 +2,9 @@ import React from 'react'
 import logo from './../../../src/images/logo192.png';
 import './header.css';
 
-
+//==================================================================
+//ХЕДЕР НЕ ОБНОВЛЯЕТЬСЯ ПРИ ВХОДЕ В СИСТЕМУ!!!!!!!!!!!!!!!!!!!!
+//==================================================================
 class Header extends React.Component {
 	constructor(props) {
 		super(props);

@@ -3,8 +3,8 @@
 let store = {
 	//===========state=============================================//
 	_state: {
-		currentUserId: null,//<<<==  USER
-		//currentUserId: "id0006",//<<<==  USER
+		//currentUserId: null,//<<<==  USER
+		currentUserId: "id0006",//<<<==  USER
 		userBase: {
 			"id0001": {
 				"userId": "id0001",
@@ -693,9 +693,7 @@ let store = {
 	},
 	//===========state end=========================================//
 	//===========rerender subscriber===============================//
-	getState() {
-		return this._state
-	},
+	getState() { return this._state },
 	_subscriber() { },
 	toSubscribe(observer) {
 		this._subscriber = observer
