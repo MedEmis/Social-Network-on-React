@@ -144,7 +144,6 @@ const userBaseReducer = (state = initialUsersState, action) => {
 					localStorage.setItem("currentUserId", newUserId)
 					state.currentUserId = localStorage.getItem("currentUserId")
 					console.log(`User:  ${newUserId} isOnline:  ${newUserModel.isOnline}`)
-					//console.log("ssssssssssssss", initialPostState)
 				}
 			}
 			creatNewUser(action.userData)
