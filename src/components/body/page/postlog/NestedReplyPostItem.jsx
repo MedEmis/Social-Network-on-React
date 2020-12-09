@@ -6,33 +6,11 @@ import './postItem.scss';
 
 
 function NestedReplyPostItem(props) {
-	const [IsTextOpen, setIsTextOpen] = useState(false)
+	//const [IsTextOpen, setIsTextOpen] = useState(false)
 	//let postsBlock = props.childReply
 	let isLiked = props.userBase[props.userId].voutedLike//to set color of icon
 	let isDisliked = props.userBase[props.userId].voutedDislike//to set color of icon
-	let panColor = {}
-	const panelColor = () => {
-		if (props.likes > props.dislikes) {
-			panColor = {
-				background: ' rgb(72, 139, 72)'
-			};
-		} else if (props.likes < props.dislikes) {
-			panColor = {
-				background: 'rgb(155, 49, 49)'
-			};
-		} else {
-			panColor = {
-				background: 'rgb(105, 85, 17)'
-			};
-		}
-	}
-	const isVoutedCheck = (event, userBase) => {
-		props.dispatch({
-			type: "LIKE_INCREMENT",
-			event: event,
-			userBase: userBase,
-		})
-	}
+
 	return (
 		<>
 			<div className="hero-posts-log-item nested-reply">
@@ -45,40 +23,28 @@ function NestedReplyPostItem(props) {
 				</div>
 				<div className="hero-posts-log-item__body">
 					<div className="hero-posts-log-item__body-text">{!props.textBody ? "...no text" : props.textBody}</div>
-					<ul onLoad={panelColor()} style={panColor} className="hero-posts-log-item__body-special-list" id="nestedReply">
-						<li onClick={(event) => {
-							isVoutedCheck(
-								event,
-								props.userBase)
-						}}
+					<ul style={props.panelColor(props)}
+						className="hero-posts-log-item__body-special-list" id="nestedReply">
+						<li onClick={(event) => props.isVoutedCheck(event, props.userBase)}
 							style={isLiked.includes(props.id) ? { backgroundColor: "green" } : { backgroundColor: "none" }}
 							name="like" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Up</span></li>
-						<li onClick={(event) => {
-							isVoutedCheck(
-								event,
-								props.userBase)
-						}}
+						<li onClick={(event) => props.isVoutedCheck(event, props.userBase)}
 							style={isDisliked.includes(props.id) ? { backgroundColor: "red" } : { backgroundColor: "none" }}
 							name="dislike" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Down</span></li>
 						<li className="hero-posts-log-item__body-special-item tooltip">{props.likes ? props.likes : 0}<span className="tooltiptext">Likes</span></li>
 						<li className="hero-posts-log-item__body-special-item tooltip">{props.dislikes ? props.dislikes : 0}<span className="tooltiptext">Dislikes</span></li>
 					</ul>
 				</div>
+
+				{/* TEXTAREA */}
 				{/* <button onClick={() =>  setIsTextOpen(true)} type="submit" className="hero-posts-log-item__button-reply">Reply</button>
 					<div className={classNames(" body-page__reply-textarea", { " visible":    IsTextOpen })}>
-						<textarea onInput={ auto_grow} className="body-page__reply-textarea-input" type="text" defaultValue={`Answer to ${ props.nikName}:`} />
+						<textarea onInput={(event) => props.autoGrow(event)} className="body-page__reply-textarea-input" type="text" defaultValue={`Answer to ${ props.nikName}:`} />
 						<div className="body-page__reply-textarea-buttons">
 							<button onClick={() =>  setIsTextOpen(false)} type="submit" className="red-btn" id="neon-text">Close</button>
 							<button onClick={(event) => {
-								 props.nestReplyFunc(
-									 props.userId,
-									 props.initialUser,
-									 props.initialPost,
-									 props.id,
-									 props.userBase[ props.userId].name,
-									event
-								)
-								 setIsTextOpen(true)
+							props.addNewNestedPost(event, props)
+							setIsTextOpen(true)
 							}
 							} type="submit" className="blue-btn" id="neon-text">Publish</button>
 						</div>

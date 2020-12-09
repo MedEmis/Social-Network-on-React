@@ -1,6 +1,5 @@
 import React from 'react'
 import logo from './../../../src/images/logo192.png';
-import { USER_LOG_OUTactionCreator } from "../../redux/userBaseReducer"
 import { pageMove } from "./../../App"
 import { Link } from 'react-router-dom';
 import './header.css';
@@ -15,7 +14,7 @@ function Header(props) {
 			<Link to="/"
 				className="header-nav-item"
 				onClick={(event) => {
-					props.dispatch(USER_LOG_OUTactionCreator())
+					props.userLogOut()
 					pageMove(event)
 				}
 				}

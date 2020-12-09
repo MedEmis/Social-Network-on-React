@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import 'materialize-css';
 import HeroInfo from './HeroInfo';
 import { pageMove } from "./../../../../App.js"
 import { Link } from 'react-router-dom';
-import { CREATE_NEW_USERactionCreator } from "../../../../redux/userBaseReducer"
+import 'materialize-css';
 
 
 
@@ -17,7 +16,6 @@ function Registration(props) {
 	const [userWebsite, setUserWebsite] = useState(null)
 	const [userAvatar, setUserAvatar] = useState(null)
 	const [userPassword, setUserPassword] = useState(null)
-	const [refresh, setRefresh] = useState(false)
 	let userPath = ''
 	let userInfo = {
 		userName: userName,
@@ -118,7 +116,7 @@ function Registration(props) {
 					</div>
 					<Link
 						onClick={(event) => {
-							props.dispatch(CREATE_NEW_USERactionCreator(userInfo))
+							props.userCreation(userInfo)
 							pageMove(event)
 						}
 						}

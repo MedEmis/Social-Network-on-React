@@ -17,7 +17,6 @@ let reRenderApp = (store) => {
 				appState={store.getState()}
 				dispatch={store.dispatch.bind(store)}
 			/>
-
 		</React.StrictMode>,
 		document.getElementById('root')
 	);

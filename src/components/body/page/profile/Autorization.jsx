@@ -2,7 +2,6 @@ import React from 'react'
 import 'materialize-css';
 import { Link } from 'react-router-dom';
 import { pageMove } from "./../../../../App.js"
-import { USER_LOG_INactionCreator } from './../../../../redux/userBaseReducer';
 
 
 
@@ -13,7 +12,7 @@ function Authorization(props) {
 		<div className="body-page__authorization">
 			<div className="body-page__authorization_box">
 				<form onSubmit={(event) => {
-					props.dispatch(USER_LOG_INactionCreator(event))
+					props.userLogIn(event)
 					event.preventDefault()
 					pageMove(event)
 				}

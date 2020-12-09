@@ -1,7 +1,7 @@
 import React from 'react'
 import './footer.scss';
 
-function Footer(prop) {
+function Footer() {
 	return (
 		<div className="footer">
 			<div className="footer__author">Project author - Maksym Drahanov</div>

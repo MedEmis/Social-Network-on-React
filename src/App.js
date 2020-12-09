@@ -5,7 +5,7 @@ import Footer from './components/footer/Footer';
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import Registration from './components/body/page/profile/Registration';
 import Authorization from './components/body/page/profile/Autorization';
-
+import { USER_LOG_INactionCreator, USER_LOG_OUTactionCreator, CREATE_NEW_USERactionCreator } from './redux/userBaseReducer';
 import './App.css';
 
 export const pageMove = (event) => {//global function for page animation
@@ -21,10 +21,18 @@ export const pageMove = (event) => {//global function for page animation
 }
 
 
+
 function App(props) {
-
 	//console.log("App props",       props.appState)
-
+	const userLogIn = (event) => {
+		props.dispatch(USER_LOG_INactionCreator(event))
+	}
+	const userCreation = (userInfo) => {
+		props.dispatch(CREATE_NEW_USERactionCreator(userInfo))
+	}
+	const userLogOut = () => {
+		props.dispatch(USER_LOG_OUTactionCreator())
+	}
 	if (props.appState.usersReducer.currentUserId) {
 		return (//autorized user
 			<div className="App">
@@ -33,7 +41,7 @@ function App(props) {
 						<>
 							<Header
 								headerState={props.appState.usersReducer}
-								dispatch={props.dispatch}
+								userLogOut={userLogOut}
 							/>
 							<Body
 								bodyState={props.appState}
@@ -61,12 +69,12 @@ function App(props) {
 						<div className="body-page">
 							<span className="body-page_cover"></span>
 							<Route exact path='/'>
-								<Authorization dispatch={props.dispatch} />
+								<Authorization userLogIn={userLogIn} />
 							</Route>
 							<Route exact path='/registration' render={() =>
 								<Registration
 									isUserExist={props.appState.usersReducer.isUserExist}
-									dispatch={props.dispatch}
+									userCreation={userCreation}
 								/>
 							} />
 						</div>

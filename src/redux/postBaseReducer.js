@@ -10,6 +10,8 @@ export let initialPostState = {
 				"nikName": "First Name",
 				"dataDate": "11.11.11",
 				"dataTime": "12:11",
+				"like": 0,
+				"dislike": 0,
 				"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutafg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 				"reply": [
 					{
@@ -18,6 +20,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": [
 							{
@@ -26,6 +30,8 @@ export let initialPostState = {
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
 								"dataTime": "12:34",
+								"like": 0,
+								"dislike": 0,
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							},
 							{
@@ -34,6 +40,8 @@ export let initialPostState = {
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
 								"dataTime": "12:34",
+								"like": 0,
+								"dislike": 0,
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							},
 							{
@@ -42,6 +50,8 @@ export let initialPostState = {
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
 								"dataTime": "12:34",
+								"like": 0,
+								"dislike": 0,
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							}
 						]
@@ -52,6 +62,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": [
 							{
@@ -60,6 +72,8 @@ export let initialPostState = {
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
 								"dataTime": "12:34",
+								"like": 0,
+								"dislike": 0,
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							}
 						]
@@ -70,6 +84,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": []
 					}
@@ -83,6 +99,8 @@ export let initialPostState = {
 				"nikName": "First Name",
 				"dataDate": "11.11.11",
 				"dataTime": "12:11",
+				"like": 0,
+				"dislike": 0,
 				"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 				"reply": [
 					{
@@ -91,6 +109,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": [
 							{
@@ -99,6 +119,8 @@ export let initialPostState = {
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
 								"dataTime": "12:34",
+								"like": 0,
+								"dislike": 0,
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							}
 						]
@@ -109,6 +131,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": []
 					},
@@ -118,6 +142,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": []
 					},
@@ -127,6 +153,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": []
 					},
@@ -136,6 +164,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": []
 					}
@@ -149,6 +179,8 @@ export let initialPostState = {
 				"nikName": "First Name",
 				"dataDate": "11.11.11",
 				"dataTime": "12:11",
+				"like": 0,
+				"dislike": 0,
 				"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 				"reply": [
 					{
@@ -157,6 +189,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": [
 							{
@@ -165,6 +199,8 @@ export let initialPostState = {
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
 								"dataTime": "12:34",
+								"like": 0,
+								"dislike": 0,
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							}
 						]
@@ -175,6 +211,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": [
 							{
@@ -183,6 +221,8 @@ export let initialPostState = {
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
 								"dataTime": "12:34",
+								"like": 0,
+								"dislike": 0,
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							}
 						]
@@ -193,6 +233,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": []
 					}
@@ -206,6 +248,8 @@ export let initialPostState = {
 				"nikName": "First Name",
 				"dataDate": "11.11.11",
 				"dataTime": "12:11",
+				"like": 0,
+				"dislike": 0,
 				"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 				"reply": [
 					{
@@ -214,6 +258,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": [
 							{
@@ -222,6 +268,8 @@ export let initialPostState = {
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
 								"dataTime": "12:34",
+								"like": 0,
+								"dislike": 0,
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							},
 							{
@@ -230,6 +278,8 @@ export let initialPostState = {
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
 								"dataTime": "12:34",
+								"like": 0,
+								"dislike": 0,
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							}
 						]
@@ -240,6 +290,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": []
 					}
@@ -251,6 +303,8 @@ export let initialPostState = {
 				"nikName": "First Name",
 				"dataDate": "11.11.11",
 				"dataTime": "12:11",
+				"like": 0,
+				"dislike": 0,
 				"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 				"reply": [
 					{
@@ -259,6 +313,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": [
 							{
@@ -267,6 +323,8 @@ export let initialPostState = {
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
 								"dataTime": "12:34",
+								"like": 0,
+								"dislike": 0,
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							},
 							{
@@ -275,6 +333,8 @@ export let initialPostState = {
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
 								"dataTime": "12:34",
+								"like": 0,
+								"dislike": 0,
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							}
 						]
@@ -285,6 +345,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": []
 					}
@@ -296,6 +358,8 @@ export let initialPostState = {
 				"nikName": "First Name",
 				"dataDate": "11.11.11",
 				"dataTime": "12:11",
+				"like": 0,
+				"dislike": 0,
 				"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 				"reply": [
 					{
@@ -304,6 +368,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": [
 							{
@@ -312,6 +378,8 @@ export let initialPostState = {
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
 								"dataTime": "12:34",
+								"like": 0,
+								"dislike": 0,
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							},
 							{
@@ -320,6 +388,8 @@ export let initialPostState = {
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
 								"dataTime": "12:34",
+								"like": 0,
+								"dislike": 0,
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							}
 						]
@@ -330,6 +400,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": []
 					}
@@ -341,6 +413,8 @@ export let initialPostState = {
 				"nikName": "First Name",
 				"dataDate": "11.11.11",
 				"dataTime": "12:11",
+				"like": 0,
+				"dislike": 0,
 				"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 				"reply": [
 					{
@@ -349,6 +423,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": [
 							{
@@ -356,6 +432,8 @@ export let initialPostState = {
 								"userId": "id0001",
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
+								"like": 0,
+								"dislike": 0,
 								"dataTime": "12:34",
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							},
@@ -364,6 +442,8 @@ export let initialPostState = {
 								"userId": "id0002",
 								"nikName": "First Nested Name",
 								"dataDate": "12.34.56",
+								"like": 0,
+								"dislike": 0,
 								"dataTime": "12:34",
 								"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf"
 							}
@@ -375,6 +455,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": []
 					}
@@ -388,6 +470,8 @@ export let initialPostState = {
 				"nikName": "First Name",
 				"dataDate": "11.11.11",
 				"dataTime": "12:11",
+				"like": 0,
+				"dislike": 0,
 				"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 				"reply": [
 					{
@@ -396,6 +480,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": []
 					},
@@ -405,6 +491,8 @@ export let initialPostState = {
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
+						"like": 0,
+						"dislike": 0,
 						"textBody": "safg dfgslgjk ouhiyhvb yfcfy kbklb utfyt njjkbnio uyugvy ibi yutf",
 						"nestedReply": []
 					}
@@ -442,20 +530,6 @@ const postBaseReducer = (state = initialPostState, action) => {
 
 
 	switch (action.type) {
-		case "AUTO_GROW":
-			// let action = {
-			// 	type: "AUTO_GROW",
-			// 	event:event
-			// }
-			let auto_grow = (event) => {
-				event.target.style.height = "5px";
-				event.target.style.height = (event.target.scrollHeight) + "px";
-				return state
-			}
-			auto_grow(action.event)
-			//console.log("AUTO_GROW", state)
-
-			break;
 		case "UPDATE_POST_TEXT":
 			// let action = {
 			// 	type: "UPDATE_POST_TEXT",
@@ -641,12 +715,7 @@ const postBaseReducer = (state = initialPostState, action) => {
 export default postBaseReducer
 
 //action creators
-export const AUTO_GROWactionCreator = (event) => {
-	return {
-		type: "AUTO_GROW",
-		event: event
-	}
-}
+
 export const UPDATE_POST_TEXTactionCreator = (event) => {
 	return {
 		type: "UPDATE_POST_TEXT",

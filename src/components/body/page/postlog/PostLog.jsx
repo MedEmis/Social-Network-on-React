@@ -1,7 +1,6 @@
 import React from 'react'
 import './makeMessage.css';
 import PostItem from './PostItem';
-import { AUTO_GROWactionCreator, UPDATE_POST_TEXTactionCreator, ADD_NEW_POSTactionCreator } from "../../../../redux/postBaseReducer.js"
 
 
 // className={classNames(" body-page__reply-textarea", { " visible":    IsTextOpen })}
@@ -10,27 +9,24 @@ import { AUTO_GROWactionCreator, UPDATE_POST_TEXTactionCreator, ADD_NEW_POSTacti
 function PostLog(props) {
 	let name = props.userBase[props.userId].name ? props.userBase[props.userId].name : "AnoNymus"
 	let postsBlock = props.postsBase ? props.postsBase[props.userId] : null
-	const child = React.createRef();
 	const postInput = React.createRef();
+	//console.log("ssss", postsBlock)
 	return (
 		<div className="body-page__hero-posts-log">
 			<div className="body-page__hero-posts">
 				<div className="body-page__hero-posts-title">Add message</div>
 				<div className="body-page__hero-posts-textarea">
 					<textarea
-						onInput={(event) => props.dispatch(AUTO_GROWactionCreator(event))}
+						onInput={(event) => props.autoGrow(event)}
 						ref={postInput}
 						value={props.currentPostText}
-						onChange={(event) => props.dispatch(UPDATE_POST_TEXTactionCreator(event))}
+						onChange={(event) => props.updateTextarea(event)}
 						className="body-page__hero-posts-textarea-input"
 					/>
 				</div>
 				<div className="body-page__hero-posts-submit">
 					<button onClick={() => {
-						props.dispatch(ADD_NEW_POSTactionCreator(
-							props.userId,
-							name
-						))
+						props.addNewPost(props.userId, name)
 					}} type="submit" className="blue-btn" id="neon-text">Publish</button>
 				</div>
 			</div>
@@ -39,7 +35,7 @@ function PostLog(props) {
 					postsBlock//if we have postBlock we will render it
 						?
 						postsBlock.map((item, index) => (item ? <PostItem
-							ref={child}
+							//data
 							key={Math.floor(Math.random() * 10000)}
 							userBase={props.userBase}
 							id={postsBlock[index].id}
@@ -51,7 +47,13 @@ function PostLog(props) {
 							textBody={postsBlock[index].textBody}
 							dislikes={postsBlock[index].dislike}
 							childReply={postsBlock[index].reply}
-							dispatch={props.dispatch}//all functions
+							//functions
+							autoGrow={props.autoGrow}
+							updateTextarea={props.updateTextarea}
+							addNewReply={props.addNewReply}
+							addNewNestedPost={props.addNewNestedPost}
+							isVoutedCheck={props.isVoutedCheck}
+							panelColor={props.panelColor}
 						/> : null))
 						: null
 				}

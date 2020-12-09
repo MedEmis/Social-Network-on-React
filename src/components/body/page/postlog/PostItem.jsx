@@ -1,40 +1,15 @@
 import React, { useState } from 'react'
 import ReplyPostItem from './ReplyPostItem';
-import { AUTO_GROWactionCreator, ADD_NEW_REPLYactionCreator } from "../../../../redux/postBaseReducer.js"
 import './postItem.scss';
 let classNames = require('classnames');
 
 
 function PostItem(props) {
-
-	//const [isVoted, setIsVouted] = useState(false)
 	const [IsTextOpen, setIsTextOpen] = useState(false)
 	let postsBlock = props.childReply
 	let isLiked = props.userBase[props.userId].voutedLike//to set color of icon
 	let isDisliked = props.userBase[props.userId].voutedDislike//to set color of icon
-	let panColor = {}
-	const panelColor = () => {
-		if (props.likes > props.dislikes) {
-			panColor = {
-				background: ' rgb(72, 139, 72)'
-			};
-		} else if (props.likes < props.dislikes) {
-			panColor = {
-				background: 'rgb(155, 49, 49)'
-			};
-		} else {
-			panColor = {
-				background: 'rgb(105, 85, 17)'
-			};
-		}
-	}
-	const isVoutedCheck = (event, userBase) => {
-		props.dispatch({
-			type: "LIKE_INCREMENT",
-			event: event,
-			userBase: userBase,
-		})
-	}
+
 	return (
 		<div className="posts-log-item-wrapper">
 			<div className="hero-posts-log-item">
@@ -49,20 +24,13 @@ function PostItem(props) {
 				</div>
 				<div className="hero-posts-log-item__body">
 					<div className="hero-posts-log-item__body-text">{!props.textBody ? "...no text" : props.textBody}</div>
-					<ul onLoad={panelColor()} style={panColor} className="hero-posts-log-item__body-special-list"  >
-						<li onClick={(event) => {
-							isVoutedCheck(
-								event,
-								props.userBase)
-						}}
+					<ul style={props.panelColor(props)}
+						className="hero-posts-log-item__body-special-list"  >
+						<li onClick={(event) => props.isVoutedCheck(event, props.userBase)}
 							style={isLiked.includes(props.id) ? { backgroundColor: "green" } : { backgroundColor: "none" }}
 							name="like" className="hero-posts-log-item__body-special-item tooltip">
 							<span className="tooltiptext">Thumbs Up</span></li>
-						<li onClick={(event) => {
-							isVoutedCheck(
-								event,
-								props.userBase)
-						}}
+						<li onClick={(event) => props.isVoutedCheck(event, props.userBase)}
 							style={isDisliked.includes(props.id) ? { backgroundColor: "red" } : { backgroundColor: "none" }}
 							name="dislike" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Down</span></li>
 						<li className="hero-posts-log-item__body-special-item tooltip">{props.likes ? props.likes : 0}<span className="tooltiptext">Likes</span></li>
@@ -72,21 +40,16 @@ function PostItem(props) {
 				<div onClick={() => setIsTextOpen(true)} type="submit" className="hero-posts-log-item__button-reply">Reply</div>
 				<div className={classNames(" body-page__reply-textarea", { " visible": IsTextOpen })}>
 					<textarea
-						onInput={(event) => props.dispatch(AUTO_GROWactionCreator(event))}
+						onInput={(event) => props.autoGrow(event)}
 						className="body-page__reply-textarea-input" type="text"
 						defaultValue={`Answer to ${props.nikName === null || props.nikName === undefined ? "anonymous" : props.nikName}:---`}
 					/>
 					<div className="body-page__reply-textarea-buttons">
 						<button onClick={() => setIsTextOpen(false)} type="submit" className="red-btn" id="neon-text">Close</button>
-						<button onClick={
-							(event) => {
-								props.dispatch(ADD_NEW_REPLYactionCreator(
-									props.userId,
-									props.id,
-									props.userBase[props.userId].name,
-									event))
-								setIsTextOpen(true)
-							}
+						<button onClick={(event) => {
+							props.addNewReply(event, props)
+							setIsTextOpen(true)
+						}
 						} type="submit" className="blue-btn" id="neon-text">Publish</button>
 					</div>
 				</div>
@@ -94,6 +57,7 @@ function PostItem(props) {
 			<div className="hero-posts-log-reply-wrapper">
 				{
 					postsBlock.map((item, index) => (item ? <ReplyPostItem
+						//DATA
 						key={Math.floor(Math.random() * 10000)}
 						id={postsBlock[index].id}
 						initialUser={props.userId}
@@ -107,7 +71,12 @@ function PostItem(props) {
 						likes={postsBlock[index].like}
 						dislikes={postsBlock[index].dislike}
 						childReply={postsBlock[index].nestedReply}
-						dispatch={props.dispatch}//all functions
+						//functions
+						updateTextarea={props.updateTextarea}
+						addNewNestedPost={props.addNewNestedPost}
+						isVoutedCheck={props.isVoutedCheck}
+						panelColor={props.panelColor}
+						autoGrow={props.autoGrow}
 					/> : null))
 				}
 			</div>
