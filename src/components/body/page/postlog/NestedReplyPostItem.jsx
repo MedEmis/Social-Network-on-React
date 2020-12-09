@@ -32,11 +32,12 @@ class NestedReplyPostItem extends React.Component {
 			};
 		}
 	}
-	isVoutedCheck = (event) => {
+	isVoutedCheck = (event, userBase) => {
 		if (this.state.isVoted === false) {
 			this.props.dispatch({
 				type: "LIKE_INCREMENT",
 				event: event,
+				userBase: userBase,
 			})
 			this.setState({ isVoted: true })
 			event.target.className += " " + "visited"
@@ -58,10 +59,18 @@ class NestedReplyPostItem extends React.Component {
 					<div className="hero-posts-log-item__body">
 						<div className="hero-posts-log-item__body-text">{!this.props.textBody ? "...no text" : this.props.textBody}</div>
 						<ul onLoad={this.panelColor()} style={this.panColor} className="hero-posts-log-item__body-special-list" id="nestedReply">
-							<li onClick={(event) => { this.isVoutedCheck(event) }}
+							<li onClick={(event) => {
+								this.isVoutedCheck(
+									event,
+									this.props.userBase)
+							}}
 								style={this.isLiked.includes(this.props.id) ? { backgroundColor: "green" } : { backgroundColor: "none" }}
 								name="like" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Up</span></li>
-							<li onClick={(event) => { this.isVoutedCheck(event) }}
+							<li onClick={(event) => {
+								this.isVoutedCheck(
+									event,
+									this.props.userBase)
+							}}
 								style={this.isDisliked.includes(this.props.id) ? { backgroundColor: "red" } : { backgroundColor: "none" }}
 								name="dislike" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Down</span></li>
 							<li className="hero-posts-log-item__body-special-item tooltip">{this.props.likes ? this.props.likes : 0}<span className="tooltiptext">Likes</span></li>

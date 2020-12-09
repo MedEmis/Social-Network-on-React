@@ -2,7 +2,7 @@ import React from 'react'
 import 'materialize-css';
 import { Link } from 'react-router-dom';
 import { pageMove } from "./../../../../App.js"
-import { USER_LOG_INactionCreator } from './../../../../redux/store';
+import { USER_LOG_INactionCreator } from './../../../../redux/userBaseReducer';
 
 
 
@@ -14,12 +14,6 @@ class Authorization extends React.Component {
 		this.state = {};
 
 	}
-	// getFormData = (event) => {
-	// 	event.preventDefault()
-	// 	console.log(event.target[0].value)
-	// 	console.log(event.target[1].value)
-
-	// }
 
 	render() {
 		return (

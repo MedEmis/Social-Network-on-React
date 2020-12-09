@@ -1,13 +1,11 @@
 import React from 'react'
 import logo from './../../../src/images/logo192.png';
-import { USER_LOG_OUTactionCreator } from "../../redux/store"
+import { USER_LOG_OUTactionCreator } from "../../redux/userBaseReducer"
 import { pageMove } from "./../../App"
-import './header.css';
 import { Link } from 'react-router-dom';
+import './header.css';
 
-//==================================================================
-//ХЕДЕР НЕ ОБНОВЛЯЕТЬСЯ ПРИ ВХОДЕ В СИСТЕМУ!!!!!!!!!!!!!!!!!!!!
-//==================================================================
+
 class Header extends React.Component {
 	constructor(props) {
 		super(props);
@@ -15,7 +13,7 @@ class Header extends React.Component {
 		this.user = this.props.headerState.currentUserId
 		this.userBase = this.props.headerState.userBase
 		this.userAvatar = this.props.headerState.userBase[this.user] ? this.props.headerState.userBase[this.user].avatarUrl : ""
-		//console.log("header props", this.props.headerState)
+		//console.log("header props", this.props.headerState.userBase[this.user])
 	}
 	render() {
 		return (

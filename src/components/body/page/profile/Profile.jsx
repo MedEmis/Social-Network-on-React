@@ -28,7 +28,7 @@ class Profile extends React.Component {
 
 	render() {
 		// if (!props.location.propsSearch) return <Redirect to="/src/components/body/page/profile/Profile" />;
-		//console.log("Profile props", this.props)
+		console.log("Profile props", this.props)
 
 
 

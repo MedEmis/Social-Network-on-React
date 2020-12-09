@@ -1,6 +1,6 @@
 import React from 'react'
 import ReplyPostItem from './ReplyPostItem';
-import { AUTO_GROWactionCreator, ADD_NEW_REPLYactionCreator } from "../../../../redux/store"
+import { AUTO_GROWactionCreator, ADD_NEW_REPLYactionCreator } from "../../../../redux/postBaseReducer.js"
 import './postItem.scss';
 let classNames = require('classnames');
 
@@ -14,8 +14,8 @@ class PostItem extends React.Component {
 			IsTextOpen: false,
 			postsBlock: props.childReply,
 		};
-		this.isLiked = this.props.userBase[this.props.userId].voutedLike
-		this.isDisliked = this.props.userBase[this.props.userId].voutedDislike
+		this.isLiked = this.props.userBase[this.props.userId].voutedLike//to set color of icon
+		this.isDisliked = this.props.userBase[this.props.userId].voutedDislike//to set color of icon
 	}
 	panelColor = () => {
 		if (this.props.likes > this.props.dislikes) {
@@ -32,10 +32,11 @@ class PostItem extends React.Component {
 			};
 		}
 	}
-	isVoutedCheck = (event) => {
+	isVoutedCheck = (event, userBase) => {
 		this.props.dispatch({
 			type: "LIKE_INCREMENT",
 			event: event,
+			userBase: userBase,
 		})
 	}
 	render() {
@@ -55,11 +56,19 @@ class PostItem extends React.Component {
 					<div className="hero-posts-log-item__body">
 						<div className="hero-posts-log-item__body-text">{!this.props.textBody ? "...no text" : this.props.textBody}</div>
 						<ul onLoad={this.panelColor()} style={this.panColor} className="hero-posts-log-item__body-special-list"  >
-							<li onClick={(event) => { this.isVoutedCheck(event) }}
+							<li onClick={(event) => {
+								this.isVoutedCheck(
+									event,
+									this.props.userBase)
+							}}
 								style={this.isLiked.includes(this.props.id) ? { backgroundColor: "green" } : { backgroundColor: "none" }}
 								name="like" className="hero-posts-log-item__body-special-item tooltip">
 								<span className="tooltiptext">Thumbs Up</span></li>
-							<li onClick={(event) => { this.isVoutedCheck(event) }}
+							<li onClick={(event) => {
+								this.isVoutedCheck(
+									event,
+									this.props.userBase)
+							}}
 								style={this.isDisliked.includes(this.props.id) ? { backgroundColor: "red" } : { backgroundColor: "none" }}
 								name="dislike" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Down</span></li>
 							<li className="hero-posts-log-item__body-special-item tooltip">{this.props.likes ? this.props.likes : 0}<span className="tooltiptext">Likes</span></li>
@@ -69,7 +78,7 @@ class PostItem extends React.Component {
 					<div onClick={() => this.setState({ IsTextOpen: true })} type="submit" className="hero-posts-log-item__button-reply">Reply</div>
 					<div className={classNames(" body-page__reply-textarea", { " visible": this.state.IsTextOpen })}>
 						<textarea
-							// onInput={(event) => this.props.dispatch(AUTO_GROWactionCreator(event))}
+							onInput={(event) => this.props.dispatch(AUTO_GROWactionCreator(event))}
 							className="body-page__reply-textarea-input" type="text"
 							defaultValue={`Answer to ${this.props.nikName === null || this.props.nikName === undefined ? "anonymous" : this.props.nikName}:---`}
 						/>

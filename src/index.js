@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from "./redux/store"
+// import store from "./redux/store"
+import store from "./redux/reduxStore"
 
 let reRenderApp = (store) => {
 	//console.log("index", store.getState())
+	//debugger
 	ReactDOM.render(
 		<React.StrictMode>
 
@@ -21,7 +23,10 @@ let reRenderApp = (store) => {
 	);
 }
 reRenderApp(store)
-store.toSubscribe(reRenderApp)
+store.subscribe(() => {//with redux
+	reRenderApp(store)
+})
+//store.subscribe(reRenderApp(store)) ====>  without redux
 
 // if (store._state.currentUserId !== null) {
 // 	store.toSubscribe(reRenderApp)

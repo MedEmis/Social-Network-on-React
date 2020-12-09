@@ -31,15 +31,7 @@ class Posts extends React.Component {
 							userBase={this.props.userBase}
 							postsBase={this.props.postsBase}
 							currentPostText={this.props.currentPostText}
-							currentPostReply={this.props.currentPostReply}
-							currentPostNestreply={this.props.currentPostNestreply}
 							dispatch={this.props.dispatch}
-						// updatePostText={this.props.updatePostText}
-						// addNewPost={this.props.addNewPost}
-						// addNewReply={this.props.addNewReply}
-						// addNewNestedReply={this.props.addNewNestedReply}
-						// likeIncrementState={this.props.likeIncrementState}
-						// auto_grow={this.props.auto_grow}
 						/>
 						: <h1><b>You don't have any posts yet</b></h1>
 				}

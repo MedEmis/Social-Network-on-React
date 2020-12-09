@@ -31,14 +31,14 @@ class App extends React.Component {
 
 		//console.log("App props", this.props.appState)
 
-		if (this.props.appState.currentUserId) {
+		if (this.props.appState.usersReducer.currentUserId) {
 			return (//autorized user
 				<div className="App">
 					<BrowserRouter>
 						<Switch>
 							<>
 								<Header
-									headerState={this.props.appState}
+									headerState={this.props.appState.usersReducer}
 									dispatch={this.props.dispatch}
 								/>
 								<Body
@@ -70,7 +70,10 @@ class App extends React.Component {
 									<Authorization dispatch={this.props.dispatch} />
 								</Route>
 								<Route exact path='/registration' render={() =>
-									<Registration isUserExist={this.props.appState.isUserExist} dispatch={this.props.dispatch} />
+									<Registration
+										isUserExist={this.props.appState.usersReducer.isUserExist}
+										dispatch={this.props.dispatch}
+									/>
 								} />
 							</div>
 						</div>

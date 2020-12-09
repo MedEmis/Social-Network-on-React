@@ -3,7 +3,7 @@ import 'materialize-css';
 import HeroInfo from './HeroInfo';
 import { pageMove } from "./../../../../App.js"
 import { Link } from 'react-router-dom';
-import { CREATE_NEW_USERactionCreator } from "../../../../redux/store"
+import { CREATE_NEW_USERactionCreator } from "../../../../redux/userBaseReducer"
 
 
 
