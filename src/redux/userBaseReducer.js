@@ -111,21 +111,22 @@ const userBaseReducer = (state = initialUsersState, action) => {
 	switch (action.type) {
 		case "CREATE_NEW_USER":
 			let creatNewUser = (userData) => {
+				console.log("create", userData)
 				let date = new Date().toLocaleDateString()
 				let newUserId = "id0" + ++Object.keys(state.userBase).length
 				let newUserModel = {
 					"userId": newUserId,
-					"name": userData.name,
-					"birthDate": userData.dateOfbirth,
-					"city": userData.city,
-					"login": userData.email,
-					"password": userData.password,
-					"webSite": userData.website,
+					"name": userData.userName,
+					"birthDate": userData.userdateOfbirth,
+					"city": userData.userCity,
+					"login": userData.userEmail,
+					"password": userData.userPassword,
+					"webSite": userData.userWebsite,
 					"registerDate": `${date}`,
 					"voutedLike": [],
 					"voutedDislike": [],
 					"isOnline": true,
-					"avatarUrl": userData.avatar,
+					"avatarUrl": userData.userAvatar,
 					"contacts": []
 				}
 				for (let key in state.userBase) {

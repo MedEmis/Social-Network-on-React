@@ -3,40 +3,33 @@ import './postLog.scss';
 import PostLog from './PostLog';
 
 
+function Posts(props) {
+
+	// if (props.location.currentUserId) {
+	// 	userId = props.location.currentUserId ||props.location.UserId
+	// } else {
+	// 	userId = currentUserId
+	// }
+	//console.log("Posts props", props)
 
 
 
-class Posts extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
 
-		};
-		// if (this.props.location.currentUserId) {
-		// 	this.userId = this.props.location.currentUserId || this.props.location.UserId
-		// } else {
-		// 	this.userId = currentUserId
-		// }
-		//console.log("Posts props", this.props)
+	return (
+		<>
+			{
+				props.currentUserId
+					? <PostLog
+						userId={props.currentUserId}
+						userBase={props.userBase}
+						postsBase={props.postsBase}
+						currentPostText={props.currentPostText}
+						dispatch={props.dispatch}
+					/>
+					: <h1><b>You don't have any posts yet</b></h1>
+			}
+		</>
+	);
 
-
-	}
-	render() {
-		return (
-			<>
-				{
-					this.props.currentUserId
-						? <PostLog
-							userId={this.props.currentUserId}
-							userBase={this.props.userBase}
-							postsBase={this.props.postsBase}
-							currentPostText={this.props.currentPostText}
-							dispatch={this.props.dispatch}
-						/>
-						: <h1><b>You don't have any posts yet</b></h1>
-				}
-			</>
-		);
-	}
 }
 export default Posts;

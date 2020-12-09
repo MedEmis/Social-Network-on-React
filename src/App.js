@@ -21,86 +21,64 @@ export const pageMove = (event) => {//global function for page animation
 }
 
 
-class App extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
+function App(props) {
 
-	render() {
+	//console.log("App props",       props.appState)
 
-		//console.log("App props", this.props.appState)
-
-		if (this.props.appState.usersReducer.currentUserId) {
-			return (//autorized user
-				<div className="App">
-					<BrowserRouter>
-						<Switch>
-							<>
-								<Header
-									headerState={this.props.appState.usersReducer}
-									dispatch={this.props.dispatch}
-								/>
-								<Body
-									bodyState={this.props.appState}
-									dispatch={this.props.dispatch}
-								/>
-							</>
-							<div className="body-main">
-								<div className="body-page">
-									<span className="body-page_cover"></span>
-									<Route exact path='/'>
-										<Authorization dispatch={this.props.dispatch} />
-									</Route>
-								</div>
-							</div>
-						</Switch>
-					</BrowserRouter>
-					<Footer />
-				</div>
-			);
-		} else {
-			return (//not autorized user
-				<div className="App">
-					<BrowserRouter>
+	if (props.appState.usersReducer.currentUserId) {
+		return (//autorized user
+			<div className="App">
+				<BrowserRouter>
+					<Switch>
+						<>
+							<Header
+								headerState={props.appState.usersReducer}
+								dispatch={props.dispatch}
+							/>
+							<Body
+								bodyState={props.appState}
+								dispatch={props.dispatch}
+							/>
+						</>
 						<div className="body-main">
 							<div className="body-page">
 								<span className="body-page_cover"></span>
 								<Route exact path='/'>
-									<Authorization dispatch={this.props.dispatch} />
+									<Authorization dispatch={props.dispatch} />
 								</Route>
-								<Route exact path='/registration' render={() =>
-									<Registration
-										isUserExist={this.props.appState.usersReducer.isUserExist}
-										dispatch={this.props.dispatch}
-									/>
-								} />
 							</div>
 						</div>
-					</BrowserRouter>
-					<Footer />
-				</div>
-			);
-		}
-
+					</Switch>
+				</BrowserRouter>
+				<Footer />
+			</div>
+		);
+	} else {
+		return (//not autorized user
+			<div className="App">
+				<BrowserRouter>
+					<div className="body-main">
+						<div className="body-page">
+							<span className="body-page_cover"></span>
+							<Route exact path='/'>
+								<Authorization dispatch={props.dispatch} />
+							</Route>
+							<Route exact path='/registration' render={() =>
+								<Registration
+									isUserExist={props.appState.usersReducer.isUserExist}
+									dispatch={props.dispatch}
+								/>
+							} />
+						</div>
+					</div>
+				</BrowserRouter>
+				<Footer />
+			</div>
+		);
 	}
+
 }
 export default App;
 
 
 
-
-
-
-
-// function App() {
-// 	return (
-// 		<div className="App">
-// 			<Header />
-// 			<Body />
-// 			<Footer />
-// 		</div>
-// 	);
-// }
-
-//export default App;

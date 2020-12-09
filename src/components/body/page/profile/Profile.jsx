@@ -9,54 +9,41 @@ import './profile.scss';
 
 
 
-class Profile extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-		};
-		this.userBase = this.props.userBase
-		this.userId = this.props.currentUserId
+function Profile(props) {
+	// if ( props.location.currentUserId) {
+	// 	 userId =  props.location.currentUserId
+	// } else {
+	// 	 userId =  props.currentuserid
+	// }
+	let userBase = props.userBase
+	let userId = props.currentUserId
+	// if (!props.location.propsSearch) return <Redirect to="/src/components/body/page/profile/Profile" />;
+	console.log("Profile props", props)
 
-
-		// if (this.props.location.currentUserId) {
-		// 	this.userId = this.props.location.currentUserId
-		// } else {
-		// 	this.userId = this.props.currentuserid
-		// }
-
-	}
-
-	render() {
-		// if (!props.location.propsSearch) return <Redirect to="/src/components/body/page/profile/Profile" />;
-		console.log("Profile props", this.props)
-
-
-
-		return (
-			<>
-				{ this.userBase.hasOwnProperty(this.userId)
-					? <div className="body-page__hero-page">
-						<div className="body-page__background"><img src={topImage} alt="topImage"></img></div>
-						<HeroInfo
-							userBase={this.userBase}
-							userId={this.userId}
-							name={this.userBase[this.userId].name}
-							heroPicture={this.userBase[this.userId].avatarUrl}
-							birthDate={this.userBase[this.userId].birthDate}
-							city={this.userBase[this.userId].city}
-							email={this.userBase[this.userId].login}
-							webSite={this.userBase[this.userId].webSite}
-						/>
-						<HeroContacts
-							contactName="contactName"
-							userBase={this.userBase}
-							userId={this.userId}
-						/>
-					</div>
-					: <User404 />
-				}
-			</>
-		);
-	}
+	return (
+		<>
+			{  userBase.hasOwnProperty(userId)
+				? <div className="body-page__hero-page">
+					<div className="body-page__background"><img src={topImage} alt="topImage"></img></div>
+					<HeroInfo
+						userBase={userBase}
+						userId={userId}
+						name={userBase[userId].name}
+						heroPicture={userBase[userId].avatarUrl}
+						birthDate={userBase[userId].birthDate}
+						city={userBase[userId].city}
+						email={userBase[userId].login}
+						webSite={userBase[userId].webSite}
+					/>
+					<HeroContacts
+						contactName="contactName"
+						userBase={userBase}
+						userId={userId}
+					/>
+				</div>
+				: <User404 />
+			}
+		</>
+	);
 }
 export default Profile;
