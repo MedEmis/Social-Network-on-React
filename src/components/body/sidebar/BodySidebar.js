@@ -5,15 +5,10 @@ import SidebarNav from './SidebarNav';
 import SidebarNews from './SidebarNews';
 
 
-function BodySidebar(props) {
+function BodySidebar() {
 	return (
-		<div className="body-sidebar">
-			<SidebarNav
-				currentUserId={props.sidebarState.currentUserId}
-				userBase={props.sidebarState.userBase}
-				postsBase={props.sidebarState.postsBase}
-				dialogBase={props.sidebarState.dialogBase}
-			/>
+		<div className="body-sidebar" >
+			<SidebarNav />
 			<MiniMenu />
 			<SidebarNews />
 		</div>

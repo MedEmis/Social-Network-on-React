@@ -6,9 +6,6 @@ import './header.css';
 
 
 function Header(props) {
-	let user = props.headerState.currentUserId
-	let userAvatar = props.headerState.userBase[user] ? props.headerState.userBase[user].avatarUrl : ""
-	//console.log("header props",      props.headerState.userBase[     user])
 	return (
 		<div className="header" >
 			<Link to="/"
@@ -21,11 +18,14 @@ function Header(props) {
 			>Log Out</Link>
 			<div className="header__pictures">
 				<div >
-					{user ? <img className="header__hero-avatar" src={userAvatar ? userAvatar : null} alt="hero" /> : null}
+					{props.user
+						? <img className="header__hero-avatar" src={props.userAvatar ? props.userAvatar : null} alt="hero" />
+						: null}
 				</div>
 				<div className="header__logo"><img className="App-logo" src={logo} alt="logo" /></div>
 			</div>
-		</div >
+		</div>
 	);
 }
+
 export default Header;

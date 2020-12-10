@@ -111,7 +111,6 @@ const userBaseReducer = (state = initialUsersState, action) => {
 	switch (action.type) {
 		case "CREATE_NEW_USER":
 			let creatNewUser = (userData) => {
-				console.log("create", userData)
 				let date = new Date().toLocaleDateString()
 				let newUserId = "id0" + ++Object.keys(state.userBase).length
 				let newUserModel = {

@@ -531,25 +531,15 @@ const postBaseReducer = (state = initialPostState, action) => {
 
 	switch (action.type) {
 		case "UPDATE_POST_TEXT":
-			// let action = {
-			// 	type: "UPDATE_POST_TEXT",
-			// 	inputValue:inputValue
-			// }
 			let updatePostText = (inputValue) => {
 				state.currentPostText = inputValue
 				return state
 			}
 			updatePostText(action.inputValue)
-			//console.log("UPDATE_POST_TEXT", state)
+			console.log("UPDATE_POST_TEXT", state)
 			break;
 		case "ADD_NEW_POST":
-			// let action = {
-			// 	type: "ADD_NEW_POST",
-			// 	userId:userId,
-			// 	nikName:nikName,
-			// }
 			let addNewPost = (userId, nikName) => {
-				console.log("ADD_NEW_POST   1", state.postsBase[userId])
 				let time = new Date().toLocaleTimeString().slice(0, -3)
 				let date = new Date().toLocaleDateString()
 				let post = {
@@ -563,24 +553,13 @@ const postBaseReducer = (state = initialPostState, action) => {
 					"dislike": 0,
 					"reply": []
 				}
-				// if (!state.postsBase.hasOwnProperty(userId)) {
-				// 	state.postsBase[userId] = []
-				// }
-				state.postsBase[userId].push(post)//нужно добавить создание нового юзер-массива с постами, потомучто он теперь НЕ добавляеться в userbase  
+				state.postsBase[userId].push(post)
 				state.currentPostText = "some news?..."
-				//console.log("ADD_NEW_POST  2", state.postsBase[userId])
 				return state
 			}
 			addNewPost(action.userId, action.nikName)
 			break;
 		case "ADD_NEW_REPLY":
-			// let action = {
-			// 	type: "ADD_NEW_REPLY",
-			// 	userId:userId,
-			// 	id:id,
-			// 	nikName:nikName,
-			// 	event:event,
-			// }
 			let addNewReply = (userId, id, nikName, event) => {
 				let textArea = event.target.offsetParent.lastElementChild.childNodes[0]
 				let time = new Date().toLocaleTimeString().slice(0, -3)
@@ -604,15 +583,6 @@ const postBaseReducer = (state = initialPostState, action) => {
 			addNewReply(action.userId, action.id, action.nikName, action.event)
 			break;
 		case "ADD_NEW_NESTED_REPLY":
-			// let action = {
-			// 	type: "ADD_NEW_NESTED_REPLY",
-			// 	userId:userId,
-			// 	initialUser:initialUser,
-			// 	initialPost:initialPost,
-			// 	id:id,
-			// 	nikName:nikName,
-			// 	event:event,
-			// }
 			let addNewNestedReply = (userId, initialUser, initialPost, id, nikName, event) => {
 				let textArea = event.target.offsetParent.lastElementChild.childNodes[0]
 				let time = new Date().toLocaleTimeString().slice(0, -3)
@@ -635,10 +605,6 @@ const postBaseReducer = (state = initialPostState, action) => {
 			addNewNestedReply(action.userId, action.initialUser, action.initialPost, action.id, action.nikName, action.event)
 			break;
 		case "LIKE_INCREMENT":
-			// let action = {
-			// 	type: "LIKE_INCREMENT",
-			// 	event:event,
-			// }
 			let likeIncrementState = (event, userBase) => {
 				let userId = event.target.parentElement.parentElement.previousSibling.childNodes[1].innerText.slice(0, 6)
 				let logId = +event.target.parentElement.parentElement.previousSibling.childNodes[3].innerText.slice(-2)

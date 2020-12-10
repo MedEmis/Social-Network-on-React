@@ -1,6 +1,7 @@
 import React from 'react'
-import './makeMessage.css';
 import PostItem from './PostItem';
+import './makeMessage.css';
+import './postLog.scss';
 
 
 // className={classNames(" body-page__reply-textarea", { " visible":    IsTextOpen })}
@@ -10,7 +11,7 @@ function PostLog(props) {
 	let name = props.userBase[props.userId].name ? props.userBase[props.userId].name : "AnoNymus"
 	let postsBlock = props.postsBase ? props.postsBase[props.userId] : null
 	const postInput = React.createRef();
-	//console.log("ssss", postsBlock)
+	//console.log("ssss", props)
 	return (
 		<div className="body-page__hero-posts-log">
 			<div className="body-page__hero-posts">
@@ -20,7 +21,11 @@ function PostLog(props) {
 						onInput={(event) => props.autoGrow(event)}
 						ref={postInput}
 						value={props.currentPostText}
-						onChange={(event) => props.updateTextarea(event)}
+						onChange={(event) => {
+							props.updateTextarea(event)
+							console.log(event.target.value)
+						}
+						}
 						className="body-page__hero-posts-textarea-input"
 					/>
 				</div>

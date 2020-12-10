@@ -5,18 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import store from "./redux/store"
 import store from "./redux/reduxStore"
+import { Provider } from 'react-redux';
 
 let reRenderApp = (store) => {
-	//console.log("index", store.getState())
-	//debugger
 	ReactDOM.render(
 		<React.StrictMode>
-
-			<App
-				// appStore={store}
-				appState={store.getState()}
-				dispatch={store.dispatch.bind(store)}
-			/>
+			<Provider store={store}>
+				<App
+					dispatch={store.dispatch.bind(store)}
+					currentUserId={store.getState().usersReducer.currentUserId}
+					isUserExist={store.getState().usersReducer.isUserExist}
+				/>
+			</Provider>
 		</React.StrictMode>,
 		document.getElementById('root')
 	);
@@ -27,10 +27,5 @@ store.subscribe(() => {//with redux
 })
 //store.subscribe(reRenderApp(store)) ====>  without redux
 
-// if (store._state.currentUserId !== null) {
-// 	store.toSubscribe(reRenderApp)
-// } else {
-// 	reRenderApp(store)
-// }
 reportWebVitals();
 
