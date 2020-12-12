@@ -39,8 +39,8 @@ function DialogsItem(props) {
 					<div className="dialogs-item__info_date">Last time was here: {props.lastDate}</div>
 					<div className="dialogs-item__info_id"> user id: {props.opponentId}&nbsp;&nbsp;&nbsp;log id: {props.dialogItemId}</div>
 				</div>
-				<div className="dialogs-item__contact_status">{props.statusText}</div>
-				<div className="dialogs-item__contact_status-color" style={{ background: props.statusColor }}></div>
+				<span className="dialogs-item__contact_status">{props.statusText}</span>
+				<span className="dialogs-item__contact_status-color" style={{ background: props.statusColor }} />
 				<div onClick={deleteItem} className="dialogs-item__contact_delete-tab"></div>
 				<Link
 					to={userProfilePath}

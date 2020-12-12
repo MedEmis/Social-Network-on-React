@@ -13,6 +13,7 @@ let initialUsersState = {
 			"education": "some education",
 			"webSite": "some webSite",
 			"registerDate": "33.33.33",
+			"statusText": "statusText33.33.33",
 			"voutedLike": [],
 			"voutedDislike": [],
 			"isOnline": false,
@@ -31,6 +32,7 @@ let initialUsersState = {
 			"voutedLike": [],
 			"voutedDislike": [],
 			"registerDate": "44.44.44",
+			"statusText": "statusText44.44.44",
 			"isOnline": true,
 			"avatarUrl": "https://scontent.fiev13-1.fna.fbcdn.net/v/t1.0-9/944993_737146193094013_5672080899067667646_n.jpg?_nc_cat=107&cb=846ca55b-ee17756f&ccb=2&_nc_sid=09cbfe&_nc_ohc=SyPoRklCbqAAX9Iyd7J&_nc_ht=scontent.fiev13-1.fna&oh=c7b2cd2853d192f8a2d0de8baefb17e7&oe=5FEA9D29",
 			"contacts": ["id0001", "id0003"]
@@ -47,6 +49,7 @@ let initialUsersState = {
 			"voutedLike": [],
 			"voutedDislike": [],
 			"registerDate": "44.44.44",
+			"statusText": "statusText44.44.44.33",
 			"isOnline": false,
 			"avatarUrl": "https://i.pinimg.com/236x/df/02/f2/df02f287609f6f06224622be9e3a588c--second-life-life-photography.jpg",
 			"contacts": ["id0002", "id0006"]
@@ -63,6 +66,7 @@ let initialUsersState = {
 			"voutedLike": [],
 			"voutedDislike": [],
 			"registerDate": "55.55.55",
+			"statusText": "statusText33.55.55.33",
 			"isOnline": true,
 			"avatarUrl": "https://i.pinimg.com/originals/41/83/04/418304673aa2ab05fd39640c99e71828.jpg",
 			"contacts": ["id0003"]
@@ -79,6 +83,7 @@ let initialUsersState = {
 			"voutedLike": [],
 			"voutedDislike": [],
 			"registerDate": "55.55.55",
+			"statusText": "statusText33.33.55.55.",
 			"isOnline": false,
 			"avatarUrl": "https://avatarfiles.alphacoders.com/257/thumb-257122.jpg",
 			"contacts": ["id0003", "id0001"]
@@ -95,6 +100,7 @@ let initialUsersState = {
 			"education": "some education",
 			"webSite": "some webSite",
 			"registerDate": "66.66.66",
+			"statusText": "statusText366.66.66.33",
 			"avatarUrl": "https://i.pinimg.com/originals/ba/ef/fc/baeffcbd32fbbb407584195f5d7bde23.jpg",
 			"isOnline": false,
 			"contacts": ["id0001", "id0002"]
@@ -103,16 +109,19 @@ let initialUsersState = {
 	isUserExist: false,
 	currentUserId: localStorage.getItem("currentUserId"),//<<<==  USER
 	//currentUserId: "id0006",//<<<==  USER
-
 }
 
 
 const userBaseReducer = (state = initialUsersState, action) => {
+	let newState = {
+		...state,
+		userBase: { ...state.userBase }
+	}
 	switch (action.type) {
 		case "CREATE_NEW_USER":
 			let creatNewUser = (userData) => {
 				let date = new Date().toLocaleDateString()
-				let newUserId = "id0" + ++Object.keys(state.userBase).length
+				let newUserId = "id0" + ++Object.keys(newState.userBase).length
 				let newUserModel = {
 					"userId": newUserId,
 					"name": userData.userName,
@@ -122,27 +131,28 @@ const userBaseReducer = (state = initialUsersState, action) => {
 					"password": userData.userPassword,
 					"webSite": userData.userWebsite,
 					"registerDate": `${date}`,
+					"statusText": "my statusText",
 					"voutedLike": [],
 					"voutedDislike": [],
 					"isOnline": true,
 					"avatarUrl": userData.userAvatar,
 					"contacts": []
 				}
-				for (let key in state.userBase) {
-					if (state.userBase[key].login == userData.email) {
-						state.isUserExist = true
+				for (let key in newState.userBase) {
+					if (newState.userBase[key].login == userData.email) {
+						newState.isUserExist = true
 						break
 					} else {
-						state.isUserExist = false
+						newState.isUserExist = false
 					}
 				}
-				if (state.isUserExist) {
+				if (newState.isUserExist) {
 					console.log("Such user already exist")
-				} else if (!state.isUserExist) {
-					state.userBase[newUserId] = newUserModel
+				} else if (!newState.isUserExist) {
+					newState.userBase[newUserId] = newUserModel
 					initialPostState.postsBase[newUserId] = []
 					localStorage.setItem("currentUserId", newUserId)
-					state.currentUserId = localStorage.getItem("currentUserId")
+					newState.currentUserId = localStorage.getItem("currentUserId")
 					console.log(`User:  ${newUserId} isOnline:  ${newUserModel.isOnline}`)
 				}
 			}
@@ -152,13 +162,13 @@ const userBaseReducer = (state = initialUsersState, action) => {
 		case "USER_LOG_IN":
 			let logIn = (action) => {
 				let result = ''
-				for (let key in state.userBase) {
-					if (state.userBase[key].login == action.inputLogin) {
-						if (state.userBase[key].password == action.inputPassword) {
-							localStorage.setItem("currentUserId", state.userBase[key].userId)
-							state.currentUserId = localStorage.getItem("currentUserId")
-							state.userBase[state.currentUserId].isOnline = true
-							result = `User:  ${state.currentUserId} isOnline:  ${state.userBase[state.currentUserId].isOnline}`
+				for (let key in newState.userBase) {
+					if (newState.userBase[key].login == action.inputLogin) {
+						if (newState.userBase[key].password == action.inputPassword) {
+							localStorage.setItem("currentUserId", newState.userBase[key].userId)
+							newState.currentUserId = localStorage.getItem("currentUserId")
+							newState.userBase[newState.currentUserId].isOnline = true
+							result = `User:  ${newState.currentUserId} isOnline:  ${newState.userBase[newState.currentUserId].isOnline}`
 							break
 						} else {
 							result = "Wrong login or password"
@@ -176,20 +186,22 @@ const userBaseReducer = (state = initialUsersState, action) => {
 		//======================================================================================================================================
 		case "USER_LOG_OUT":
 			let logOut = () => {
-				if (state.userBase[state.currentUserId] !== undefined) {
-					state.userBase[state.currentUserId].isOnline = false
-					console.log(`User:  ${state.currentUserId} isOnline:  ${state.userBase[state.currentUserId].isOnline}`)
+				if (newState.userBase[newState.currentUserId] !== undefined) {
+					newState.userBase[newState.currentUserId].isOnline = false
+					console.log(`User:  ${newState.currentUserId} isOnline:  ${newState.userBase[newState.currentUserId].isOnline}`)
 				}
 				localStorage.removeItem("currentUserId")
-				state.currentUserId = localStorage.getItem("currentUserId")
+				newState.currentUserId = localStorage.getItem("currentUserId")
 			}
 			logOut(action)
 			break;
-		default:
-			return state
+		default: return newState
 	}
+	// console.log("first", state)
+	// console.log("second", newState)
+	// console.log("secondAAA", newState.userBase == state.userBase)
 
-	return state
+	return newState
 }
 export default userBaseReducer
 //reducer getting state from store and action from UI. Don't need subscriber. It will return renewed state.

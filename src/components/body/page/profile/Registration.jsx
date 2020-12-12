@@ -17,7 +17,7 @@ function Registration(props) {
 	const [userAvatar, setUserAvatar] = useState(null)
 	const [userPassword, setUserPassword] = useState(null)
 	let userPath = ''
-	let userInfo = {
+	let userData = {
 		userName: userName,
 		userdateOfbirth: userdateOfbirth,
 		userCity: userCity,
@@ -116,7 +116,7 @@ function Registration(props) {
 					</div>
 					<Link
 						onClick={(event) => {
-							props.userCreation(userInfo)
+							props.userCreation(userData)
 							pageMove(event)
 						}
 						}

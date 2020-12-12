@@ -10,7 +10,7 @@ import {
 
 
 let mapStateToProps = (state) => {//data for connect in state
-	console.log(state)
+	//console.log(state)
 	return {
 		userId: state.usersReducer.currentUserId,
 		userBase: state.usersReducer.userBase,

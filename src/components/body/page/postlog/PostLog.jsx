@@ -11,7 +11,7 @@ function PostLog(props) {
 	let name = props.userBase[props.userId].name ? props.userBase[props.userId].name : "AnoNymus"
 	let postsBlock = props.postsBase ? props.postsBase[props.userId] : null
 	const postInput = React.createRef();
-	//console.log("ssss", props)
+	console.log("PostLog", props.postsBase )
 	return (
 		<div className="body-page__hero-posts-log">
 			<div className="body-page__hero-posts">
@@ -23,7 +23,6 @@ function PostLog(props) {
 						value={props.currentPostText}
 						onChange={(event) => {
 							props.updateTextarea(event)
-							console.log(event.target.value)
 						}
 						}
 						className="body-page__hero-posts-textarea-input"
