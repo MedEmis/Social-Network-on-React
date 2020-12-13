@@ -1,16 +1,13 @@
 import React from 'react'
 import './profile.scss';
+import defaultAvatar from "./../../../../images/defaultUser.png"
 
 
 function HeroInfo(props) {
 	return (
 		<div className="body-page__info">
 			<div className="body-page__hero-bigavatar">
-				{
-					props.heroPicture
-						? <img className="hero-avatar" src={props.heroPicture} alt="hero" />
-						: 'no image'
-				}
+				<img className="hero-avatar" src={props.heroPicture || defaultAvatar} alt="hero" />
 			</div>
 			<div className="body-page__hero-data">
 				<div className="body-page__hero-data-item">

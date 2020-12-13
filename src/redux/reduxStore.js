@@ -1,16 +1,15 @@
 import { createStore, combineReducers } from 'redux'
+import { devToolsEnhancer } from 'redux-devtools-extension';
 import userBaseReducer from './userBaseReducer';
 import postBaseReducer from './postBaseReducer';
 import dialogBaseReducer from './dialogBaseReducer';
-import usersPageReducer from './usersPageReducer';
 
 let reducers = combineReducers({
 	usersReducer: userBaseReducer,
 	postsReducer: postBaseReducer,
-	dialogsReducer: dialogBaseReducer,
-	usersPageReducer: usersPageReducer
+	dialogsReducer: dialogBaseReducer
 })
 
-let store = createStore(reducers)
+const store = createStore(reducers, devToolsEnhancer());
 
 export default store           

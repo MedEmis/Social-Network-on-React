@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import ReplyPostItem from './ReplyPostItem';
 import './postItem.scss';
+import defaultAvatar from "./../../../../images/defaultUser.png"
+
 let classNames = require('classnames');
 
 
@@ -13,7 +15,7 @@ function PostItem(props) {
 	return (
 		<div className="posts-log-item-wrapper">
 			<div className="hero-posts-log-item">
-				<img className="hero-posts-log-item_avatar" src={props.userBase[props.userId].avatarUrl} alt="avatar" />
+				<img className="hero-posts-log-item_avatar" src={props.userBase[props.userId].avatarUrl || defaultAvatar} alt="avatar" />
 				<div className="hero-posts-log-item__title">
 					<div className="hero-posts-log-item__title-from">From: {!props.userBase[props.userId].name ? " Anonymous" : props.userBase[props.userId].name}</div>
 					<div className="hero-posts-log-item__title-date">{props.userId}</div>

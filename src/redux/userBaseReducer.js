@@ -1,7 +1,7 @@
 import { initialPostState } from "./postBaseReducer"
 
 
-let initialUsersState = {
+export let initialUsersState = {
 	userBase: {
 		"id0001": {
 			"login": "AAA@111.cc",
@@ -195,6 +195,41 @@ const userBaseReducer = (state = initialUsersState, action) => {
 			}
 			logOut(action)
 			break;
+		case "FOLLOW":
+			let follow = (event, currentUserId, userBase) => {
+				let followId = event.target.offsetParent.childNodes[0].childNodes[1].textContent
+				event.target.classList.toggle("is-flipped")
+				if (event.target.classList.contains("is-flipped")) {
+					event.target.textContent = "Unfollow"
+					userBase[currentUserId].contacts.push(followId)
+				} else {
+					event.target.textContent = "Follow"
+					userBase[currentUserId].contacts.pop(followId)
+				}
+				console.log(event.target)
+			}
+			follow(action.event, action.currentUserId, action.userBase)
+			// return {}
+			break
+		case "CARD_FLIP":
+			// let cardFlip = (event) => {
+			// 	event.target.classList.toggle("is-flipped")
+			// 	if (event.target.classList.contains("is-flipped")) {
+			// 		event.target.textContent = "Unfollow"
+			// 	} else {
+			// 		event.target.textContent = "Follow"
+			// 	}
+			// }
+			// cardFlip(action.event)
+			// return {}
+			break
+		case "CHAT":
+			let chat = () => {
+				console.log("CHAT")
+			}
+			chat()
+			// return {}
+			break
 		default: return newState
 	}
 	// console.log("first", state)
@@ -223,5 +258,27 @@ export const USER_LOG_INactionCreator = (event) => {
 export const USER_LOG_OUTactionCreator = () => {
 	return {
 		type: "USER_LOG_OUT",
+	}
+}
+export const FOLLOW_actionCreator = (event, currentUserId, userBase) => {
+	return {
+		type: "FOLLOW",
+		event: event,
+		currentUserId: currentUserId,
+		userBase: userBase
+	}
+}
+export const CARD_FLIP_actionCreator = (event) => {
+	return {
+		type: "CARD_FLIP",
+		event: event
+
+	}
+}
+export const CHAT_actionCreator = (event) => {
+	return {
+		type: "CHAT",
+		event: event
+
 	}
 }

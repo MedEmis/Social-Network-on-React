@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import './postItem.scss';
+import defaultAvatar from "./../../../../images/defaultUser.png"
+
 //let classNames = require('classnames');
 
 
@@ -14,7 +16,7 @@ function NestedReplyPostItem(props) {
 	return (
 		<>
 			<div className="hero-posts-log-item nested-reply">
-				<img className="hero-posts-log-item_avatar" src={props.userBase[props.userId].avatarUrl} alt="avatar" />
+				<img className="hero-posts-log-item_avatar" src={props.userBase[props.userId].avatarUrl || defaultAvatar} alt="avatar" />
 				<div className="hero-posts-log-item__title">
 					<div className="hero-posts-log-item__title-from">From: {!props.nikName ? " Anonymous" : props.nikName}</div>
 					<div className="hero-posts-log-item__title-date">{props.userId}</div>
