@@ -11,9 +11,10 @@ function Dialogs(props) {
 	let userBase = props.userBase
 	let dialogBase = props.dialogBase
 	let currentUserId = props.userId
-	console.log(props)
+	let currentUser = userBase.filter(item => item.userId === currentUserId)[0]
+	//console.log(currentUser)
 	return (
-		
+
 		<div className="dialogs__wrapper">
 			<div className="dialogs__title">Your contacts and recent conversations</div>
 			{
@@ -21,16 +22,14 @@ function Dialogs(props) {
 					? dialogBase[currentUserId].map((item, index) => (item ? <DialogsItem
 						opponentName={dialogBase[currentUserId][index].name}
 						lastDate={dialogBase[currentUserId][index].lastVisit}
+						userBase={props.userBase}
 						opponentId={dialogBase[currentUserId][index].opponentId}
-						statusText={userBase[dialogBase[currentUserId][index].opponentId].isOnline ? "Online" : "Offline"}
-						statusColor={userBase[dialogBase[currentUserId][index].opponentId].isOnline ? "green" : "red"}
 						totalMessages={dialogBase[currentUserId][index].messages.length}
 						lastMessage={dialogBase[currentUserId][index].messages[dialogBase[currentUserId][index].messages.length - 1]}
-						opponentPic={userBase[dialogBase[currentUserId][index].opponentId].avatarUrl}
 						dialogItemId={dialogBase[currentUserId][index].id}
 						currentUserId={currentUserId}
-						currentPic={userBase[currentUserId].avatarUrl}
-						key={Math.floor(Math.random() * 10000)}
+						currentPic={currentUser.avatarUrl}
+						key={dialogBase[currentUserId][index].id}
 					/> : <div>No any dialogs yet</div>))
 					: <div>No any dialogs yet</div>
 			}

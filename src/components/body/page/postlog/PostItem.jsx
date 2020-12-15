@@ -9,15 +9,17 @@ let classNames = require('classnames');
 function PostItem(props) {
 	const [IsTextOpen, setIsTextOpen] = useState(false)
 	let postsBlock = props.childReply
-	let isLiked = props.userBase[props.userId].voutedLike//to set color of icon
-	let isDisliked = props.userBase[props.userId].voutedDislike//to set color of icon
-
+	let user = props.userBase.filter(item => item.userId === props.userId)[0]
+	let isLiked = user.voutedLike//to set color of icon
+	let isDisliked = user.voutedDislike//to set color of icon
+	let avatar = user.avatarUrl
+	let name = user.name
 	return (
 		<div className="posts-log-item-wrapper">
 			<div className="hero-posts-log-item">
-				<img className="hero-posts-log-item_avatar" src={props.userBase[props.userId].avatarUrl || defaultAvatar} alt="avatar" />
+				<img className="hero-posts-log-item_avatar" src={avatar || defaultAvatar} alt="avatar" />
 				<div className="hero-posts-log-item__title">
-					<div className="hero-posts-log-item__title-from">From: {!props.userBase[props.userId].name ? " Anonymous" : props.userBase[props.userId].name}</div>
+					<div className="hero-posts-log-item__title-from">From: {!name ? " Anonymous" : name} </div>
 					<div className="hero-posts-log-item__title-date">{props.userId}</div>
 					<div className="hero-posts-log-item__title-date">
 						Date: {!props.dataDate ? "--.--.--" : props.dataDate}  /   At: {!props.dataTime ? "--:--" : props.dataTime}

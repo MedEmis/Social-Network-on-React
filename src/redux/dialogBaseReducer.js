@@ -56,6 +56,20 @@ let initialState = {
 					"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
 					"sadfasdfsdfsadfasdfasd"
 				]
+			},
+			{
+				"id": "115",
+				"userId": "id0001",
+				"opponentId": "id0002",
+				"name": "Name One",
+				"lastVisit": "11.11.12",
+				"messages": [
+					"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+					"Lorem, irit? Quos?",
+					"Lorem, ipsum dolorolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+					"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ratione distinctio amet praesentium temporibus exercitationem incidunt dolore harum dicta, dolores recusandae non sapiente, est ut veritatis vero quis reprehenderit? Quos?",
+					"sadfasdfsdfsadfasdfasd"
+				]
 			}
 		],
 		"id0002": [

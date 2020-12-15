@@ -6,7 +6,7 @@ let classNames = require('classnames');
 
 function UsersPageItem(props) {
 	let Iffollowed;
-	if (props.userBase[props.currentUserId].contacts.includes(props.userId)) {
+	if (props.userBase.filter(item => item.userId === props.currentUserId)[0].contacts.includes(props.userId)) {
 		Iffollowed = true
 	} else {
 		Iffollowed = false
@@ -14,11 +14,11 @@ function UsersPageItem(props) {
 
 	return (
 		<div className="userPage__news-item">
-			{/* <div className="userPage__avatar">
+			<div className="userPage__avatar">
 				<img className="dialog-avatar" src={props.userAvatar} alt="heroPicture" />
-			</div> */}
+			</div>
 			<div className="userPage__info">
-				{/* <div className="userPage__info_title">
+				<div className="userPage__info_title">
 					<div className="userPage__info_title-item name">{props.userName}</div>
 					<div className="userPage__info_title-item id">{props.userId}</div>
 					<div className="userPage__info_title-item reg-date">Here from: {props.registerDate}</div>
@@ -35,7 +35,7 @@ function UsersPageItem(props) {
 						onClick={(event) => props.toChat(event)}
 					>chat</div>
 					<div className="userPage__info_buttons-item feature">feature</div>
-				</div> */}
+				</div>
 			</div>
 
 		</div >

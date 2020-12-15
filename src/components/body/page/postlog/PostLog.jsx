@@ -8,10 +8,10 @@ import './postLog.scss';
 
 
 function PostLog(props) {
-	let name = props.userBase[props.userId].name ? props.userBase[props.userId].name : "AnoNymus"
+	let name = props.userBase.filter(item => item.userId == props.userId)[0].name ? props.userBase.filter(item => item.userId == props.userId)[0].name : "AnoNymus"
 	let postsBlock = props.postsBase ? props.postsBase[props.userId] : null
 	const postInput = React.createRef();
-	console.log("PostLog", props.postsBase )
+	//console.log("PostLog", postsBlock)
 	return (
 		<div className="body-page__hero-posts-log">
 			<div className="body-page__hero-posts">

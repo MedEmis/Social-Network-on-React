@@ -33,8 +33,9 @@ let mapDispatchToProps = (dispatch) => {//functions for connect is dispatch
 			dispatch(ADD_NEW_REPLYactionCreator(
 				data.userId,
 				data.id,
-				data.userBase[data.userId].name,
-				event))
+				data.userBase.filter(item => item.userId == data.userId)[0].name,
+				event
+			))
 		},
 		addNewNestedPost: (event, data) => {
 			dispatch(ADD_NEW_NESTED_REPLYactionCreator(
@@ -42,7 +43,7 @@ let mapDispatchToProps = (dispatch) => {//functions for connect is dispatch
 				data.initialUser,
 				data.initialPost,
 				data.id,
-				data.userBase[data.userId].name,
+				data.userBase.filter(item => item.userId == data.userId)[0].name,
 				event
 			))
 		},

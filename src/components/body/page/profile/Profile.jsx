@@ -20,24 +20,26 @@ function Profile(props) {
 
 	let userBase = props.userBase
 	let userId = props.userId
+	let user = props.userBase.filter(item => item.userId === userId)
 	return (
-		userBase.hasOwnProperty(userId)
+		user
 			? <div className="body-page__hero-page">
 				<div className="body-page__background"><img src={topImage} alt="topImage"></img></div>
 				<HeroInfo
 					userBase={userBase}
 					userId={userId}
-					name={userBase[userId].name}
-					heroPicture={userBase[userId].avatarUrl}
-					birthDate={userBase[userId].birthDate}
-					city={userBase[userId].city}
-					email={userBase[userId].login}
-					webSite={userBase[userId].webSite}
+					name={user[0].name}
+					heroPicture={user[0].avatarUrl}
+					birthDate={user[0].birthDate}
+					city={user[0].city}
+					email={user[0].login}
+					webSite={user[0].webSite}
 				/>
 				<HeroContacts
 					contactName="contactName"
 					userBase={userBase}
 					userId={userId}
+					user={user[0]}
 				/>
 			</div>
 			: <User404 />

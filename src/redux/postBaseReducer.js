@@ -633,9 +633,11 @@ const postBaseReducer = (state = initialPostState, action) => {
 			let likeIncrementState = (event, userBase) => {
 				let userId = event.target.parentElement.parentElement.previousSibling.childNodes[1].innerText.slice(0, 6)
 				let logId = +event.target.parentElement.parentElement.previousSibling.childNodes[3].innerText.slice(-2)
+				let user = userBase.filter(item => item.userId == userId)[0]
 				let action = event.target.attributes.name.value
+				console.log(`user ${user.userId} pressed ${action}`)
 				//checking if this los was already vouted
-				if (userBase[userId].voutedLike.includes(logId) || userBase[userId].voutedDislike.includes(logId)) {
+				if (user.voutedLike.includes(logId) || user.voutedDislike.includes(logId)) {
 					return
 				} else {
 					//CYCLE FOR SEARCHING ANY OBJECT IN NESTED BASE BY ANY ATTRIBUTE======START
@@ -647,11 +649,11 @@ const postBaseReducer = (state = initialPostState, action) => {
 								if (tempTarget[i].id === logId) {
 									if (action === "like") {
 										newState.postsBase[key][i].like++
-										userBase[userId].voutedLike.push(logId)
+										user.voutedLike.push(logId)
 										break
 									} else if (action === "dislike") {
 										newState.postsBase[key][i].dislike++
-										userBase[userId].voutedDislike.push(logId)
+										user.voutedDislike.push(logId)
 										break
 									}
 								} else {
@@ -662,11 +664,12 @@ const postBaseReducer = (state = initialPostState, action) => {
 											if (newtempTarget[j].id === logId) {
 												if (action === "like") {
 													newState.postsBase[key][i].reply[j].like++
-													userBase[userId].voutedLike.push(logId)
+													//userBase[userId].voutedLike.push(logId)
+													user.voutedLike.push(logId)
 													break
 												} else if (action === "dislike") {
 													newState.postsBase[key][i].reply[j].dislike++
-													userBase[userId].voutedDislike.push(logId)
+													user.voutedDislike.push(logId)
 													break
 												}
 											} else {
@@ -676,11 +679,11 @@ const postBaseReducer = (state = initialPostState, action) => {
 													if (newNestedTarget[k].id === logId) {
 														if (action === "like") {
 															newState.postsBase[key][i].reply[j].nestedReply[k].like++
-															userBase[userId].voutedLike.push(logId)
+															user.voutedLike.push(logId)
 															break
 														} else if (action === "dislike") {
 															newState.postsBase[key][i].reply[j].nestedReply[k].dislike++
-															userBase[userId].voutedDislike.push(logId)
+															user.voutedDislike.push(logId)
 															break
 														}
 													}

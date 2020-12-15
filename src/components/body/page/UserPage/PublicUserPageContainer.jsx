@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {
 	FOLLOW_actionCreator,
 	CHAT_actionCreator,
-	CARD_FLIP_actionCreator
+	SET_USERS_actionCreator
 } from './../../../../redux/userBaseReducer';
 
 
@@ -18,8 +18,8 @@ let mapDispatchToProps = (dispatch) => {//functions for connect is dispatch
 		toFollow: (event, currentUserId, userBase) => {
 			dispatch(FOLLOW_actionCreator(event, currentUserId, userBase))
 		},
-		cardFlip: (event) => {
-			dispatch(CARD_FLIP_actionCreator(event))
+		setUsers: (newUsers) => {
+			dispatch(SET_USERS_actionCreator(newUsers))
 		},
 		toChat: (event) => {
 			dispatch(CHAT_actionCreator(event))

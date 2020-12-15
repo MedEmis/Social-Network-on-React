@@ -6,16 +6,22 @@ import './dialogs.scss';
 
 
 function DialogsItem(props) {
+	console.log(props)
 
+	let opponent = props.userBase.filter(item => item.userId === props.opponentId)[0]
+	let statusText = opponent.isOnline ? "Online" : "Offline"
+	let statusColor = opponent.isOnline ? "green" : "red"
+	let opponentAvatar = opponent.avatarUrl
+	console.log()
 	let userProfilePath = {
-		pathname: "/src/components/body/page/profile/Profile",
+		pathname: "/Profile",
 		currentUserId: props.opponentId,
 		userBase: props.userBase,
 		postsBase: props.postsBase,
 		dialogBase: props.dialogBase
 	}
 	let userPostsPath = {
-		pathname: "/src/components/body/page/postlog/Posts",
+		pathname: "/Posts",
 		currentUserId: props.opponentId,
 		userBase: props.userBase,
 		postsBase: props.postsBase,
@@ -32,15 +38,15 @@ function DialogsItem(props) {
 		<div className="dialogs-item">
 			<div className="dialogs-item__contact">
 				<div className="dialogs-item__avatar">
-					<img className="dialog-avatar" src={props.opponentPic} alt="heroPicture" />
+					<img className="dialog-avatar" src={opponentAvatar} alt="heroPicture" />
 				</div>
 				<div className="dialogs-item__info">
 					<div className="dialogs-item__info_name">{props.opponentName}</div>
 					<div className="dialogs-item__info_date">Last time was here: {props.lastDate}</div>
 					<div className="dialogs-item__info_id"> user id: {props.opponentId}&nbsp;&nbsp;&nbsp;log id: {props.dialogItemId}</div>
 				</div>
-				<span className="dialogs-item__contact_status">{props.statusText}</span>
-				<span className="dialogs-item__contact_status-color" style={{ background: props.statusColor }} />
+				<span className="dialogs-item__contact_status">{statusText}</span>
+				<span className="dialogs-item__contact_status-color" style={{ background: statusColor }} />
 				<div onClick={deleteItem} className="dialogs-item__contact_delete-tab"></div>
 				<Link
 					to={userProfilePath}
@@ -53,7 +59,7 @@ function DialogsItem(props) {
 					<img className="dialog-avatar" src={props.currentPic} alt="heroPicture" />
 				</div>
 				<div className="dialogs-item__avatar">
-					<img className="dialog-avatar" src={props.opponentPic} alt="opponentPicture" />
+					<img className="dialog-avatar" src={opponentAvatar} alt="opponentPicture" />
 				</div>
 				<div className="dialogs-item__recent-messages">
 					<Link
