@@ -6,6 +6,10 @@
 		background: rgb(63, 60, 60);
 		padding: 10px 10px 140px 10px;
 		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 	&__title {
 		width: 100%;
@@ -37,6 +41,59 @@
 		overflow: hidden;
 		border: 5px solid #333;
 	}
+	&__pagination-list {
+		width: auto;
+		max-width: 50%;
+		height: 40px;
+		margin-bottom: 20px;
+		padding: 10px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		cursor: pointer;
+		user-select: none;
+		position: relative;
+		&_navig {
+			flex: 0 0 10%;
+			color: rgb(15, 7, 83);
+			padding: 10px 20px;
+			&:hover {
+				background: rgb(73, 73, 73);
+				border-radius: 20px;
+			}
+		}
+		&_total {
+			height: 30px;
+			width: 200px;
+			position: absolute;
+			right: calc(50% - 100px);
+			bottom: -30px;
+			color: rgb(212, 207, 241);
+		}
+		&_pages-container {
+			flex: 0 0 auto;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			overflow: hidden;
+		}
+
+		&_item {
+			transition: 0.2s linear;
+			color: rgb(84, 89, 136);
+			padding: 5px;
+			&:hover {
+				background: rgb(73, 73, 73);
+				border-radius: 20px;
+			}
+			&.active {
+				font-weight: 900;
+				font-size: 36px;
+				color: rgb(183, 186, 216);
+			}
+		}
+	}
+
 	&__info {
 		background: rgb(95, 51, 51);
 		height: 99%;
@@ -66,7 +123,7 @@
 			height: 99%;
 			border-radius: 20px;
 			text-align: center;
-			padding: 10px 5px; 
+			padding: 10px 5px;
 			&.name {
 				background: rgb(153, 138, 219);
 				flex: 0 0 50%;
@@ -111,23 +168,22 @@
 			text-transform: uppercase;
 			font-size: 16px;
 			cursor: pointer;
-			&.follow{
+			&.follow {
 				background: rgb(12, 68, 4);
 				transition: 0.5s;
 				transform-style: preserve-3d;
 				transform: rotateY(0deg);
 				font-size: 12px;
 				font-weight: 900;
-				&.is-flipped{
+				&.is-flipped {
 					background: rgb(133, 34, 4);
 					transform: rotateY(360deg);
 				}
 			}
-			&.chat{
+			&.chat {
 				background: rgb(63, 5, 117);
-				
 			}
-			&.feature{
+			&.feature {
 				background: rgb(63, 5, 117);
 			}
 		}

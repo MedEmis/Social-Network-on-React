@@ -1,5 +1,4 @@
 import React from 'react'
-import StoreContext from '../../../../redux/storeContext';
 import './dialogs.scss';
 import DialogsItem from './DialogsItem';
 
