@@ -8,6 +8,7 @@ let classNames = require('classnames');
 
 function PostItem(props) {
 	const [IsTextOpen, setIsTextOpen] = useState(false)
+	const [IsVoted, setIsVoted] = useState(false)
 	let postsBlock = props.childReply
 	let user = props.userBase.filter(item => item.userId === props.userId)[0]
 	let isLiked = user.voutedLike//to set color of icon
@@ -30,11 +31,18 @@ function PostItem(props) {
 					<div className="hero-posts-log-item__body-text">{!props.textBody ? "...no text" : props.textBody}</div>
 					<ul style={props.panelColor(props)}
 						className="hero-posts-log-item__body-special-list"  >
-						<li onClick={(event) => props.isVoutedCheck(event, props.userBase)}
+						<li onClick={(event) => {
+							props.isVoutedCheck(event, props.userBase)
+							setIsVoted(true)
+						}
+						}
 							style={isLiked.includes(props.id) ? { backgroundColor: "green" } : { backgroundColor: "none" }}
 							name="like" className="hero-posts-log-item__body-special-item tooltip">
 							<span className="tooltiptext">Thumbs Up</span></li>
-						<li onClick={(event) => props.isVoutedCheck(event, props.userBase)}
+						<li onClick={(event) => {
+							props.isVoutedCheck(event, props.userBase)
+							setIsVoted(true)
+						}}
 							style={isDisliked.includes(props.id) ? { backgroundColor: "red" } : { backgroundColor: "none" }}
 							name="dislike" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Down</span></li>
 						<li className="hero-posts-log-item__body-special-item tooltip">{props.likes ? props.likes : 0}<span className="tooltiptext">Likes</span></li>

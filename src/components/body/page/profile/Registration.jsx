@@ -54,12 +54,12 @@ function Registration(props) {
 				break;
 		}
 	}
-	if (!props.isUserExist) {
-		userPath = "/registration"
-	} else {
-		userPath = "/src/components/body/page/profile/Profile"
-	}
 	console.log("isUser exist", props.isUserExist)
+	if (props.isUserExist === true) {
+		userPath = "/registration"
+	} else if (!props.isUserExist === false) {
+		userPath = "/Profile"
+	}
 	return (
 		<div className="body-page__registration">
 			<HeroInfo
@@ -114,6 +114,7 @@ function Registration(props) {
 							id="password" type="text" name="password" className="reginput validate" />
 						<label htmlFor="password">Your password</label>
 					</div>
+					<Link to="/" type="button" className="body-page__authorization_button" onClick={(event) => pageMove(event)} >Back</Link>
 					<Link
 						onClick={(event) => {
 							props.userCreation(userData)

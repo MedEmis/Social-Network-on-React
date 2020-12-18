@@ -1,5 +1,12 @@
-//need postBase, userBase and currentuserId
+//============ACTIONS======================
 
+const UPDATE_POST_TEXT = "UPDATE_POST_TEXT"
+const ADD_NEW_POST = "ADD_NEW_POST"
+const ADD_NEW_REPLY = "ADD_NEW_REPLY"
+const ADD_NEW_NESTED_REPLY = "ADD_NEW_NESTED_REPLY"
+const LIKE_INCREMENT = "LIKE_INCREMENT"
+
+//============ACTIONS END==================
 
 export let initialPostState = {
 	postsBase: {
@@ -527,109 +534,103 @@ export let initialPostState = {
 
 
 const postBaseReducer = (state = initialPostState, action) => {
-	let newState = {
-		postsBase: { ...state.postsBase },
-		...state
-	}
-
+	// let state = {
+	// 	postsBase: { ...state.postsBase },
+	// 	...state
+	// }
+	let time = new Date().toLocaleTimeString().slice(0, -3)
+	let date = new Date().toLocaleDateString()
+	let textArea
+	let post = {}
 	switch (action.type) {
-		case "UPDATE_POST_TEXT":
-			let updatePostText = (inputValue) => {
-				newState.currentPostText = inputValue
-				return newState
+		case UPDATE_POST_TEXT:
+			return {
+				postsBase: { ...state.postsBase },
+				...state,
+				currentPostText: action.inputValue,
 			}
-			updatePostText(action.inputValue)
-			break;
-		case "ADD_NEW_POST":
-			let addNewPost = (userId, nikName) => {
-				let time = new Date().toLocaleTimeString().slice(0, -3)
-				let date = new Date().toLocaleDateString()
-				let post = {
-					"id": ++newState.postsCount,
-					"userId": userId,
-					"nikName": nikName,
-					"dataDate": `${date}`,
-					"dataTime": `${time}`,
-					"textBody": newState.currentPostText,
-					"like": 0,
-					"dislike": 0,
-					"reply": []
-				}
-				newState.postsBase[userId].push(post)
-				newState.currentPostText = "some news?..."
+		//======================================================================================================================================
+		case ADD_NEW_POST:
+			return {
+				postsBase: {
+					...state.postsBase[action.userId] = [
+						...state.postsBase[action.userId],
+						{
+							"id": ++state.postsCount,
+							"userId": action.userId,
+							"nikName": action.nikName,
+							"dataDate": `${date}`,
+							"dataTime": `${time}`,
+							"textBody": state.currentPostText,
+							"like": 0,
+							"dislike": 0,
+							"reply": []
+						}
+					],
+					...state.postsBase,
+				},
+				currentPostText: "some news?...",
+				postsCount: state.postsCount++
 			}
-			addNewPost(action.userId, action.nikName)
-			//===========functionless example================================================
-			//----without function it is possible to pass arguments via " action.userId"----
-			// return {
-			// 	...state,
-			// 	postsBase: {
-			// 		...state.postsBase,
-			// 		postsCount: state.postsCount++,
-			// 		[localStorage.getItem("currentUserId")]: [
-			// 			...state.postsBase[localStorage.getItem("currentUserId")],
-			// 			{
-			// 				"id": ++state.postsCount,
-			// 				"userId": action.userId,
-			// 				"nikName": action.nikName,
-			// 				"dataDate": new Date().toLocaleDateString(),
-			// 				"dataTime": new Date().toLocaleTimeString().slice(0, -3),
-			// 				"textBody": state.currentPostText,
-			// 				"like": 0,
-			// 				"dislike": 0,
-			// 				"reply": []
-			// 			}
-			// 		],
-			// 	}
-			// }
-			//=======================functionless example end=================================
-			break;
-		case "ADD_NEW_REPLY":
-			let addNewReply = (userId, id, nikName, event) => {
-				let textArea = event.target.offsetParent.lastElementChild.childNodes[0]
-				let time = new Date().toLocaleTimeString().slice(0, -3)
-				let date = new Date().toLocaleDateString()
-				let post = {
-					"id": ++newState.postsCount,
-					"userId": userId,
-					"nikName": nikName,
-					"dataDate": `${date}`,
-					"dataTime": `${time}`,
-					"textBody": textArea.value,
-					"like": 0,
-					"dislike": 0,
-					"nestedReply": []
-				}
-				// textArea.value = `Answer to ${nikName === null || nikName === undefined ? "anonymous" : nikName}:--- `
-				let target = newState.postsBase[userId].filter(item => item.id === id)
-				target[0].reply.push(post)
-				textArea.value = ""
+		//======================================================================================================================================
+		case ADD_NEW_REPLY:
+			textArea = action.event.target.offsetParent.lastElementChild.childNodes[0]
+			post = {
+				"id": ++state.postsCount,
+				"userId": action.userId,
+				"nikName": action.nikName,
+				"dataDate": `${date}`,
+				"dataTime": `${time}`,
+				"textBody": textArea.value,
+				"like": 0,
+				"dislike": 0,
+				"nestedReply": []
 			}
-			addNewReply(action.userId, action.id, action.nikName, action.event)
-			break;
-		case "ADD_NEW_NESTED_REPLY":
-			let addNewNestedReply = (userId, initialUser, initialPost, id, nikName, event) => {
-				let textArea = event.target.offsetParent.lastElementChild.childNodes[0]
-				let time = new Date().toLocaleTimeString().slice(0, -3)
-				let date = new Date().toLocaleDateString()
-				let post = {
-					"id": ++newState.postsCount,
-					"userId": userId,
-					"nikName": nikName,
-					"dataDate": `${date}`,
-					"dataTime": `${time}`,
-					"textBody": textArea.value,
-					"like": 0,
-					"dislike": 0,
-				}
-				let target = newState.postsBase[initialUser].filter(item => item.id === initialPost)
-				let nestedTarget = target[0].reply.filter(item => item.id === id)
-				nestedTarget[0].nestedReply.push(post)
-				textArea.value = ""
+			textArea.value = ""
+			return {
+				postsBase: {//searching deeply inside the object accordinately to user ID
+					...state.postsBase[action.userId]
+						.filter(item => item.id === action.id)[0].reply = [
+						...state.postsBase[action.userId]
+							.filter(item => item.id === action.id)[0].reply,
+						post
+					],
+					...state.postsBase,
+				},
+				currentPostText: "some news?...",
+				postsCount: ++state.postsCount
 			}
-			addNewNestedReply(action.userId, action.initialUser, action.initialPost, action.id, action.nikName, action.event)
-			break;
-		case "LIKE_INCREMENT":
+		//======================================================================================================================================
+		case ADD_NEW_NESTED_REPLY:
+			textArea = action.event.target.offsetParent.lastElementChild.childNodes[0]
+			post = {
+				"id": ++state.postsCount,
+				"userId": action.userId,
+				"nikName": action.nikName,
+				"dataDate": `${date}`,
+				"dataTime": `${time}`,
+				"textBody": textArea.value,
+				"like": 0,
+				"dislike": 0,
+			}
+			textArea.value = ""
+			return {
+				postsBase: {//searching deeply inside the object accordinately to user ID
+					...state.postsBase[action.initialUser]
+						.filter(item => item.id === action.initialPost)[0].reply
+						.filter(item => item.id === action.id)[0].nestedReply = [
+						...state.postsBase[action.initialUser]
+							.filter(item => item.id === action.initialPost)[0].reply
+							.filter(item => item.id === action.id)[0].nestedReply,
+						post
+					],
+					...state.postsBase,
+				},
+				currentPostText: "some news?...",
+				postsCount: ++state.postsCount
+			}
+		//======================================================================================================================================
+		case LIKE_INCREMENT:
 			let likeIncrementState = (event, userBase) => {
 				let userId = event.target.parentElement.parentElement.previousSibling.childNodes[1].innerText.slice(0, 6)
 				let logId = +event.target.parentElement.parentElement.previousSibling.childNodes[3].innerText.slice(-2)
@@ -641,18 +642,18 @@ const postBaseReducer = (state = initialPostState, action) => {
 					return
 				} else {
 					//CYCLE FOR SEARCHING ANY OBJECT IN NESTED BASE BY ANY ATTRIBUTE======START
-					for (let key in newState.postsBase) {
-						let tempTarget = newState.postsBase[key]
+					for (let key in state.postsBase) {
+						let tempTarget = state.postsBase[key]
 						//searching in posts
 						for (let i = 0; i < tempTarget.length; i++) {
 							if (tempTarget[i] !== undefined) {
 								if (tempTarget[i].id === logId) {
 									if (action === "like") {
-										newState.postsBase[key][i].like++
+										state.postsBase[key][i].like++
 										user.voutedLike.push(logId)
 										break
 									} else if (action === "dislike") {
-										newState.postsBase[key][i].dislike++
+										state.postsBase[key][i].dislike++
 										user.voutedDislike.push(logId)
 										break
 									}
@@ -663,12 +664,12 @@ const postBaseReducer = (state = initialPostState, action) => {
 										if (newtempTarget[j] !== undefined) {
 											if (newtempTarget[j].id === logId) {
 												if (action === "like") {
-													newState.postsBase[key][i].reply[j].like++
+													state.postsBase[key][i].reply[j].like++
 													//userBase[userId].voutedLike.push(logId)
 													user.voutedLike.push(logId)
 													break
 												} else if (action === "dislike") {
-													newState.postsBase[key][i].reply[j].dislike++
+													state.postsBase[key][i].reply[j].dislike++
 													user.voutedDislike.push(logId)
 													break
 												}
@@ -678,11 +679,11 @@ const postBaseReducer = (state = initialPostState, action) => {
 												for (let k = 0; k < newNestedTarget.length; k++) {
 													if (newNestedTarget[k].id === logId) {
 														if (action === "like") {
-															newState.postsBase[key][i].reply[j].nestedReply[k].like++
+															state.postsBase[key][i].reply[j].nestedReply[k].like++
 															user.voutedLike.push(logId)
 															break
 														} else if (action === "dislike") {
-															newState.postsBase[key][i].reply[j].nestedReply[k].dislike++
+															state.postsBase[key][i].reply[j].nestedReply[k].dislike++
 															user.voutedDislike.push(logId)
 															break
 														}
@@ -698,43 +699,41 @@ const postBaseReducer = (state = initialPostState, action) => {
 				}
 			}
 			likeIncrementState(action.event, action.userBase)
-			break;
 		default:
-			return newState
+			return state
 	}
 
-	return newState
 }
 
 export default postBaseReducer
 
 //action creators
 
-export const UPDATE_POST_TEXTactionCreator = (event) => {
+export const UPDATE_POST_TEXT_actionCreator = (event) => {
 	return {
-		type: "UPDATE_POST_TEXT",
+		type: UPDATE_POST_TEXT,
 		inputValue: event.target.value
 	}
 }
-export const ADD_NEW_POSTactionCreator = (userId, nikName) => {
+export const ADD_NEW_POST_actionCreator = (userId, nikName) => {
 	return {
-		type: "ADD_NEW_POST",
+		type: ADD_NEW_POST,
 		userId: userId,
 		nikName: nikName,
 	}
 }
-export const ADD_NEW_REPLYactionCreator = (userId, id, nikName, event) => {
+export const ADD_NEW_REPLY_actionCreator = (userId, id, nikName, event) => {
 	return {
-		type: "ADD_NEW_REPLY",
+		type: ADD_NEW_REPLY,
 		userId: userId,
 		id: id,
 		nikName: nikName,
 		event: event,
 	}
 }
-export const ADD_NEW_NESTED_REPLYactionCreator = (userId, initialUser, initialPost, id, nikName, event) => {
+export const ADD_NEW_NESTED_REPLY_actionCreator = (userId, initialUser, initialPost, id, nikName, event) => {
 	return {
-		type: "ADD_NEW_NESTED_REPLY",
+		type: ADD_NEW_NESTED_REPLY,
 		userId: userId,
 		initialUser: initialUser,
 		initialPost: initialPost,

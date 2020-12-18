@@ -8,7 +8,9 @@ import {
 } from './../../../../redux/userBaseReducer';
 
 
+
 let mapStateToProps = (state) => {//data for connect in state
+	console.log("currentUsersPage", state.usersReducer.currentUsersPage)
 	return {
 		userBase: state.usersReducer.userBase,
 		currentUserId: state.usersReducer.currentUserId,
@@ -17,25 +19,14 @@ let mapStateToProps = (state) => {//data for connect in state
 		currentUsersPage: state.usersReducer.currentUsersPage
 	}
 }
-let mapDispatchToProps = (dispatch) => {//functions for connect is dispatch
-	return {
-		toFollow: (event, currentUserId, userBase) => {
-			dispatch(FOLLOW_actionCreator(event, currentUserId, userBase))
-		},
-		setUsers: (newUsers, totalCount) => {
-			dispatch(SET_USERS_actionCreator(newUsers, totalCount))
-		},
-		ChangePage: (event) => {
-			dispatch(CHANGE_PAGE_actionCreator(event))
-		},
-		toChat: (event) => {
-			dispatch(CHAT_actionCreator(event))
-		}
-	}
-}
 
 
-const PublicUserPageContainer = connect(mapStateToProps, mapDispatchToProps)(PublicUserPage)
+const PublicUserPageContainer = connect(mapStateToProps, {
+	toFollow: FOLLOW_actionCreator,
+	setUsers: SET_USERS_actionCreator,
+	ChangePage: CHANGE_PAGE_actionCreator,
+	toChat: CHAT_actionCreator
+})(PublicUserPage)
 
 
 

@@ -1,5 +1,12 @@
 import { initialPostState } from "./postBaseReducer"
-import * as axios from "axios"
+
+const CREATE_NEW_USER = "CREATE_NEW_USER"
+const USER_LOG_IN = "USER_LOG_IN"
+const USER_LOG_OUT = "USER_LOG_OUT"
+const FOLLOW = "FOLLOW"
+const CHAT = "CHAT"
+const SET_USERS = "SET_USERS"
+const CHANGE_PAGE = "CHANGE_PAGE"
 
 
 export let initialUsersState = {
@@ -101,151 +108,183 @@ export let initialUsersState = {
 	currentUserId: localStorage.getItem("currentUserId"),//<<<==  USER
 	displayedUsers: 4,
 	totalUsersCount: 0,
-	currentUsersPage: 1
+	currentUsersPage: +localStorage.getItem("currentUserPage")
 }
 
 
+let userId
+let date
+let user
+let newUserId
+let newUserModel
 const userBaseReducer = (state = initialUsersState, action) => {
-	let newState = {
-		userBase: [...state.userBase],
-		...state
-	}
 	switch (action.type) {
-		case "CREATE_NEW_USER":
-			let creatNewUser = (userData) => {
-				let date = new Date().toLocaleDateString()
-				let newUserId = "id0" + ++Object.keys(newState.userBase).length
-				let newUserModel = {
-					"userId": newUserId,
-					"name": userData.userName,
-					"birthDate": userData.userdateOfbirth,
-					"city": userData.userCity,
-					"login": userData.userEmail,
-					"password": userData.userPassword,
-					"webSite": userData.userWebsite,
-					"registerDate": `${date}`,
-					"statusText": "my statusText",
-					"voutedLike": [],
-					"voutedDislike": [],
-					"isOnline": true,
-					"avatarUrl": userData.userAvatar,
-					"contacts": []
-				}
-				for (let i = 0; i < newState.userBase.length; i++) {
-					if (newState.userBase[i].login == userData.email) {
-						newState.isUserExist = true
-						break
-					} else {
-						newState.isUserExist = false
-					}
-				}
-				if (newState.isUserExist) {
-					console.log("Such user already exist")
-				} else if (!newState.isUserExist) {
-					// newState.userBase[newUserId] = newUserModel
-					newState.userBase.push(newUserModel)
-					initialPostState.postsBase[newUserId] = []
-					localStorage.setItem("currentUserId", newUserId)
-					newState.currentUserId = localStorage.getItem("currentUserId")
-					console.log(`User:  ${newUserId} isOnline:  ${newUserModel.isOnline}`)
+		case CREATE_NEW_USER:
+			date = new Date().toLocaleDateString()
+			newUserId = "id0" + ++Object.keys(state.userBase).length
+			newUserModel = {
+				"userId": newUserId,
+				"name": action.userData.userName,
+				"birthDate": action.userData.userdateOfbirth,
+				"city": action.userData.userCity,
+				"login": action.userData.userEmail,
+				"password": action.userData.userPassword,
+				"webSite": action.userData.userWebsite,
+				"registerDate": `${date}`,
+				"statusText": "my statusText",
+				"voutedLike": [],
+				"voutedDislike": [],
+				"isOnline": true,
+				"avatarUrl": action.userData.userAvatar,
+				"contacts": []
+			}
+			for (let i = 0; i < state.userBase.length; i++) {
+				if (state.userBase[i].login === action.userData.userEmail) {
+					state.isUserExist = true
+					break
+				} else {
+					state.isUserExist = false
 				}
 			}
-			creatNewUser(action.userData)
+			console.log("reducer", state.isUserExist)
+			if (state.isUserExist) {
+				console.log("Such user already exist")
+				return {
+					...state,
+					isUserExist: true
+				}
+			} else if (!state.isUserExist) {
+				state.userBase[newUserId] = newUserModel
+				state.userBase.push(newUserModel)
+				initialPostState.postsBase[newUserId] = []
+				localStorage.setItem("currentUserId", newUserId)
+				state.currentUserId = localStorage.getItem("currentUserId")
+				console.log(`User:  ${newUserId} isOnline:  ${newUserModel.isOnline}`)
+				return { ...state }
+			}
 			break
-		//==================================================================================================================
-		case "USER_LOG_IN":
+		//======================================================================================================================================
+		case USER_LOG_IN:
 			let logIn = (action) => {
 				let result = ''
-				for (let i = 0; i < newState.userBase.length; i++) {
-					if (newState.userBase[i].login == action.inputLogin) {
-						if (newState.userBase[i].password == action.inputPassword) {
-							localStorage.setItem("currentUserId", newState.userBase[i].userId)
-							newState.currentUserId = localStorage.getItem("currentUserId")
-							newState.userBase[i].isOnline = true
-							result = `User:  ${newState.userBase[i].userId} isOnline:  ${newState.userBase[i].isOnline}`
-							break
+				if (action.inputLogin && action.inputPassword) {
+					for (let i = 0; i < state.userBase.length; i++) {
+						if (state.userBase[i].login === action.inputLogin) {
+							if (state.userBase[i].password === action.inputPassword) {
+								localStorage.setItem("currentUserId", state.userBase[i].userId)
+								//state.currentUserId = localStorage.getItem("currentUserId")
+								//state.userBase[i].isOnline = true
+								result = `User:  ${state.userBase[i].userId} isOnline:  ${state.userBase[i].isOnline}`
+								return {
+									userBase: {
+										...state.userBase[i].isOnline = true,
+									},
+									currentUserId: localStorage.getItem("currentUserId"),
+									...state
+								}
+							} else {
+								result = "Wrong login or password"
+								break
+							}
 						} else {
-							result = "Wrong login or password"
-							break
+							result = "Such user was not found"
+							continue
 						}
-					} else {
-						result = "Such user was not found"
-						continue
 					}
+					console.log(result)
+				} else {
+					console.log("You need to enter data")
 				}
-				console.log(result)
+
 			}
 			logIn(action)
 			break;
 		//======================================================================================================================================
-		case "USER_LOG_OUT":
-			let logOut = () => {
-				let userId = localStorage.getItem("currentUserId")
-				let user = newState.userBase.filter(item => item.userId === localStorage.getItem("currentUserId"))
-				if (user[0]) {
-					user[0].isOnline = false
-					console.log(`User:  ${userId} isOnline:  ${user[0].isOnline}`)
-				}
+		case USER_LOG_OUT:
+			userId = localStorage.getItem("currentUserId")
+			user = state.userBase.filter(item => item.userId === localStorage.getItem("currentUserId"))
+			//debugger
+			if (user[0]) {
+				user[0].isOnline = false
 				localStorage.removeItem("currentUserId")//resetting of user ID
-				newState.currentUserId = localStorage.getItem("currentUserId")// set user ID as null to send us to authorization page
-			}
-			logOut(action)
-			break;
-		case "FOLLOW":
-			let follow = (event, currentUserId, userBase) => {
-				let followId = event.target.offsetParent.childNodes[0].childNodes[1].textContent
-				let user = userBase.filter(item => item.userId === currentUserId)[0]
-				event.target.classList.toggle("is-flipped")
-				if (event.target.classList.contains("is-flipped")) {
-					event.target.textContent = "Unfollow"
-					user.contacts.push(followId)
-				} else {
-					event.target.textContent = "Follow"
-					user.contacts.pop(followId)
+				console.log(`User:  ${userId} isOnline:  ${user[0].isOnline}`)
+				return {
+					...state,
+					currentUserId: localStorage.getItem("currentUserId")// set user ID as null to send us to authorization page
 				}
-				console.log(user.contacts)
+			} else {
+				localStorage.removeItem("currentUserId")
+				return null
 			}
-			follow(action.event, action.currentUserId, action.userBase)
-			// return {}
-			break
-		case "CHAT":
-			let chat = () => {
-				console.log("CHAT")
+		//======================================================================================================================================
+		case FOLLOW:
+			let followId = action.event.target.offsetParent.childNodes[0].childNodes[1].textContent
+			user = action.userBase.filter(item => item.userId === action.currentUserId)[0]
+			action.event.target.classList.toggle("is-flipped")
+			if (action.event.target.classList.contains("is-flipped")) {
+				action.event.target.textContent = "Unfollow"
+				return {
+					userBase: {
+						...state.userBase.filter(item => item.userId === action.currentUserId)[0].contacts = [
+							...state.userBase.filter(item => item.userId === action.currentUserId)[0].contacts,
+							followId
+						]
+					},
+					...state
+				}
+				//user.contacts.push(followId)
+			} else {
+				action.event.target.textContent = "Follow"
+				return {
+					userBase: {
+						...state.userBase.filter(item => item.userId === action.currentUserId)[0].contacts = [
+							...state.userBase.filter(item => item.userId === action.currentUserId)[0].contacts.pop(followId)
+						]
+					},
+					...state
+				}
 			}
-			chat()
-			// return {}
-			break
-		case "SET_USERS":
+		//======================================================================================================================================
+		case CHAT:
+			console.log("CHAT")
 			return {
-				...newState,
-				userBase: [...action.newUsers, ...newState.userBase],
+				...state
+			}
+		//======================================================================================================================================
+		case SET_USERS:
+			console.log("SET_USERS", action.newUsers)
+			return {
+				...state,
+				userBase: [...action.newUsers, ...state.userBase],
 				totalUsersCount: action.totalCount
 			}
-		case "CHANGE_PAGE":
-			const loadData = async (event) => {
-				let lastPage = Math.ceil(newState.totalUsersCount / newState.displayedUsers)
-				if (event.target.textContent === "prev" && newState.currentUsersPage > 1) {
-					--newState.currentUsersPage
-				} else if (event.target.textContent === "next" && newState.currentUsersPage < lastPage) {
-					++newState.currentUsersPage
-				} else if (event.target.attributes.name !== undefined) {
-					newState.currentUsersPage = +event.target.attributes.name.value
+		//======================================================================================================================================
+		case CHANGE_PAGE:
+			let lastPage = Math.ceil(state.totalUsersCount / state.displayedUsers)
+			if (action.event.target.textContent === "prev" && state.currentUsersPage > 1) {
+				localStorage.setItem("currentUserPage", state.currentUsersPage - 1)
+				return {
+					...state,
+					currentUsersPage: --state.currentUsersPage,
 				}
-				await axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newState.currentUsersPage}&count=${newState.displayedUsers}`)
-					.then(response => {
-						return {
-							userBase: [...response.data.items, ...newState.userBase],
-							...newState,
-						}
-					})
+			} else if (action.event.target.textContent === "next" && state.currentUsersPage < lastPage) {
+				localStorage.setItem("currentUserPage", state.currentUsersPage + 1)
+				return {
+					...state,
+					currentUsersPage: ++state.currentUsersPage,
+				}
+			} else if (action.event.target.attributes.name) {
+				localStorage.setItem("currentUserPage", +action.event.target.attributes.name.value)
+				return {
+					...state,
+					currentUsersPage: +action.event.target.attributes.name.value,
+				}
+			} else {
+				return { ...state }
 			}
-			loadData(action.event)
-			break
-		default: return newState
+		//======================================================================================================================================
+		default: return state
 	}
-
-
-	return newState
 }
 export default userBaseReducer
 //reducer getting state from store and action from UI. Don't need subscriber. It will return renewed state.
@@ -253,25 +292,25 @@ export default userBaseReducer
 //action creators
 export const CREATE_NEW_USERactionCreator = (userData) => {
 	return {
-		type: "CREATE_NEW_USER",
+		type: CREATE_NEW_USER,
 		userData: userData
 	}
 }
 export const USER_LOG_INactionCreator = (event) => {
 	return {
-		type: "USER_LOG_IN",
+		type: USER_LOG_IN,
 		inputLogin: event.target[0].value,
 		inputPassword: event.target[1].value,
 	}
 }
 export const USER_LOG_OUTactionCreator = () => {
 	return {
-		type: "USER_LOG_OUT",
+		type: USER_LOG_OUT,
 	}
 }
 export const FOLLOW_actionCreator = (event, currentUserId, userBase) => {
 	return {
-		type: "FOLLOW",
+		type: FOLLOW,
 		event: event,
 		currentUserId: currentUserId,
 		userBase: userBase
@@ -279,14 +318,14 @@ export const FOLLOW_actionCreator = (event, currentUserId, userBase) => {
 }
 export const CHAT_actionCreator = (event) => {
 	return {
-		type: "CHAT",
+		type: CHAT,
 		event: event
 
 	}
 }
 export const SET_USERS_actionCreator = (newUsers, totalCount) => {
 	return {
-		type: "SET_USERS",
+		type: SET_USERS,
 		newUsers: newUsers,
 		totalCount: totalCount
 
@@ -294,7 +333,7 @@ export const SET_USERS_actionCreator = (newUsers, totalCount) => {
 }
 export const CHANGE_PAGE_actionCreator = (event) => {
 	return {
-		type: "CHANGE_PAGE",
+		type: CHANGE_PAGE,
 		event: event
 	}
 }

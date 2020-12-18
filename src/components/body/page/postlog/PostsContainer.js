@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import PostLog from './PostLog';
 import {
-	UPDATE_POST_TEXTactionCreator,
-	ADD_NEW_POSTactionCreator,
-	ADD_NEW_REPLYactionCreator,
-	ADD_NEW_NESTED_REPLYactionCreator
+	UPDATE_POST_TEXT_actionCreator,
+	ADD_NEW_POST_actionCreator,
+	ADD_NEW_REPLY_actionCreator,
+	ADD_NEW_NESTED_REPLY_actionCreator
 } from "../../../../redux/postBaseReducer.js"
 
 
@@ -21,16 +21,16 @@ let mapStateToProps = (state) => {//data for connect in state
 let mapDispatchToProps = (dispatch) => {//functions for connect is dispatch
 	return {
 		updateTextarea: (event) => {
-			dispatch(UPDATE_POST_TEXTactionCreator(event))
+			dispatch(UPDATE_POST_TEXT_actionCreator(event))
 		},
 		addNewPost: (userId, name) => {
-			dispatch(ADD_NEW_POSTactionCreator(
+			dispatch(ADD_NEW_POST_actionCreator(
 				userId,
 				name
 			))
 		},
 		addNewReply: (event, data) => {
-			dispatch(ADD_NEW_REPLYactionCreator(
+			dispatch(ADD_NEW_REPLY_actionCreator(
 				data.userId,
 				data.id,
 				data.userBase.filter(item => item.userId == data.userId)[0].name,
@@ -38,7 +38,7 @@ let mapDispatchToProps = (dispatch) => {//functions for connect is dispatch
 			))
 		},
 		addNewNestedPost: (event, data) => {
-			dispatch(ADD_NEW_NESTED_REPLYactionCreator(
+			dispatch(ADD_NEW_NESTED_REPLY_actionCreator(
 				data.userId,
 				data.initialUser,
 				data.initialPost,
