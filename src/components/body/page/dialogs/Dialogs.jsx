@@ -19,7 +19,6 @@ function Dialogs(props) {
 			{
 				dialogBase[currentUserId]
 					? dialogBase[currentUserId].map((item, index) => (item ? <DialogsItem
-						opponentName={dialogBase[currentUserId][index].name}
 						lastDate={dialogBase[currentUserId][index].lastVisit}
 						userBase={props.userBase}
 						opponentId={dialogBase[currentUserId][index].opponentId}

@@ -13,17 +13,17 @@ import PublicUserPageContainer from './page/UserPage/PublicUserPageContainer';
 
 
 
-
+//${:props.temporaryID}
 
 function Body(props) {
-	//console.log("Body props",     props)
+	//console.log("Body props", props)
 	return (
 		<div className="body-main">
 			<SidebarContainer />
 			<div className="body-page">
 				<span className="body-page_cover"></span>
 				<Switch>
-					<Route exact path='/Profile' component={ProfileContainer} />
+					<Route exact path="/Profile/:temporaryID" component={ProfileContainer} />
 					<Route exact path='/Posts' component={PostsContainer} />
 					<Route exact path='/Dialogs' component={DialogsContainer} />
 					<Route exact path='/UserPage' component={PublicUserPageContainer} />

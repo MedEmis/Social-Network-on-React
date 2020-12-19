@@ -15,7 +15,6 @@ function NestedReplyPostItem(props) {
 	let isLiked = user.voutedLike//to set color of icon
 	let isDisliked = user.voutedDislike//to set color of icon
 	let avatar = user.avatarUrl
-	let name = user.name
 	return (
 		<>
 			<div className="hero-posts-log-item nested-reply">

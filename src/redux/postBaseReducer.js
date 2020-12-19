@@ -634,7 +634,7 @@ const postBaseReducer = (state = initialPostState, action) => {
 			let likeIncrementState = (event, userBase) => {
 				let userId = event.target.parentElement.parentElement.previousSibling.childNodes[1].innerText.slice(0, 6)
 				let logId = +event.target.parentElement.parentElement.previousSibling.childNodes[3].innerText.slice(-2)
-				let user = userBase.filter(item => item.userId == userId)[0]
+				let user = userBase.filter(item => item.userId === userId)[0]
 				let action = event.target.attributes.name.value
 				console.log(`user ${user.userId} pressed ${action}`)
 				//checking if this los was already vouted

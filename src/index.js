@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import store from "./redux/store"
 import store from "./redux/reduxStore"
 import { Provider } from 'react-redux';
 import AppContainer from './AppContainer';
@@ -12,11 +10,7 @@ import AppContainer from './AppContainer';
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<AppContainer/>
-			{/* <App
-				currentUserId={store.getState().usersReducer.currentUserId}
-				isUserExist={store.getState().usersReducer.isUserExist}
-			/> */}
+			<AppContainer />
 		</Provider>
 	</React.StrictMode>,
 	document.getElementById('root')

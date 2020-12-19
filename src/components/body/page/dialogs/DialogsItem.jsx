@@ -6,34 +6,19 @@ import './dialogs.scss';
 
 
 function DialogsItem(props) {
-	console.log(props)
-
 	let opponent = props.userBase.filter(item => item.userId === props.opponentId)[0]
 	let statusText = opponent.isOnline ? "Online" : "Offline"
 	let statusColor = opponent.isOnline ? "green" : "red"
 	let opponentAvatar = opponent.avatarUrl
-	console.log()
-	let userProfilePath = {
-		pathname: "/Profile",
-		currentUserId: props.opponentId,
-		userBase: props.userBase,
-		postsBase: props.postsBase,
-		dialogBase: props.dialogBase
-	}
-	let userPostsPath = {
-		pathname: "/Posts",
-		currentUserId: props.opponentId,
-		userBase: props.userBase,
-		postsBase: props.postsBase,
-		dialogBase: props.dialogBase
-	}
-
+	let opponentName = opponent.name
+	let userPostsPath = "/Posts"
+	let userProfilePath = `/Profile/${opponent.userId}`
 	const deleteItem = (event) => {
 		let dialogItem = event.target.parentNode.parentNode
 		dialogItem.style.right = "150%"
 		setTimeout(() => dialogItem.style.display = "none", 800);
 	}
-
+	// console.log("dialog", props)
 	return (
 		<div className="dialogs-item">
 			<div className="dialogs-item__contact">
@@ -41,7 +26,7 @@ function DialogsItem(props) {
 					<img className="dialog-avatar" src={opponentAvatar} alt="heroPicture" />
 				</div>
 				<div className="dialogs-item__info">
-					<div className="dialogs-item__info_name">{props.opponentName}</div>
+					<div className="dialogs-item__info_name">{opponentName}</div>
 					<div className="dialogs-item__info_date">Last time was here: {props.lastDate}</div>
 					<div className="dialogs-item__info_id"> user id: {props.opponentId}&nbsp;&nbsp;&nbsp;log id: {props.dialogItemId}</div>
 				</div>

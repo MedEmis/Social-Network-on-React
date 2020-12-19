@@ -6,6 +6,7 @@ const USER_LOG_OUT = "USER_LOG_OUT"
 const FOLLOW = "FOLLOW"
 const CHAT = "CHAT"
 const SET_USERS = "SET_USERS"
+const SET_PROFILE = "SET_PROFILE"
 const CHANGE_PAGE = "CHANGE_PAGE"
 
 
@@ -108,7 +109,8 @@ export let initialUsersState = {
 	currentUserId: localStorage.getItem("currentUserId"),//<<<==  USER
 	displayedUsers: 4,
 	totalUsersCount: 0,
-	currentUsersPage: +localStorage.getItem("currentUserPage")
+	currentUsersPage: +localStorage.getItem("currentUserPage"),
+	profile: null
 }
 
 
@@ -252,11 +254,16 @@ const userBaseReducer = (state = initialUsersState, action) => {
 			}
 		//======================================================================================================================================
 		case SET_USERS:
-			console.log("SET_USERS", action.newUsers)
 			return {
 				...state,
 				userBase: [...action.newUsers, ...state.userBase],
 				totalUsersCount: action.totalCount
+			}
+		//======================================================================================================================================
+		case SET_PROFILE:
+			return {
+				...state,
+				profile: action.data
 			}
 		//======================================================================================================================================
 		case CHANGE_PAGE:
@@ -328,6 +335,13 @@ export const SET_USERS_actionCreator = (newUsers, totalCount) => {
 		type: SET_USERS,
 		newUsers: newUsers,
 		totalCount: totalCount
+
+	}
+}
+export const SET_PROFILE_actionCreator = (data) => {
+	return {
+		type: SET_PROFILE,
+		data
 
 	}
 }

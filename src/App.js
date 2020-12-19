@@ -22,13 +22,13 @@ export const pageMove = (event) => {//global function for page animation
 
 
 function App(props) {
-	// console.log("app", props)
+	//console.log("app", props)
 	if (props.currentUserId) {
 		return (//autorized user
 			<div className="App">
 				<BrowserRouter>
 					<HeaderContainer />
-					<Body />
+					<Body temporaryID={props.temporaryID} />
 				</BrowserRouter>
 				<Footer />
 			</div>

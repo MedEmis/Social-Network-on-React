@@ -33,7 +33,7 @@ let mapDispatchToProps = (dispatch) => {//functions for connect is dispatch
 			dispatch(ADD_NEW_REPLY_actionCreator(
 				data.userId,
 				data.id,
-				data.userBase.filter(item => item.userId == data.userId)[0].name,
+				data.userBase.filter(item => item.userId === data.userId)[0].name,
 				event
 			))
 		},
@@ -43,7 +43,7 @@ let mapDispatchToProps = (dispatch) => {//functions for connect is dispatch
 				data.initialUser,
 				data.initialPost,
 				data.id,
-				data.userBase.filter(item => item.userId == data.userId)[0].name,
+				data.userBase.filter(item => item.userId === data.userId)[0].name,
 				event
 			))
 		},

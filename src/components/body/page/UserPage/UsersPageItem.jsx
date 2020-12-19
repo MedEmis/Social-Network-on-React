@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom';
 import './usersPage.scss';
+import { pageMove } from "./../../../../App.js"
 let classNames = require('classnames');
 
 
@@ -11,7 +13,7 @@ function UsersPageItem(props) {
 	} else {
 		Iffollowed = false
 	}
-
+	let usersPath = `/Profile/${props.userId}`
 	return (
 		<div className="userPage__news-item">
 			<div className="userPage__avatar">
@@ -34,7 +36,7 @@ function UsersPageItem(props) {
 					<div className="userPage__info_buttons-item chat"
 						onClick={(event) => props.toChat(event)}
 					>chat</div>
-					<div className="userPage__info_buttons-item feature">feature</div>
+					<Link className="userPage__info_buttons-item feature" to={usersPath} onClick={(event) => pageMove(event)}></Link>
 				</div>
 			</div>
 

@@ -3,7 +3,6 @@ import './profile.scss';
 
 function HeroContacts(props) {
 	let userBase = props.userBase
-	let userId = props.userId
 	return (
 		<div className="body-page__hero-contacts">
 			<div className="body-page__hero-contacts_title">MY FRENDS</div>
@@ -13,16 +12,16 @@ function HeroContacts(props) {
 						className="body-page__hero-contacts_item"
 						key={userId}>
 						<img
-							src={userBase.filter(item => item.userId == userId)[0].avatarUrl}
+							src={userBase.filter(item => item.userId === userId)[0].avatarUrl}
 							alt="contactPicture"
 							className="body-page__hero-contacts_picture">
 						</img>
 						<div
 							className="body-page__hero-contacts_status"
-							style={{ background: userBase.filter(item => item.userId == userId)[0].isOnline ? "green" : "red" }}>
+							style={{ background: userBase.filter(item => item.userId === userId)[0].isOnline ? "green" : "red" }}>
 						</div>
 						<div
-							className="body-page__hero-contacts_name">{userBase.filter(item => item.userId == userId)[0].name}
+							className="body-page__hero-contacts_name">{userBase.filter(item => item.userId === userId)[0].name}
 						</div>
 					</div>
 					: "You dont have any frend yet"))

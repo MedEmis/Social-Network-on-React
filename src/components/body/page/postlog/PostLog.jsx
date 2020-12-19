@@ -8,7 +8,7 @@ import './postLog.scss';
 
 
 function PostLog(props) {
-	let name = props.userBase.filter(item => item.userId == props.userId)[0].name ? props.userBase.filter(item => item.userId == props.userId)[0].name : "AnoNymus"
+	let name = props.userBase.filter(item => item.userId === props.userId)[0].name ? props.userBase.filter(item => item.userId === props.userId)[0].name : "AnoNymus"
 	let postsBlock = props.postsBase ? props.postsBase[props.userId] : null
 	const postInput = React.createRef();
 	//console.log("PostLog", postsBlock)
