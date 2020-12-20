@@ -26,7 +26,7 @@ function App(props) {
 	if (props.currentUserId) {
 		return (//autorized user
 			<div className="App">
-				<BrowserRouter>
+				<BrowserRouter basename="/react-social-network/">
 					<HeaderContainer />
 					<Body temporaryID={props.temporaryID} />
 				</BrowserRouter>
@@ -36,7 +36,7 @@ function App(props) {
 	} else {
 		return (//not autorized user
 			<div className="App">
-				<BrowserRouter>
+				<BrowserRouter basename="/react-social-network/">
 					<div className="body-main">
 						<div className="body-page">
 							<span className="body-page_cover"></span>
