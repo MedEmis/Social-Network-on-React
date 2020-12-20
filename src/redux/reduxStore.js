@@ -3,11 +3,13 @@ import { devToolsEnhancer } from 'redux-devtools-extension';
 import userBaseReducer from './userBaseReducer';
 import postBaseReducer from './postBaseReducer';
 import dialogBaseReducer from './dialogBaseReducer';
+import authReducer from './authReducer';
 
 let reducers = combineReducers({
 	usersReducer: userBaseReducer,
 	postsReducer: postBaseReducer,
-	dialogsReducer: dialogBaseReducer
+	dialogsReducer: dialogBaseReducer,
+	authReducer: authReducer,
 })
 
 const store = createStore(reducers, devToolsEnhancer());

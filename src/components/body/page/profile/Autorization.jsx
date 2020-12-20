@@ -14,7 +14,7 @@ function Authorization(props) {
 				<form onSubmit={(event) => {
 					props.userLogIn(event)
 					event.preventDefault()
-					pageMove(event)
+					//pageMove(event)
 				}
 				}
 					action="" className="body-page__authorization_form">
