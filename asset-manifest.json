@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/my-react-practice/static/css/main.fce67eb0.chunk.css",
+    "main.js": "/my-react-practice/static/js/main.42f85aab.chunk.js",
+    "main.js.map": "/my-react-practice/static/js/main.42f85aab.chunk.js.map",
+    "runtime-main.js": "/my-react-practice/static/js/runtime-main.a8ecc052.js",
+    "runtime-main.js.map": "/my-react-practice/static/js/runtime-main.a8ecc052.js.map",
+    "static/css/2.f4ae4707.chunk.css": "/my-react-practice/static/css/2.f4ae4707.chunk.css",
+    "static/js/2.a9deff81.chunk.js": "/my-react-practice/static/js/2.a9deff81.chunk.js",
+    "static/js/2.a9deff81.chunk.js.map": "/my-react-practice/static/js/2.a9deff81.chunk.js.map",
+    "static/js/3.aa632a8a.chunk.js": "/my-react-practice/static/js/3.aa632a8a.chunk.js",
+    "static/js/3.aa632a8a.chunk.js.map": "/my-react-practice/static/js/3.aa632a8a.chunk.js.map",
+    "index.html": "/my-react-practice/index.html",
+    "static/css/2.f4ae4707.chunk.css.map": "/my-react-practice/static/css/2.f4ae4707.chunk.css.map",
+    "static/css/main.fce67eb0.chunk.css.map": "/my-react-practice/static/css/main.fce67eb0.chunk.css.map",
+    "static/js/2.a9deff81.chunk.js.LICENSE.txt": "/my-react-practice/static/js/2.a9deff81.chunk.js.LICENSE.txt",
+    "static/media/404erorr.6914168b.png": "/my-react-practice/static/media/404erorr.6914168b.png",
+    "static/media/body.scss": "/my-react-practice/static/media/chiptextures.7ac38ee5.jpg",
+    "static/media/page-top.089fd0dd.jpg": "/my-react-practice/static/media/page-top.089fd0dd.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a8ecc052.js",
+    "static/css/2.f4ae4707.chunk.css",
+    "static/js/2.a9deff81.chunk.js",
+    "static/css/main.fce67eb0.chunk.css",
+    "static/js/main.42f85aab.chunk.js"
+  ]
+}
