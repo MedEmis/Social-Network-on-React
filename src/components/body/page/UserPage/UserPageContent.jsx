@@ -11,7 +11,7 @@ function UsersPageContent(props) {
 				props.userBase
 					//.slice(0, showItem)  =>to show only some elements
 					? props.userBase.slice(0, props.displayedUsers).map((user, index) => (user ? <UsersPageItem
-						key={props.userBase[index].userId}
+						key={props.userBase[index].userId || props.userBase[index].id}
 						//data
 						userBase={props.userBase}
 						currentUserId={props.currentUserId}
@@ -25,6 +25,7 @@ function UsersPageContent(props) {
 						statusText={props.userBase[index].statusText}
 						//functions
 						toFollow={props.toFollow}
+						followRequest={props.followRequest}
 						toChat={props.toChat}
 					/> : null))
 					: null

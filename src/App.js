@@ -2,7 +2,7 @@ import React from 'react'
 import HeaderContainer from './components/header/HeaderContainer';
 import Body from './components/body/Body';
 import Footer from './components/footer/Footer';
-import { Route, BrowserRouter } from 'react-router-dom'
+import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import RegistrationContainer from './components/body/page/profile/RegistrationContainer';
 import AuthorizationContainer from './components/body/page/profile/AuthorizationContainer';
 import './App.css';
@@ -23,7 +23,7 @@ export const pageMove = (event) => {//global function for page animation
 
 function App(props) {
 	//console.log("app", props)
-	if (props.currentUserId) {
+	if (props.currentUserId || localStorage.getItem("currentUserId")) {
 		return (//autorized user
 			<div className="App">
 				<BrowserRouter basename="/react-social-network/">
@@ -40,8 +40,10 @@ function App(props) {
 					<div className="body-main">
 						<div className="body-page">
 							<span className="body-page_cover"></span>
-							<Route exact path='/' component={AuthorizationContainer} />
-							<Route exact path='/registration' component={RegistrationContainer} />
+							<Switch>
+								<Route exact path='/' component={AuthorizationContainer} />
+								<Route exact path='/registration' component={RegistrationContainer} />
+							</Switch>
 						</div>
 					</div>
 				</BrowserRouter>

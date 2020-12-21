@@ -39,7 +39,7 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => {//data for connect in state
 	return {
 		userBase: state.usersReducer.userBase,
-		userId: state.usersReducer.currentUserId,
+		userId: state.authReducer.currentUserId,
 		profile: state.usersReducer.profile
 	}
 }

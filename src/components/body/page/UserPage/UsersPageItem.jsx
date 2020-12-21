@@ -29,12 +29,16 @@ function UsersPageItem(props) {
 				<div className="userPage__info_buttons">
 					<div className={classNames("userPage__info_buttons-item follow", { " is-flipped": Iffollowed })}
 						onClick={(event) => {
+							props.followRequest(event)
 							props.toFollow(event, props.currentUserId, props.userBase)
+							console.log(props.userBase.filter(item => (item.userId || item.Id) === props.currentUserId)[0].contacts)
 						}
 						}
 					>Follow</div>
 					<div className="userPage__info_buttons-item chat"
-						onClick={(event) => props.toChat(event)}
+						onClick={(event) => {
+							props.toChat(event)
+						}}
 					>chat</div>
 					<Link className="userPage__info_buttons-item feature" to={usersPath} onClick={(event) => pageMove(event)}></Link>
 				</div>

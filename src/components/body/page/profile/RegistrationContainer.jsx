@@ -1,4 +1,4 @@
-import { CREATE_NEW_USERactionCreator } from './../../../../redux/userBaseReducer';
+import { CREATE_NEW_USERactionCreator } from './../../../../redux/authReducer';
 import { connect } from 'react-redux'
 import Registration from './Registration';
 

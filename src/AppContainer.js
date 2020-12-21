@@ -7,7 +7,7 @@ import App from "./App"
 let mapStateToProps = (state) => {//data for connect in state
 	return {
 		isUserExist: state.usersReducer.isUserExist,
-		currentUserId: state.usersReducer.currentUserId,
+		currentUserId: state.authReducer ? state.authReducer.currentUserId : null,
 		temporaryID: state.usersReducer.profile ? state.usersReducer.profile.userId : null
 	}
 }

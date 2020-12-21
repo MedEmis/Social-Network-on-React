@@ -1,8 +1,5 @@
-import { initialPostState } from "./postBaseReducer"
 
-const CREATE_NEW_USER = "CREATE_NEW_USER"
-const USER_LOG_IN = "USER_LOG_IN"
-const USER_LOG_OUT = "USER_LOG_OUT"
+
 const FOLLOW = "FOLLOW"
 const CHAT = "CHAT"
 const SET_USERS = "SET_USERS"
@@ -106,125 +103,27 @@ export let initialUsersState = {
 		}
 	],
 	isUserExist: false,
-	currentUserId: localStorage.getItem("currentUserId"),//<<<==  USER
 	displayedUsers: 4,
 	totalUsersCount: 0,
 	currentUsersPage: +localStorage.getItem("currentUserPage"),
 	profile: null
 }
 
-
-let userId
-let date
 let user
+let date
 let newUserId
 let newUserModel
 const userBaseReducer = (state = initialUsersState, action) => {
 	switch (action.type) {
-		case CREATE_NEW_USER:
-			date = new Date().toLocaleDateString()
-			newUserId = "id0" + ++Object.keys(state.userBase).length
-			newUserModel = {
-				"userId": newUserId,
-				"name": action.userData.userName,
-				"birthDate": action.userData.userdateOfbirth,
-				"city": action.userData.userCity,
-				"login": action.userData.userEmail,
-				"password": action.userData.userPassword,
-				"webSite": action.userData.userWebsite,
-				"registerDate": `${date}`,
-				"statusText": "my statusText",
-				"voutedLike": [],
-				"voutedDislike": [],
-				"isOnline": true,
-				"avatarUrl": action.userData.userAvatar,
-				"contacts": []
-			}
-			for (let i = 0; i < state.userBase.length; i++) {
-				if (state.userBase[i].login === action.userData.userEmail) {
-					state.isUserExist = true
-					break
-				} else {
-					state.isUserExist = false
-				}
-			}
-			console.log("reducer", state.isUserExist)
-			if (state.isUserExist) {
-				console.log("Such user already exist")
-				return {
-					...state,
-					isUserExist: true
-				}
-			} else if (!state.isUserExist) {
-				state.userBase[newUserId] = newUserModel
-				state.userBase.push(newUserModel)
-				initialPostState.postsBase[newUserId] = []
-				localStorage.setItem("currentUserId", newUserId)
-				state.currentUserId = localStorage.getItem("currentUserId")
-				console.log(`User:  ${newUserId} isOnline:  ${newUserModel.isOnline}`)
-				return { ...state }
-			}
-			break
-		//======================================================================================================================================
-		case USER_LOG_IN:
-			let logIn = (action) => {
-				let result = ''
-				if (action.inputLogin && action.inputPassword) {
-					for (let i = 0; i < state.userBase.length; i++) {
-						if (state.userBase[i].login === action.inputLogin) {
-							if (state.userBase[i].password === action.inputPassword) {
-								localStorage.setItem("currentUserId", state.userBase[i].userId)
-								//state.currentUserId = localStorage.getItem("currentUserId")
-								//state.userBase[i].isOnline = true
-								result = `User:  ${state.userBase[i].userId} isOnline:  ${state.userBase[i].isOnline}`
-								return {
-									userBase: {
-										...state.userBase[i].isOnline = true,
-									},
-									currentUserId: localStorage.getItem("currentUserId"),
-									...state
-								}
-							} else {
-								result = "Wrong login or password"
-								break
-							}
-						} else {
-							result = "Such user was not found"
-							continue
-						}
-					}
-					console.log(result)
-				} else {
-					console.log("You need to enter data")
-				}
 
-			}
-			logIn(action)
-			break;
-		//======================================================================================================================================
-		case USER_LOG_OUT:
-			userId = localStorage.getItem("currentUserId")
-			user = state.userBase.filter(item => item.userId === localStorage.getItem("currentUserId"))
-			//debugger
-			if (user[0]) {
-				user[0].isOnline = false
-				localStorage.removeItem("currentUserId")//resetting of user ID
-				console.log(`User:  ${userId} isOnline:  ${user[0].isOnline}`)
-				return {
-					...state,
-					currentUserId: localStorage.getItem("currentUserId")// set user ID as null to send us to authorization page
-				}
-			} else {
-				localStorage.removeItem("currentUserId")
-				return null
-			}
-		//======================================================================================================================================
 		case FOLLOW:
 			let followId = action.event.target.offsetParent.childNodes[0].childNodes[1].textContent
-			user = action.userBase.filter(item => item.userId === action.currentUserId)[0]
+			user = state.userBase.filter(item => (item.userId || item.Id) === action.currentUserId)[0]
 			action.event.target.classList.toggle("is-flipped")
 			if (action.event.target.classList.contains("is-flipped")) {
 				action.event.target.textContent = "Unfollow"
+				console.log("Unfollow")
+				console.log(state.userBase.filter(item => item.userId === action.currentUserId)[0].contacts)
 				return {
 					userBase: {
 						...state.userBase.filter(item => item.userId === action.currentUserId)[0].contacts = [
@@ -234,9 +133,10 @@ const userBaseReducer = (state = initialUsersState, action) => {
 					},
 					...state
 				}
-				//user.contacts.push(followId)
 			} else {
 				action.event.target.textContent = "Follow"
+				console.log("Follow")
+				console.log(state.userBase.filter(item => item.userId === action.currentUserId)[0].contacts)
 				return {
 					userBase: {
 						...state.userBase.filter(item => item.userId === action.currentUserId)[0].contacts = [
@@ -297,24 +197,8 @@ export default userBaseReducer
 //reducer getting state from store and action from UI. Don't need subscriber. It will return renewed state.
 
 //action creators
-export const CREATE_NEW_USERactionCreator = (userData) => {
-	return {
-		type: CREATE_NEW_USER,
-		userData: userData
-	}
-}
-export const USER_LOG_INactionCreator = (event) => {
-	return {
-		type: USER_LOG_IN,
-		inputLogin: event.target[0].value,
-		inputPassword: event.target[1].value,
-	}
-}
-export const USER_LOG_OUTactionCreator = () => {
-	return {
-		type: USER_LOG_OUT,
-	}
-}
+
+
 export const FOLLOW_actionCreator = (event, currentUserId, userBase) => {
 	return {
 		type: FOLLOW,

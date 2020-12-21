@@ -20,12 +20,51 @@ class UsersPage extends React.Component {
 	async dataLoad() {
 		this.setState({ isLoading: true })
 		await axios.get(
-			`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentUsersPage}&count=${this.props.displayedUsers} `
+			`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentUsersPage}&count=${this.props.displayedUsers} `,
+			{ withCredentials: true }
 		)
 			.then(response => {
 				this.props.setUsers(response.data.items, response.data.totalCount)
 			})
 		this.setState({ isLoading: false })
+	}
+	//==================================================================================================================================
+	async followRequest(event) {
+		// "API-KEY":'6f029e5f-48f9-458c-ac33-6b805ca9e34e'
+		let method = event.target.textContent.toLocaleLowerCase()
+		let id = event.target.offsetParent.childNodes[0].childNodes[1].textContent
+		console.log("method",method)
+		if (method === "follow") {
+			await axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
+				withCredentials: true,
+				headers: {
+					"API-KEY": "2dfa7780-67c5-4719-a0fd-058e0a7328bb"
+				}
+			})
+				.then(response => {
+					if (response.data.resultCode === 0) {
+						console.log(response)
+					} else {
+						console.log("FAIL")
+						console.log(response)
+					}
+				})
+		} else if (method === "unfollow") {
+			await axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
+				withCredentials: true,
+				headers: {
+					"API-KEY": "2dfa7780-67c5-4719-a0fd-058e0a7328bb"
+				}
+			})
+				.then(response => {
+					if (response.data.resultCode === 0) {
+						console.log(response)
+					} else {
+						console.log("FAIL")
+					}
+				})
+		}
+
 	}
 	//==================================================================================================================================
 	componentDidMount() { if (!this.pagesArray.length) { this.dataLoad() } }
@@ -50,6 +89,7 @@ class UsersPage extends React.Component {
 							displayedUsers={this.props.displayedUsers}
 							//functions
 							toFollow={this.props.toFollow}
+							followRequest={this.followRequest}
 							toChat={this.props.toChat}
 						/>
 				}
