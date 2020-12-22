@@ -114,23 +114,11 @@ const authReducer = (state = initialAuthState, action) => {
 				...state,
 				currentUserId: null// set user ID as null to send us to authorization page
 			}
-		// if (user[0]) {
-		// 	user[0].isOnline = false
-		// 	localStorage.removeItem("currentUserId")//resetting of user ID
-		// 	console.log(`User:  ${userId} isOnline:  ${user[0].isOnline}`)
-		// 	return {
-		// 		...state,
-		// 		currentUserId: null// set user ID as null to send us to authorization page
-		// 	}
-		// } else {
-		// 	localStorage.removeItem("currentUserId")
-		// 	return null
-		// }
 		default: return {
 			...state
 		}
 	}
-	return { ...state }
+	return state
 }
 export default authReducer
 export const SET_USER_DATA_actionCreator = (userData, event) => {

@@ -109,43 +109,42 @@ export let initialUsersState = {
 	profile: null
 }
 
-let user
-let date
-let newUserId
-let newUserModel
 const userBaseReducer = (state = initialUsersState, action) => {
 	switch (action.type) {
-
 		case FOLLOW:
 			let followId = action.event.target.offsetParent.childNodes[0].childNodes[1].textContent
-			user = state.userBase.filter(item => (item.userId || item.Id) === action.currentUserId)[0]
+			let user = state.userBase.filter(item => (item.userId || item.Id) === action.currentUserId)[0]
 			action.event.target.classList.toggle("is-flipped")
-			if (action.event.target.classList.contains("is-flipped")) {
+			if (action.request === "follow") {
 				action.event.target.textContent = "Unfollow"
-				console.log("Unfollow")
-				console.log(state.userBase.filter(item => item.userId === action.currentUserId)[0].contacts)
-				return {
-					userBase: {
-						...state.userBase.filter(item => item.userId === action.currentUserId)[0].contacts = [
-							...state.userBase.filter(item => item.userId === action.currentUserId)[0].contacts,
-							followId
-						]
-					},
-					...state
-				}
-			} else {
-				action.event.target.textContent = "Follow"
 				console.log("Follow")
-				console.log(state.userBase.filter(item => item.userId === action.currentUserId)[0].contacts)
-				return {
-					userBase: {
-						...state.userBase.filter(item => item.userId === action.currentUserId)[0].contacts = [
-							...state.userBase.filter(item => item.userId === action.currentUserId)[0].contacts.pop(followId)
-						]
-					},
-					...state
+				if (!user.contacts.includes(followId)) {
+					return {
+						userBase: { ...user.contacts = [...user.contacts, followId] },
+						...state
+					}
+				} else {
+					return {
+						...state
+					}
+				}
+			} else if (action.request === "unfollow") {
+				console.log("Unfollow")
+				action.event.target.textContent = "Follow"
+				let followIdIndex = user.contacts.indexOf(followId)
+				user.contacts.splice(followIdIndex, 1)
+				if (user.contacts.includes(followId)) {
+					return {
+						userBase: { ...user.contacts = [...user.contacts] },
+						...state
+					}
+				} else {
+					return {
+						...state
+					}
 				}
 			}
+			break
 		//======================================================================================================================================
 		case CHAT:
 			console.log("CHAT")
@@ -199,12 +198,12 @@ export default userBaseReducer
 //action creators
 
 
-export const FOLLOW_actionCreator = (event, currentUserId, userBase) => {
+export const FOLLOW_actionCreator = (event, currentUserId, request) => {
 	return {
 		type: FOLLOW,
 		event: event,
 		currentUserId: currentUserId,
-		userBase: userBase
+		request: request
 	}
 }
 export const CHAT_actionCreator = (event) => {

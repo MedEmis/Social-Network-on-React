@@ -8,12 +8,13 @@ let classNames = require('classnames');
 
 function UsersPageItem(props) {
 	let Iffollowed;
-	if (props.userBase.filter(item => item.userId === props.currentUserId)[0].contacts.includes(props.userId)) {
+	if (props.userBase.filter(item => item.userId === props.currentUserId)[0].contacts.includes(String(props.userId))) {//my ID array is String, but from server => Number
 		Iffollowed = true
 	} else {
 		Iffollowed = false
 	}
 	let usersPath = `/Profile/${props.userId}`
+
 	return (
 		<div className="userPage__news-item">
 			<div className="userPage__avatar">
@@ -27,19 +28,15 @@ function UsersPageItem(props) {
 				</div>
 				<div className="userPage__info_status">{props.statusText}</div>
 				<div className="userPage__info_buttons">
-					<div className={classNames("userPage__info_buttons-item follow", { " is-flipped": Iffollowed })}
-						onClick={(event) => {
-							props.followRequest(event)
-							props.toFollow(event, props.currentUserId, props.userBase)
-							console.log(props.userBase.filter(item => (item.userId || item.Id) === props.currentUserId)[0].contacts)
-						}
-						}
-					>Follow</div>
-					<div className="userPage__info_buttons-item chat"
+					<button className={classNames("userPage__info_buttons-item follow", { " is-flipped": Iffollowed })}
+						disabled={false}
+						onClick={(event) => props.followRequest(event)}
+					>Follow</button>
+					<button className="userPage__info_buttons-item chat"
 						onClick={(event) => {
 							props.toChat(event)
 						}}
-					>chat</div>
+					>chat</button>
 					<Link className="userPage__info_buttons-item feature" to={usersPath} onClick={(event) => pageMove(event)}></Link>
 				</div>
 			</div>
