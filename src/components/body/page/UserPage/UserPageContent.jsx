@@ -22,9 +22,7 @@ function UsersPageContent(props) {
 						registerDate={props.userBase[index].registerDate}
 						userId={props.userBase[index].userId || props.userBase[index].id}
 						statusText={props.userBase[index].statusText}
-						isFollowing={props.isFollowing}
 						//functions
-						toFollow={props.toFollow}
 						followRequest={props.followRequest}
 						toChat={props.toChat}
 					/> : null))

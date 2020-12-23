@@ -23,7 +23,8 @@ export const pageMove = (event) => {//global function for page animation
 
 function App(props) {
 	//console.log("app", props)
-	if (props.currentUserId || localStorage.getItem("currentUserId")) {
+	// if (props.currentUserId || localStorage.getItem("currentUserId")) {//my data base
+	if (props.isAuthorized|| localStorage.getItem("currentUserId")) {
 		return (//autorized user
 			<div className="App">
 				<BrowserRouter basename="/react-social-network/">
@@ -50,6 +51,22 @@ function App(props) {
 				<Footer />
 			</div>
 		);
+		// return (//not autorized user
+		// 	<div className="App">
+		// 		<BrowserRouter basename="/react-social-network/">
+		// 			<div className="body-main">
+		// 				<div className="body-page">
+		// 					<span className="body-page_cover"></span>
+		// 					<Switch>
+		// 						<Route exact path='/' component={AuthorizationContainer} />
+		// 						<Route exact path='/registration' component={RegistrationContainer} />
+		// 					</Switch>
+		// 				</div>
+		// 			</div>
+		// 		</BrowserRouter>
+		// 		<Footer />
+		// 	</div>
+		// );
 	}
 
 }

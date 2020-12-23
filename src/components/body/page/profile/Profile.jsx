@@ -17,8 +17,7 @@ function Profile(props) {
 	let heroPicture = props.profile ? props.profile.photos.large : null
 	// ВРЕМЕННО ИСПОЛЬЗУЕТЬСЯ БАЗА С КАМАСУТРЫ. ЧТОБЫ ПЕРЕКЛЮЧИТЬСЯ НА МОЮ НУЖНО ОТКЛЮЧИТЬ props.isLoading И props.profile(ПОМЕНЯТЬ НА user)
 	return (
-		!props.isLoading
-			?
+		!props.isLoading ?
 			props.profile ?
 				//user ?
 				<div className="body-page__hero-page">

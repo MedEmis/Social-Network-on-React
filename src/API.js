@@ -10,32 +10,23 @@ const axiosInstance = axios.create({
 export const userAPI = {
 	async logIn() {
 		return await axiosInstance.get(`auth/me`)
-			.then(response => response.data)//returning data for component function
+			.then(response => {
+				if (response.data.resultCode === 0) { return response }
+			})//returning data for component function
 	},
 	async getUsersBase(currentPage, displayedUsers) {
 		return await axiosInstance.get(`users?page=${currentPage}&count=${displayedUsers}`)
 			.then(response => response.data)//returning data for component function
 	},
-	async followRequest(event, toFollow, currentUserId) {
-		let request = event.target.textContent.toLocaleLowerCase()
-		let id = event.target.offsetParent.childNodes[0].childNodes[1].textContent
-		event.target.disabled = true
+	async getUsersProfile(userId) {
+		return await axiosInstance.get(`profile/${userId}`)
+			.then(response => response.data)//returning data for component function
+	},
+	async followRequest(request, id) {
 		if (request === "follow") {
-			await axiosInstance.post(`follow/${id}`).then(response => {
-				if (response.data.resultCode === 0) {
-					return toFollow(event, currentUserId, request), event.target.disabled = false
-				} else {
-					return 
-				}
-			})
+			return await axiosInstance.post(`follow/${id}`)
 		} else if (request === "unfollow") {
-			await axiosInstance.delete(`follow/${id}`).then(response => {
-				if (response.data.resultCode === 0) {
-					return toFollow(event, currentUserId, request), event.target.disabled = false
-				} else {
-					return 
-				}
-			})
+			return await axiosInstance.delete(`follow/${id}`)
 		}
 	}
 }

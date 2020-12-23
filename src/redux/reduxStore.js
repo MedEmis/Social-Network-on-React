@@ -1,9 +1,9 @@
-import { createStore, combineReducers } from 'redux'
-import { devToolsEnhancer } from 'redux-devtools-extension';
+import { createStore, compose, combineReducers, applyMiddleware } from 'redux'
 import userBaseReducer from './userBaseReducer';
 import postBaseReducer from './postBaseReducer';
 import dialogBaseReducer from './dialogBaseReducer';
 import authReducer from './authReducer';
+import thunkMiddleware from 'redux-thunk'
 
 let reducers = combineReducers({
 	usersReducer: userBaseReducer,
@@ -12,6 +12,11 @@ let reducers = combineReducers({
 	authReducer: authReducer,
 })
 
-const store = createStore(reducers, devToolsEnhancer());
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default store           
+const store = createStore(
+	reducers,
+	composeEnhancer(applyMiddleware(thunkMiddleware)),
+);
+
+export default store;

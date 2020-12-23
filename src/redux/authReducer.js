@@ -1,5 +1,6 @@
 import { initialUsersState } from "./userBaseReducer"
 import { initialPostState } from "./postBaseReducer"
+import { userAPI } from './../API';
 
 
 const USER_LOG_IN = "USER_LOG_IN"
@@ -23,10 +24,13 @@ let newUserModel
 const authReducer = (state = initialAuthState, action) => {
 	switch (action.type) {
 		case SET_USER_DATA:
-			console.log(action.userData.data)
+			console.log("logged in", action.userData.data)
+			localStorage.setItem("currentUserId", action.userData.data.id)
 			return {
 				...state,
-				...action.userData.data,
+				email: action.userData.data.email,
+				userId: action.userData.data.id,
+				login: action.userData.data.login,
 				isAuthorized: true
 			}
 		//======================================================================================================================================
@@ -86,7 +90,8 @@ const authReducer = (state = initialAuthState, action) => {
 							result = `User:  ${initialUsersState.userBase[i].userId} isOnline:  ${initialUsersState.userBase[i].isOnline}`
 							return {
 								...state,
-								currentUserId: initialUsersState.userBase[i].userId
+								currentUserId: initialUsersState.userBase[i].userId,
+								isAuthorized: true
 							}
 						} else {
 							result = "Wrong login or password"
@@ -104,15 +109,16 @@ const authReducer = (state = initialAuthState, action) => {
 			break;
 		//======================================================================================================================================
 		case USER_LOG_OUT:
-			userId = localStorage.getItem("currentUserId")
-			user = initialUsersState.userBase.filter(item => item.userId === localStorage.getItem("currentUserId"))[0]
+			//userId = localStorage.getItem("currentUserId")
+			//user = initialUsersState.userBase.filter(item => item.userId === localStorage.getItem("currentUserId"))[0]
 			//debugger
-			user.isOnline = false
+			//user.isOnline = false
 			localStorage.removeItem("currentUserId")//resetting of user ID
-			console.log(`User:  ${userId} isOnline:  ${user.isOnline}`)
+			//console.log(`User:  ${userId} isOnline:  ${user.isOnline}`)
 			return {
 				...state,
-				currentUserId: null// set user ID as null to send us to authorization page
+				currentUserId: null,// set user ID as null to send us to authorization page
+				isAuthorized: false
 			}
 		default: return {
 			...state
@@ -146,3 +152,13 @@ export const CREATE_NEW_USERactionCreator = (userData) => {
 		userData: userData
 	}
 }
+
+
+
+//==============THUNKS========================================================================
+export const LogInThunkCreator = () => (dispatch) => {
+	userAPI.logIn().then(data => {//start API request, and after response...
+		dispatch(SET_USER_DATA_actionCreator(data))// put data to store
+	})
+}
+//=============THUNKS END=====================================================================

@@ -1,10 +1,13 @@
 
+import { userAPI } from './../API';
 
-const FOLLOW = "FOLLOW"
 const CHAT = "CHAT"
+const FOLLOW = "FOLLOW"
 const SET_USERS = "SET_USERS"
-const SET_PROFILE = "SET_PROFILE"
 const CHANGE_PAGE = "CHANGE_PAGE"
+const SET_PROFILE = "SET_PROFILE"
+const TOGGLE_FETCHING = "TOGGLE_FETCHING"
+const TOGGLE_FOLLOWING = "TOGGLE_FOLLOWING"
 
 
 export let initialUsersState = {
@@ -102,49 +105,65 @@ export let initialUsersState = {
 			"contacts": ["id0001", "id0002"]
 		}
 	],
-	isUserExist: false,
+	profile: null,
 	displayedUsers: 4,
+	isFetching: null,
+	isUserExist: false,
 	totalUsersCount: 0,
 	currentUsersPage: +localStorage.getItem("currentUserPage"),
-	profile: null
 }
 
 const userBaseReducer = (state = initialUsersState, action) => {
 	switch (action.type) {
 		case FOLLOW:
-			let followId = action.event.target.offsetParent.childNodes[0].childNodes[1].textContent
 			let user = state.userBase.filter(item => (item.userId || item.Id) === action.currentUserId)[0]
 			action.event.target.classList.toggle("is-flipped")
-			if (action.request === "follow") {
-				action.event.target.textContent = "Unfollow"
-				console.log("Follow")
-				if (!user.contacts.includes(followId)) {
-					return {
-						userBase: { ...user.contacts = [...user.contacts, followId] },
-						...state
+			if (user) {
+				if (action.request === "follow") {
+					action.event.target.textContent = "Unfollow"
+					console.log("Follow")
+					if (!user.contacts.includes(action.followTo)) {
+						return {
+							userBase: { ...user.contacts = [...user.contacts, action.followTo] },
+							...state
+						}
+					} else {
+						return {
+							...state
+						}
 					}
-				} else {
-					return {
-						...state
+				} else if (action.request === "unfollow") {
+					console.log("Unfollow")
+					action.event.target.textContent = "Follow"
+					let followIdIndex = user.contacts.indexOf(action.followTo)
+					user.contacts.splice(followIdIndex, 1)
+					if (user.contacts.includes(action.followTo)) {
+						return {
+							userBase: { ...user.contacts = [...user.contacts] },
+							...state
+						}
+					} else {
+						return {
+							...state
+						}
 					}
 				}
-			} else if (action.request === "unfollow") {
-				console.log("Unfollow")
-				action.event.target.textContent = "Follow"
-				let followIdIndex = user.contacts.indexOf(followId)
-				user.contacts.splice(followIdIndex, 1)
-				if (user.contacts.includes(followId)) {
-					return {
-						userBase: { ...user.contacts = [...user.contacts] },
-						...state
-					}
-				} else {
-					return {
-						...state
-					}
-				}
+			} else {
+				return null
 			}
-			break
+
+		//======================================================================================================================================
+		case TOGGLE_FOLLOWING:
+			return {
+				...state,
+				isFollowing: action.condition
+			}
+		//======================================================================================================================================
+		case TOGGLE_FETCHING:
+			return {
+				...state,
+				isFetching: action.condition
+			}
 		//======================================================================================================================================
 		case CHAT:
 			console.log("CHAT")
@@ -186,7 +205,7 @@ const userBaseReducer = (state = initialUsersState, action) => {
 					currentUsersPage: +action.event.target.attributes.name.value,
 				}
 			} else {
-				return { ...state }
+				return state
 			}
 		//======================================================================================================================================
 		default: return state
@@ -195,15 +214,15 @@ const userBaseReducer = (state = initialUsersState, action) => {
 export default userBaseReducer
 //reducer getting state from store and action from UI. Don't need subscriber. It will return renewed state.
 
-//action creators
 
-
-export const FOLLOW_actionCreator = (event, currentUserId, request) => {
+//==============ACTION CREATORS========================================================================
+export const FOLLOW_actionCreator = (event, currentUserId, request, id) => {
 	return {
 		type: FOLLOW,
 		event: event,
 		currentUserId: currentUserId,
-		request: request
+		request: request,
+		followTo: id
 	}
 }
 export const CHAT_actionCreator = (event) => {
@@ -234,3 +253,37 @@ export const CHANGE_PAGE_actionCreator = (event) => {
 		event: event
 	}
 }
+export const Toggle_IsFetching_actionCreator = (condition) => {
+	return {
+		type: TOGGLE_FETCHING,
+		condition: condition
+	}
+}
+//==============ACTION CREATORS END========================================================================
+
+//==============THUNKS========================================================================
+export const GetUserBaseThunkCreator = (currentPage, displayedUsers) => (dispatch) => {
+	dispatch(Toggle_IsFetching_actionCreator(true))// switch loader on
+	userAPI.getUsersBase(currentPage, displayedUsers).then(data => {//start API request, and after response...
+		dispatch(Toggle_IsFetching_actionCreator(false))// switch loader off
+		dispatch(SET_USERS_actionCreator(data.items, data.totalCount))// put data to store
+	})
+}
+export const GetUserProfileThunkCreator = (userId) => (dispatch) => {
+	console.log("GetUserProfile", userId)
+	dispatch(Toggle_IsFetching_actionCreator(true))// switch loader on
+	userAPI.getUsersProfile(userId).then(data => {//start API request, and after response...
+		dispatch(Toggle_IsFetching_actionCreator(false))// switch loader off
+		dispatch(SET_PROFILE_actionCreator(data))// put data to store
+	})
+}
+export const FollowingThunkCreator = (event, currentUserId) => (dispatch) => {
+	let request = event.target.textContent.toLocaleLowerCase()
+	let id = event.target.offsetParent.childNodes[0].childNodes[1].textContent
+	event.target.disabled = true
+	userAPI.followRequest(request, id).then(response => {
+		dispatch(FOLLOW_actionCreator(event, currentUserId, request, id))
+		event.target.disabled = false
+	})
+}
+//==============THUNKS END========================================================================
