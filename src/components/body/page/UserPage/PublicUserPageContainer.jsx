@@ -10,8 +10,7 @@ import {
 
 
 
-let mapStateToProps = (state) => {//data for connect in state
-	console.log("isFollowing", state.usersReducer.isFollowing,)
+let mapStateToProps = (state) => {//preparing props for component
 	return {
 		userBase: state.usersReducer.userBase,
 		isFetching: state.usersReducer.isFetching,
@@ -26,7 +25,7 @@ let mapStateToProps = (state) => {//data for connect in state
 
 
 const PublicUserPageContainer = connect(mapStateToProps, {
-	toChat: CHAT_actionCreator,
+	toChat: CHAT_actionCreator,// giving function callbacks to component
 	toFollow: FollowingThunkCreator,
 	GetUsers: GetUserBaseThunkCreator,
 	ChangePage: CHANGE_PAGE_actionCreator,

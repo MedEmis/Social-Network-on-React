@@ -3,6 +3,8 @@ import Profile from './Profile';
 import { connect } from 'react-redux'
 import { GetUserProfileThunkCreator } from './../../../../redux/userBaseReducer';
 import { withRouter } from 'react-router-dom';
+import { WithAuthRedirect_HOC } from '../../../../HOC/withAuthRedirectHOC.js';
+import { compose } from 'redux';
 
 
 class ProfileContainer extends React.Component {
@@ -23,20 +25,18 @@ class ProfileContainer extends React.Component {
 		)
 	}
 }
-
+//===========================================================================================
 let mapStateToProps = (state) => {//data for connect in state
 	return {
+		profile: state.usersReducer.profile,
 		userBase: state.usersReducer.userBase,
 		userId: state.authReducer.currentUserId,
-		profile: state.usersReducer.profile,
-		isFetching: state.usersReducer.isFetching
+		isFetching: state.usersReducer.isFetching,
 	}
 }
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer) //Connecting URL data to our component
-export default connect(mapStateToProps, { setProfile: GetUserProfileThunkCreator })(WithUrlDataContainerComponent)
-
-
-
-
-//export default ProfileContainer;
+export default compose(
+	connect(mapStateToProps, { setProfile: GetUserProfileThunkCreator }), // THIRD =>//  giving props ang callbacks
+	withRouter,// SECOND => // //Connecting URL data to our component
+	WithAuthRedirect_HOC// FIRST  => // giving our ProfileContainer to HOC function to wrap with it (HOC), and assign property "isAuthorized" and give ability to redirect
+)(ProfileContainer)//TARGET component

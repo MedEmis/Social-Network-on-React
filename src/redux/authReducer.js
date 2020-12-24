@@ -74,7 +74,7 @@ const authReducer = (state = initialAuthState, action) => {
 				initialPostState.postsBase[newUserId] = []
 				localStorage.setItem("currentUserId", newUserId)
 				console.log(`User:  ${newUserId} isOnline:  ${newUserModel.isOnline}`)
-				return { ...state, currentUserId: newUserId }
+				return { ...state, currentUserId: newUserId, isAuthorized: true }
 			}
 			break
 
@@ -109,12 +109,7 @@ const authReducer = (state = initialAuthState, action) => {
 			break;
 		//======================================================================================================================================
 		case USER_LOG_OUT:
-			//userId = localStorage.getItem("currentUserId")
-			//user = initialUsersState.userBase.filter(item => item.userId === localStorage.getItem("currentUserId"))[0]
-			//debugger
-			//user.isOnline = false
 			localStorage.removeItem("currentUserId")//resetting of user ID
-			//console.log(`User:  ${userId} isOnline:  ${user.isOnline}`)
 			return {
 				...state,
 				currentUserId: null,// set user ID as null to send us to authorization page
