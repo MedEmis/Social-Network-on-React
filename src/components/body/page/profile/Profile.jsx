@@ -6,6 +6,7 @@ import topImage from "./../../../../images/page-top.jpg"
 import './profile.scss';
 import './../../preloader.scss';
 import HeroAbout from './HeroAbout';
+import StatusBlock from './StatusBlock';
 
 
 
@@ -21,7 +22,15 @@ function Profile(props) {
 			props.profile ?
 				//user ?
 				<div className="body-page__hero-page">
-					<div className="body-page__background"><img src={topImage} alt="topImage"></img></div>
+					<div className="body-page__background">
+						<img src={topImage} alt="topImage" className="body-page__background_image" />
+						<StatusBlock
+							userId={props.userId}							
+							userStatus={props.userStatus}							
+							getStatus={props.getStatus}
+							setStatus={props.setStatus}
+						/>
+					</div>
 					<HeroInfo
 						userBase={props.userBase}
 						userId={props.userId}

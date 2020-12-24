@@ -24,15 +24,20 @@ let newUserModel
 const authReducer = (state = initialAuthState, action) => {
 	switch (action.type) {
 		case SET_USER_DATA:
-			console.log("logged in", action.userData.data)
-			localStorage.setItem("currentUserId", action.userData.data.id)
-			return {
-				...state,
-				email: action.userData.data.email,
-				userId: action.userData.data.id,
-				login: action.userData.data.login,
-				isAuthorized: true
+			if (action.userData.data.id) {
+				console.log("logged in", action.userData.data.id)
+				localStorage.setItem("currentUserId",action.userData.data.id)
+				return {
+					...state,
+					email: action.userData.data.email,
+					userId: action.userData.data.id,
+					login: action.userData.data.login,
+					isAuthorized: true
+				}
+			} else {
+				console.log("Not logged")
 			}
+			break
 		//======================================================================================================================================
 		case CREATE_NEW_USER:
 			date = new Date().toLocaleDateString()
@@ -122,11 +127,10 @@ const authReducer = (state = initialAuthState, action) => {
 	return state
 }
 export default authReducer
-export const SET_USER_DATA_actionCreator = (userData, event) => {
+export const SET_USER_DATA_actionCreator = (data) => {
 	return {
 		type: SET_USER_DATA,
-		userData: userData,
-		event: event
+		userData: data
 	}
 }
 export const USER_LOG_INactionCreator = (event) => {

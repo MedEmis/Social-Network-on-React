@@ -11,7 +11,7 @@ export const userAPI = {
 	async logIn() {
 		return await axiosInstance.get(`auth/me`)
 			.then(response => {
-				if (response.data.resultCode === 0) { return response }
+				if (response.data.resultCode === 0) { return response.data }
 			})//returning data for component function
 	},
 	async getUsersBase(currentPage, displayedUsers) {
@@ -21,6 +21,14 @@ export const userAPI = {
 	async getUsersProfile(userId) {
 		return await axiosInstance.get(`profile/${userId}`)
 			.then(response => response.data)//returning data for component function
+	},
+	async getUserStatus(userId) {
+		return await axiosInstance.get(`/profile/status/${userId}`)
+			.then(response => response.data)
+	},
+	async setUserStatus(payload) {
+		return await axiosInstance.put(`/profile/status`, { status: payload })
+			.then(response => { if (response.resultCode === 0) { return response.data } })
 	},
 	async followRequest(request, id) {
 		if (request === "follow") {

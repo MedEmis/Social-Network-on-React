@@ -4,10 +4,10 @@ import { userAPI } from './../API';
 const CHAT = "CHAT"
 const FOLLOW = "FOLLOW"
 const SET_USERS = "SET_USERS"
+const SET_STATUS = "SET_STATUS"
 const CHANGE_PAGE = "CHANGE_PAGE"
 const SET_PROFILE = "SET_PROFILE"
 const TOGGLE_FETCHING = "TOGGLE_FETCHING"
-const TOGGLE_FOLLOWING = "TOGGLE_FOLLOWING"
 
 
 export let initialUsersState = {
@@ -110,6 +110,7 @@ export let initialUsersState = {
 	isFetching: null,
 	isUserExist: false,
 	totalUsersCount: 0,
+	userStatus: null,
 	currentUsersPage: +localStorage.getItem("currentUserPage"),
 }
 
@@ -151,13 +152,7 @@ const userBaseReducer = (state = initialUsersState, action) => {
 			} else {
 				return null
 			}
-
-		//======================================================================================================================================
-		case TOGGLE_FOLLOWING:
-			return {
-				...state,
-				isFollowing: action.condition
-			}
+			break
 		//======================================================================================================================================
 		case TOGGLE_FETCHING:
 			return {
@@ -182,6 +177,12 @@ const userBaseReducer = (state = initialUsersState, action) => {
 			return {
 				...state,
 				profile: action.data
+			}
+		//======================================================================================================================================
+		case SET_STATUS:
+			return {
+				...state,
+				userStatus: action.userStatus
 			}
 		//======================================================================================================================================
 		case CHANGE_PAGE:
@@ -259,6 +260,12 @@ export const Toggle_IsFetching_actionCreator = (condition) => {
 		condition: condition
 	}
 }
+export const SET_STATUS_actionCreator = (userStatus) => {
+	return {
+		type: SET_STATUS,
+		userStatus: userStatus
+	}
+}
 //==============ACTION CREATORS END========================================================================
 
 //==============THUNKS========================================================================
@@ -270,7 +277,6 @@ export const GetUserBaseThunkCreator = (currentPage, displayedUsers) => (dispatc
 	})
 }
 export const GetUserProfileThunkCreator = (userId) => (dispatch) => {
-	console.log("GetUserProfile", userId)
 	dispatch(Toggle_IsFetching_actionCreator(true))// switch loader on
 	userAPI.getUsersProfile(userId).then(data => {//start API request, and after response...
 		dispatch(Toggle_IsFetching_actionCreator(false))// switch loader off
@@ -284,6 +290,18 @@ export const FollowingThunkCreator = (event, currentUserId) => (dispatch) => {
 	userAPI.followRequest(request, id).then(response => {
 		dispatch(FOLLOW_actionCreator(event, currentUserId, request, id))
 		event.target.disabled = false
+	})
+}
+export const GetStatusThunkCreator = (currentUserId) => (dispatch) => {
+	userAPI.getUserStatus(currentUserId).then(response => {
+		dispatch(SET_STATUS_actionCreator(response))
+	})
+}
+export const SetStatusThunkCreator = (event) => (dispatch) => {
+	let payload = event.target.value
+	console.log("thunk", payload)
+	userAPI.setUserStatus(payload).then(response => {
+		dispatch(SET_STATUS_actionCreator(payload))
 	})
 }
 //==============THUNKS END========================================================================
