@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 
 function StatusBlock(props) {
 	const [isTyping, setIsTyping] = useState(false)
-	const [status, setStatus] = useState()
 	return (
 		<div className="body-page__background_status"
 			onDoubleClick={() => setIsTyping(true)}
@@ -12,8 +11,7 @@ function StatusBlock(props) {
 				? <input onBlur={(event) => {
 					setIsTyping(false)
 					props.setStatus(event)
-					//setStatus(event.target.value)
-				}} className="body-page__background_status-input" placeholder="enter your status" autoFocus={true} />
+				}} className="body-page__background_status-input" placeholder="enter your status" autoFocus={true} maxLength = "35"/>
 				: <span className="body-page__background_status-text">{props.userStatus || "double click to set status"}</span>
 			}
 		</div>

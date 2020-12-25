@@ -6,6 +6,7 @@ import { userAPI } from './../API';
 const USER_LOG_IN = "USER_LOG_IN"
 const USER_LOG_OUT = "USER_LOG_OUT"
 const SET_USER_DATA = "SET_USER_DATA"
+const AUTHORIZATION = "AUTHORIZATION"
 const CREATE_NEW_USER = "CREATE_NEW_USER"
 
 
@@ -16,28 +17,28 @@ export let initialAuthState = {
 	isAuthorized: false,
 	currentUserId: null || localStorage.getItem("currentUserId")
 }
-let userId
-let user
+
 let date
 let newUserId
 let newUserModel
 const authReducer = (state = initialAuthState, action) => {
 	switch (action.type) {
 		case SET_USER_DATA:
-			if (action.userData.data.id) {
-				console.log("logged in", action.userData.data.id)
-				localStorage.setItem("currentUserId",action.userData.data.id)
-				return {
-					...state,
-					email: action.userData.data.email,
-					userId: action.userData.data.id,
-					login: action.userData.data.login,
-					isAuthorized: true
-				}
-			} else {
-				console.log("Not logged")
+			return {
+				...state,
+				email: action.userData.data.email,
+				login: action.userData.data.login,
+				isAuthorized: true
 			}
-			break
+		//======================================================================================================================================
+		case AUTHORIZATION:
+			localStorage.setItem("currentUserId", action.userId)
+			console.log("logged in", action.userId)
+			return {
+				...state,
+				userId: action.userId,
+				isAuthorized: true
+			}
 		//======================================================================================================================================
 		case CREATE_NEW_USER:
 			date = new Date().toLocaleDateString()
@@ -127,6 +128,8 @@ const authReducer = (state = initialAuthState, action) => {
 	return state
 }
 export default authReducer
+
+//================ACTIONS=====================================================================================
 export const SET_USER_DATA_actionCreator = (data) => {
 	return {
 		type: SET_USER_DATA,
@@ -151,13 +154,30 @@ export const CREATE_NEW_USERactionCreator = (userData) => {
 		userData: userData
 	}
 }
-
-
+export const AUTHORIZATION_actionCreator = (userId) => {
+	return {
+		type: AUTHORIZATION,
+		userId: userId
+	}
+}
+//================ACTIONS END==================================================================================
 
 //==============THUNKS========================================================================
 export const LogInThunkCreator = () => (dispatch) => {
 	userAPI.logIn().then(data => {//start API request, and after response...
 		dispatch(SET_USER_DATA_actionCreator(data))// put data to store
+	})
+}
+export const AuthorizationThunkCreator = (email, password, rememberMe) => (dispatch) => {
+	userAPI.authorization(email, password, rememberMe).then(response => {//start API request, and after response...
+		if (response.data.resultCode === 0) {//if server allow authorization...
+			dispatch(AUTHORIZATION_actionCreator(response.data.data.userId))// put data to store
+			userAPI.logIn(response.data.data.userId).then(data => {//start API request, and after response...
+				dispatch(SET_USER_DATA_actionCreator(data))// put data to store
+			})
+		} else {
+			console.log(response.data.messages[0])
+		}
 	})
 }
 //=============THUNKS END=====================================================================

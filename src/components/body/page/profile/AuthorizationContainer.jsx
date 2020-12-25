@@ -1,19 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { USER_LOG_INactionCreator, LogInThunkCreator } from './../../../../redux/authReducer'; //---For my data base
+import { USER_LOG_INactionCreator, LogInThunkCreator, AuthorizationThunkCreator } from './../../../../redux/authReducer'; //---For my data base
 import Authorization from './Autorization';
 
 function AuthorizationContainer(props) {
 	return (
-		<Authorization
-			userLogIn={props.LogIn}//---for samurai API base
-			//userLogIn={props.userLogIn} //---For my data base
-		/>
+		<Authorization {...props} />
 	)
 }
 
-
-export default connect(null/* no props */, { LogIn: LogInThunkCreator })(AuthorizationContainer)
+export default connect(null, {
+	// LogIn: LogInThunkCreator,
+	Authorization: AuthorizationThunkCreator
+})(AuthorizationContainer)
 
 
 //AuthorizationContainer = connect(null/* no props */, { userLogIn: USER_LOG_INactionCreator, })(Authorization)  //---For my data base

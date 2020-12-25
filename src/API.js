@@ -14,6 +14,10 @@ export const userAPI = {
 				if (response.data.resultCode === 0) { return response.data }
 			})//returning data for component function
 	},
+	async authorization(email, password, rememberMe = false, captcha = null) {
+		return await axiosInstance.post(`auth/login`, { email: email, password: password, rememberMe: rememberMe, captcha: captcha })
+			.then(response => { return response })//returning data for component function
+	},
 	async getUsersBase(currentPage, displayedUsers) {
 		return await axiosInstance.get(`users?page=${currentPage}&count=${displayedUsers}`)
 			.then(response => response.data)//returning data for component function
