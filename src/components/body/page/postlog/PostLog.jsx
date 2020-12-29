@@ -11,6 +11,23 @@ function PostLog(props) {
 	let name = props.userBase.filter(item => item.userId === props.userId)[0] ? props.userBase.filter(item => item.userId === props.userId)[0].name : "AnoNymus"
 	let postsBlock = props.postsBase ? props.postsBase[props.userId] : null
 	const postInput = React.createRef();
+	const panelColor = (data) => {
+		let panColor = {}
+		if (data.likes > data.dislikes) {
+			panColor = {
+				background: ' rgb(72, 139, 72)'
+			};
+		} else if (data.likes < data.dislikes) {
+			panColor = {
+				background: 'rgb(155, 49, 49)'
+			};
+		} else {
+			panColor = {
+				background: 'rgb(105, 85, 17)'
+			};
+		}
+		return panColor
+	}
 	//console.log("PostLog", postsBlock)
 	return (
 		<div className="body-page__hero-posts-log">
@@ -41,6 +58,7 @@ function PostLog(props) {
 						postsBlock.map((item, index) => (item ? <PostItem
 							//data
 							key={Math.floor(Math.random() * 10000)}
+							type={" "}
 							userBase={props.userBase}
 							id={postsBlock[index].id}
 							likes={postsBlock[index].like}
@@ -52,15 +70,41 @@ function PostLog(props) {
 							dislikes={postsBlock[index].dislike}
 							childReply={postsBlock[index].reply}
 							//functions
+							panelColor={panelColor}
 							autoGrow={props.autoGrow}
 							updateTextarea={props.updateTextarea}
 							addNewReply={props.addNewReply}
 							addNewNestedPost={props.addNewNestedPost}
-							isVoutedCheck={props.isVoutedCheck}
-							panelColor={props.panelColor}
+							isVotedCheck={props.isVotedCheck}
 						/> : null))
 						: null
 				}
+				{/* {
+					postsBlock//if we have postBlock we will render it
+						?
+						postsBlock.map((item, index) => (item ? <PostItem
+							//data
+							key={Math.floor(Math.random() * 10000)}
+							userBase={props.userBase}
+							id={postsBlock[index].id}
+							likes={postsBlock[index].like}
+							userId={postsBlock[index].userId}
+							nikName={postsBlock[index].nikName}
+							dataDate={postsBlock[index].dataDate}
+							dataTime={postsBlock[index].dataTime}
+							textBody={postsBlock[index].textBody}
+							dislikes={postsBlock[index].dislike}
+							childReply={postsBlock[index].reply}
+							//functions
+							panelColor={panelColor}
+							autoGrow={props.autoGrow}
+							updateTextarea={props.updateTextarea}
+							addNewReply={props.addNewReply}
+							addNewNestedPost={props.addNewNestedPost}
+							isVotedCheck={props.isVotedCheck}
+						/> : null))
+						: null
+				} */}
 				<div className="body-page__end">no more messages here</div>
 			</div>
 		</div>

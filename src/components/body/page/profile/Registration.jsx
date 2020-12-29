@@ -127,8 +127,8 @@ function Registration(props) {
 					/>
 					<Link to="/" type="button" className="body-page__authorization_button" onClick={(event) => pageMove(event)} >Back</Link>
 					<button onClick={(event) => {
-						//props.userCreation(userData)
-						//pageMove(event)
+						props.userCreation(userData)
+						pageMove(event)
 					}} type="submit" className="body-page__authorization_button"
 					>DONE!</button>
 				</form>

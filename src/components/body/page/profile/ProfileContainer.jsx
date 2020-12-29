@@ -15,7 +15,7 @@ class ProfileContainer extends React.Component {
 	componentDidMount() {
 		let userId = this.props.match.params.temporaryID
 		this.props.getProfile(userId)
-		this.props.getStatus(userId)
+		//this.props.getStatus(userId)
 	}
 	render() {
 		return (
@@ -44,5 +44,5 @@ export default compose(
 		setStatus: SetStatusThunkCreator,
 	}), // THIRD =>//  giving props ang callbacks
 	withRouter,// SECOND => // //Connecting URL data to our component
-	WithAuthRedirect_HOC// FIRST  => // giving our ProfileContainer to HOC function to wrap with it (HOC), and assign property "isAuthorized" and give ability to redirect
+	//WithAuthRedirect_HOC// FIRST  => // giving our ProfileContainer to HOC function to wrap with it (HOC), and assign property "isAuthorized" and give ability to redirect
 )(ProfileContainer)//TARGET component

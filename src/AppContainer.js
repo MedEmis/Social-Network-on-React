@@ -1,25 +1,32 @@
 import { connect } from 'react-redux'
+import React from 'react'
 import App from "./App"
-
+import { getCurrentUserId, getIsUserExist, getTemporaryID, getIsAuthorized } from './redux/selectors';
+import store from "./redux/reduxStore"
+import { Provider } from 'react-redux';
 
 
 
 let mapStateToProps = (state) => {//data for connect in state
 	return {
-		isUserExist: state.usersReducer.isUserExist ? state.usersReducer.isUserExist : null,
-		currentUserId: state.authReducer ? state.authReducer.currentUserId : null,
-		temporaryID: state.usersReducer.profile ? state.usersReducer.profile.userId : null,
-		isAuthorized: state.authReducer.isAuthorized
+		isUserExist: getIsUserExist(state),
+		currentUserId: getCurrentUserId(state),
+		temporaryID: getTemporaryID(state),
+		isAuthorized: getIsAuthorized(state)
 	}
 }
-let mapDispatchToProps = (dispatch) => {//functions for connect is dispatch
-	return {}
+
+const AppContainer = connect(mapStateToProps, null)(App)
+
+
+
+const ReactSocialNetwork = (props) => {
+	return (
+		<React.StrictMode>
+			<Provider store={store}>
+				<AppContainer />
+			</Provider>
+		</React.StrictMode>
+	)
 }
-
-
-const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App)
-
-
-
-
-export default AppContainer;
+export default ReactSocialNetwork

@@ -37,6 +37,7 @@ const authReducer = (state = initialAuthState, action) => {
 			return {
 				...state,
 				userId: action.userId,
+				currentUserId: action.userId,
 				isAuthorized: true
 			}
 		//======================================================================================================================================
@@ -75,7 +76,8 @@ const authReducer = (state = initialAuthState, action) => {
 					isUserExist: true
 				}
 			} else if (!state.isUserExist) {
-				//initialUsersState.userBase[newUserId] = newUserModel
+				//state.userBase.push(newUserModel) //=>for test, because this action pushing new user to state of another reducer
+				// so for test, temporary need to push in this state (fake only for test)   
 				initialUsersState.userBase.push(newUserModel)
 				initialPostState.postsBase[newUserId] = []
 				localStorage.setItem("currentUserId", newUserId)
@@ -163,21 +165,23 @@ export const AUTHORIZATION_actionCreator = (userId) => {
 //================ACTIONS END==================================================================================
 
 //==============THUNKS========================================================================
-export const LogInThunkCreator = () => (dispatch) => {
-	userAPI.logIn().then(data => {//start API request, and after response...
-		dispatch(SET_USER_DATA_actionCreator(data))// put data to store
-	})
+export const LogInThunkCreator = () => async (dispatch) => {
+	let response = await userAPI.logIn()
+	if (response.data.resultCode === 0) { dispatch(SET_USER_DATA_actionCreator(response.data)) }
 }
-export const AuthorizationThunkCreator = (email, password, rememberMe) => (dispatch) => {
-	userAPI.authorization(email, password, rememberMe).then(response => {//start API request, and after response...
-		if (response.data.resultCode === 0) {//if server allow authorization...
-			dispatch(AUTHORIZATION_actionCreator(response.data.data.userId))// put data to store
-			userAPI.logIn(response.data.data.userId).then(data => {//start API request, and after response...
-				dispatch(SET_USER_DATA_actionCreator(data))// put data to store
-			})
-		} else {
-			console.log(response.data.messages[0])
-		}
-	})
+export const LogOutThunkCreator = () => async (dispatch) => {
+	let response = await userAPI.logOut()
+	if (response.data.resultCode === 0) { dispatch(USER_LOG_OUTactionCreator()) }
+}
+export const AuthorizationThunkCreator = (email, password, rememberMe) => async (dispatch) => {
+	let response = await userAPI.authorization(email, password, rememberMe)//start API request, and after response...
+	if (response.data.resultCode === 0) {//if server allow authorization...
+		dispatch(AUTHORIZATION_actionCreator(response.data.data.userId))// put data to store
+		let userData = await userAPI.logIn(response.data.data.userId)//get user data
+		dispatch(SET_USER_DATA_actionCreator(userData))// put data to store
+	} else {
+		console.log(response.data.messages[0])
+	}
+
 }
 //=============THUNKS END=====================================================================

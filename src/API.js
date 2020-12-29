@@ -8,37 +8,24 @@ const axiosInstance = axios.create({
 })
 
 export const userAPI = {
-	async logIn() {
-		return await axiosInstance.get(`auth/me`)
-			.then(response => {
-				if (response.data.resultCode === 0) { return response.data }
-			})//returning data for component function
+	logIn() { return axiosInstance.get(`auth/me`) },
+	authorization(email, password, rememberMe = false, captcha = null) {
+		return axiosInstance.post(`auth/login`, { email: email, password: password, rememberMe: rememberMe, captcha: captcha })
 	},
-	async authorization(email, password, rememberMe = false, captcha = null) {
-		return await axiosInstance.post(`auth/login`, { email: email, password: password, rememberMe: rememberMe, captcha: captcha })
-			.then(response => { return response })//returning data for component function
+	logOut() { return axiosInstance.delete(`auth/login`) },
+	getUsersBase(currentPage, displayedUsers) {
+		return axiosInstance.get(`users?page=${currentPage}&count=${displayedUsers}`)
 	},
-	async getUsersBase(currentPage, displayedUsers) {
-		return await axiosInstance.get(`users?page=${currentPage}&count=${displayedUsers}`)
-			.then(response => response.data)//returning data for component function
+	getUsersProfile(userId) { return axiosInstance.get(`profile/${userId}`) },
+	getUserStatus(userId) { return axiosInstance.get(`/profile/status/${userId}`) },
+	setUserStatus(payload) {
+		return axiosInstance.put(`/profile/status`, { status: payload })
 	},
-	async getUsersProfile(userId) {
-		return await axiosInstance.get(`profile/${userId}`)
-			.then(response => response.data)//returning data for component function
-	},
-	async getUserStatus(userId) {
-		return await axiosInstance.get(`/profile/status/${userId}`)
-			.then(response => response.data)
-	},
-	async setUserStatus(payload) {
-		return await axiosInstance.put(`/profile/status`, { status: payload })
-			.then(response => { if (response.resultCode === 0) { return response.data } })
-	},
-	async followRequest(request, id) {
+	followRequest(request, id) {
 		if (request === "follow") {
-			return await axiosInstance.post(`follow/${id}`)
+			return axiosInstance.post(`follow/${id}`)
 		} else if (request === "unfollow") {
-			return await axiosInstance.delete(`follow/${id}`)
+			return axiosInstance.delete(`follow/${id}`)
 		}
 	}
 }

@@ -32,7 +32,7 @@ function PostItem(props) {
 					<ul style={props.panelColor(props)}
 						className="hero-posts-log-item__body-special-list"  >
 						<li onClick={(event) => {
-							props.isVoutedCheck(event, props.userBase)
+							props.isVotedCheck(event, props.userBase)
 							setIsVoted(true)
 						}
 						}
@@ -40,7 +40,7 @@ function PostItem(props) {
 							name="like" className="hero-posts-log-item__body-special-item tooltip">
 							<span className="tooltiptext">Thumbs Up</span></li>
 						<li onClick={(event) => {
-							props.isVoutedCheck(event, props.userBase)
+							props.isVotedCheck(event, props.userBase)
 							setIsVoted(true)
 						}}
 							style={isDisliked.includes(props.id) ? { backgroundColor: "red" } : { backgroundColor: "none" }}
@@ -86,7 +86,7 @@ function PostItem(props) {
 						//functions
 						updateTextarea={props.updateTextarea}
 						addNewNestedPost={props.addNewNestedPost}
-						isVoutedCheck={props.isVoutedCheck}
+						isVotedCheck={props.isVotedCheck}
 						panelColor={props.panelColor}
 						autoGrow={props.autoGrow}
 					/> : null))
@@ -96,3 +96,103 @@ function PostItem(props) {
 	);
 }
 export default PostItem;
+
+
+
+
+
+// import React from 'react'
+// import ReplyPostItem from './ReplyPostItem';
+// import './postItem.scss';
+// import PostBody from './PostBody';
+
+
+
+// function PostItem(props) {
+
+// 	let postsBlock = props.childReply
+// 	let user = props.userBase.filter(item => item.userId === props.userId)[0]
+// 	let isLiked = user.voutedLike//to set color of icon
+// 	let isDisliked = user.voutedDislike//to set color of icon
+// 	let avatar = user.avatarUrl
+// 	let name = user.name
+// 	let type = props.type
+// 	return (
+// 		<div className="posts-log-item-wrapper">
+// 			<PostBody
+// 				type={type}
+// 				replyAbility={true}
+// 				avatar={avatar}
+// 				nikName={props.nikName}
+// 				userId={props.userId}
+// 				dataDate={props.dataDate}
+// 				dataTime={props.dataTime}
+// 				id={props.id}
+// 				textBody={props.textBody}
+// 				userBase={props.userBase}
+// 				isLiked={isLiked}
+// 				isDisliked={isDisliked}
+// 				likes={props.likes}
+// 				dislikes={props.dislikes}
+// 				//functions
+// 				isVotedCheck={props.isVotedCheck}
+// 				panelColor={props.panelColor}
+// 				autoGrow={props.autoGrow}
+// 				addNewReply={props.addNewReply}
+// 			/>
+// 			<div className="hero-posts-log-reply-wrapper">
+// 				{
+// 					postsBlock.map((item, index) => (item
+// 						? <PostItem
+// 							//data
+// 							key={Math.floor(Math.random() * 10000)}
+// 							type={"reply"}
+// 							userBase={props.userBase}
+// 							id={postsBlock[index].id}
+// 							likes={postsBlock[index].like}
+// 							userId={postsBlock[index].userId}
+// 							nikName={postsBlock[index].nikName}
+// 							dataDate={postsBlock[index].dataDate}
+// 							dataTime={postsBlock[index].dataTime}
+// 							textBody={postsBlock[index].textBody}
+// 							dislikes={postsBlock[index].dislike}
+// 							childReply={postsBlock[index].reply}
+// 							//functions
+// 							panelColor={props.panelColor}
+// 							autoGrow={props.autoGrow}
+// 							updateTextarea={props.updateTextarea}
+// 							addNewReply={props.addNewReply}
+// 							addNewNestedPost={props.addNewNestedPost}
+// 							isVotedCheck={props.isVotedCheck}
+// 						/>
+// 						: null))
+// 				}
+// 				{/* {
+// 					postsBlock.map((item, index) => (item ? <ReplyPostItem
+// 						//DATA
+// 						key={Math.floor(Math.random() * 10000)}
+// 						id={postsBlock[index].id}
+// 						initialUser={props.userId}
+// 						initialPost={props.id}
+// 						userId={postsBlock[index].userId}
+// 						userBase={props.userBase}
+// 						nikName={postsBlock[index].nikName}
+// 						dataDate={postsBlock[index].dataDate}
+// 						dataTime={postsBlock[index].dataTime}
+// 						textBody={postsBlock[index].textBody}
+// 						likes={postsBlock[index].like}
+// 						dislikes={postsBlock[index].dislike}
+// 						childReply={postsBlock[index].nestedReply}
+// 						//functions
+// 						updateTextarea={props.updateTextarea}
+// 						addNewNestedPost={props.addNewNestedPost}
+// 						isVotedCheck={props.isVotedCheck}
+// 						panelColor={props.panelColor}
+// 						autoGrow={props.autoGrow}
+// 					/> : null))
+// 				} */}
+// 			</div>
+// 		</div>
+// 	);
+// }
+// export default PostItem;

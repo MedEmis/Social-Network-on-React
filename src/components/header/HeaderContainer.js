@@ -1,5 +1,5 @@
 import Header from './Header';
-import { USER_LOG_OUTactionCreator } from './../../redux/authReducer';
+import { USER_LOG_OUTactionCreator, LogOutThunkCreator } from './../../redux/authReducer';
 import { connect } from 'react-redux'
 
 let mapStateToProps = (state) => {//data for connect in state
@@ -10,15 +10,9 @@ let mapStateToProps = (state) => {//data for connect in state
 		userAvatar: user ? user.avatarUrl : null
 	}
 }
-let mapDispatchToProps = (dispatch) => {//functions for connect is dispatch
-	return {
-		userLogOut: () => {
-			dispatch(USER_LOG_OUTactionCreator())
-		}
-	}
-}
 
-const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header)
+
+const HeaderContainer = connect(mapStateToProps, { userLogOut: LogOutThunkCreator })(Header)
 
 
 

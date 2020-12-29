@@ -1,10 +1,12 @@
 //============ACTIONS======================
 
-const UPDATE_POST_TEXT = "UPDATE_POST_TEXT"
+const AUTO_GROW = "AUTO_GROW"
+const DELETE_POST = "DELETE_POST"
 const ADD_NEW_POST = "ADD_NEW_POST"
 const ADD_NEW_REPLY = "ADD_NEW_REPLY"
-const ADD_NEW_NESTED_REPLY = "ADD_NEW_NESTED_REPLY"
 const LIKE_INCREMENT = "LIKE_INCREMENT"
+const UPDATE_POST_TEXT = "UPDATE_POST_TEXT"
+const ADD_NEW_NESTED_REPLY = "ADD_NEW_NESTED_REPLY"
 
 //============ACTIONS END==================
 
@@ -534,10 +536,6 @@ export let initialPostState = {
 
 
 const postBaseReducer = (state = initialPostState, action) => {
-	// let state = {
-	// 	postsBase: { ...state.postsBase },
-	// 	...state
-	// }
 	let time = new Date().toLocaleTimeString().slice(0, -3)
 	let date = new Date().toLocaleDateString()
 	let textArea
@@ -549,6 +547,11 @@ const postBaseReducer = (state = initialPostState, action) => {
 				...state,
 				currentPostText: action.inputValue,
 			}
+		//======================================================================================================================================
+		case AUTO_GROW:
+			action.event.target.style.height = "5px";
+			action.event.target.style.height = (action.event.target.scrollHeight) + "px";
+			return state
 		//======================================================================================================================================
 		case ADD_NEW_POST:
 			return {
@@ -598,7 +601,7 @@ const postBaseReducer = (state = initialPostState, action) => {
 					...state.postsBase,
 				},
 				currentPostText: "some news?...",
-				postsCount: ++state.postsCount
+				postsCount: state.postsCount++
 			}
 		//======================================================================================================================================
 		case ADD_NEW_NESTED_REPLY:
@@ -627,7 +630,13 @@ const postBaseReducer = (state = initialPostState, action) => {
 					...state.postsBase,
 				},
 				currentPostText: "some news?...",
-				postsCount: ++state.postsCount
+				postsCount: state.postsCount++
+			}
+		//======================================================================================================================================
+		case DELETE_POST:
+			return {
+				...state.postsBase[action.userId].filter(post => post.id !== action.postId),
+				...state.postsCount = --state.postsCount
 			}
 		//======================================================================================================================================
 		case LIKE_INCREMENT:
@@ -707,12 +716,17 @@ const postBaseReducer = (state = initialPostState, action) => {
 
 export default postBaseReducer
 
-//action creators
-
+//=========ACTION CREATORS=================================================
 export const UPDATE_POST_TEXT_actionCreator = (event) => {
 	return {
 		type: UPDATE_POST_TEXT,
 		inputValue: event.target.value
+	}
+}
+export const AUTO_GROW_actionCreator = (event) => {
+	return {
+		type: AUTO_GROW,
+		event: event
 	}
 }
 export const ADD_NEW_POST_actionCreator = (userId, nikName) => {
@@ -720,6 +734,13 @@ export const ADD_NEW_POST_actionCreator = (userId, nikName) => {
 		type: ADD_NEW_POST,
 		userId: userId,
 		nikName: nikName,
+	}
+}
+export const DELETE_POST_actionCreator = (postId, userId) => {
+	return {
+		type: DELETE_POST,
+		postId: postId,
+		userId: userId
 	}
 }
 export const ADD_NEW_REPLY_actionCreator = (userId, id, nikName, event) => {
@@ -742,3 +763,45 @@ export const ADD_NEW_NESTED_REPLY_actionCreator = (userId, initialUser, initialP
 		event: event,
 	}
 }
+export const LIKE_INCREMENT_actionCreator = (event, userBase) => {
+	return {
+		type: LIKE_INCREMENT,
+		event: event,
+		userBase: userBase,
+	}
+}
+//=========ACTION CREATORS END=================================================
+
+
+//=========THUNKS CREATORS =================================================
+export const UpdateTextareaThunkCreator = (event) => (dispatch) => {
+	dispatch(UPDATE_POST_TEXT_actionCreator(event))
+}
+export const AddNewPostThunkCreator = (userId, name) => (dispatch) => {
+	dispatch(ADD_NEW_POST_actionCreator(userId, name))
+}
+export const AddNewReplyThunkCreator = (event, data) => (dispatch) => {
+	dispatch(ADD_NEW_REPLY_actionCreator(
+		data.userId,
+		data.id,
+		data.userBase.filter(item => item.userId === data.userId)[0].name,
+		event
+	))
+}
+export const AddNewNestedPostThunkCreator = (event, data) => (dispatch) => {
+	dispatch(ADD_NEW_NESTED_REPLY_actionCreator(
+		data.userId,
+		data.initialUser,
+		data.initialPost,
+		data.id,
+		data.userBase.filter(item => item.userId === data.userId)[0].name,
+		event
+	))
+}
+export const IsVotedCheckThunkCreator = (event, userBase) => (dispatch) => {
+	dispatch(LIKE_INCREMENT_actionCreator(event, userBase))
+}
+export const AutoGrowThunkCreator = (event) => (dispatch) => {
+	dispatch(AUTO_GROW_actionCreator(event))
+}
+//=========THUNKS CREATORS END =================================================

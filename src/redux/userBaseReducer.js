@@ -150,7 +150,7 @@ const userBaseReducer = (state = initialUsersState, action) => {
 					}
 				}
 			} else {
-				return null
+				return state
 			}
 			break
 		//======================================================================================================================================
@@ -187,13 +187,13 @@ const userBaseReducer = (state = initialUsersState, action) => {
 		//======================================================================================================================================
 		case CHANGE_PAGE:
 			let lastPage = Math.ceil(state.totalUsersCount / state.displayedUsers)
-			if (action.event.target.textContent === "prev" && state.currentUsersPage > 1) {
+			if (action.event.target.attributes.name.value === "prev" && state.currentUsersPage > 1) {
 				localStorage.setItem("currentUserPage", state.currentUsersPage - 1)
 				return {
 					...state,
 					currentUsersPage: --state.currentUsersPage,
 				}
-			} else if (action.event.target.textContent === "next" && state.currentUsersPage < lastPage) {
+			} else if (action.event.target.attributes.name.value === "next" && state.currentUsersPage < lastPage) {
 				localStorage.setItem("currentUserPage", state.currentUsersPage + 1)
 				return {
 					...state,
@@ -269,39 +269,37 @@ export const SET_STATUS_actionCreator = (userStatus) => {
 //==============ACTION CREATORS END========================================================================
 
 //==============THUNKS========================================================================
-export const GetUserBaseThunkCreator = (currentPage, displayedUsers) => (dispatch) => {
+export const GetUserBaseThunkCreator = (currentPage, displayedUsers) => async (dispatch) => {
 	dispatch(Toggle_IsFetching_actionCreator(true))// switch loader on
-	userAPI.getUsersBase(currentPage, displayedUsers).then(data => {//start API request, and after response...
-		dispatch(Toggle_IsFetching_actionCreator(false))// switch loader off
-		dispatch(SET_USERS_actionCreator(data.items, data.totalCount))// put data to store
-	})
+	let response = await userAPI.getUsersBase(currentPage, displayedUsers)
+	dispatch(Toggle_IsFetching_actionCreator(false))// switch loader off
+	dispatch(SET_USERS_actionCreator(response.data.items, response.data.totalCount))// put data to store
 }
-export const GetUserProfileThunkCreator = (userId) => (dispatch) => {
+export const GetUserProfileThunkCreator = (userId) => async (dispatch) => {
 	dispatch(Toggle_IsFetching_actionCreator(true))// switch loader on
-	userAPI.getUsersProfile(userId).then(data => {//start API request, and after response...
-		dispatch(Toggle_IsFetching_actionCreator(false))// switch loader off
-		dispatch(SET_PROFILE_actionCreator(data))// put data to store
-	})
+	let response = await userAPI.getUsersProfile(userId)
+	dispatch(Toggle_IsFetching_actionCreator(false))// switch loader off
+	dispatch(SET_PROFILE_actionCreator(response.data))// put data to store
 }
-export const FollowingThunkCreator = (event, currentUserId) => (dispatch) => {
+export const GetStatusThunkCreator = (currentUserId) => async (dispatch) => {
+	let response = await userAPI.getUserStatus(currentUserId)
+	console.log(response)
+	dispatch(SET_STATUS_actionCreator(response.data))
+}
+export const SetStatusThunkCreator = (event) => async (dispatch) => {
+	let payload = event.target.value
+	console.log("payload", payload)
+	let response = await userAPI.setUserStatus(payload)
+	if (response.resultCode === 0) {
+		dispatch(SET_STATUS_actionCreator(payload))
+	}
+}
+export const FollowingThunkCreator = (event, currentUserId) => async (dispatch) => {
 	let request = event.target.textContent.toLocaleLowerCase()
 	let id = event.target.offsetParent.childNodes[0].childNodes[1].textContent
 	event.target.disabled = true
-	userAPI.followRequest(request, id).then(response => {
-		dispatch(FOLLOW_actionCreator(event, currentUserId, request, id))
-		event.target.disabled = false
-	})
-}
-export const GetStatusThunkCreator = (currentUserId) => (dispatch) => {
-	userAPI.getUserStatus(currentUserId).then(response => {
-		dispatch(SET_STATUS_actionCreator(response))
-	})
-}
-export const SetStatusThunkCreator = (event) => (dispatch) => {
-	let payload = event.target.value
-	console.log("thunk", payload)
-	userAPI.setUserStatus(payload).then(response => {
-		dispatch(SET_STATUS_actionCreator(payload))
-	})
+	let response = await userAPI.followRequest(request, id)
+	dispatch(FOLLOW_actionCreator(event, currentUserId, request, id))
+	event.target.disabled = false
 }
 //==============THUNKS END========================================================================

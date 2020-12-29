@@ -14,7 +14,10 @@ let mapDispatchToProps = (dispatch) => {//functions for connect is dispatch
 }
 
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+const DialogsContainer = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Dialogs)
 
 
 

@@ -25,8 +25,8 @@ function Profile(props) {
 					<div className="body-page__background">
 						<img src={topImage} alt="topImage" className="body-page__background_image" />
 						<StatusBlock
-							userId={props.userId}							
-							userStatus={props.userStatus}							
+							userId={props.userId}
+							userStatus={props.userStatus}
 							getStatus={props.getStatus}
 							setStatus={props.setStatus}
 						/>

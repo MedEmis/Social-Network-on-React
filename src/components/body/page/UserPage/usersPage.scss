@@ -64,10 +64,15 @@
 		&_navig {
 			flex: 0 0 10%;
 			color: rgb(15, 7, 83);
-			padding: 10px 20px;
-			&:hover {
-				background: rgb(73, 73, 73);
-				border-radius: 20px;
+			padding: 20px 20px;
+			z-index: 20;
+
+			&.prev {
+				background: center / contain no-repeat  url("https://img.icons8.com/office/64/000000/circled-left-2.png");
+			}
+			&.next {
+				transform: rotate(180deg);
+				background: center / contain no-repeat url("https://img.icons8.com/office/64/000000/circled-left-2.png");
 			}
 		}
 		&_total {
@@ -189,9 +194,9 @@
 					transform: rotateY(360deg);
 				}
 				&:disabled {
-					background: center / contain no-repeat url(https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg);
+					background: center / contain no-repeat
+						url(https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg);
 					//background: rgb(218, 186, 8);
-
 				}
 			}
 			&.chat {

@@ -30,13 +30,13 @@ function ReplyPostItem(props) {
 					<ul style={props.panelColor(props)}
 						className="hero-posts-log-item__body-special-list" >
 						<li onClick={(event) => {
-							props.isVoutedCheck(event, props.userBase)
+							props.isVotedCheck(event, props.userBase)
 							setIsVoted(true)
 						}}
 							style={isLiked.includes(props.id) ? { backgroundColor: "green" } : { backgroundColor: "none" }}
 							name="like" className="hero-posts-log-item__body-special-item tooltip"><span className="tooltiptext">Thumbs Up</span></li>
 						<li onClick={(event) => {
-							props.isVoutedCheck(event, props.userBase)
+							props.isVotedCheck(event, props.userBase)
 							setIsVoted(true)
 						}}
 							style={isDisliked.includes(props.id) ? { backgroundColor: "red" } : { backgroundColor: "none" }}
@@ -61,6 +61,8 @@ function ReplyPostItem(props) {
 					</div>
 				</div>
 			</div>
+			
+			
 			<div className="body-page__hero-posts-log-nested-reply-wrapper">
 				{
 					(postsBlock !== undefined && postsBlock !== null)
@@ -81,7 +83,7 @@ function ReplyPostItem(props) {
 							//functions
 							updateTextarea={props.updateTextarea}
 							//addNewNestedPost={props.addNewNestedPost}
-							isVoutedCheck={props.isVoutedCheck}
+							isVotedCheck={props.isVotedCheck}
 							panelColor={props.panelColor}
 							autoGrow={props.autoGrow}
 						/> : null))
