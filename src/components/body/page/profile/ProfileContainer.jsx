@@ -1,31 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Profile from './Profile';
 import { connect } from 'react-redux'
-import { GetUserProfileThunkCreator, GetStatusThunkCreator, SetStatusThunkCreator } from './../../../../redux/userBaseReducer';
+import {
+	GetUserProfileThunkCreator,
+	GetStatusThunkCreator,
+	SetStatusThunkCreator,
+	SaveImageThunkCreator
+} from './../../../../redux/userBaseReducer';
 import { withRouter } from 'react-router-dom';
 import { WithAuthRedirect_HOC } from '../../../../HOC/withAuthRedirectHOC.js';
 import { compose } from 'redux';
 
-
-class ProfileContainer extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {}
-	}
-	componentDidMount() {
-		let userId = this.props.match.params.temporaryID
-		this.props.getProfile(userId)
-		//this.props.getStatus(userId)
-	}
-	render() {
-		return (
-			<Profile
-				{...this.props}
-				isLoading={this.props.isFetching}
-			/>
-		)
-	}
+function ProfileContainer(props) {
+	let userId = props.match.params.temporaryID
+	let isOwner = +props.userId === +userId
+	useEffect(() => {
+		props.getProfile(userId, isOwner)
+	}, [userId, isOwner])
+	return (
+		<Profile
+			{...props}
+			isOwner={isOwner}
+			isLoading={props.isFetching}
+		/>
+	)
 }
+
 //===========================================================================================
 let mapStateToProps = (state) => {//data for connect in state
 	return {
@@ -33,6 +33,7 @@ let mapStateToProps = (state) => {//data for connect in state
 		userBase: state.usersReducer.userBase,
 		isFetching: state.usersReducer.isFetching,
 		userStatus: state.usersReducer.userStatus,
+		watchedProfile: state.usersReducer.watchedProfile,
 		userId: state.authReducer.currentUserId || state.authReducer.userId,
 	}
 }
@@ -42,6 +43,7 @@ export default compose(
 		getProfile: GetUserProfileThunkCreator,
 		getStatus: GetStatusThunkCreator,
 		setStatus: SetStatusThunkCreator,
+		saveImage: SaveImageThunkCreator
 	}), // THIRD =>//  giving props ang callbacks
 	withRouter,// SECOND => // //Connecting URL data to our component
 	//WithAuthRedirect_HOC// FIRST  => // giving our ProfileContainer to HOC function to wrap with it (HOC), and assign property "isAuthorized" and give ability to redirect

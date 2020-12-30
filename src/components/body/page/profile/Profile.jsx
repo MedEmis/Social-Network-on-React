@@ -13,9 +13,22 @@ import StatusBlock from './StatusBlock';
 
 
 function Profile(props) {
+
 	let userId = props.match.params.temporaryID
 	let user = props.userBase.filter(item => item.userId === userId)[0]
-	let heroPicture = props.profile ? props.profile.photos.large : null
+	let heroPicture
+	let name
+	let webSite
+	if (props.isOwner) {
+		heroPicture = props.profile ? props.profile.photos.large : null
+		name = props.profile ? props.profile.fullName : null
+		webSite = props.profile ? props.profile.contacts.twitter : null
+	} else {
+		heroPicture = props.watchedProfile ? props.watchedProfile.photos.large : null
+		name = props.watchedProfile ? props.watchedProfile.fullName : null
+		webSite = props.watchedProfile ? props.watchedProfile.contacts.twitter : null
+	}
+
 	// ВРЕМЕННО ИСПОЛЬЗУЕТЬСЯ БАЗА С КАМАСУТРЫ. ЧТОБЫ ПЕРЕКЛЮЧИТЬСЯ НА МОЮ НУЖНО ОТКЛЮЧИТЬ props.isLoading И props.profile(ПОМЕНЯТЬ НА user)
 	return (
 		!props.isLoading ?
@@ -24,19 +37,27 @@ function Profile(props) {
 				<div className="body-page__hero-page">
 					<div className="body-page__background">
 						<img src={topImage} alt="topImage" className="body-page__background_image" />
-						<StatusBlock
-							userId={props.userId}
-							userStatus={props.userStatus}
-							getStatus={props.getStatus}
-							setStatus={props.setStatus}
-						/>
+						{
+							props.isOwner
+								? <StatusBlock
+									userId={props.userId}
+									userStatus={props.userStatus}
+									getStatus={props.getStatus}
+									setStatus={props.setStatus}
+								/>
+								: null
+						}
 					</div>
 					<HeroInfo
+						isOwner={props.isOwner}
 						userBase={props.userBase}
-						userId={props.userId}
-						name={props.profile ? props.profile.fullName : null}
+						userId={userId}
+						// userId={props.userId}
+						name={name }
 						heroPicture={heroPicture}
-						webSite={props.profile ? props.profile.contacts.twitter : null}
+						webSite={webSite}
+						//functions
+						saveImage={props.saveImage}
 					//=============================
 					//MY BASE \/
 					//userBase={props.userBase}
@@ -55,7 +76,6 @@ function Profile(props) {
 								: null} />
 							: null
 					}
-
 					{
 						user
 							? <HeroContacts

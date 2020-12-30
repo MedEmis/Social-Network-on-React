@@ -6,52 +6,30 @@ import DialogsContainer from './page/dialogs/DialogsContainer';
 import MusicContainer from './page/music/MusicContainer';
 import './body.scss';
 import ProfileContainer from './page/profile/ProfileContainer';
-import withSuspense from './../../HOC/withSuspense';
-import PublicUserPageContainer from './page/UserPage/PublicUserPageContainer';
-
-//====components===========================
-//const ProfileContainer = React.lazy(() => import('./page/profile/ProfileContainer'));
-//const PostsContainer = React.lazy(() => import('./page/postlog/PostsContainer'));
-//const DialogsContainer = React.lazy(() => import('./page/dialogs/DialogsContainer'));
-//const PublicUserPageContainer = React.lazy(() => import('./page/UserPage/PublicUserPageContainer'));
-//const MusicContainer = React.lazy(() => import('./page/music/MusicContainer'));
-//====components end====================import Loader from './Loader';
-
-
-//СТРАНИЦА, ГДЕ НУЖНО ДЕЛАТЬ РОУТИНГ ДЛЯ ПЕРЕКЛЮЧЕНИЯ МЕЖДУ СТРАНИЦАМИ С ПОМОЩЬЮ NAV
-
-
-
-
-//${:props.temporaryID}
+import Loader from './Loader';
+const PublicUserPageContainer = React.lazy(() => import('./page/UserPage/PublicUserPageContainer'));
 
 function Body(props) {
 	//console.log("Body props", props)
-	// if (props.isAuthorized) {
 	return (
 		<div className="body-main">
 			<SidebarContainer />
 			<div className="body-page">
 				<span className="body-page_cover"></span>
-				<Switch>
-					<Route exact path="/Profile/:temporaryID" component={ProfileContainer} />
-					<Route exact path='/Posts' component={PostsContainer} />
-					<Route exact path='/Dialogs' component={DialogsContainer} />
-					<Route exact path='/UserPage' component={PublicUserPageContainer} />
-					<Route exact path='/UserPage' component={PublicUserPageContainer} />
-					{/* <Route exact path='/UserPage' render={withSuspense(PublicUserPageContainer)/**with suspense complaining to fallback  */} />    */}
-					<Route exact path='/Music' component={MusicContainer} />
-				</Switch>
+				<React.Suspense fallback={<Loader />}>
+					<Switch>
+						<Route exact path="/Profile/:temporaryID" component={ProfileContainer} />
+						<Route exact path='/Posts' component={PostsContainer} />
+						<Route exact path='/Dialogs' component={DialogsContainer} />
+						<Route exact path='/UserPage' component={PublicUserPageContainer} />
+						<Route exact path='/Music' component={MusicContainer} />
+					</Switch>
+				</React.Suspense>
 				{/* way 1 <Route exact path='/src/components/body/page/profile/Profile' component={Profile} /> */}
 				{/* way 2 <Route exact path='/src/components/body/page/news/News'> <Componet someProps={...} /> </Route> */}
 				{/* way 3 <Route exact path='/src/components/body/page/postlog/Posts' render={()=> <Posts someProps={...} />} /> */}
 			</div>
 		</div>
 	);
-
-
-
-
-
 }
 export default Body;

@@ -4,6 +4,7 @@ import App from "./App"
 import { getCurrentUserId, getIsUserExist, getTemporaryID, getIsAuthorized } from './redux/selectors';
 import store from "./redux/reduxStore"
 import { Provider } from 'react-redux';
+import { GetUserProfileThunkCreator } from './redux/userBaseReducer';
 
 
 
@@ -16,7 +17,9 @@ let mapStateToProps = (state) => {//data for connect in state
 	}
 }
 
-const AppContainer = connect(mapStateToProps, null)(App)
+const AppContainer = connect(mapStateToProps, {
+	getProfile: GetUserProfileThunkCreator
+})(App)
 
 
 

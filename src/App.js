@@ -6,7 +6,7 @@ import Footer from './components/footer/Footer';
 import Body from './components/body/Body';
 import store from "./redux/reduxStore"
 import { Provider } from 'react-redux';
-import React from 'react'
+import React, { useEffect } from 'react'
 import './App.css';
 
 export const pageMove = (event) => {//global function for page animation
@@ -24,6 +24,9 @@ export const pageMove = (event) => {//global function for page animation
 
 
 function App(props) {
+	useEffect(() => {
+		props.getProfile(props.currentUserId, true)
+	}, [props.currentUserId])
 	//console.log("app", props)
 	if (props.isAuthorized || localStorage.getItem("currentUserId")) {
 		return (//autorized user

@@ -3,11 +3,14 @@ import { userAPI } from './../API';
 
 const CHAT = "CHAT"
 const FOLLOW = "FOLLOW"
+const FOLLOW_MY_BASE = "FOLLOW_MY_BASE"
 const SET_USERS = "SET_USERS"
 const SET_STATUS = "SET_STATUS"
 const CHANGE_PAGE = "CHANGE_PAGE"
 const SET_PROFILE = "SET_PROFILE"
 const TOGGLE_FETCHING = "TOGGLE_FETCHING"
+const SET_PROFILE_IMAGE = "SET_PROFILE_IMAGE"
+const SET_TEMPORARY_PROFILE = "SET_TEMPORARY_PROFILE"
 
 
 export let initialUsersState = {
@@ -106,6 +109,8 @@ export let initialUsersState = {
 		}
 	],
 	profile: null,
+	watchedProfile: null,
+	isTemporary: false,
 	displayedUsers: 4,
 	isFetching: null,
 	isUserExist: false,
@@ -116,10 +121,10 @@ export let initialUsersState = {
 
 const userBaseReducer = (state = initialUsersState, action) => {
 	switch (action.type) {
-		case FOLLOW:
+		case FOLLOW_MY_BASE:
 			let user = state.userBase.filter(item => (item.userId || item.Id) === action.currentUserId)[0]
-			action.event.target.classList.toggle("is-flipped")
 			if (user) {
+				action.event.target.classList.toggle("is-flipped")
 				if (action.request === "follow") {
 					action.event.target.textContent = "Unfollow"
 					console.log("Follow")
@@ -154,6 +159,23 @@ const userBaseReducer = (state = initialUsersState, action) => {
 			}
 			break
 		//======================================================================================================================================
+		case FOLLOW:
+			action.event.target.classList.toggle("is-flipped")
+			if (action.request === "follow") {
+				action.event.target.textContent = "Unfollow"
+				console.log("Follow")
+				return {
+					...state
+				}
+			} else if (action.request === "unfollow") {
+				console.log("Unfollow")
+				action.event.target.textContent = "Follow"
+				return {
+					...state
+				}
+			}
+			break
+		//======================================================================================================================================
 		case TOGGLE_FETCHING:
 			return {
 				...state,
@@ -176,7 +198,24 @@ const userBaseReducer = (state = initialUsersState, action) => {
 		case SET_PROFILE:
 			return {
 				...state,
-				profile: action.data
+				profile: action.data,
+				isTemporary: false
+			}
+		//======================================================================================================================================
+		case SET_PROFILE_IMAGE:
+			return {
+				...state,
+				profile: {
+					...state.profile,
+					photos: action.data
+				}
+			}
+		//======================================================================================================================================
+		case SET_TEMPORARY_PROFILE:
+			return {
+				...state,
+				watchedProfile: action.data,
+				isTemporary: true
 			}
 		//======================================================================================================================================
 		case SET_STATUS:
@@ -226,6 +265,15 @@ export const FOLLOW_actionCreator = (event, currentUserId, request, id) => {
 		followTo: id
 	}
 }
+export const FOLLOW_MY_BASE_actionCreator = (event, currentUserId, request, id) => {
+	return {
+		type: FOLLOW_MY_BASE,
+		event: event,
+		currentUserId: currentUserId,
+		request: request,
+		followTo: id
+	}
+}
 export const CHAT_actionCreator = (event) => {
 	return {
 		type: CHAT,
@@ -244,6 +292,18 @@ export const SET_USERS_actionCreator = (newUsers, totalCount) => {
 export const SET_PROFILE_actionCreator = (data) => {
 	return {
 		type: SET_PROFILE,
+		data
+	}
+}
+export const SET_TEMPORARY_PROFILE_actionCreator = (data) => {
+	return {
+		type: SET_TEMPORARY_PROFILE,
+		data
+	}
+}
+export const SET_PROFILE_IMAGE_actionCreator = (data) => {
+	return {
+		type: SET_PROFILE_IMAGE,
 		data
 
 	}
@@ -275,20 +335,22 @@ export const GetUserBaseThunkCreator = (currentPage, displayedUsers) => async (d
 	dispatch(Toggle_IsFetching_actionCreator(false))// switch loader off
 	dispatch(SET_USERS_actionCreator(response.data.items, response.data.totalCount))// put data to store
 }
-export const GetUserProfileThunkCreator = (userId) => async (dispatch) => {
+export const GetUserProfileThunkCreator = (userId, isOwned) => async (dispatch) => {
 	dispatch(Toggle_IsFetching_actionCreator(true))// switch loader on
 	let response = await userAPI.getUsersProfile(userId)
 	dispatch(Toggle_IsFetching_actionCreator(false))// switch loader off
-	dispatch(SET_PROFILE_actionCreator(response.data))// put data to store
+	if (isOwned) {
+		dispatch(SET_PROFILE_actionCreator(response.data))// put data to store
+	} else {
+		dispatch(SET_TEMPORARY_PROFILE_actionCreator(response.data))// put data to store
+	}
 }
 export const GetStatusThunkCreator = (currentUserId) => async (dispatch) => {
 	let response = await userAPI.getUserStatus(currentUserId)
-	console.log(response)
 	dispatch(SET_STATUS_actionCreator(response.data))
 }
 export const SetStatusThunkCreator = (event) => async (dispatch) => {
 	let payload = event.target.value
-	console.log("payload", payload)
 	let response = await userAPI.setUserStatus(payload)
 	if (response.resultCode === 0) {
 		dispatch(SET_STATUS_actionCreator(payload))
@@ -299,7 +361,16 @@ export const FollowingThunkCreator = (event, currentUserId) => async (dispatch) 
 	let id = event.target.offsetParent.childNodes[0].childNodes[1].textContent
 	event.target.disabled = true
 	let response = await userAPI.followRequest(request, id)
-	dispatch(FOLLOW_actionCreator(event, currentUserId, request, id))
+	if (response.data.resultCode === 0) {
+		dispatch(FOLLOW_actionCreator(event, currentUserId, request, id))
+		//	dispatch(FOLLOW_MY_BASE_actionCreator(event, currentUserId, request, id))//for my userbase
+	}
 	event.target.disabled = false
+}
+export const SaveImageThunkCreator = (image) => async (dispatch) => {
+	let response = await userAPI.saveImageApi(image)
+	if (response.data.resultCode === 0) {
+		dispatch(SET_PROFILE_IMAGE_actionCreator(response.data.data.photos))
+	}
 }
 //==============THUNKS END========================================================================

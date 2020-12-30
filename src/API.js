@@ -13,19 +13,22 @@ export const userAPI = {
 		return axiosInstance.post(`auth/login`, { email: email, password: password, rememberMe: rememberMe, captcha: captcha })
 	},
 	logOut() { return axiosInstance.delete(`auth/login`) },
-	getUsersBase(currentPage, displayedUsers) {
-		return axiosInstance.get(`users?page=${currentPage}&count=${displayedUsers}`)
-	},
+	getUsersBase(currentPage, displayedUsers) { return axiosInstance.get(`users?page=${currentPage}&count=${displayedUsers}`) },
 	getUsersProfile(userId) { return axiosInstance.get(`profile/${userId}`) },
 	getUserStatus(userId) { return axiosInstance.get(`/profile/status/${userId}`) },
-	setUserStatus(payload) {
-		return axiosInstance.put(`/profile/status`, { status: payload })
-	},
+	setUserStatus(payload) { return axiosInstance.put(`/profile/status`, { status: payload }) },
 	followRequest(request, id) {
 		if (request === "follow") {
 			return axiosInstance.post(`follow/${id}`)
 		} else if (request === "unfollow") {
 			return axiosInstance.delete(`follow/${id}`)
 		}
-	}
+	},
+	saveImageApi(image) {
+		let formData = new FormData()
+		formData.append("image", image)
+		return axiosInstance.put(`/profile/photo`, formData, {
+			headers: { "Content-Type": "multipart/form-data" }
+		})
+	},
 }

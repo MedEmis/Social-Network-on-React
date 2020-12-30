@@ -1,0 +1,24 @@
+.buttons {
+	&__file-input {
+		&_label {
+			position: relative;
+			top: 0;
+			width: 100%;
+			text-transform: uppercase;
+			background: rgb(31, 31, 31);
+			padding: 5px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			user-select: none;
+			font-weight: 900;
+			border-bottom: 5px solid #333;
+			&:active {
+				top: 4px;
+				border-bottom: 1px solid #333;
+			}
+		}
+		&_input {
+			display: none;
+		}
+	}
+}

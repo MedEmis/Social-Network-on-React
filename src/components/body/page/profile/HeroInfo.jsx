@@ -1,37 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './profile.scss';
 import defaultAvatar from "./../../../../images/defaultUser.png"
+import FileInput from './../../buttons/FileInput';
 
 
-function HeroInfo(props) {
+function InfoField({ label, content }) {
+	return (
+		<div className="body-page__hero-data-item">
+			<span>{label}:</span>
+			<span>{!content ? "-None-" : content}</span>
+		</div>
+	)
+}
+
+function HeroInfo({ isOwner, userId, heroPicture, name, birthDate, city, email, webSite, saveImage }) {
+	useEffect(() => {
+		SetUserID(userId)
+	}, [isOwner, heroPicture])
+	const [userID, SetUserID] = useState()
 	return (
 		<div className="body-page__info">
 			<div className="body-page__hero-bigavatar">
-				<img className="hero-avatar" src={props.heroPicture || defaultAvatar} alt="hero" />
+				<img className="hero-avatar" src={heroPicture || defaultAvatar} alt="hero" />
+				{isOwner && <FileInput label="change avatar" saveImage={saveImage} />}
 			</div>
 			<div className="body-page__hero-data">
-				<div className="body-page__hero-data-item">
-					<span>Name:</span>
-					<span>{!props.name ? "-None-" : props.name}</span>
-				</div>
-				<div className="body-page__hero-data-item">
-					<span>Date of birth:</span>
-					<span>{!props.birthDate ? "-None-" : props.birthDate}</span>
-				</div>
-				<div className="body-page__hero-data-item">
-					<span>City:</span>
-					<span>{!props.city ? "-None-" : props.city}</span>
-				</div>
-				<div className="body-page__hero-data-item">
-					<span>E-mail:</span>
-					<span>{!props.email ? "-None-" : props.email}</span>
-				</div>
-				<div className="body-page__hero-data-item">
-					<span>Web Site</span>
-					<span>{!props.webSite ? "-None-" : props.webSite}</span>
-				</div>
+				<InfoField label="Name" content={name} />
+				<InfoField label="Date of birth" content={birthDate} />
+				<InfoField label="City" content={city} />
+				<InfoField label="E-mail" content={email} />
+				<InfoField label="Web Site" content={webSite} />
 			</div>
 		</div>
 	);
 }
 export default HeroInfo;
+

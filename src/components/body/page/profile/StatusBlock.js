@@ -10,13 +10,12 @@ function StatusBlock({ getStatus, setStatus, userId, userStatus }) {
 	})
 	return (
 		<div className="body-page__background_status"
-			onDoubleClick={() => setIsTyping(true)}
-		>
+			onDoubleClick={() => setIsTyping(true)} >
 			{isTyping
-				? <input onBlur={(event) => {
+				? <input onBlur={(event) =>  {
 					setIsTyping(false)
-					setStatus(event)
-				}}	defaultValue={statusText}
+					 setStatus(event)
+				}} defaultValue={statusText}
 					className="body-page__background_status-input" placeholder="enter your status" autoFocus={true} maxLength="35" />
 				: <span className="body-page__background_status-text">{statusText || "double click to set status"}</span>
 			}
