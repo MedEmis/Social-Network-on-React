@@ -13,7 +13,7 @@ function InfoField({ label, content }) {
 	)
 }
 
-function HeroInfo({ isOwner, userId, heroPicture, name, birthDate, city, email, webSite, saveImage }) {
+function HeroInfo({ isOwner, userId, heroPicture, name, birthDate, city, email, webSite, saveImage, profile, lookingForAJobDescription, github, website, mainLink }) {
 	useEffect(() => {
 		SetUserID(userId)
 	}, [isOwner, heroPicture])
@@ -26,11 +26,18 @@ function HeroInfo({ isOwner, userId, heroPicture, name, birthDate, city, email, 
 			</div>
 			<div className="body-page__hero-data">
 				<InfoField label="Name" content={name} />
+				<InfoField label="Looking for job?" content={isOwner ? profile.lookingForAJobDescription : lookingForAJobDescription} />
+				<InfoField label="Git-Hub" content={isOwner ? profile.contacts.github : github} />
+				<InfoField label="Portfolio" content={isOwner ? profile.contacts.mainLink : mainLink} />
+				<InfoField label="Email" content={isOwner ? email : null} />
+			</div>
+			{/* <div className="body-page__hero-data">
+				<InfoField label="Name" content={name} />
 				<InfoField label="Date of birth" content={birthDate} />
 				<InfoField label="City" content={city} />
 				<InfoField label="E-mail" content={email} />
 				<InfoField label="Web Site" content={webSite} />
-			</div>
+			</div> */}
 		</div>
 	);
 }

@@ -198,9 +198,16 @@ const userBaseReducer = (state = initialUsersState, action) => {
 		case SET_PROFILE:
 			return {
 				...state,
-				profile: action.data,
+				profile: {
+					...state.profile,
+					...action.data
+				},
 				isTemporary: false
 			}
+		// profile: {
+		// 	...state.profile,
+		// 	...action.data
+		// },
 		//======================================================================================================================================
 		case SET_PROFILE_IMAGE:
 			return {
@@ -372,5 +379,13 @@ export const SaveImageThunkCreator = (image) => async (dispatch) => {
 	if (response.data.resultCode === 0) {
 		dispatch(SET_PROFILE_IMAGE_actionCreator(response.data.data.photos))
 	}
+}
+export const UpdateProfileThunkCreator = (profile) => async (dispatch) => {
+	dispatch(Toggle_IsFetching_actionCreator(true))// switch loader on
+	let response = await userAPI.updateProfile(profile)
+	 if (response.data.resultCode === 0) {
+	 	dispatch(SET_PROFILE_actionCreator(profile))
+	 }
+	dispatch(Toggle_IsFetching_actionCreator(false))// switch loader off
 }
 //==============THUNKS END========================================================================

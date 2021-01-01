@@ -8,15 +8,22 @@ const axiosInstance = axios.create({
 })
 
 export const userAPI = {
+	//=====AUTHORIZATION==================================================================
 	logIn() { return axiosInstance.get(`auth/me`) },
 	authorization(email, password, rememberMe = false, captcha = null) {
 		return axiosInstance.post(`auth/login`, { email: email, password: password, rememberMe: rememberMe, captcha: captcha })
 	},
 	logOut() { return axiosInstance.delete(`auth/login`) },
+	//=====AUTHORIZATION END==================================================================
+
+	//=====USER BASE ==================================================================
 	getUsersBase(currentPage, displayedUsers) { return axiosInstance.get(`users?page=${currentPage}&count=${displayedUsers}`) },
 	getUsersProfile(userId) { return axiosInstance.get(`profile/${userId}`) },
 	getUserStatus(userId) { return axiosInstance.get(`/profile/status/${userId}`) },
 	setUserStatus(payload) { return axiosInstance.put(`/profile/status`, { status: payload }) },
+	//=====USER BASE END==================================================================
+
+	//=====PROFILE==================================================================
 	followRequest(request, id) {
 		if (request === "follow") {
 			return axiosInstance.post(`follow/${id}`)
@@ -31,4 +38,12 @@ export const userAPI = {
 			headers: { "Content-Type": "multipart/form-data" }
 		})
 	},
+	updateProfile(profile) {
+		return axiosInstance.put(`/profile`, profile)
+	},
+	//=====PROFILE END==================================================================
+
+	//=====SECURITY======================================================================
+	getCaptcha() { return axiosInstance.get("/security/get-captcha-url") },
+	//=====SECURITY END==================================================================
 }

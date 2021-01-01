@@ -2,6 +2,7 @@
 	&__hero-page {
 		display: block;
 		position: relative;
+		padding-bottom: 120px;
 	}
 	&__background {
 		top: 0;
@@ -76,6 +77,8 @@
 		background: rgb(59, 59, 59);
 		border-radius: 20px;
 		padding: 10px;
+		overflow: hidden;
+		word-wrap: break-word;
 		margin-bottom: 10px;
 		text-align: left;
 
@@ -154,15 +157,18 @@
 	}
 	&__authorization {
 		width: 100%;
-		height: 100%;
+		height: auto;
 		display: flex;
 		justify-content: center;
 		align-items: stretch;
 		padding: 50px;
 		color: rgb(255, 248, 248);
+		transition: 0.5s linear;
 		&_box {
-			width: 60%;
-			height: 500px;
+			// width: 60%;
+			// height: auto;
+			// min-height: 550px;
+			// max-height: 650px;
 			background: rgb(54, 48, 133);
 			border-radius: 20px;
 			padding: 50px 100px;
@@ -175,20 +181,21 @@
 			position: relative;
 		}
 		&_button {
+			user-select: none;
 			position: relative;
 			z-index: 5;
 			font-size: 24px;
 			font-weight: 900;
 			color: #035a5f;
-			width: 200px;
+			width: auto;
 			height: 40px;
-			border-radius: 50px 50px;
+			border-radius: 10px;
 			background: rgb(10, 52, 114);
-			margin-bottom: 20px;
+			margin: 0 20px 20px 20px;
 			bottom: 0px;
 			transition: 0.3s;
 			border-bottom: 5px solid rgb(17, 30, 63);
-			padding: 5px;
+			padding: 5px 20px;
 			&:hover {
 				color: #03e9f4;
 				&:disabled {
@@ -216,7 +223,45 @@
 		}
 	}
 }
+.captcha-block {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 10px;
+	& input {
+		color: #fff;
+		letter-spacing: 3px;
+	}
+	&__captcha-reload {
+		height: 37px;
+		width: 37px;
+		font-size: 22px;
+		cursor: pointer;
+		color: rgb(11, 124, 5);
+		&:hover {
+			transition: 0.5s linear;
+			transform: rotate(-360deg);
+		}
+	}
+}
 
+.hard-coded-users{
+	position: absolute;
+	top: 0;right: -300px;
+	font-size: 20px;
+	background: rgb(53, 53, 53);
+	padding: 10px;
+	text-align-last: left;
+	& li{
+		margin-bottom: 10px;
+		background: rgb(28, 27, 27);
+		padding: 5px;
+		& p{
+			margin-bottom: 5px;
+		}
+	}
+}
 .reginput {
 	color: rgb(255, 255, 255);
 }

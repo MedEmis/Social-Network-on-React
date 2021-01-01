@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, useLocation } from 'react-router-dom'
 import SidebarContainer from './sidebar/SidebarContainer';
 import PostsContainer from './page/postlog/PostsContainer';
 import DialogsContainer from './page/dialogs/DialogsContainer';
@@ -10,11 +10,15 @@ import Loader from './Loader';
 const PublicUserPageContainer = React.lazy(() => import('./page/UserPage/PublicUserPageContainer'));
 
 function Body(props) {
-	//console.log("Body props", props)
+	const location = useLocation();
+	//console.log(location.pathname === "/");
 	return (
 		<div className="body-main">
 			<SidebarContainer />
 			<div className="body-page">
+				{
+					location.pathname === "/" && <Description />
+				}
 				<span className="body-page_cover"></span>
 				<React.Suspense fallback={<Loader />}>
 					<Switch>
@@ -33,3 +37,19 @@ function Body(props) {
 	);
 }
 export default Body;
+
+function Description() {
+	return (
+		<div className="Description">
+			<h3>SHORT DESCRIPTION OF PROJECT</h3>
+			<p> This is my first "big" project wrote on React. </p>
+			<p> This project is NOT production-ready and was created to show my skills in front-end development. </p>
+			<p> Not all functions are working here (as "music", "news" , "dialogs") </p>
+			<p> To check how MY POSTS and DIALOGS working, you need to log in with one of the "hardcoded users" from Authorization page.
+			Because API endpoint, which I was using, doesn't provide method to save user posts, especially with double nested objects (like my post system has).
+			That's why ONLY - PROFILE, USER BASE and AUTHORIZATION pages are working properly with server (but not all small features). But if you will be authorized
+			 with "hardcoded user", PROFILE might be not working as well, because I was concentrating on setting up work with server.</p>
+			<p>In case you have any question, you can find my contacts below in the footer. </p>
+		</div>
+	)
+}

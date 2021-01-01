@@ -5,6 +5,7 @@ import { getCurrentUserId, getIsUserExist, getTemporaryID, getIsAuthorized } fro
 import store from "./redux/reduxStore"
 import { Provider } from 'react-redux';
 import { GetUserProfileThunkCreator } from './redux/userBaseReducer';
+import { LogInThunkCreator } from './redux/authReducer';
 
 
 
@@ -24,6 +25,7 @@ const AppContainer = connect(mapStateToProps, {
 
 
 const ReactSocialNetwork = (props) => {
+	
 	return (
 		<React.StrictMode>
 			<Provider store={store}>

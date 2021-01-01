@@ -32,7 +32,18 @@
 }
 
 
-
+.Description{
+	padding: 20px;
+	background: rgb(92, 91, 91);
+	margin: 50px;
+	border-radius: 10px;
+	text-align: left;
+	& p{
+		line-height: 30px;
+		font-size: 20px;
+		margin-top: 20px;
+	}
+}
 
 
 

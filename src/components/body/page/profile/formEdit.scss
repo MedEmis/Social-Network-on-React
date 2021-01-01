@@ -1,0 +1,20 @@
+.profile-editor-form {
+	padding: 0 20px;
+	background: rgb(49, 48, 48);
+	overflow: hidden;
+	height: auto;
+	&__input-field {
+		transition: 1.5s linear;
+		& textarea {
+			background: rgb(84, 84, 84);
+			font-size: 18px;
+			max-width: 100%;
+			min-width: 100%;
+			min-height: 50px;
+			max-height: 500px;
+		}
+	}
+	&.hidden{
+		height: 0;
+	}
+}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import HeroInfo from './HeroInfo';
 import HeroContacts from './HeroContacts';
 import User404 from './User404';
@@ -7,13 +7,15 @@ import './profile.scss';
 import './../../preloader.scss';
 import HeroAbout from './HeroAbout';
 import StatusBlock from './StatusBlock';
+import ProfileEditForm from './ProfileEditForm';
 
 
 
 
 
 function Profile(props) {
-
+	const [formEdit, setFormEdit] = useState(true)
+	const hideForm = () => setFormEdit(true)
 	let userId = props.match.params.temporaryID
 	let user = props.userBase.filter(item => item.userId === userId)[0]
 	let heroPicture
@@ -22,12 +24,16 @@ function Profile(props) {
 	if (props.isOwner) {
 		heroPicture = props.profile ? props.profile.photos.large : null
 		name = props.profile ? props.profile.fullName : null
-		webSite = props.profile ? props.profile.contacts.twitter : null
+		webSite = props.profile ? props.profile.contacts.mainLink : null
 	} else {
 		heroPicture = props.watchedProfile ? props.watchedProfile.photos.large : null
 		name = props.watchedProfile ? props.watchedProfile.fullName : null
 		webSite = props.watchedProfile ? props.watchedProfile.contacts.twitter : null
 	}
+	// useEffect(() => {
+	// 	props.getProfile(props.userId, props.isOwner)
+	// }, [])
+
 
 	// ВРЕМЕННО ИСПОЛЬЗУЕТЬСЯ БАЗА С КАМАСУТРЫ. ЧТОБЫ ПЕРЕКЛЮЧИТЬСЯ НА МОЮ НУЖНО ОТКЛЮЧИТЬ props.isLoading И props.profile(ПОМЕНЯТЬ НА user)
 	return (
@@ -39,22 +45,27 @@ function Profile(props) {
 						<img src={topImage} alt="topImage" className="body-page__background_image" />
 						{
 							props.isOwner
-								? <StatusBlock
-									userId={props.userId}
-									userStatus={props.userStatus}
-									getStatus={props.getStatus}
-									setStatus={props.setStatus}
-								/>
+								? <>
+									<StatusBlock
+										userId={props.userId}
+										userStatus={props.userStatus}
+										getStatus={props.getStatus}
+										setStatus={props.setStatus}
+									/>
+								</>
 								: null
 						}
 					</div>
 					<HeroInfo
+						profile={props.profile}
 						isOwner={props.isOwner}
 						userBase={props.userBase}
 						userId={userId}
 						// userId={props.userId}
-						name={name }
+						email={props.email}
+						name={name}
 						heroPicture={heroPicture}
+						webSite={webSite}
 						webSite={webSite}
 						//functions
 						saveImage={props.saveImage}
@@ -69,8 +80,16 @@ function Profile(props) {
 					//email={user.login}
 					//webSite={user.webSite}
 					/>
+					<button onClick={() => setFormEdit(false)} className="body-page__authorization_button ">edit your profile</button>
+					<ProfileEditForm
+						profile={props.profile}
+						userId={props.userId}
+						updateProfile={props.updateProfile}
+						formEdit={formEdit}
+						hideForm={hideForm}
+					/>
 					{
-						props.profile
+						props.profile.aboutMe
 							? <HeroAbout text={props.profile
 								? props.profile.aboutMe
 								: null} />

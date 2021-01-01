@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import ReactSocialNetwork from './AppContainer'
-
+import "react-rpm"
 //========== with react-redux. Via connect it will make its own subscribe without rerendering of entire DOM tree, but only some components
 ReactDOM.render(
 	<ReactSocialNetwork />,
 	document.getElementById('root')
 );
-
 
 // ReactDOM.render(
 // 	<React.StrictMode>

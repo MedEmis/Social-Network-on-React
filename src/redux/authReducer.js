@@ -3,11 +3,12 @@ import { initialPostState } from "./postBaseReducer"
 import { userAPI } from './../API';
 
 
-const USER_LOG_IN = "USER_LOG_IN"
-const USER_LOG_OUT = "USER_LOG_OUT"
-const SET_USER_DATA = "SET_USER_DATA"
-const AUTHORIZATION = "AUTHORIZATION"
-const CREATE_NEW_USER = "CREATE_NEW_USER"
+const USER_LOG_IN = "Social-Network-on-React/auth/USER_LOG_IN"
+const USER_LOG_OUT = "Social-Network-on-React/auth/USER_LOG_OUT"
+const SET_USER_DATA = "Social-Network-on-React/auth/SET_USER_DATA"
+const AUTHORIZATION = "Social-Network-on-React/auth/AUTHORIZATION"
+const CREATE_NEW_USER = "Social-Network-on-React/auth/CREATE_NEW_USER"
+const GET_CAPTCHA_SUCCESS = "Social-Network-on-React/auth/GET_CAPTCHA_SUCCESS"
 
 
 export let initialAuthState = {
@@ -15,6 +16,7 @@ export let initialAuthState = {
 	userId: null,
 	login: null,
 	isAuthorized: false,
+	captcha: null,
 	currentUserId: null || localStorage.getItem("currentUserId")
 }
 
@@ -123,6 +125,11 @@ const authReducer = (state = initialAuthState, action) => {
 				currentUserId: null,// set user ID as null to send us to authorization page
 				isAuthorized: false
 			}
+		case GET_CAPTCHA_SUCCESS:
+			return {
+				...state,
+				captcha: action.captcha
+			}
 		default: return {
 			...state
 		}
@@ -162,6 +169,12 @@ export const AUTHORIZATION_actionCreator = (userId) => {
 		userId: userId
 	}
 }
+export const GET_CAPTCHA_SUCCESS_actionCreator = (captcha) => {
+	return {
+		type: GET_CAPTCHA_SUCCESS,
+		captcha: captcha
+	}
+}
 //================ACTIONS END==================================================================================
 
 //==============THUNKS========================================================================
@@ -173,15 +186,21 @@ export const LogOutThunkCreator = () => async (dispatch) => {
 	let response = await userAPI.logOut()
 	if (response.data.resultCode === 0) { dispatch(USER_LOG_OUTactionCreator()) }
 }
-export const AuthorizationThunkCreator = (email, password, rememberMe) => async (dispatch) => {
-	let response = await userAPI.authorization(email, password, rememberMe)//start API request, and after response...
+export const AuthorizationThunkCreator = (email, password, rememberMe, captcha) => async (dispatch) => {
+	let response = await userAPI.authorization(email, password, rememberMe, captcha)//start API request, and after response...
 	if (response.data.resultCode === 0) {//if server allow authorization...
 		dispatch(AUTHORIZATION_actionCreator(response.data.data.userId))// put data to store
-		let userData = await userAPI.logIn(response.data.data.userId)//get user data
-		dispatch(SET_USER_DATA_actionCreator(userData))// put data to store
+		dispatch(LogInThunkCreator())
+	} else if (response.data.resultCode === 10) {
+		window.M.toast({ html: response.data.messages[0] })//message for user
+		dispatch(GetCaptchaThunkCreator())
 	} else {
-		console.log(response.data.messages[0])
+		window.M.toast({ html: response.data.messages[0] })
 	}
-
+}
+export const GetCaptchaThunkCreator = () => async (dispatch) => {
+	let response = await userAPI.getCaptcha()
+	const captcha = response.data.url
+	dispatch(GET_CAPTCHA_SUCCESS_actionCreator(captcha))
 }
 //=============THUNKS END=====================================================================

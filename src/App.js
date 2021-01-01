@@ -8,6 +8,7 @@ import store from "./redux/reduxStore"
 import { Provider } from 'react-redux';
 import React, { useEffect } from 'react'
 import './App.css';
+import { LogInThunkCreator } from './redux/authReducer';
 
 export const pageMove = (event) => {//global function for page animation
 	if (window.location.href === event.target.href) { return }
