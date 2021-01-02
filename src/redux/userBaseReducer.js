@@ -44,7 +44,7 @@ export let initialUsersState = {
 			"voutedDislike": [],
 			"registerDate": "44.44.44",
 			"isOnline": true,
-			"avatarUrl": "https://scontent.fiev13-1.fna.fbcdn.net/v/t1.0-9/944993_737146193094013_5672080899067667646_n.jpg?_nc_cat=107&cb=846ca55b-ee17756f&ccb=2&_nc_sid=09cbfe&_nc_ohc=SyPoRklCbqAAX9Iyd7J&_nc_ht=scontent.fiev13-1.fna&oh=c7b2cd2853d192f8a2d0de8baefb17e7&oe=5FEA9D29",
+			"avatarUrl": "https://tipik.ru/wp-content/uploads/2019/08/%D0%90%D1%80%D1%82%D1%8B-%D1%80%D1%8B%D0%B6%D0%B8%D0%B5-%D0%B4%D0%B5%D0%B2%D1%83%D1%88%D0%BA%D0%B8-014.jpg",
 			"contacts": ["id0001", "id0003"]
 		}, {
 			"login": "CCC@111",
@@ -204,10 +204,6 @@ const userBaseReducer = (state = initialUsersState, action) => {
 				},
 				isTemporary: false
 			}
-		// profile: {
-		// 	...state.profile,
-		// 	...action.data
-		// },
 		//======================================================================================================================================
 		case SET_PROFILE_IMAGE:
 			return {

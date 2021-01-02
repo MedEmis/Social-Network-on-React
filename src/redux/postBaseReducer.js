@@ -115,7 +115,7 @@ export let initialPostState = {
 					{
 						"id": "00011",
 						"userId": "id0002",
-						"nikName": "First Reply Name",
+						"nikName": "Name Five",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
 						"like": 0,
@@ -137,7 +137,7 @@ export let initialPostState = {
 					{
 						"id": "00021",
 						"userId": "id0001",
-						"nikName": "First Reply Name",
+						"nikName": "Name Six",
 						"dataDate": "12.34.56",
 						"dataTime": "12:34",
 						"like": 0,
@@ -146,7 +146,7 @@ export let initialPostState = {
 						"nestedReply": []
 					},
 					{
-						"id": "00021",
+						"id": "00022",
 						"userId": "id0005",
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
@@ -157,7 +157,7 @@ export let initialPostState = {
 						"nestedReply": []
 					},
 					{
-						"id": "00021",
+						"id": "00023",
 						"userId": "id0005",
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
@@ -168,7 +168,7 @@ export let initialPostState = {
 						"nestedReply": []
 					},
 					{
-						"id": "00021",
+						"id": "00024",
 						"userId": "id0005",
 						"nikName": "First Reply Name",
 						"dataDate": "12.34.56",
@@ -577,6 +577,7 @@ const postBaseReducer = (state = initialPostState, action) => {
 			}
 		//======================================================================================================================================
 		case ADD_NEW_REPLY:
+			
 			textArea = action.event.target.offsetParent.lastElementChild.childNodes[0]
 			post = {
 				"id": ++state.postsCount,
@@ -605,6 +606,7 @@ const postBaseReducer = (state = initialPostState, action) => {
 			}
 		//======================================================================================================================================
 		case ADD_NEW_NESTED_REPLY:
+			console.log(action)
 			textArea = action.event.target.offsetParent.lastElementChild.childNodes[0]
 			post = {
 				"id": ++state.postsCount,
@@ -646,7 +648,7 @@ const postBaseReducer = (state = initialPostState, action) => {
 				let user = userBase.filter(item => item.userId === userId)[0]
 				let action = event.target.attributes.name.value
 				console.log(`user ${user.userId} pressed ${action}`)
-				//checking if this los was already vouted
+				//checking if this post was already voted
 				if (user.voutedLike.includes(logId) || user.voutedDislike.includes(logId)) {
 					return
 				} else {
@@ -782,7 +784,7 @@ export const AddNewPostThunkCreator = (userId, name) => (dispatch) => {
 }
 export const AddNewReplyThunkCreator = (event, data) => (dispatch) => {
 	dispatch(ADD_NEW_REPLY_actionCreator(
-		data.userId,
+		localStorage.getItem("currentUserId"),
 		data.id,
 		data.userBase.filter(item => item.userId === data.userId)[0].name,
 		event
@@ -790,7 +792,7 @@ export const AddNewReplyThunkCreator = (event, data) => (dispatch) => {
 }
 export const AddNewNestedPostThunkCreator = (event, data) => (dispatch) => {
 	dispatch(ADD_NEW_NESTED_REPLY_actionCreator(
-		data.userId,
+		localStorage.getItem("currentUserId"),
 		data.initialUser,
 		data.initialPost,
 		data.id,

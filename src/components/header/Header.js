@@ -19,7 +19,7 @@ function Header(props) {
 			>Log Out</Link>
 			<div className="header__pictures">
 				<div >
-					<img className="header__hero-avatar" src={props.userAvatar || defaultAvatar} alt="hero" />
+					<img className="header__hero-avatar" src={props.userAvatar || props.hardcodedUserAvatar || defaultAvatar} alt="hero" />
 				</div>
 				<div className="header__logo"><img className="App-logo" src={logo} alt="logo" /></div>
 			</div>

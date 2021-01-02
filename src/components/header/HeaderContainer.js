@@ -4,12 +4,12 @@ import { connect } from 'react-redux'
 
 let mapStateToProps = (state) => {//data for connect in state
 	let userId = state.authReducer ? state.authReducer.currentUserId : null
-	let user = state.usersReducer.userBase.filter(item => item.userId === userId)[0]
+	const hardcodedUser = state.usersReducer.userBase.filter((user) => user.userId === (localStorage.getItem("currentUserId")))[0]
 	const userAvatar = state.usersReducer.profile ? state.usersReducer.profile.photos.small : null
 	return {
 		user: userId,
-		// userAvatar: user ? user.avatarUrl : null // for my data base
-		userAvatar: userAvatar
+		userAvatar: userAvatar,
+		hardcodedUserAvatar: hardcodedUser ? hardcodedUser.avatarUrl : null
 	}
 }
 
@@ -20,3 +20,4 @@ const HeaderContainer = connect(mapStateToProps, { userLogOut: LogOutThunkCreato
 
 
 export default HeaderContainer;
+

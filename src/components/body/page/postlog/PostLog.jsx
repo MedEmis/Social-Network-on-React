@@ -10,6 +10,7 @@ import './postLog.scss';
 function PostLog(props) {
 	let name = props.userBase.filter(item => item.userId === props.userId)[0] ? props.userBase.filter(item => item.userId === props.userId)[0].name : "AnoNymus"
 	let postsBlock = props.postsBase ? props.postsBase[props.userId] : null
+	let usertype = localStorage.getItem("userType")
 	const postInput = React.createRef();
 	const panelColor = (data) => {
 		let panColor = {}
@@ -105,9 +106,13 @@ function PostLog(props) {
 						/> : null))
 						: null
 				} */}
-				<div className="body-page__end">no more messages here</div>
+				{
+					usertype === "hardcodedUser"
+						? <div className="body-page__end">{"no more messages here"}</div>
+						: <div className="body-page__end">{"Sorry, for real users this page will not work properly..."}</div>
+				}
 			</div>
-		</div>
+		</div >
 	);
 }
 export default PostLog;

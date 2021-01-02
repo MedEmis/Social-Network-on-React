@@ -27,7 +27,7 @@ function AuthorizationForm({ GetCaptcha, inputCaptcha, captcha, Authorization })
 			<Form
 				onSubmit={(event) => {
 					console.log(event)
-					Authorization(event.email, event.password, event.rememberMe, event.captcha)
+					Authorization(event.email, event.password, event.rememberMe, event.captcha, event.hardcodedUser)
 				}}
 				render={({ handleSubmit, form, submitting, pristine }) => (
 					<form onSubmit={handleSubmit}>
@@ -43,7 +43,12 @@ function AuthorizationForm({ GetCaptcha, inputCaptcha, captcha, Authorization })
 						</div>
 						<label>
 							<Field name="rememberMe" id="rememberMe" component="input" type="checkbox" className="filled-in" />
-							<span>Remember me</span>
+							<span style={{ marginRight: 30 }}>Remember me</span>
+
+						</label>
+						<label>
+							<Field name="hardcodedUser" id="hardcodedUser" component="input" type="checkbox" className="filled-in" />
+							<span>Hardcoded user</span>
 						</label>
 						{
 							captcha && (
@@ -90,6 +95,7 @@ const HardcodedUsers = () => {
 	return (
 		<div className="hard-coded-users">
 			<h2>Hardcoded users</h2>
+			<h3>To log in as hardcoded user,<br/> don't forget to press on <br/> "Hardcoded user" check box  </h3>
 			<ul>
 				<li>
 					<p>"login": "AAA@111.cc"</p>

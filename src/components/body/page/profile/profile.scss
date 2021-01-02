@@ -248,11 +248,15 @@
 
 .hard-coded-users{
 	position: absolute;
-	top: 0;right: -300px;
+	top: 0;left: -300px;
 	font-size: 20px;
 	background: rgb(53, 53, 53);
 	padding: 10px;
 	text-align-last: left;
+	& h3{
+		word-wrap: break-word;
+
+	}
 	& li{
 		margin-bottom: 10px;
 		background: rgb(28, 27, 27);

@@ -13,7 +13,6 @@ import { WithAuthRedirect_HOC } from '../../../../HOC/withAuthRedirectHOC.js';
 import { compose } from 'redux';
 
 function ProfileContainer(props) {
-	let isLoading = props.isFetching
 	let userId = props.match.params.temporaryID
 	let isOwner = +props.userId === +userId
 	useEffect(() => {
@@ -24,7 +23,7 @@ function ProfileContainer(props) {
 		<Profile
 			{...props}
 			isOwner={isOwner}
-			isLoading={isLoading}
+			isLoading={props.isFetching}
 		/>
 	)
 }

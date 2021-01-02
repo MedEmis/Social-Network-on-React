@@ -83,6 +83,7 @@ const authReducer = (state = initialAuthState, action) => {
 				initialUsersState.userBase.push(newUserModel)
 				initialPostState.postsBase[newUserId] = []
 				localStorage.setItem("currentUserId", newUserId)
+				localStorage.setItem("usertype", "hardcoded")
 				console.log(`User:  ${newUserId} isOnline:  ${newUserModel.isOnline}`)
 				return { ...state, currentUserId: newUserId, isAuthorized: true }
 			}
@@ -96,6 +97,7 @@ const authReducer = (state = initialAuthState, action) => {
 					if (initialUsersState.userBase[i].login === action.inputLogin) {
 						if (initialUsersState.userBase[i].password === action.inputPassword) {
 							localStorage.setItem("currentUserId", initialUsersState.userBase[i].userId)
+							localStorage.setItem("usertype", "hardcoded")
 							initialUsersState.userBase[i].isOnline = true
 							result = `User:  ${initialUsersState.userBase[i].userId} isOnline:  ${initialUsersState.userBase[i].isOnline}`
 							return {
@@ -112,14 +114,15 @@ const authReducer = (state = initialAuthState, action) => {
 						continue
 					}
 				}
-				console.log(result)
+				window.M.toast({ html: result })//message for user
 			} else {
-				console.log("You need to enter data")
+				window.M.toast({ html: "You need to enter data" })//message for user
 			}
 			break;
 		//======================================================================================================================================
 		case USER_LOG_OUT:
 			localStorage.removeItem("currentUserId")//resetting of user ID
+			localStorage.removeItem("usertype")//resetting of user ID
 			return {
 				...state,
 				currentUserId: null,// set user ID as null to send us to authorization page
@@ -145,11 +148,11 @@ export const SET_USER_DATA_actionCreator = (data) => {
 		userData: data
 	}
 }
-export const USER_LOG_INactionCreator = (event) => {
+export const USER_LOG_INactionCreator = (email, password) => {
 	return {
 		type: USER_LOG_IN,
-		inputLogin: event.target[0].value,
-		inputPassword: event.target[1].value,
+		inputLogin: email,
+		inputPassword: password,
 	}
 }
 export const USER_LOG_OUTactionCreator = () => {
@@ -186,17 +189,23 @@ export const LogOutThunkCreator = () => async (dispatch) => {
 	let response = await userAPI.logOut()
 	if (response.data.resultCode === 0) { dispatch(USER_LOG_OUTactionCreator()) }
 }
-export const AuthorizationThunkCreator = (email, password, rememberMe, captcha) => async (dispatch) => {
-	let response = await userAPI.authorization(email, password, rememberMe, captcha)//start API request, and after response...
-	if (response.data.resultCode === 0) {//if server allow authorization...
-		dispatch(AUTHORIZATION_actionCreator(response.data.data.userId))// put data to store
-		dispatch(LogInThunkCreator())
-	} else if (response.data.resultCode === 10) {
-		window.M.toast({ html: response.data.messages[0] })//message for user
-		dispatch(GetCaptchaThunkCreator())
-	} else {
-		window.M.toast({ html: response.data.messages[0] })
+export const AuthorizationThunkCreator = (email, password, rememberMe, captcha, hardcodedUser) => async (dispatch) => {
+	// IF hardcodedUser CHECKBOX WAS CHECKED => WILL BE AUTHORIZER HARDCODED USER
+	if (hardcodedUser) {// part for hardcoded users
+		dispatch(USER_LOG_INactionCreator(email, password))
+	} else {// part for real users from server
+		let response = await userAPI.authorization(email, password, rememberMe, captcha)//start API request, and after response...
+		if (response.data.resultCode === 0) {//if server allow authorization...
+			dispatch(AUTHORIZATION_actionCreator(response.data.data.userId))// put data to store
+			dispatch(LogInThunkCreator())
+		} else if (response.data.resultCode === 10) {
+			window.M.toast({ html: response.data.messages[0] })//message for user
+			dispatch(GetCaptchaThunkCreator())
+		} else {
+			window.M.toast({ html: response.data.messages[0] })
+		}
 	}
+
 }
 export const GetCaptchaThunkCreator = () => async (dispatch) => {
 	let response = await userAPI.getCaptcha()
