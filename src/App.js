@@ -6,9 +6,11 @@ import Footer from './components/footer/Footer';
 import Body from './components/body/Body';
 import store from "./redux/reduxStore"
 import { Provider } from 'react-redux';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css';
-import { LogInThunkCreator } from './redux/authReducer';
+import { ThemeConsumer, ThemeProvider } from './redux/ThemeContext';
+
+
 
 export const pageMove = (event) => {//global function for page animation
 	if (window.location.href === event.target.href) { return }
@@ -24,20 +26,35 @@ export const pageMove = (event) => {//global function for page animation
 
 
 
+
 function App(props) {
 	useEffect(() => {
-		props.getProfile(props.currentUserId, true)
-	}, [props.currentUserId])
+		
+
+		if (localStorage.getItem("usertype") !== "hardcoded") {
+			props.getProfile(props.currentUserId, true)
+		}
+	})
 	//console.log("app", props)
+	const [lightTheme, setTheme] = useState(false)
+	const themeChange = () => {
+		setTheme(!lightTheme)
+	}
+
+
+
+
 	if (props.isAuthorized || localStorage.getItem("currentUserId")) {
 		return (//autorized user
 			<div className="App">
 				<Provider store={store}>
-					<BrowserRouter basename="/react-social-network/">
-						<HeaderContainer />
-						<Body temporaryID={props.temporaryID} isAuthorized={props.isAuthorized} />
-					</BrowserRouter>
-					<Footer />
+					<ThemeProvider value={lightTheme} >
+						<BrowserRouter basename="/react-social-network/">
+							<HeaderContainer />
+							<Body temporaryID={props.temporaryID} isAuthorized={props.isAuthorized} themeChange={themeChange} />
+						</BrowserRouter>
+						<Footer />
+					</ThemeProvider>
 				</Provider>
 			</div>
 		);

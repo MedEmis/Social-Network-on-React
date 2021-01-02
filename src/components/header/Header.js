@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import logo from './../../../src/images/logo192.png';
 import { pageMove } from "./../../App"
 import { Link } from 'react-router-dom';
-import './header.css';
+import './header.scss';
 import defaultAvatar from "./../../images/defaultUser.png"
+import { ThemeContext } from '../../redux/ThemeContext';
 
 
 function Header(props) {
+	const lightTheme = useContext(ThemeContext)
 	return (
-		<div className="header" >
+		<div className="header" style={{ background: lightTheme ? " rgb(195, 193, 201)" : "rgb(37, 33, 49)" }}>
 			<Link to="/"
 				className="header-nav-item"
 				onClick={(event) => {
@@ -24,7 +26,7 @@ function Header(props) {
 				<div className="header__logo"><img className="App-logo" src={logo} alt="logo" /></div>
 			</div>
 		</div>
-	);
+	)
 }
 
 export default Header;

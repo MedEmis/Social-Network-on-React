@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import ReplyPostItem from './ReplyPostItem';
 import './postItem.scss';
 import defaultAvatar from "./../../../../images/defaultUser.png"
+import { ThemeContext } from '../../../../redux/ThemeContext';
 
 let classNames = require('classnames');
 
@@ -9,6 +10,7 @@ let classNames = require('classnames');
 function PostItem(props) {
 	const [IsTextOpen, setIsTextOpen] = useState(false)
 	const [IsVoted, setIsVoted] = useState(false)
+	const lightTheme = useContext(ThemeContext)
 	let postsBlock = props.childReply
 	let user = props.userBase.filter(item => item.userId === props.userId)[0]
 	let isLiked = user.voutedLike//to set color of icon
@@ -16,7 +18,7 @@ function PostItem(props) {
 	let avatar = user.avatarUrl
 	let name = user.name
 	return (
-		<div className="posts-log-item-wrapper">
+		<div className="posts-log-item-wrapper" style={{ background: lightTheme ? " rgb(214, 210, 210)" : "rgb(112, 112, 112)" }}>
 			<div className="hero-posts-log-item">
 				<img className="hero-posts-log-item_avatar" src={avatar || defaultAvatar} alt="avatar" />
 				<div className="hero-posts-log-item__title">

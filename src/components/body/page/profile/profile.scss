@@ -42,7 +42,7 @@
 	&__info {
 		display: flex;
 		padding: 10px;
-		background: rgb(68, 68, 68);
+		background: rgb(82, 78, 78);
 		border-radius: 5px;
 	}
 	&__hero-bigavatar,
@@ -75,6 +75,7 @@
 		height: auto;
 		display: block;
 		background: rgb(59, 59, 59);
+
 		border-radius: 20px;
 		padding: 10px;
 		overflow: hidden;
@@ -246,22 +247,22 @@
 	}
 }
 
-.hard-coded-users{
+.hard-coded-users {
 	position: absolute;
-	top: 0;left: -300px;
+	top: 0;
+	left: -300px;
 	font-size: 20px;
 	background: rgb(53, 53, 53);
 	padding: 10px;
 	text-align-last: left;
-	& h3{
+	& h3 {
 		word-wrap: break-word;
-
 	}
-	& li{
+	& li {
 		margin-bottom: 10px;
 		background: rgb(28, 27, 27);
 		padding: 5px;
-		& p{
+		& p {
 			margin-bottom: 5px;
 		}
 	}

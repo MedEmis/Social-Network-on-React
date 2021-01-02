@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ThemeContext } from '../../../../redux/ThemeContext';
 import './dialogs.scss';
 import DialogsItem from './DialogsItem';
 
@@ -11,10 +12,11 @@ function Dialogs(props) {
 	let dialogBase = props.dialogBase
 	let currentUserId = props.userId
 	let currentUser = userBase.filter(item => item.userId === currentUserId)[0]
+	const lightTheme = useContext(ThemeContext)
 	//console.log(currentUser)
 	return (
 
-		<div className="dialogs__wrapper">
+		<div className="dialogs__wrapper" style={{ background: lightTheme ? " rgb(197, 195, 195)" : "rgb(61, 56, 56)" }} >
 			<div className="dialogs__title">Your contacts and recent conversations</div>
 			{
 				dialogBase[currentUserId]

@@ -3,7 +3,6 @@
 	width: 200px;
 	height: 100%;
 	overflow: auto;
-	background: rgb(75, 71, 71);
 	position: relative;
 	&__hero-posts-log {
 		background: rgb(95, 95, 95);
@@ -14,7 +13,6 @@
 		align-items: flex-end;
 		flex-direction: column;
 		padding: 5px 5px 30px 5px;
-
 		position: relative;
 	}
 	&__hero-posts-logs-wrapper {

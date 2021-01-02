@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
 import './mini-menu.scss'
 let classNames = require('classnames');
-export const MiniMenu = () => {
+export const MiniMenu = ({ themeChange }) => {
 	let [isActive, setActive] = useState(false);
 	function toggleOpen() {
 		setActive(!isActive)
 	}
+
 	return (
 		<div className="mini-menu-box">
-			<div className={classNames("mobile-canvas", { " open": isActive })}>
+			<div className={classNames("mobile-canvas  ", { " open": isActive })} >
 				<div className={classNames("button-container", { " open": isActive })}>
-					<div className="button-wrapper">
-						<div className="button" onClick={toggleOpen}>
+					<div className="button-wrapper ">
+						<div className="button tooltipped" data-position="left" data-tooltip="Settings" onClick={toggleOpen}>
 							<span></span>
 							<span></span>
 							<span></span>
 						</div>
-						<div className="button-child-wrapper">
-							<div className="button-child">
-								<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+						<div className="button-child-wrapper" >
+							<div className="button-child  tooltipped" data-position="left" data-tooltip="Theme color" onClick={() => themeChange()}>
+								{/* <svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
 									<g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
 										<g id="Artboard-3" transform="translate(-18.000000, -18.000000)" fill="#FC3E9F">
 											<path d="M40.5353125,43 C39.17625,43 38.0703125,41.894375 38.0703125,40.535 L38.0703125,25.7421875 C38.0703125,25.3971875 38.3496875,25.1171875 38.6953125,25.1171875 C39.040625,25.1171875 39.3203125,25.3971875 39.3203125,25.7421875 L39.3203125,40.535 C39.3203125,41.205 39.8653125,41.75 40.5353125,41.75 C41.205,41.75 41.75,41.205 41.75,40.535 L41.75,20.4646875 C41.75,19.7946875 41.205,19.25 40.5353125,19.25 C39.8653125,19.25 39.3203125,19.7946875 39.3203125,20.4646875 L39.3203125,21.385 C39.3203125,21.7303125 39.040625,22.01 38.6953125,22.01 C38.3496875,22.01 38.0703125,21.7303125 38.0703125,21.385 L38.0703125,20.4646875 C38.0703125,19.105625 39.17625,18 40.5353125,18 C41.8946875,18 43,19.105625 43,20.4646875 L43,40.535 C43,41.894375 41.8946875,43 40.5353125,43 Z M33.8453125,43 C32.4859375,43 31.38,41.894375 31.38,40.535 L31.38,26.7146875 C31.38,25.355625 32.4859375,24.25 33.8453125,24.25 C35.2046875,24.25 36.31,25.355625 36.31,26.7146875 L36.31,40.535 C36.31,41.894375 35.2046875,43 33.8453125,43 Z M35.06,26.7146875 C35.06,26.0446875 34.515,25.5 33.8453125,25.5 C33.1753125,25.5 32.63,26.0446875 32.63,26.7146875 L32.63,40.535 C32.63,41.205 33.1753125,41.75 33.8453125,41.75 C34.515,41.75 35.06,41.205 35.06,40.535 L35.06,26.7146875 Z M27.1546875,43 C25.7953125,43 24.69,41.894375 24.69,40.535 L24.69,32.9646875 C24.69,31.605625 25.7953125,30.5 27.1546875,30.5 C28.5140625,30.5 29.62,31.605625 29.62,32.9646875 L29.62,40.535 C29.62,41.894375 28.5140625,43 27.1546875,43 Z M28.37,32.9646875 C28.37,32.2946875 27.8246875,31.75 27.1546875,31.75 C26.485,31.75 25.94,32.2946875 25.94,32.9646875 L25.94,40.535 C25.94,41.205 26.485,41.75 27.1546875,41.75 C27.8246875,41.75 28.37,41.205 28.37,40.535 L28.37,32.9646875 Z M20.4646875,43 C19.1053125,43 18,41.894375 18,40.535 L18,39.2146875 C18,37.855625 19.1053125,36.75 20.4646875,36.75 C21.82375,36.75 22.9296875,37.855625 22.9296875,39.2146875 L22.9296875,40.535 C22.9296875,41.894375 21.82375,43 20.4646875,43 Z M21.6796875,39.2146875 C21.6796875,38.5446875 21.1346875,38 20.4646875,38 C19.795,38 19.25,38.5446875 19.25,39.2146875 L19.25,40.535 C19.25,41.205 19.795,41.75 20.4646875,41.75 C21.1346875,41.75 21.6796875,41.205 21.6796875,40.535 L21.6796875,39.2146875 Z" id="Shape"></path>
@@ -30,9 +31,30 @@ export const MiniMenu = () => {
 											</filter>
 										</g>
 									</g>
+								</svg> */}
+								<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px"
+									height="100px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" xmlSpace="preserve">
+									<g id="sun">
+										<path d="M50,31.7c-9.9,0-18,8.1-18,18s8.1,18,18,18s18-8.1,18-18S59.9,31.7,50,31.7z M50,65.7c-8.8,0-16-7.2-16-16s7.2-16,16-16
+					s16,7.2,16,16S58.8,65.7,50,65.7z"/>
+
+										<g  className="odd">
+											<line fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeMiterlimit="10" x1="50" y1="71.6" x2="50" y2="80.9" />
+											<line fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeMiterlimit="10" x1="50" y2="18.4" x2="50" y1="27.7" />
+											<line fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeMiterlimit="10" x1="28" y1="49.7" x2="18.7" y2="49.7" />
+											<line fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeMiterlimit="10" x2="81.3" y1="49.7" x1="72" y2="49.7" />
+										</g>
+										<g  className="even">
+											<line fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeMiterlimit="10" x1="34.2" y1="65.1" x2="27.6" y2="71.6" />
+											<line fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeMiterlimit="10" x2="71.8" y2="27.4" x1="65.2" y1="34" />
+											<line fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeMiterlimit="10" x1="34.2" y1="34" x2="27.6" y2="27.4" />
+											<line fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeMiterlimit="10" x2="71.8" y2="71.7" x1="65.2" y1="65.1" />
+										</g>
+									</g>
 								</svg>
+
 							</div>
-							<div className="button-child">
+							<div className="button-child tooltipped" data-position="left" data-tooltip="Nothing yet...">
 								<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
 									<g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
 										<g id="Artboard-3-Copy" transform="translate(-18.000000, -18.000000)" fill="#FC3E9F">
@@ -41,7 +63,7 @@ export const MiniMenu = () => {
 									</g>
 								</svg>
 							</div>
-							<div className="button-child">
+							<div className="button-child tooltipped" data-position="left" data-tooltip="Nothing yet...">
 								<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
 									<g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
 										<g id="Artboard-3-Copy-2" transform="translate(-18.000000, -18.000000)" fill="#FC3E9F">
@@ -54,6 +76,6 @@ export const MiniMenu = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div >
 	)
 }

@@ -6,7 +6,9 @@ let mapStateToProps = (state) => {//data for connect in state
 	return {}
 }
 let mapDispatchToProps = (dispatch) => {//functions for connect is dispatch
-	return {}
+	return {
+		//themeChange: props.themeChange
+	}
 }
 
 const SidebarContainer = connect(mapStateToProps, mapDispatchToProps)(BodySidebar)

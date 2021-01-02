@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:100");
 
-.mini-menu-box{
+.mini-menu-box {
 	position: absolute;
 	top: 350px;
 	right: 20px;
@@ -192,7 +192,6 @@ $longer-time: ($time * 2); // all about naming, right?
 	bottom: 0;
 	left: 30px;
 	cursor: pointer;
-
 }
 
 .button {
@@ -204,13 +203,13 @@ $longer-time: ($time * 2); // all about naming, right?
 	transition: all $time ease-in-out $delay;
 
 	span {
-		position: absolute; 
+		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 		width: 80px;
 		height: 80px;
-		background: center / contain no-repeat url('https://img.icons8.com/nolan/64/gear.png');
+		background: center / contain no-repeat url("https://img.icons8.com/nolan/64/gear.png");
 		background-color: $pink;
 		border-radius: 50%;
 		//@include neon-fx($pink);
@@ -268,5 +267,85 @@ $longer-time: ($time * 2); // all about naming, right?
 		opacity: 0;
 		visibility: hidden;
 		// transition: all $longer-time $bezier calc(($delay) / 2);
+	}
+}
+
+svg {
+	#sun {
+		animation-duration: 10s;
+		animation-timing-function: linear;
+		animation-delay: 0;
+		animation-iteration-count: infinite;
+		animation-name: rotate;
+		transform-origin: 50% 50%;
+	}
+	line {
+		stroke-width: 2px;
+		fill: none;
+		stroke-dasharray: 11px;
+		stroke-dashoffset: 4px;
+		animation-duration: 2s;
+		animation-timing-function: ease-in-out;
+		animation-delay: 0;
+		animation-iteration-count: infinite;
+	}
+	.even line {
+		animation-name: pulse;
+		&:nth-child(1) {
+			animation-delay: 0.3s;
+		}
+		&:nth-child(2) {
+			animation-delay: 0.2s;
+		}
+		&:nth-child(3) {
+			animation-delay: 0.4s;
+		}
+	}
+	.odd line {
+		animation-name: pulse-rev;
+		stroke-dashoffset: 11px;
+
+		&:nth-child(1) {
+			animation-delay: 0.1s;
+		}
+		&:nth-child(2) {
+			animation-delay: 0.2s;
+		}
+		&:nth-child(3) {
+			animation-delay: 0.4s;
+		}
+	}
+}
+
+@keyframes pulse {
+	0% {
+		stroke-dashoffset: 0px;
+	}
+	50% {
+		stroke-dashoffset: 6px;
+	}
+	100% {
+		stroke-dashoffset: 0px;
+	}
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes pulse-rev {
+	0% {
+		stroke-dashoffset: 6px;
+	}
+	50% {
+		stroke-dashoffset: 0px;
+	}
+	100% {
+		stroke-dashoffset: 6px;
 	}
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import HeroInfo from './HeroInfo';
 import HeroContacts from './HeroContacts';
 import User404 from './User404';
@@ -8,6 +8,7 @@ import './../../preloader.scss';
 import HeroAbout from './HeroAbout';
 import StatusBlock from './StatusBlock';
 import ProfileEditForm from './ProfileEditForm';
+import { ThemeContext } from '../../../../redux/ThemeContext';
 
 
 
@@ -15,6 +16,7 @@ import ProfileEditForm from './ProfileEditForm';
 
 function Profile(props) {
 	const [formEdit, setFormEdit] = useState(true)
+	const lightTheme = useContext(ThemeContext)
 	const hideForm = () => setFormEdit(true)
 	const usertype = localStorage.getItem("usertype")
 	let userId = props.match.params.temporaryID
@@ -41,40 +43,41 @@ function Profile(props) {
 	if (usertype === "hardcoded") {
 		return (
 
-			//user ?
-			<div className="body-page__hero-page">
-				<div className="body-page__background">
-					<img src={topImage} alt="topImage" className="body-page__background_image" />
+			user ?
+				<div className="body-page__hero-page" style={{ background: lightTheme ? " rgb(189, 182, 182)" : "rgb(104, 99, 99)" }}>
+					<div className="body-page__background">
+						<img src={topImage} alt="topImage" className="body-page__background_image" />
+					</div>
+					<HeroInfo
+						//MY BASE \/
+						userBase={props.userBase}
+						userId={userId}
+						name={user.name}
+						heroPicture={user.avatarUrl}
+						birthDate={user.birthDate}
+						city={user.city}
+						email={user.login}
+						webSite={user.webSite}
+					/>
+					{
+						user
+							? <HeroContacts
+								contactName="contactName"
+								userBase={props.userBase}
+								userId={props.userId}
+								user={user}
+							/>
+							: null
+					}
 				</div>
-				<HeroInfo
-					//MY BASE \/
-					userBase={props.userBase}
-					userId={userId}
-					name={user.name}
-					heroPicture={user.avatarUrl}
-					birthDate={user.birthDate}
-					city={user.city}
-					email={user.login}
-					webSite={user.webSite}
-				/>
-				{
-					user
-						? <HeroContacts
-							contactName="contactName"
-							userBase={props.userBase}
-							userId={props.userId}
-							user={user}
-						/>
-						: null
-				}
-			</div>
+				: null
 		);
 	} else {
 		return (
 			!props.isLoading ?
 				props.profile ?
 					//user ?
-					<div className="body-page__hero-page">
+					<div className="body-page__hero-page" style={{ background: lightTheme ? " rgb(189, 182, 182)" : "rgb(104, 99, 99)" }}>
 						<div className="body-page__background">
 							<img src={topImage} alt="topImage" className="body-page__background_image" />
 							{

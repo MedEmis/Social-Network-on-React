@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PostItem from './PostItem';
 import './makeMessage.css';
 import './postLog.scss';
+import { ThemeContext } from '../../../../redux/ThemeContext';
 
 
 // className={classNames(" body-page__reply-textarea", { " visible":    IsTextOpen })}
@@ -11,6 +12,7 @@ function PostLog(props) {
 	let name = props.userBase.filter(item => item.userId === props.userId)[0] ? props.userBase.filter(item => item.userId === props.userId)[0].name : "AnoNymus"
 	let postsBlock = props.postsBase ? props.postsBase[props.userId] : null
 	let usertype = localStorage.getItem("userType")
+	const lightTheme = useContext(ThemeContext)
 	const postInput = React.createRef();
 	const panelColor = (data) => {
 		let panColor = {}
@@ -31,7 +33,7 @@ function PostLog(props) {
 	}
 	//console.log("PostLog", postsBlock)
 	return (
-		<div className="body-page__hero-posts-log">
+		<div className="body-page__hero-posts-log" style={{ background: lightTheme ? " rgb(228, 217, 217)" : "rgb(95, 95, 95)" }} >
 			<div className="body-page__hero-posts">
 				<div className="body-page__hero-posts-title">Add message</div>
 				<div className="body-page__hero-posts-textarea">

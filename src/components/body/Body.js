@@ -10,12 +10,13 @@ import Loader from './Loader';
 const ProfileContainer = React.lazy(() => import('./page/profile/ProfileContainer'));
 const PublicUserPageContainer = React.lazy(() => import('./page/UserPage/PublicUserPageContainer'));
 
+
 function Body(props) {
 	const location = useLocation();
 	//console.log(location.pathname === "/");
 	return (
 		<div className="body-main">
-			<SidebarContainer />
+			<SidebarContainer themeChange={props.themeChange} />
 			<div className="body-page">
 				{
 					location.pathname === "/" && <Description />
@@ -51,7 +52,7 @@ function Description() {
 			That's why ONLY - PROFILE, USER BASE and AUTHORIZATION pages are working properly with server (but not all small features). But if you will be authorized
 			 with "hardcoded user", PROFILE will not have same functionality as real user.</p>
 			<p>Also features of posts will work only for new created posts, but not for hardcoded one, due to only new created messages will have all necessary elements to make it work properly.  </p>
-			<p>New created user wil have same functionality as hardcoded user, because API, I was using does not allow to create use from my side. But I've made it myself, just for practice.  </p>
+			<p>New created user wil have same functionality as hardcoded user, because API, I was using does not allow to create use from my side. But I've made it myself, just for practice. And new created user will not be saved and after reload will disappear from state</p>
 			<p>In case you have any question, you can find my contacts below in the footer. </p>
 		</div>
 	)
