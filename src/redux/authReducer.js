@@ -186,8 +186,14 @@ export const LogInThunkCreator = () => async (dispatch) => {
 	if (response.data.resultCode === 0) { dispatch(SET_USER_DATA_actionCreator(response.data)) }
 }
 export const LogOutThunkCreator = () => async (dispatch) => {
-	let response = await userAPI.logOut()
-	if (response.data.resultCode === 0) { dispatch(USER_LOG_OUTactionCreator()) }
+	const userType = localStorage.getItem("usertype")
+	if (userType === "hardcoded") {
+		localStorage.removeItem("currentUserId")//resetting of user ID
+		localStorage.removeItem("usertype")//resetting of user ID
+	} else {
+		let response = await userAPI.logOut()
+		if (response.data.resultCode === 0) { dispatch(USER_LOG_OUTactionCreator()) }
+	}
 }
 export const AuthorizationThunkCreator = (email, password, rememberMe, captcha, hardcodedUser) => async (dispatch) => {
 	// IF hardcodedUser CHECKBOX WAS CHECKED => WILL BE AUTHORIZER HARDCODED USER
