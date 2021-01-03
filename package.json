@@ -1,8 +1,8 @@
 {
-  "homepage": "https://MedEmis.github.io/react-social-network",
+  "homepage": "https://social-network-on-react.vercel.app/",
   "name": "my-react-app",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.1",
@@ -13,10 +13,12 @@
     "express": "^4.17.1",
     "final-form": "^4.20.1",
     "final-form-arrays": "^3.0.2",
+    "gh-pages": "^3.1.0",
     "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^5.11.8",
     "nodemon": "^2.0.6",
     "npm": "^6.14.9",
+    "terser": "3.14.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-final-form": "^6.5.2",
@@ -62,7 +64,6 @@
   },
   "devDependencies": {
     "eslint-plugin-react-hooks": "^4.2.0",
-    "gh-pages": "^3.1.0",
     "node-sass": "^4.14.1",
     "react-materialize": "^3.9.3",
     "react-test-renderer": "^17.0.1",

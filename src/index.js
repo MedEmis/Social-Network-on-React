@@ -5,10 +5,10 @@ import reportWebVitals from './reportWebVitals';
 import ReactSocialNetwork from './AppContainer'
 import "react-rpm"
 
-document.addEventListener('DOMContentLoaded', function () {
-	let elems = document.querySelectorAll('.tooltipped');
-	let instances = window.M.Tooltip.init(elems);
-});//FOR TOOLTIPS
+ document.addEventListener('DOMContentLoaded', function () {
+ 	let elems = document.querySelectorAll('.tooltipped');
+ 	let instances = window.M.Tooltip.init(elems);
+ });//FOR TOOLTIPS
 
 
 
