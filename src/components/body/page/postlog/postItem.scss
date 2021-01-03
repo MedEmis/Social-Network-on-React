@@ -9,6 +9,7 @@
 	position: relative;
 	border-bottom: 10px solid #da4e0d;
 	//animation: 0.5s linear  sideMove;
+	transition: 0.5s linear;
 }
 .hero-posts-log-item {
 	width: 90%;
@@ -28,6 +29,7 @@
 	text-align: right;
 	float: right;
 	position: relative;
+	
 	&_avatar {
 		position: absolute;
 		width: 80px;

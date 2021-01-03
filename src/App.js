@@ -21,7 +21,7 @@ export const pageMove = (event) => {//global function for page animation
 	setTimeout(() => {
 		page.style.right = "0%"
 		pageCover.style.display = "none"
-	}, 300);
+	}, 400);
 }
 
 

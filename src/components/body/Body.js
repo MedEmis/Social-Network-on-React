@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Switch, Route, useLocation } from 'react-router-dom'
 import SidebarContainer from './sidebar/SidebarContainer';
 import PostsContainer from './page/postlog/PostsContainer';
@@ -7,17 +7,19 @@ import MusicContainer from './page/music/MusicContainer';
 import './body.scss';
 //import ProfileContainer from './page/profile/ProfileContainer';
 import Loader from './Loader';
+import { ThemeContext } from '../../redux/ThemeContext';
 const ProfileContainer = React.lazy(() => import('./page/profile/ProfileContainer'));
 const PublicUserPageContainer = React.lazy(() => import('./page/UserPage/PublicUserPageContainer'));
 
 
 function Body(props) {
 	const location = useLocation();
+	const lightTheme = useContext(ThemeContext)
 	//console.log(location.pathname === "/");
 	return (
-		<div className="body-main">
+		<div className="body-main" >
 			<SidebarContainer themeChange={props.themeChange} />
-			<div className="body-page">
+			<div className="body-page" style={{ background: lightTheme ? " rgb(200, 200, 200)" : "rgb(56, 56, 56)" }}>
 				{
 					location.pathname === "/" && <Description />
 				}
