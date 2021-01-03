@@ -93,51 +93,41 @@ function Profile(props) {
 									: null
 							}
 						</div>
-						{
-							props.hardcodedUser
-								? user(//if user is from hardcoded base
-									<HeroInfo
-										//MY BASE \/
-										userBase={props.userBase}
-										userId={userId}
-										name={user.name}
-										heroPicture={user.avatarUrl}
-										birthDate={user.birthDate}
-										city={user.city}
-										email={user.login}
-										webSite={user.webSite}
-									/>
-								)
-								: (//if user is from real server base
-									<HeroInfo
-										profile={props.profile}
-										isOwner={props.isOwner}
-										userBase={props.userBase}
-										userId={userId}
-										// userId={props.userId}
-										email={props.email}
-										name={name}
-										heroPicture={heroPicture}
-										webSite={webSite}
-										webSite={webSite}
-										//functions
-										saveImage={props.saveImage}
-									/>
-								)
-						}
-						<button onClick={() => setFormEdit(false)} className="body-page__authorization_button ">edit your profile</button>
-						<ProfileEditForm
+						<HeroInfo
 							profile={props.profile}
-							userId={props.userId}
-							updateProfile={props.updateProfile}
-							formEdit={formEdit}
-							hideForm={hideForm}
+							isOwner={props.isOwner}
+							userBase={props.userBase}
+							userId={userId}
+							// userId={props.userId}
+							email={props.email}
+							name={name}
+							heroPicture={heroPicture}
+							webSite={webSite}
+							webSite={webSite}
+							//functions
+							saveImage={props.saveImage}
 						/>
 						{
-							props.profile.aboutMe
-								? <HeroAbout text={props.profile
-									? props.profile.aboutMe
-									: null} />
+							props.isOwner//if current user is owner of account 
+								? (// showing of account updating form / button and "about me" info
+									<>
+										<button onClick={() => setFormEdit(false)} className="body-page__authorization_button ">edit your profile</button>
+										<ProfileEditForm
+											profile={props.profile}
+											userId={props.userId}
+											updateProfile={props.updateProfile}
+											formEdit={formEdit}
+											hideForm={hideForm}
+										/>
+										{
+											props.profile.aboutMe
+												? <HeroAbout text={props.profile
+													? props.profile.aboutMe
+													: null} />
+												: null
+										}
+									</>
+								)
 								: null
 						}
 						{
